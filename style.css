@@ -1,3 +1,4 @@
+/* 리스트관련 css */
 .ListSector {
   width: 980px;
   margin: auto;
@@ -38,6 +39,7 @@
   background-color: rgb(239, 247, 218);
 }
 
+/* 좋아요, 찜, 링크 */
 .FixedOption {
   margin: auto 0px auto 30px;
 }
