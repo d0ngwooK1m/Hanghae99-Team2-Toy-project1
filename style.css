@@ -1,3 +1,4 @@
+//리스트관련 css
 .ListSector{
     width: 980px;
     margin: auto;
@@ -37,6 +38,7 @@
     overflow: hidden;
     background-color: rgb(239, 247, 218);
 }
+//좋아요, 찜, 링크
 .FixedOption{
     margin: auto 0px auto 30px;
 }
@@ -61,3 +63,119 @@
     text-decoration: none;
     color:black;
 }
+
+a { text-decoration:none }  
+.hoon-1{
+    display: flex;
+    flex-direction: row;
+    height: 180px;
+    background-color: black;
+}
+.hoon-2{
+    flex-basis: auto;
+    border-radius:20px;
+    height: 40px;
+    width: 400px;
+    margin-left: 10%;
+    margin-top: 70px;
+}
+.hoon-3{
+    flex-basis: auto;
+    background-color: white;
+    height: 40px;
+    width: 200px;
+    margin: 70px 0 0 700px;
+    border-radius:20px;
+
+    text-align: center;
+    line-height: 40px;
+}
+.hoon-4{
+    flex-basis: auto;
+    background-color: white;
+    height: 40px;
+    width: 150px;
+    margin: auto 5% auto 60px;
+    border-radius:20px;
+
+    text-align: center;
+    line-height: 40px;
+}
+/* flex 초기 설정 */
+.flex-layout {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-layout-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-layout-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+/* 팝업 css */
+.popup-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.popup-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100vh;
+}
+.popup-content {
+  width: 900px;
+  padding: 20px;
+  background-color: #fff;
+}
+.popup-close-btn {
+  padding: 10px 20px;
+  color: #fff;
+  border: 0;
+  background-color: black;
+}
+.create-form-wrap {
+  margin-top: 10px;
+}
+.create-form-wrap label {
+  width: 80px;
+}
+.create-form-wrap input {
+  flex: 1;
+  padding: 5px 10px;
+  border: 1px solid #dee2e6;
+}
+.create-form-wrap textarea {
+  flex: 1;
+  padding: 5px 10px;
+  border: 1px solid #dee2e6;
+}
+.create-form-wrap input::placeholder,
+.create-form-wrap textarea::placeholder {
+  color: #adb5bd;
+}
+.create-form-btn {
+  margin-top: 30px;
+  padding: 10px 20px;
+  color: #fff;
+  border: 0;
+  background-color: black;
+}
+
+.test-content {
+  width: 980px;
+  margin: 0 auto;
+  text-align: end;
+}
+

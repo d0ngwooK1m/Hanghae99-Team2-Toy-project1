@@ -1,3 +1,4 @@
+//좋아요 기능, 찜 기능
 const Option_Jjim = document.querySelector('#Option_Jjim')
 const Jjim_star = document.querySelector('#star')
 const Option_Like = document.querySelector('#Option_Like')
@@ -36,3 +37,28 @@ Option_Jjim.addEventListener('click', Jjim_starControl)
 Option_Like.addEventListener('click', Like)
 Like_heart.addEventListener('click',Like)
 Option_Like.addEventListener('click', Like_heartControl)
+
+// popup
+const popupBtn = document.querySelector(".create-btn");
+const popupBg = document.querySelector(".popup-background");
+const popupCloseBtn = document.querySelector(".popup-close-btn");
+const showPopup = () => {
+  popupBg.style.display === "" || popupBg.style.display === "none"
+    ? (popupBg.style.display = "block")
+    : (popupBg.style.display = "none");
+};
+const hidePopup = () => {
+  popupBg.style.display === "block"
+    ? (popupBg.style.display = "none")
+    : (popupBg.style.display = "block");
+  window.location.reload();
+};
+popupBtn.addEventListener("click", function () {
+  showPopup();
+});
+popupCloseBtn.addEventListener("click", function () {
+  hidePopup();
+});
+popupBg.addEventListener("click", function () {
+  hidePopup();
+});
