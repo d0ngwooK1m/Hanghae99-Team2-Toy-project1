@@ -1,0 +1,77 @@
+/* flex 초기 설정 */
+.flex-layout {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-layout-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-layout-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+/* 팝업 css */
+.popup-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.popup-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100vh;
+}
+.popup-content {
+  width: 900px;
+  padding: 20px;
+  background-color: #fff;
+}
+.popup-close-btn {
+  padding: 10px 20px;
+  color: #fff;
+  border: 0;
+  background-color: black;
+}
+.create-form-wrap {
+  margin-top: 10px;
+}
+.create-form-wrap label {
+  width: 80px;
+}
+.create-form-wrap input {
+  flex: 1;
+  padding: 5px 10px;
+  border: 1px solid #dee2e6;
+}
+.create-form-wrap textarea {
+  flex: 1;
+  padding: 5px 10px;
+  border: 1px solid #dee2e6;
+}
+.create-form-wrap input::placeholder,
+.create-form-wrap textarea::placeholder {
+  color: #adb5bd;
+}
+.create-form-btn {
+  margin-top: 30px;
+  padding: 10px 20px;
+  color: #fff;
+  border: 0;
+  background-color: black;
+}
+
+.test-content {
+  width: 980px;
+  margin: 0 auto;
+  text-align: end;
+}
