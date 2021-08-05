@@ -12,7 +12,7 @@
 </head>
 <body>
 
-
+    <!-- 상단메뉴 -->
     <div class="hoon-1">
         <a href="index.html">
             <img src="logo.png" style="float: left; margin-top: 60px; margin-left: 30px; width: 60px; height: 60px;">
@@ -26,9 +26,20 @@
         </div>
     </div>
 
-    <div class="test-content">
-        <button class="create-btn">등록하기</button>
+
+    <!-- 등록버튼 -->
+    <div class="menu-wrap">
+        <a href='#' class="writebtn a-content create-btn">➕</a>
+        <div class="dropdown">
+            <button class="dropbtn">👀</button>
+            <div class="dropdown-content">
+                <a href="#" class='a-content'>👍</a>
+                <a href="#" class='a-content'>🕔</a>
+            </div>
+        </div>
     </div>
+    
+    <!-- 등록버튼 -->
     <div class="popup-background">
         <div class="popup-wrap">
             <section class="popup-content">
@@ -38,7 +49,7 @@
                 </div>
                 <div class="create-content">
                     <h3>개발로그 등록하기 (대충넣음, 나중에 문구 변경)</h3>
-                    <form class="create-form">
+                    <div class="create-form">
                         <div class="create-form-wrap flex-layout">
                             <label for="url">URL</label>
                             <input type="text" id="url" name="url" placeholder="URL을 입력해주세요"/>
@@ -54,12 +65,13 @@
                         <div class="flex-layout-end">
                             <button class="create-form-btn">등록</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </section>
         </div>
     </div>
 
+    <!-- 카드리스트 -->
     <div class="ListSector">
         <div class="ListBg">
             <div class="ListFlex">
