@@ -1,4 +1,4 @@
-//리스트관련 css
+/* //리스트관련 css */
 .ListSector{
     width: 980px;
     margin: auto;
@@ -38,7 +38,7 @@
     overflow: hidden;
     background-color: rgb(239, 247, 218);
 }
-//좋아요, 찜, 링크
+/* //좋아요, 찜, 링크 */
 .FixedOption{
     margin: auto 0px auto 30px;
 }
@@ -117,6 +117,73 @@ a { text-decoration:none }
   justify-content: flex-end;
   align-items: center;
 }
+
+/* 버튼 css */
+.menu-wrap {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 5px 0px auto;
+}
+
+.a-content {
+  text-decoration: none;
+}
+
+/* 드롭다운 버튼 */
+.dropbtn, 
+.writebtn {
+  background-color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: solid 0.5px black;
+  border-radius: 50%;
+}
+
+/* 드롭다운 컨텐츠 위치 조정 */
+.dropdown {
+  position: relative;
+  /* display: inline-block; */
+}
+
+/* 드롭다운 컨텐츠 숨기기 (기본설정) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 16px;
+  z-index: 1;
+}
+
+/* 드롭다운 안에 있는 링크들 */
+.dropdown-content a {
+  background-color: white;
+  border: solid 0.5px black;
+  border-radius: 50%;
+  margin-top: 5px;
+  padding: 16px;
+  display: block;
+}
+
+/* 드롭다운 호버 색깔 바꾸기 */
+.dropdown-content a:hover {
+  background-color: gold;
+}
+
+/* 드롭다운 호버 메뉴 보이기 */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* 메뉴 보이면 색 바꾸기 */
+.dropdown:hover .dropbtn {
+  background-color: gold;
+}
+
+.writebtn:hover  {
+  background-color: gold;
+}
+
 /* 팝업 css */
 .popup-background {
   display: none;
