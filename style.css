@@ -267,6 +267,9 @@ a {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1;
 }
+.show {
+  display: block;
+}
 .popup-wrap {
   position: absolute;
   top: 50%;

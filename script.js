@@ -42,26 +42,22 @@ Option_Like.addEventListener("click", Like_heartControl);
 const popupBtn = document.querySelector(".create-btn");
 const popupBg = document.querySelector(".popup-background");
 const popupCloseBtn = document.querySelector(".popup-close-btn");
-const showPopup = () => {
-  popupBg.style.display === "" || popupBg.style.display === "none"
-    ? (popupBg.style.display = "block")
-    : (popupBg.style.display = "none");
-};
-const hidePopup = (e) => {
+const showPopup = (e) => {
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
-  popupBg.style.display === "block"
-    ? (popupBg.style.display = "none")
-    : (popupBg.style.display = "block");
-  window.location.reload();
+  if (popupBg.classList.contains("show")) {
+    popupBg.classList.remove("show");
+  } else {
+    popupBg.classList.add("show");
+  }
 };
 popupBtn.addEventListener("click", function (e) {
-  showPopup();
+  showPopup(e);
 });
 popupCloseBtn.addEventListener("click", function (e) {
-  hidePopup(e);
+  showPopup(e);
 });
 popupBg.addEventListener("click", function (e) {
-  hidePopup(e);
+  showPopup(e);
 });
