@@ -1,3 +1,69 @@
+
+/* //리스트관련 css */
+.ListSector{
+    width: 980px;
+    margin: auto;
+}
+.ListBg{
+    width: 100%;
+    height: 320px;
+    border: 3px solid black;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    background-color: rgb(241, 241, 235, 0.3);
+}
+.classImg{
+    width: 230.4px;
+    height: 129.6px;
+    margin: 94px 10px 94px 50px;
+    border: 1px solid black;
+}
+.ListFlex{
+    display:flex;
+}
+.ListFlex .title{
+    width:300px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin: 50px 20px 20px 0;
+    word-break:break-all;
+    overflow: hidden;
+    background-color: rgb(239, 247, 218);
+}
+.ListFlex .desc{
+    width:300px;
+    border: 2px solid black;
+    border-radius: 5px;
+    word-break:break-all;
+    max-height: 196px;
+    overflow: hidden;
+    background-color: rgb(239, 247, 218);
+}
+/* //좋아요, 찜, 링크 */
+.FixedOption{
+    margin: auto 0px auto 30px;
+}
+.LikeNum{
+    margin: auto 0px auto 30px;
+}
+.FixedOption{
+    border: 1px solid black;
+    width:70px;
+    height:70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.FixedOption img{
+    width:30px;
+    height:30px;
+}
+.FixedOption a:link, .FixedOption a:visited, .FixedOption a:hover{
+    text-decoration: none;
+    color:black;
+=======
 /* 리스트관련 css */
 .ListSector {
   width: 980px;
@@ -65,6 +131,7 @@
 .FixedOption a:hover {
   text-decoration: none;
   color: black;
+
 }
 
 a {
@@ -122,6 +189,73 @@ a {
   justify-content: flex-end;
   align-items: center;
 }
+
+/* 버튼 css */
+.menu-wrap {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 5px 0px auto;
+}
+
+.a-content {
+  text-decoration: none;
+}
+
+/* 드롭다운 버튼 */
+.dropbtn, 
+.writebtn {
+  background-color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: solid 0.5px black;
+  border-radius: 50%;
+}
+
+/* 드롭다운 컨텐츠 위치 조정 */
+.dropdown {
+  position: relative;
+  /* display: inline-block; */
+}
+
+/* 드롭다운 컨텐츠 숨기기 (기본설정) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 16px;
+  z-index: 1;
+}
+
+/* 드롭다운 안에 있는 링크들 */
+.dropdown-content a {
+  background-color: white;
+  border: solid 0.5px black;
+  border-radius: 50%;
+  margin-top: 5px;
+  padding: 16px;
+  display: block;
+}
+
+/* 드롭다운 호버 색깔 바꾸기 */
+.dropdown-content a:hover {
+  background-color: gold;
+}
+
+/* 드롭다운 호버 메뉴 보이기 */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* 메뉴 보이면 색 바꾸기 */
+.dropdown:hover .dropbtn {
+  background-color: gold;
+}
+
+.writebtn:hover  {
+  background-color: gold;
+}
+
 /* 팝업 css */
 .popup-background {
   display: none;
