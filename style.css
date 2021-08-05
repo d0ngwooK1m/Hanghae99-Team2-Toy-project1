@@ -1,37 +1,185 @@
-a { text-decoration:none }  
-.hoon-1{
-    display: flex;
-    flex-direction: row;
-    height: 180px;
-    background-color: black;
+/* 리스트관련 css */
+.ListSector {
+  width: 980px;
+  margin: auto;
 }
-.hoon-2{
-    flex-basis: auto;
-    border-radius:20px;
-    height: 40px;
-    width: 400px;
-    margin-left: 10%;
-    margin-top: 70px;
+.ListBg {
+  width: 100%;
+  height: 320px;
+  border: 3px solid black;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  background-color: rgb(241, 241, 235, 0.3);
 }
-.hoon-3{
-    flex-basis: auto;
-    background-color: white;
-    height: 40px;
-    width: 200px;
-    margin: 70px 0 0 700px;
-    border-radius:20px;
+.classImg {
+  width: 230.4px;
+  height: 129.6px;
+  margin: 94px 10px 94px 50px;
+  border: 1px solid black;
+}
+.ListFlex {
+  display: flex;
+}
+.ListFlex .title {
+  width: 300px;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 50px 20px 20px 0;
+  word-break: break-all;
+  overflow: hidden;
+  background-color: rgb(239, 247, 218);
+}
+.ListFlex .desc {
+  width: 300px;
+  border: 2px solid black;
+  border-radius: 5px;
+  word-break: break-all;
+  max-height: 196px;
+  overflow: hidden;
+  background-color: rgb(239, 247, 218);
+}
 
-    text-align: center;
-    line-height: 40px;
+/* 좋아요, 찜, 링크 */
+.FixedOption {
+  margin: auto 0px auto 30px;
 }
-.hoon-4{
-    flex-basis: auto;
-    background-color: white;
-    height: 40px;
-    width: 150px;
-    margin: auto 5% auto 60px;
-    border-radius:20px;
+.LikeNum {
+  margin: auto 0px auto 30px;
+}
+.FixedOption {
+  border: 1px solid black;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+.FixedOption img {
+  width: 30px;
+  height: 30px;
+}
+.FixedOption a:link,
+.FixedOption a:visited,
+.FixedOption a:hover {
+  text-decoration: none;
+  color: black;
+}
 
-    text-align: center;
-    line-height: 40px;
+a {
+  text-decoration: none;
+}
+.hoon-1 {
+  display: flex;
+  flex-direction: row;
+  height: 180px;
+  background-color: black;
+}
+.hoon-2 {
+  flex-basis: auto;
+  border-radius: 20px;
+  height: 40px;
+  width: 400px;
+  margin-left: 10%;
+  margin-top: 70px;
+}
+.hoon-3 {
+  flex-basis: auto;
+  background-color: white;
+  height: 40px;
+  width: 200px;
+  margin: 70px 0 0 700px;
+  border-radius: 20px;
+
+  text-align: center;
+  line-height: 40px;
+}
+.hoon-4 {
+  flex-basis: auto;
+  background-color: white;
+  height: 40px;
+  width: 150px;
+  margin: auto 5% auto 60px;
+  border-radius: 20px;
+
+  text-align: center;
+  line-height: 40px;
+}
+/* flex 초기 설정 */
+.flex-layout {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-layout-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-layout-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+/* 팝업 css */
+.popup-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.popup-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100vh;
+}
+.popup-content {
+  width: 900px;
+  padding: 20px;
+  background-color: #fff;
+}
+.popup-close-btn {
+  padding: 10px 20px;
+  color: #fff;
+  border: 0;
+  background-color: black;
+}
+.create-form-wrap {
+  margin-top: 10px;
+}
+.create-form-wrap label {
+  width: 80px;
+}
+.create-form-wrap input {
+  flex: 1;
+  padding: 5px 10px;
+  border: 1px solid #dee2e6;
+}
+.create-form-wrap textarea {
+  flex: 1;
+  padding: 5px 10px;
+  border: 1px solid #dee2e6;
+}
+.create-form-wrap input::placeholder,
+.create-form-wrap textarea::placeholder {
+  color: #adb5bd;
+}
+.create-form-btn {
+  margin-top: 30px;
+  padding: 10px 20px;
+  color: #fff;
+  border: 0;
+  background-color: black;
+}
+
+.test-content {
+  width: 980px;
+  margin: 0 auto;
+  text-align: end;
 }

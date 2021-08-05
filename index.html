@@ -11,6 +11,8 @@
     <script defer src="script.js"></script>
 </head>
 <body>
+
+
     <div class="hoon-1">
         <a href="index.html">
             <img src="logo.png" style="float: left; margin-top: 60px; margin-left: 30px; width: 60px; height: 60px;">
@@ -24,5 +26,65 @@
         </div>
     </div>
 
+    <div class="test-content">
+        <button class="create-btn">등록하기</button>
+    </div>
+    <div class="popup-background">
+        <div class="popup-wrap">
+            <section class="popup-content">
+                <h2 class="readable-hidden">팝업</h2>
+                <div class="flex-layout-end">
+                    <button class="popup-close-btn">닫기</button>
+                </div>
+                <div class="create-content">
+                    <h3>개발로그 등록하기 (대충넣음, 나중에 문구 변경)</h3>
+                    <form class="create-form">
+                        <div class="create-form-wrap flex-layout">
+                            <label for="url">URL</label>
+                            <input type="text" id="url" name="url" placeholder="URL을 입력해주세요"/>
+                        </div>
+                        <div class="create-form-wrap flex-layout">
+                            <label for="title">제목</label>
+                            <input type="text" id="title" name="title" placeholder="사이트 이름을 입력해주세요"/>
+                        </div>
+                        <div class="create-form-wrap flex-layout">
+                            <label for="description">설명</label>
+                            <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
+                        </div>
+                        <div class="flex-layout-end">
+                            <button class="create-form-btn">등록</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="ListSector">
+        <div class="ListBg">
+            <div class="ListFlex">
+                <img src="img/vatican.jpg" class="classImg">
+                <div class="high-low">
+                    <div class ="title">제목aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                    <div class ="desc">설명입니다.aaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                </div>
+                <div class="LikeNum" id="LikeNum">1</div>
+                <div class="FixedOption" id="Option_Like"><div><img src="img/heart.png" id="heart"></div></div>
+                <div class="FixedOption"><a href="https://opentutorials.org/course/1">링크</a></div>
+                <div class="FixedOption" id ="Option_Jjim"><div><img src="img/star.png" id="star"></div></div>
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>
