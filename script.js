@@ -69,9 +69,41 @@ function xClose() {
 function cancelClose() {
   loginModal.style.display = "none";
 }
+function makeLoginModal() {
+  loginModal.style.display = "block";
+}
+
+function xCloseLogin() {
+  loginModal.style.display = "none";
+}
+
+function cancelCloseLogin() {
+  loginModal.style.display = "none";
+}
 
 loginModal.addEventListener("click", function bgClose(e) {
   if (e.target === loginModal) {
     loginModal.style.display = "none";
+  }
+});
+
+// signupmodal
+const signupModal = document.querySelector("#signupmodal");
+
+function makeSignupModal() {
+  signupModal.style.display = "block";
+}
+
+function xCloseSignup() {
+  signupModal.style.display = "none";
+}
+
+function cancelCloseSignup() {
+  signupModal.style.display = "none";
+}
+
+signupModal.addEventListener("click", function bgClose(e) {
+  if (e.target === signupModal) {
+    signupModal.style.display = "none";
   }
 });
