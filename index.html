@@ -15,17 +15,48 @@
     <!-- 상단메뉴 -->
     <div class="hoon-1">
         <a href="index.html">
-            <img src="logo.png" style="float: left; margin-top: 60px; margin-left: 30px; width: 60px; height: 60px;">
+            <img src="img/logo.png" style="float: left; margin-top: 60px; margin-left: 30px; width: 60px; height: 60px;">
         </a>
         <input class="hoon-2" type="text" placeholder="검색어 입력">
         <div class="hoon-3">
             <a href="#">마이페이지</a>
         </div>
         <div class="hoon-4">
-            <a href="#">로그인</a> / <a href="#">회원가입</a>
+            <a onclick="document.querySelector('#loginmodal').style.display='block'">로그인/회원가입</a>
         </div>
     </div>
 
+    <!-- 모달창 -->
+    <div id="loginmodal" class="modal">
+        <span onclick="document.querySelector('#loginmodal').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+        <!-- 모달 컨텐츠 -->
+        <form class="modal-content animate" action="#">
+            <div class="imgcontainer">
+                <img src="img/logo.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button type="submit" class="loginbtn">Login</button>
+                <button type="submit" class="signinbtn">Signin</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.querySelector('#id01').value.style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a>
+                </span>
+            </div>
+        </form>
+    </div>
 
     <!-- 등록버튼 -->
     <div class="menu-wrap">
@@ -40,7 +71,7 @@
     </div>
     
     <!-- 등록버튼 -->
-    <div class="popup-background">
+    <div id="writemodal" class="popup-background">
         <div class="popup-wrap">
             <section class="popup-content">
                 <h2 class="readable-hidden">팝업</h2>
