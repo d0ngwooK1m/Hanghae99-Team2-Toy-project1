@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toy Project1</title>
+    <link rel="stylesheet" href="default.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="my_page_style.css">
+    <script defer src="script.js"></script>
+    <script defer src="my_page_script.js"></script>
+</head>
+<body>
+    <!-- 상단메뉴 -->
+    <section class ="top menu">
+        <div class="hoon-1">
+            <a href="index.html">
+                <img src="img/logo.png" style="margin-left: 30px; width: 60px; height: 60px;">
+            </a>
+            <div class="hoon-6">
+                <input class="hoon-2" type="text" placeholder="검색어 입력">
+            </div>    
+            <div class="hoon-5">
+                <div class="hoon-3">
+                    <a href="#">마이페이지</a>
+                </div>
+                <div class="hoon-4">
+                    <a onclick="makeModal()">로그인/회원가입</a>
+                </div>
+            </div>    
+            
+        </div>
+            <div class="my_bg">
+                <div class="my_Jjim">
+                    <a href="#card_list">찜목록</a>
+                </div>
+                <div class="my_info">
+                    <a href="#my_information">내정보</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id ="my_information">
+        <div class="My_Nick">
+            <div class="Nick">닉네임</div>
+            <div class="Nick_content">창환쓰<button>변경</button></div>
+        </div>
+        <div class="My_ID">
+            <div class="ID">ID</div>
+            <div class="ID_content">황창환</div>
+        </div>
+        <div class="My_PW">
+            <div class="PW">PW</div>
+            <div class="PW_content">******** <button>변경</button></div>
+        </div>
+    </section>
+
+    <section class ="card" id ="card_list">
+        <div class="ListSector">
+            <div class="ListBg">
+                <div class="ListFlex">
+                    <img src="img/vatican.jpg" class="classImg">
+                    <div class="high-low">
+                        <div class ="title">제목aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                        <div class ="desc">설명입니다.aaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                    </div>
+                    <div class="LikeNum" id="LikeNum">1</div>
+                    <div class="FixedOption" id="Option_Like"><div><img src="img/heart.png" id="heart"></div></div>
+                    <div class="FixedOption"><a href="https://opentutorials.org/course/1" target= '_blank'><img src="img/link.png"></a></div>
+                    <div class="FixedOption" id ="Option_Jjim"><div><img src="img/star.png" id="star"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>
