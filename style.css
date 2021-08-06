@@ -523,3 +523,13 @@ span.psw {
   top: 20px;
   right: 20px;
 }
+.edit_btn {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+}
+.delete_btn {
+  position: absolute;
+  top: 20px;
+  right: 80px;
+}
