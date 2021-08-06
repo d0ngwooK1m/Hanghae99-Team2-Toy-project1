@@ -39,35 +39,41 @@ Like_heart.addEventListener("click", Like);
 Option_Like.addEventListener("click", Like_heartControl);
 
 // popup
-const popupBtn = document.querySelector(".create-btn");
-const popupBg = document.querySelector(".popup-background");
-const popupCloseBtn = document.querySelector(".popup-close-btn");
-const showPopup = (e) => {
-  if (e.target.className !== e.currentTarget.className) {
-    return null;
+const writeModal = document.querySelector('#writemodal');
+
+function makeList() {
+  writeModal.style.display='block';
+}
+
+function writeClose() {
+  writeModal.style.display='none';
+}
+
+writeModal.addEventListener('click', function bgClose(e) {
+  if (e.target === writeModal) {
+    writeModal.style.display = "none";
   }
-  if (popupBg.classList.contains("show")) {
-    popupBg.classList.remove("show");
-  } else {
-    popupBg.classList.add("show");
-  }
-};
-popupBtn.addEventListener("click", function (e) {
-  showPopup(e);
 });
-popupCloseBtn.addEventListener("click", function (e) {
-  showPopup(e);
-});
-popupBg.addEventListener("click", function (e) {
-  showPopup(e);
-});
+
+
 
 // loginmodal
 const loginModal = document.querySelector('#loginmodal');
 
-window.onclick = function (e) {
+function makeModal() {
+  loginModal.style.display='block';
+}
+
+function xClose() {
+  loginModal.style.display='none';
+}
+
+function cancelClose() {
+  loginModal.style.display='none';
+}
+
+loginModal.addEventListener('click', function bgClose(e) {
   if (e.target === loginModal) {
     loginModal.style.display = "none";
   }
-}
-
+});
