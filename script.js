@@ -63,11 +63,10 @@ popupBg.addEventListener("click", function (e) {
 });
 
 // loginmodal
-const loginModal = document.querySelector('#loginmodal');
+const loginModal = document.querySelector("#loginmodal");
 
 window.onclick = function (e) {
   if (e.target === loginModal) {
     loginModal.style.display = "none";
   }
-}
-
+};
