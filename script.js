@@ -98,3 +98,20 @@ signupModal.addEventListener('click', function bgClose(e) {
     signupModal.style.display = "none";
   }
 });
+
+
+// Listmodal
+const openButton = document.querySelector(".ListFlex");
+const modal = document.querySelector(".List_modal");
+const overlay = modal.querySelector(".List_overlay");
+const closeBtn = modal.querySelector("button");
+const openModal = () => {
+    modal.classList.remove("List_hidden");
+
+}
+const closeModal = () => {
+    modal.classList.add("List_hidden");
+}
+overlay.addEventListener("click", closeModal);
+closeBtn.addEventListener("click", closeModal);
+openButton.addEventListener("click", openModal);
