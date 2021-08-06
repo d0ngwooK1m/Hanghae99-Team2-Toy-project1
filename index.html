@@ -25,14 +25,14 @@
                 <a href="#">마이페이지</a>
             </div>
             <div class="hoon-4">
-                <a onclick="document.querySelector('#loginmodal').style.display='block'">로그인/회원가입</a>
+                <a onclick="makeModal()">로그인/회원가입</a>
             </div>
         </div>    
     </div>
 
     <!-- 모달창 -->
     <div id="loginmodal" class="modal">
-        <span onclick="document.querySelector('#loginmodal').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <span onclick="xClose()" class="close" title="Close Modal">&times;</span>
 
         <!-- 모달 컨텐츠 -->
         <form class="modal-content animate" action="#">
@@ -55,7 +55,7 @@
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.querySelector('#id01').value.style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="cancelClose()" class="cancelbtn">Cancel</button>
                 <span class="psw">Forgot <a href="#">password?</a>
                 </span>
             </div>
@@ -64,7 +64,7 @@
 
     <!-- 등록버튼 -->
     <div class="menu-wrap">
-        <a href='#' class="writebtn a-content create-btn">➕</a>
+        <a href='#' class="writebtn a-content create-btn" onclick="makeList()">➕</a>
         <div class="dropdown">
             <button class="dropbtn">👀</button>
             <div class="dropdown-content">
@@ -80,7 +80,7 @@
             <section class="popup-content">
                 <h2 class="readable-hidden">팝업</h2>
                 <div class="flex-layout-end">
-                    <button class="popup-close-btn">닫기</button>
+                    <button class="popup-close-btn" onclick="writeClose()">닫기</button>
                 </div>
                 <div class="create-content">
                     <h3>개발로그 등록하기 (대충넣음, 나중에 문구 변경)</h3>
