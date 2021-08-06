@@ -149,6 +149,7 @@ a {
   border-radius: 20px;
   height: 40px;
   width: 400px;
+  margin-right: 100px;
 }
 .hoon-3 {
   display: flex;
@@ -158,6 +159,7 @@ a {
   height: 40px;
   width: 200px;
   border-radius: 20px;
+  margin-right: 100px;
 }
 .hoon-4 {
   display: flex;
@@ -166,8 +168,13 @@ a {
   background-color: white;
   height: 40px;
   width: 150px;
-  margin-right: 5%;
+  margin-right: 60px;
   border-radius: 20px;
+}
+
+.hoon-5{
+  display: flex;
+  
 }
 /* flex 초기 설정 */
 .flex-layout {
