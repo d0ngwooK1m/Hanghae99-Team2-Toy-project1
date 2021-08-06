@@ -25,16 +25,17 @@
                 <a href="#">마이페이지</a>
             </div>
             <div class="hoon-4">
-                <a onclick="makeModal()">로그인/회원가입</a>
+                <a class="login-a" onclick="makeLoginModal()">로그인</a>
+                <a class="signup-a" onclick="makeSignupModal()">회원가입</a>
             </div>
         </div>    
     </div>
 
-    <!-- 모달창 -->
+    <!-- 로그인 모달창 -->
     <div id="loginmodal" class="modal">
-        <span onclick="xClose()" class="close" title="Close Modal">&times;</span>
+        <span onclick="xCloseLogin()" class="close" title="Close Modal">&times;</span>
 
-        <!-- 모달 컨텐츠 -->
+        <!--로그인 모달 컨텐츠 -->
         <form class="modal-content animate" action="#">
             <div class="imgcontainer">
                 <img src="img/logo.png" alt="Avatar" class="avatar">
@@ -48,16 +49,44 @@
                 <input type="password" placeholder="Enter Password" name="psw" required>
 
                 <button type="submit" class="loginbtn">Login</button>
-                <button type="submit" class="signinbtn">Signin</button>
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="cancelClose()" class="cancelbtn">Cancel</button>
+                <button type="button" onclick="cancelCloseLogin()" class="cancelbtn">Cancel</button>
                 <span class="psw">Forgot <a href="#">password?</a>
                 </span>
+            </div>
+        </form>
+    </div>
+
+    <!-- 회원가입 모달창 -->
+    <div id="signupmodal" class="modal">
+        <span onclick="xCloseSignup()" class="close" title="Close Modal">&times;</span>
+
+        <!--회원가입 모달 컨텐츠 -->
+        <form class="modal-content animate" action="#">
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="uid"><b>ID</b></label>
+                <input type="text" placeholder="Enter UserID" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="uname" required>
+
+                <label for="psw"><b>Check Password</b></label>
+                <input type="password" placeholder="Check Password" name="psw" required>
+
+                <button type="submit" class="loginbtn">Sign Up</button>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <type type="button" onclick="cancelCloseSignup()" class="cancelbtn">Cancel</type>
             </div>
         </form>
     </div>
@@ -80,7 +109,7 @@
             <section class="popup-content">
                 <h2 class="readable-hidden">팝업</h2>
                 <div class="flex-layout-end">
-                    <button class="popup-close-btn" onclick="writeClose()">닫기</button>
+                    <button class="popup-close-btn" onclick="cancelClose()">닫기</button>
                 </div>
                 <div class="create-content">
                     <h3>개발로그 등록하기 (대충넣음, 나중에 문구 변경)</h3>
