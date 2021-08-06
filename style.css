@@ -463,3 +463,44 @@ span.psw {
   from {-webkit-transform: scale(0);}
   to {-webkit-transform: scale(1);}
 }
+
+
+button{
+  all:unset;
+  background-color: teal;
+
+}
+.modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal_overlay{
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.modal_content{
+  background-color: white;
+  padding: 50px 100px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 980px;
+  top: 0px;
+  border-radius: 10px;
+}
+.hidden{
+  display: none;
+}
+.close_btn{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
