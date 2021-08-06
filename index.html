@@ -25,16 +25,14 @@
                 <a href="my_page.html">마이페이지</a>
             </div>
             <div class="hoon-4">
-                <a class="login-a" onclick="makeLoginModal()">로그인</a>
-                <a class="signup-a" onclick="makeSignupModal()">회원가입</a>
+                <a class="login-btn">로그인</a>
+                <a class="signup-btn">회원가입</a>
             </div>
         </div>    
     </div>
 
     <!-- 로그인 모달창 -->
-    <div id="loginmodal" class="modal">
-        <span onclick="xCloseLogin()" class="close" title="Close Modal">&times;</span>
-
+    <div id="loginmodal" class="login-background">
         <!--로그인 모달 컨텐츠 -->
         <form class="modal-content animate" action="#">
             <div class="imgcontainer">
@@ -55,17 +53,15 @@
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="cancelCloseLogin()" class="cancelbtn">Cancel</button>
                 <span class="psw">Forgot <a href="#">password?</a>
                 </span>
+                <button class="login-close-btn close-btn">&times;</button>
             </div>
         </form>
     </div>
 
     <!-- 회원가입 모달창 -->
-    <div id="signupmodal" class="modal">
-        <span onclick="xCloseSignup()" class="close" title="Close Modal">&times;</span>
-
+    <div id="signupmodal" class="signup-background">
         <!--회원가입 모달 컨텐츠 -->
         <form class="modal-content animate" action="#">
 
@@ -74,42 +70,40 @@
                 <input type="text" placeholder="Enter Username" name="uname" required>
 
                 <label for="uid"><b>ID</b></label>
-                <input type="text" placeholder="Enter UserID" name="uname" required>
+                <input type="text" placeholder="Enter UserID" name="uid" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="uname" required>
+                <input type="password" placeholder="Enter Password" name="psw" required>
 
-                <label for="psw"><b>Check Password</b></label>
-                <input type="password" placeholder="Check Password" name="psw" required>
+                <label for="psw2"><b>Check Password</b></label>
+                <input type="password" placeholder="Check Password" name="psw2" required>
 
                 <button type="submit" class="loginbtn">Sign Up</button>
-            </div>
-
-            <div class="container" style="background-color:#f1f1f1">
-                <type type="button" onclick="cancelCloseSignup()" class="cancelbtn">Cancel</type>
+                <button class="signup-close-btn close-btn">&times;</button>
             </div>
         </form>
     </div>
 
     <!-- 등록버튼 -->
-    <div class="menu-wrap">
-        <a href='#' class="writebtn a-content create-btn" onclick="makeList()">➕</a>
-        <div class="dropdown">
-            <button class="dropbtn">👀</button>
-            <div class="dropdown-content">
-                <a href="#" class='a-content'>👍</a>
-                <a href="#" class='a-content'>🕔</a>
+    <div class="menu-container">
+        <div class="menu-wrap">
+            <a href='#' class="writebtn a-content create-btn">➕</a>
+            <div class="dropdown">
+                <button class="dropbtn">👀</button>
+                <div class="dropdown-content">
+                    <a href="#" class='a-content'>👍</a>
+                    <a href="#" class='a-content'>🕔</a>
+                </div>
             </div>
         </div>
     </div>
-    
-    <!-- 등록버튼 -->
+    <!-- 등록팝업 -->
     <div id="writemodal" class="popup-background">
         <div class="popup-wrap">
             <section class="popup-content">
                 <h2 class="readable-hidden">팝업</h2>
                 <div class="flex-layout-end">
-                    <button class="popup-close-btn" onclick="cancelClose()">닫기</button>
+                    <button class="popup-close-btn">닫기</button>
                 </div>
                 <div class="create-content">
                     <h3>개발로그 등록하기 (대충넣음, 나중에 문구 변경)</h3>
@@ -136,7 +130,7 @@
     </div>
 
     <!-- 카드리스트 -->
-    <sector class ="card">
+    <section class ="card">
         <div class="ListSector">
             <div class="ListBg">
                 <div class="ListFlex">
@@ -147,8 +141,7 @@
                             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                            aaaaa
-                        </div>
+                          </div>
                     </div>
                     <div class="LikeNum" id="LikeNum">1</div>
                     <div class="FixedOption" id="Option_Like"><div><img src="img/heart.png" id="heart"></div></div>
@@ -159,9 +152,9 @@
             </div>
         </div>
 
-    </div>
+    </section>
 
-    <!-- <button id="open">modal</button> -->
+    <!-- 리스트 상세보기 -->
     <div class="List_modal List_hidden">
         <div class="List_overlay"></div>
             <div class="List_content">
@@ -175,6 +168,5 @@
                 <button class="close_btn">X</button>
             </div>
     </div>
-    </sector>
 </body>
 </html>
