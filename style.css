@@ -147,7 +147,7 @@ a {
 }
 .hoon-1 {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
   height: 180px;
   background-color: black;
@@ -183,7 +183,9 @@ a {
 
 .hoon-5{
   display: flex;
-  
+}
+.hoon-6{
+  width: 500px;
 }
 /* flex 초기 설정 */
 .flex-layout {
