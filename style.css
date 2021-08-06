@@ -172,13 +172,24 @@ a {
 }
 .hoon-4 {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
   height: 40px;
   width: 200px;
   margin-right: 60px;
   border-radius: 20px;
+}
+
+.login-a,
+.signup-a {
+  padding: 9px 22px 9px 22px;
+  border-radius: 20px;
+}
+
+.login-a:hover,
+.signup-a:hover {
+  background-color: whitesmoke;
 }
 
 .hoon-5{
@@ -356,16 +367,6 @@ input[type=text], input[type=password] {
 /* 모든 버튼 스타일링 */
 .loginbtn {
   background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-.signinbtn {
-  background-color: #3564ff;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
