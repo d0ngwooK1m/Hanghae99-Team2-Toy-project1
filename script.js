@@ -38,80 +38,114 @@ Option_Like.addEventListener("click", Like);
 Like_heart.addEventListener("click", Like);
 Option_Like.addEventListener("click", Like_heartControl);
 
-
 // Listmodal
 const openButton = document.querySelector(".ListFlex");
 const modal = document.querySelector(".List_modal");
 const overlay = modal.querySelector(".List_overlay");
 const closeBtn = modal.querySelector("button");
 const openModal = () => {
-    modal.classList.remove("List_hidden");
-
-}
+  modal.classList.remove("List_hidden");
+};
 const closeModal = () => {
-    modal.classList.add("List_hidden");
-}
+  modal.classList.add("List_hidden");
+};
 overlay.addEventListener("click", closeModal);
 closeBtn.addEventListener("click", closeModal);
 openButton.addEventListener("click", openModal);
 
 // popup
-const writeModal = document.querySelector('#writemodal');
+// const writeModal = document.querySelector("#writemodal");
 
-function makeList() {
-  writeModal.style.display='block';
-}
+// function makeList() {
+//   writeModal.style.display = "block";
+// }
 
-function writeClose() {
-  writeModal.style.display='none';
-}
+// function writeClose() {
+//   writeModal.style.display = "none";
+// }
 
-writeModal.addEventListener('click', function bgClose(e) {
-  if (e.target === writeModal) {
-    writeModal.style.display = "none";
-  }
-});
-
-
+// writeModal.addEventListener("click", function bgClose(e) {
+//   if (e.target === writeModal) {
+//     writeModal.style.display = "none";
+//   }
+// });
 
 // loginmodal
-const loginModal = document.querySelector('#loginmodal');
+// const loginModal = document.querySelector("#loginmodal");
 
-function makeLoginModal() {
-  loginModal.style.display='block';
-}
+// function makeLoginModal() {
+//   loginModal.style.display = "block";
+// }
 
-function xCloseLogin() {
-  loginModal.style.display='none';
-}
+// function xCloseLogin() {
+//   loginModal.style.display = "none";
+// }
 
-function cancelCloseLogin() {
-  loginModal.style.display='none';
-}
+// function cancelCloseLogin() {
+//   loginModal.style.display = "none";
+// }
 
-loginModal.addEventListener('click', function bgClose(e) {
-  if (e.target === loginModal) {
-    loginModal.style.display = "none";
-  }
-});
+// loginModal.addEventListener("click", function bgClose(e) {
+//   if (e.target === loginModal) {
+//     loginModal.style.display = "none";
+//   }
+// });
 
 // signupmodal
-const signupModal = document.querySelector('#signupmodal');
+// const signupModal = document.querySelector("#signupmodal");
 
-function  makeSignupModal() {
-  signupModal.style.display='block';
-}
+// function makeSignupModal() {
+//   signupModal.style.display = "block";
+// }
 
-function xCloseSignup() {
-  signupModal.style.display='none';
-}
+// function xCloseSignup() {
+//   signupModal.style.display = "none";
+// }
 
-function cancelCloseSignup() {
-  signupModal.style.display='none';
-}
+// function cancelCloseSignup() {
+//   signupModal.style.display = "none";
+// }
 
-signupModal.addEventListener('click', function bgClose(e) {
-  if (e.target === signupModal) {
-    signupModal.style.display = "none";
+// signupModal.addEventListener("click", function bgClose(e) {
+//   if (e.target === signupModal) {
+//     signupModal.style.display = "none";
+//   }
+// });
+
+// html에 dom 태그들을 변수로 담아두기
+const popupBtn = document.querySelector(".create-btn");
+const popupBg = document.querySelector(".popup-background");
+const popupCloseBtn = document.querySelector(".popup-close-btn");
+const signupBtn = document.querySelector(".signup-btn");
+const signupBg = document.querySelector(".signup-background");
+const signupCloseBtn = document.querySelector(".signup-close-btn");
+const loginBtn = document.querySelector(".login-btn");
+const loginBg = document.querySelector(".login-background");
+const loginCloseBtn = document.querySelector(".login-close-btn");
+
+// 팝업 기능을 하는 함수는 하나로 통일하고자 만듬 (팝업의 기능은 같기때문에)
+const handlePopup = (e, tag) => {
+  // 전체 영역을 덮는 backgorund에 click 이벤트가 발생되어 자식에도 이벤트 전파되는 현상 막기
+  if (e.target.className !== e.currentTarget.className) {
+    return null;
   }
-});
+  // 함수의 매개변수로 받은 tag에 show라는 클래스가 있는지 확인하기
+  if (tag.classList.contains("show")) {
+    // tag에 show라는 클래스가 있으면 show 클래스를 지워서 팝업 닫기
+    tag.classList.remove("show");
+  } else {
+    // tag에 show라는 클래스가 없으면 show 클래스를 추가해서 팝업 보이기
+    tag.classList.add("show");
+  }
+};
+
+// 변수로 담아둔 태그를 클릭했을때 팝업 함수 실행
+popupBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
+popupCloseBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
+popupBg.addEventListener("click", (e) => handlePopup(e, popupBg));
+signupBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
+signupCloseBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
+signupBg.addEventListener("click", (e) => handlePopup(e, signupBg));
+loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
+loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
+loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
