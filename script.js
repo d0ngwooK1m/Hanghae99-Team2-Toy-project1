@@ -54,72 +54,72 @@ closeBtn.addEventListener("click", closeModal);
 openButton.addEventListener("click", openModal);
 
 // popup
-const writeModal = document.querySelector("#writemodal");
+// const writeModal = document.querySelector("#writemodal");
 
-function makeList() {
-  writeModal.style.display = "block";
-}
+// function makeList() {
+//   writeModal.style.display = "block";
+// }
 
-function writeClose() {
-  writeModal.style.display = "none";
-}
+// function writeClose() {
+//   writeModal.style.display = "none";
+// }
 
-writeModal.addEventListener("click", function bgClose(e) {
-  if (e.target === writeModal) {
-    writeModal.style.display = "none";
-  }
-});
+// writeModal.addEventListener("click", function bgClose(e) {
+//   if (e.target === writeModal) {
+//     writeModal.style.display = "none";
+//   }
+// });
 
 // loginmodal
-const loginModal = document.querySelector("#loginmodal");
+// const loginModal = document.querySelector("#loginmodal");
 
-function makeModal() {
-  loginModal.style.display = "block";
-}
+// function makeModal() {
+//   loginModal.style.display = "block";
+// }
 
-function xClose() {
-  loginModal.style.display = "none";
-}
+// function xClose() {
+//   loginModal.style.display = "none";
+// }
 
-function cancelClose() {
-  loginModal.style.display = "none";
-}
-function makeLoginModal() {
-  loginModal.style.display = "block";
-}
+// function cancelClose() {
+//   loginModal.style.display = "none";
+// }
+// function makeLoginModal() {
+//   loginModal.style.display = "block";
+// }
 
-function xCloseLogin() {
-  loginModal.style.display = "none";
-}
+// function xCloseLogin() {
+//   loginModal.style.display = "none";
+// }
 
-function cancelCloseLogin() {
-  loginModal.style.display = "none";
-}
+// function cancelCloseLogin() {
+//   loginModal.style.display = "none";
+// }
 
-loginModal.addEventListener("click", function bgClose(e) {
-  if (e.target === loginModal) {
-    loginModal.style.display = "none";
-  }
-});
+// loginModal.addEventListener("click", function bgClose(e) {
+//   if (e.target === loginModal) {
+//     loginModal.style.display = "none";
+//   }
+// });
 
 // signupmodal
-const signupModal = document.querySelector("#signupmodal");
+// const signupModal = document.querySelector("#signupmodal");
 
-function makeSignupModal() {
-  signupModal.style.display = "block";
-}
+// function makeSignupModal() {
+//   signupModal.style.display = "block";
+// }
 
-function xCloseSignup() {
-  signupModal.style.display = "none";
-}
+// function xCloseSignup() {
+//   signupModal.style.display = "none";
+// }
 
-function cancelCloseSignup() {
-  signupModal.style.display = "none";
-}
+// function cancelCloseSignup() {
+//   signupModal.style.display = "none";
+// }
 
-signupModal.addEventListener("click", function bgClose(e) {
-  if (e.target === signupModal) {
-    signupModal.style.display = "none";
+// signupModal.addEventListener("click", function bgClose(e) {
+//   if (e.target === signupModal) {
+//     signupModal.style.display = "none";
 // const writeModal = document.querySelector("#writemodal");
 
 // function makeList() {
