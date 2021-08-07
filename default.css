@@ -2,11 +2,19 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
+  font-family: "GmarketSansMedium" !important;
 }
 html,
 body,
@@ -143,4 +151,11 @@ table {
 }
 h3 {
   font-size: 2.3em;
+}
+a {
+  text-decoration: none;
+}
+a:hover,
+button:hover {
+  cursor: pointer;
 }
