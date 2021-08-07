@@ -223,5 +223,5 @@ signupBg.addEventListener("click", (e) => handlePopup(e, signupBg));
 
 //로그인
 loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
-// loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
+loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
 loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
