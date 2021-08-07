@@ -358,12 +358,8 @@
 }
 
 .login-form {
-<<<<<<< HEAD
-  transition: box-shadow 0.3s;
-=======
   position: relative;
   transition: box-shadow .3s;
->>>>>>> b42dcb376fef74a7f42afa699f6fb6503f2feda1
   border: 2px solid #dddddd9c;
   border-radius: 5px;
   padding: 50px;
