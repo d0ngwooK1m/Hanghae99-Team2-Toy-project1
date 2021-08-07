@@ -179,12 +179,17 @@ openButton.addEventListener("click", openModal);
 // });
 
 // html의 태그들을 변수로 담아두기
+//글작성
 const popupBtn = document.querySelector(".create-btn");
 const popupBg = document.querySelector(".popup-background");
 const popupCloseBtn = document.querySelector(".popup-close-btn");
+
+//회원가입
 const signupBtn = document.querySelector(".signup-btn");
 const signupBg = document.querySelector(".signup-background");
 const signupCloseBtn = document.querySelector(".signup-close-btn");
+
+//로그인
 const loginBtn = document.querySelector(".login-btn");
 const loginBg = document.querySelector(".login-background");
 const loginCloseBtn = document.querySelector(".login-close-btn");
@@ -206,12 +211,17 @@ const handlePopup = (e, tag) => {
 };
 
 // 변수로 담아둔 태그를 클릭했을때 팝업 함수 실행
+//글작성
 popupBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
 popupCloseBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
 popupBg.addEventListener("click", (e) => handlePopup(e, popupBg));
+
+//회원가입
 signupBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
 signupCloseBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
 signupBg.addEventListener("click", (e) => handlePopup(e, signupBg));
+
+//로그인
 loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
-loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
+// loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
 loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
