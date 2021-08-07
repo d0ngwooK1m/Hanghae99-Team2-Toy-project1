@@ -54,25 +54,32 @@
 }
 .cardRow {
   display: flex;
-  justify-content: center;
 }
+<<<<<<< HEAD
 .ListBg:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 4px rgba(0, 0, 0, 0.4);
+=======
+.ListBg:hover{
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
+>>>>>>> b42dcb376fef74a7f42afa699f6fb6503f2feda1
 }
 .ListBg {
-  width: 400px;
+  width: 27%;
   height: 700px;
-  border: 3px solid black;
+  border: 2px solid #dddddd9c;
   border-radius: 5px;
-  margin: 0 3% 0 3%;
-  background-color: rgb(241, 241, 235, 0.3);
+  margin-right: 9.5%;
   transition: box-shadow 0.23s linear;
 }
+.ListBg:last-child{
+  margin-right: 0;
+}
+.ListFlex{
+  padding:20px;
+}
 .classImg {
-  display: flex;
-  width: 90%;
+  width: 100%;
   height: 20%;
-  margin: 20px 20px 10px 20px;
   border: 1px solid black;
 }
 .Option {
@@ -86,22 +93,26 @@
 }
 .Like {
   border: 1px solid black;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   text-align: center;
   position: relative;
   font-size: 15px;
 }
 .Like img {
+<<<<<<< HEAD
   margin-top: 15%;
+=======
+  margin-top:10%;
+>>>>>>> b42dcb376fef74a7f42afa699f6fb6503f2feda1
   width: 30px;
   height: 30px;
 }
 .FixedOption {
   border: 1px solid black;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -121,19 +132,16 @@
 }
 
 .ListFlex .title {
-  width: 90%;
-  border-radius: 5px;
-  height: 40px;
   margin: 0 20px 20px 20px;
   display: -webkit-box;
+  height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  font-size: 20px;
 }
 .ListFlex .desc {
-  width: 90%;
-  border-radius: 5px;
   height: 180px;
   margin: 0 20px 30px 20px;
   display: -webkit-box;
@@ -338,34 +346,74 @@
   padding: 14px 20px;
 }
 
-/* 로그인모달v2 */
-.login-background {
+/* 로그인, 회원가입 모달v2 */
+.login-background,
+.signup-background {
   display: none;
-  /* position: ; */
-  background-color: rgba(275, 275, 275, 0.7);
-}
-
-.login-form {
-  transition: box-shadow 0.3s;
-  border: 2px solid #dddddd9c;
-  border-radius: 5px;
-  padding: 5% 5%;
-  margin: 15% auto;
-  width: 30%;
-  height: 50%;
-  background-color: rgba(275, 275, 275, 1);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .show {
   display: block;
 }
 
+.login-form {
+<<<<<<< HEAD
+  transition: box-shadow 0.3s;
+=======
+  position: relative;
+  transition: box-shadow .3s;
+>>>>>>> b42dcb376fef74a7f42afa699f6fb6503f2feda1
+  border: 2px solid #dddddd9c;
+  border-radius: 5px;
+  padding: 50px;
+  margin: 15% auto;
+  width: 500px;
+  height: 400px;
+  background-color: rgba(275, 275, 275, 1);
+}
+
+.signup-form {
+  position: relative;
+  transition: box-shadow .3s;
+  border: 2px solid #dddddd9c;
+  border-radius: 5px;
+  padding: 50px;
+  margin: 5% auto;
+  width: 500px;
+  height: 600px;
+  background-color: rgba(275, 275, 275, 1);
+}
+
 .login-form:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
+.login-close-btn{
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  font-size: 2rem;
+}
 
-input[type="text"],
-input[type="password"] {
+.signup-close-btn {
+  position: absolute;
+  left: 85%;
+  top: 8px;
+  font-size: 2rem;
+} 
+
+.login-close-btn:hover,
+.signup-close-btn:hover {
+  color: red;
+}
+
+.login-form:hover,
+.signup-form:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="password"] {
   width: 100%;
   padding: 2% 0;
   margin: 5% auto;
@@ -373,7 +421,8 @@ input[type="password"] {
   border-radius: 3px;
 }
 
-button[type="submit"] {
+.login-submit-btn,
+.signup-submit-btn {
   transition: background-color 1s;
   width: 100%;
   padding: 2% 0;
@@ -383,7 +432,8 @@ button[type="submit"] {
   border-radius: 5px;
 }
 
-button[type="submit"]:hover {
+.login-submit-btn:hover,
+.signup-submit-btn:hover {
   background-color: rgba(8, 8, 8, 0.788);
 }
 
@@ -409,7 +459,7 @@ button[type="submit"]:hover {
   text-align: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.2);
   position: relative;
-  width: 1280px;
+  width: 66%;
   top: 0px;
   border-radius: 10px;
 }
@@ -441,7 +491,7 @@ button[type="submit"]:hover {
 
 /* icon nav css */
 .icon-nav-wrap {
-  width: 980px;
+  width: 1500px;
   margin: 30px auto;
   padding-bottom: 15px;
   border-bottom: 1px solid #e0e0e0;
