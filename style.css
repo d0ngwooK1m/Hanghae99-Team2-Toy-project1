@@ -340,23 +340,34 @@
 /* 로그인모달v2 */
 .login-background {
   display: none;
-  /* position: ; */
   background-color: rgba(275, 275, 275, 0.7);
 }
 
+.show {
+  display: block;
+}
+
 .login-form {
+  position: relative;
   transition: box-shadow .3s;
   border: 2px solid #dddddd9c;
   border-radius: 5px;
-  padding: 5% 5%;
+  padding: 50px;
   margin: 15% auto;
   width: 30%;
   height: 50%;
   background-color: rgba(275, 275, 275, 1);
 }
 
-.show {
-  display: block;
+.login-close-btn {
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  font-size: 2rem;
+}
+
+.login-close-btn:hover {
+  color: red;
 }
 
 .login-form:hover {
