@@ -178,7 +178,7 @@ openButton.addEventListener("click", openModal);
 //   }
 // });
 
-// html에 dom 태그들을 변수로 담아두기
+// html의 태그들을 변수로 담아두기
 const popupBtn = document.querySelector(".create-btn");
 const popupBg = document.querySelector(".popup-background");
 const popupCloseBtn = document.querySelector(".popup-close-btn");
