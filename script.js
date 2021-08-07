@@ -39,7 +39,7 @@ Like_heart.addEventListener("click", Like);
 Option_Like.addEventListener("click", Like_heartControl);
 
 // Listmodal
-const openButton = document.querySelector(".ListFlex");
+const openButton = document.querySelector(".preview");
 const modal = document.querySelector(".List_modal");
 const overlay = modal.querySelector(".List_overlay");
 const closeBtn = modal.querySelector("button");
