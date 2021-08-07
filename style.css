@@ -512,16 +512,20 @@ span.psw {
   display: none;
 }
 .close_btn {
+  all: unset;
   position: absolute;
   top: 20px;
   right: 20px;
 }
 .edit_btn {
+  all: unset;
   position: absolute;
   top: 65px;
   right: 20px;
+  
 }
 .delete_btn {
+  all: unset;
   position: absolute;
   top: 110px;
   right: 20px;
@@ -597,7 +601,4 @@ span.psw {
 }
 .icon-dropdown-container:hover > .icon-dropdown-wrap {
   display: block;
-}
-button {
-  all: unset;
 }
