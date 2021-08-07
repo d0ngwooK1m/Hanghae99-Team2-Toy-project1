@@ -1,15 +1,45 @@
-@font-face {
-  font-family: "GmarketSansMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-* {
-  font-family: "GmarketSansMedium" !important;
+/* 저희가 만든 css중 같이 공통으로 사용할 수 있는 css 상단배치 */
+/* 확대 애니메이션 추가 */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
 }
 
-/* //리스트관련 css */
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+/* flex 공통 css */
+.flex-layout {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-layout-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-layout-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* 리스트관련 css */
 .ListSector {
   width: 980px;
   margin: auto;
@@ -145,10 +175,6 @@
   text-decoration: none;
   color: black;
 }
-
-a {
-  text-decoration: none;
-}
 .topmenu {
   display: flex;
   justify-content: space-between;
@@ -184,28 +210,11 @@ a {
   margin-right: 60px;
   border-radius: 20px;
 }
-
 .member_box {
   display: flex;
 }
 .search_box {
   width: 500px;
-}
-/* flex 초기 설정 */
-.flex-layout {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-.flex-layout-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.flex-layout-end {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
 }
 
 /* 버튼 css */
@@ -465,30 +474,6 @@ span.psw {
   cursor: pointer;
 }
 
-/* 확대 애니메이션 추가 */
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s;
-}
-
-@-webkit-keyframes animatezoom {
-  from {
-    -webkit-transform: scale(0);
-  }
-  to {
-    -webkit-transform: scale(1);
-  }
-}
-
-@keyframes animatezoom {
-  from {
-    -webkit-transform: scale(0);
-  }
-  to {
-    -webkit-transform: scale(1);
-  }
-}
-
 .List_modal {
   position: fixed;
   top: 0;
@@ -540,3 +525,4 @@ span.psw {
 button {
   all:unset;
 }
+

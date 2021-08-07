@@ -13,32 +13,31 @@
 </head>
 <body>
     <!-- 상단메뉴 -->
-    <section class ="top menu">
-        <div class="hoon-1">
-            <a href="index.html">
-                <img src="img/logo.png" style="margin-left: 30px; width: 60px; height: 60px;">
-            </a>
-            <div class="hoon-6">
-                <input class="hoon-2" type="text" placeholder="검색어 입력">
-            </div>    
-            <div class="hoon-5">
-                <div class="hoon-3">
-                    <a href="#">마이페이지</a>
-                </div>
-                <div class="hoon-4">
-                    <a onclick="makeModal()">로그인/회원가입</a>
-                </div>
-            </div>    
-            
-        </div>
-            <div class="my_bg">
-                <div class="my_Jjim">
-                    <a href="#card_list">찜목록</a>
-                </div>
-                <div class="my_info">
-                    <a href="#my_information">내정보</a>
-                </div>
+    <header class ="topmenu">
+        <a href="index.html">
+            <img src="img/logo.png" style="margin-left: 30px; width: 60px; height: 60px;">
+        </a>
+        <div class="search_box">
+            <input class="search_bar" type="text" placeholder="검색어 입력">
+        </div>    
+        <div class="member_box">
+            <div class="mypage">
+                <a href="my_page.html">마이페이지</a>
             </div>
+            <!-- 마이페이지에서 로그인 / 회원가입 버튼은 사라져야 함(이미 로그인된 회원만 들어올 수 있기 때문에)-->
+            <div class="login_signup">
+                <a>로그인</a>
+                <a>회원가입</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="my_bg">
+        <div class="my_Jjim">
+            <a href="#card_list">찜목록</a>
+        </div>
+        <div class="my_info">
+            <a href="#my_information">내정보</a>
         </div>
     </section>
 
@@ -97,6 +96,8 @@
     
                     코딩과 네트워킹 등 소프트웨어 기술 뿐 아니라 개발자 영어, 독일어 등과 같은 외국어, 심지어 육아에 요리까지 넓은 분야의 강의가 올라온다.
                     <button class="close_btn">X</button>
+                    <button class="edit_btn"><img src="img/edit2.png"></button>
+                    <button class="delete_btn"><img src="img/delete.png"></button>
                 </div>
         </div>
     </section>
