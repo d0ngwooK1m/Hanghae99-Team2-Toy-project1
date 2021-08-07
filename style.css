@@ -48,15 +48,15 @@
 }
 
 /* 리스트관련 css */
-.cardCloumn{
+.cardCloumn {
   width: 1500px;
-  margin:auto;
+  margin: 0 auto 50px;
 }
-.cardRow{
+.cardRow {
   display: flex;
 }
-.ListBg:hover{
-  box-shadow: 0 0 11px rgba(33,33,33,.2);
+.ListBg:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 .ListBg {
   width: 27%;
@@ -66,38 +66,45 @@
   margin-right: 9.5%;
   transition: box-shadow 0.23s linear;
 }
-.ListBg:last-child{
+.ListBg:last-child {
   margin-right: 0;
 }
-.ListFlex{
-  padding:20px;
+.ListFlex {
+  padding: 20px;
 }
 .classImg {
   width: 100%;
   height: 20%;
-  border: 1px solid black;
 }
-.Option{
-  display:flex;
+.Option {
+  display: flex;
   margin: 20px auto 10px auto;
   justify-content: center;
 }
-.FixedOption, .Like {
+.FixedOption,
+.Like {
   margin: auto 30px auto 30px;
 }
-.Like{
+.Like {
+  position: relative;
   border: 1px solid black;
   width: 60px;
   height: 60px;
+  line-height: 60px;
   border-radius: 50%;
   text-align: center;
-  position: relative;
   font-size: 15px;
 }
 .Like img {
-  margin-top:10%;
   width: 30px;
   height: 30px;
+  vertical-align: middle;
+}
+.Like .LikeNum {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 11px;
 }
 .FixedOption {
   border: 1px solid black;
@@ -122,36 +129,36 @@
 }
 
 .ListFlex .title {
-  margin: 0 20px 20px 20px;
+  margin: 20px 0;
   display: -webkit-box;
-  height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   font-size: 20px;
+  font-weight: 900;
 }
 .ListFlex .desc {
-  height: 180px;
-  margin: 0 20px 30px 20px;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
+  font-size: 14px;
+  font-family: "GmarketSansLight" !important;
 }
-.preview{
+.preview-btn-wrap {
+  margin-top: 30px;
+  text-align: center;
+}
+.preview {
   border: 1px solid;
   border-radius: 5px;
   background-color: #202020;
-  color:white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: white;
   font-size: 16px;
-  width:50%;
+  width: 50%;
   height: 60px;
-  margin: 20px auto auto auto;
 }
 
 .topmenu {
@@ -169,6 +176,10 @@
   height: 40px;
   width: 400px;
   margin-right: 100px;
+  padding: 0px 15px;
+}
+.search_bar:focus {
+  outline: none;
 }
 .mypage {
   display: flex;
@@ -336,10 +347,11 @@
   padding: 14px 20px;
 }
 
-/* 로그인모달v2 */
-.login-background {
+/* 로그인, 회원가입 모달v2 */
+.login-background,
+.signup-background {
   display: none;
-  background-color: rgba(275, 275, 275, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .show {
@@ -348,16 +360,31 @@
 
 .login-form {
   position: relative;
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
   border: 2px solid #dddddd9c;
   border-radius: 5px;
   padding: 50px;
   margin: 15% auto;
-  width: 30%;
-  height: 50%;
+  width: 500px;
+  height: 400px;
   background-color: rgba(275, 275, 275, 1);
 }
 
+.signup-form {
+  position: relative;
+  transition: box-shadow 0.3s;
+  border: 2px solid #dddddd9c;
+  border-radius: 5px;
+  padding: 50px;
+  margin: 5% auto;
+  width: 500px;
+  height: 600px;
+  background-color: rgba(275, 275, 275, 1);
+}
+
+.login-form:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
 .login-close-btn {
   position: absolute;
   right: 15px;
@@ -365,12 +392,21 @@
   font-size: 2rem;
 }
 
-.login-close-btn:hover {
+.signup-close-btn {
+  position: absolute;
+  left: 85%;
+  top: 8px;
+  font-size: 2rem;
+}
+
+.login-close-btn:hover,
+.signup-close-btn:hover {
   color: red;
 }
 
-.login-form:hover {
-  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+.login-form:hover,
+.signup-form:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
 .modal-content input[type="text"],
@@ -382,7 +418,8 @@
   border-radius: 3px;
 }
 
-button[type="submit"] {
+.login-submit-btn,
+.signup-submit-btn {
   transition: background-color 1s;
   width: 100%;
   padding: 2% 0;
@@ -392,7 +429,8 @@ button[type="submit"] {
   border-radius: 5px;
 }
 
-button[type="submit"]:hover {
+.login-submit-btn:hover,
+.signup-submit-btn:hover {
   background-color: rgba(8, 8, 8, 0.788);
 }
 
@@ -436,7 +474,6 @@ button[type="submit"]:hover {
   position: absolute;
   top: 65px;
   right: 20px;
-  
 }
 .delete_btn {
   all: unset;
@@ -493,14 +530,14 @@ button[type="submit"]:hover {
   display: none;
 }
 .icon-dropdown-wrap2 {
-  font-size: 11px;
+  font-size: 13px;
 }
 .icon-dropdown-wrap2 .line {
   margin: 0px 10px;
 }
-.icon-dropdown-wrap2 li:hover {
+.icon-dropdown-wrap2 span:hover {
   animation: fade 1s;
-  color: red;
+  color: #4dabf7;
   cursor: pointer;
 }
 .icon-first {
@@ -515,4 +552,12 @@ button[type="submit"]:hover {
 }
 .icon-dropdown-container:hover > .icon-dropdown-wrap {
   display: block;
+}
+.login-form {
+  position: relative;
+}
+.test {
+  position: absolute;
+  top: 0;
+  right: 10px;
 }
