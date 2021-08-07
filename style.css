@@ -492,11 +492,11 @@ span.psw {
 }
 .List_content {
   background-color: white;
-  padding: 50px 100px;
+  padding: 5% 10%;
   text-align: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.2);
   position: relative;
-  width: 980px;
+  width: 1280px;
   top: 0px;
   border-radius: 10px;
 }
@@ -510,11 +510,19 @@ span.psw {
 }
 .edit_btn {
   position: absolute;
-  top: 20px;
-  right: 50px;
+  top: 65px;
+  right: 20px;
 }
 .delete_btn {
   position: absolute;
-  top: 20px;
-  right: 80px;
+  top: 110px;
+  right: 20px;
 }
+.line{
+  color: rgb(117, 117, 117);
+  margin: 2% 0 2% 0;
+}
+button {
+  all:unset;
+}
+
