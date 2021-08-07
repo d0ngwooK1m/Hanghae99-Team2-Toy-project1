@@ -40,52 +40,54 @@
 }
 
 /* 리스트관련 css */
-.ListSector {
-  width: 980px;
-  margin: auto;
+.cardCloumn{
+  width: 1500px;
+  margin:auto;
+}
+.cardRow{
+  display: flex;
+  justify-content: center;
+}
+.ListBg:hover{
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 6px 4px rgba(0, 0, 0, 0.5);
 }
 .ListBg {
-  width: 100%;
-  height: 320px;
+  width: 400px;
+  height: 700px;
   border: 3px solid black;
-  border-radius: 20px;
-  margin-bottom: 30px;
+  border-radius: 5px;
+  margin: 0 3% 0 3%;
   background-color: rgb(241, 241, 235, 0.3);
+  transition: box-shadow 0.23s linear;
 }
 .classImg {
-  width: 230.4px;
-  height: 129.6px;
-  margin: 94px 10px 94px 50px;
+  display: flex;
+  width: 90%;
+  height: 20%;
+  margin: 20px 20px 10px 20px;
   border: 1px solid black;
 }
-.ListFlex {
-  display: flex;
+.Option{
+  display:flex;
+  margin: 20px auto 10px auto;
+  justify-content: center;
 }
-.ListFlex .title {
-  width: 300px;
-  border: 2px solid black;
-  border-radius: 5px;
-  max-height: 35px;
-  margin: 0 20px 25px 0;
-  word-break: break-all;
-  overflow: hidden;
-  background-color: rgb(239, 247, 218);
+.FixedOption, .Like {
+  margin: auto 30px auto 30px;
 }
-.ListFlex .desc {
-  width: 300px;
-  border: 2px solid black;
-  border-radius: 5px;
-  word-break: break-all;
-  max-height: 196px;
-  overflow: hidden;
-  background-color: rgb(239, 247, 218);
+.Like{
+  border: 1px solid black;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  font-size: 15px;
 }
-/* //좋아요, 찜, 링크 */
-.FixedOption {
-  margin: auto 0px auto 30px;
-}
-.LikeNum {
-  margin: auto 0px auto 30px;
+.Like img {
+  margin-top:15%;
+  width: 30px;
+  height: 30px;
 }
 .FixedOption {
   border: 1px solid black;
@@ -98,6 +100,7 @@
   font-size: 30px;
 }
 .FixedOption img {
+  margin-top: 40%;
   width: 30px;
   height: 30px;
 }
@@ -106,79 +109,49 @@
 .FixedOption a:hover {
   text-decoration: none;
   color: black;
-}
-/* 리스트관련 css */
-.ListSector {
-  width: 980px;
-  margin: auto;
-}
-.ListBg {
-  width: 100%;
-  height: 320px;
-  border: 3px solid black;
-  border-radius: 20px;
-  margin-bottom: 30px;
-  background-color: rgb(241, 241, 235, 0.3);
-}
-.classImg {
-  width: 230.4px;
-  height: 129.6px;
-  margin: 94px 10px 94px 50px;
-  border: 1px solid black;
-}
-.ListFlex {
-  display: flex;
-}
-.ListFlex .title {
-  width: 300px;
-  border: 2px solid black;
-  border-radius: 5px;
-  margin: 50px 20px 20px 0;
-  word-break: break-all;
-  overflow: hidden;
-  background-color: rgb(239, 247, 218);
-}
-.ListFlex .desc {
-  width: 300px;
-  border: 2px solid black;
-  border-radius: 5px;
-  word-break: break-all;
-  max-height: 196px;
-  overflow: hidden;
-  background-color: rgb(239, 247, 218);
 }
 
-/* 좋아요, 찜, 링크 */
-.FixedOption {
-  margin: auto 0px auto 30px;
+.ListFlex .title {
+  width: 90%;
+  border-radius: 5px;
+  height: 40px;
+  margin: 0 20px 20px 20px;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
-.LikeNum {
-  margin: auto 0px auto 30px;
+.ListFlex .desc {
+  width: 90%;
+  border-radius: 5px;
+  height: 180px;
+  margin: 0 20px 30px 20px;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
 }
-.FixedOption {
-  border: 1px solid black;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+.preview{
+  border: 1px solid;
+  border-radius: 5px;
+  background-color: #202020;
+  color:white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
+  font-size: 16px;
+  width:50%;
+  height: 60px;
+  margin: 20px auto auto auto;
 }
-.FixedOption img {
-  width: 30px;
-  height: 30px;
-}
-.FixedOption a:link,
-.FixedOption a:visited,
-.FixedOption a:hover {
-  text-decoration: none;
-  color: black;
-}
+
 .topmenu {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   height: 180px;
   background-color: black;
   padding-left: 30px;
