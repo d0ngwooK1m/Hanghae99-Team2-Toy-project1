@@ -54,25 +54,27 @@
 }
 .cardRow{
   display: flex;
-  justify-content: center;
 }
 .ListBg:hover{
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
 }
 .ListBg {
-  width: 400px;
+  width: 27%;
   height: 700px;
-  border: 3px solid black;
+  border: 2px solid #dddddd9c;
   border-radius: 5px;
-  margin: 0 3% 0 3%;
-  background-color: rgb(241, 241, 235, 0.3);
+  margin-right: 9.5%;
   transition: box-shadow 0.23s linear;
 }
+.ListBg:last-child{
+  margin-right: 0;
+}
+.ListFlex{
+  padding:20px;
+}
 .classImg {
-  display: flex;
-  width: 90%;
+  width: 100%;
   height: 20%;
-  margin: 20px 20px 10px 20px;
   border: 1px solid black;
 }
 .Option{
@@ -85,22 +87,22 @@
 }
 .Like{
   border: 1px solid black;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   text-align: center;
   position: relative;
   font-size: 15px;
 }
 .Like img {
-  margin-top:15%;
+  margin-top:10%;
   width: 30px;
   height: 30px;
 }
 .FixedOption {
   border: 1px solid black;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -120,19 +122,16 @@
 }
 
 .ListFlex .title {
-  width: 90%;
-  border-radius: 5px;
-  height: 40px;
   margin: 0 20px 20px 20px;
   display: -webkit-box;
+  height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  font-size: 20px;
 }
 .ListFlex .desc {
-  width: 90%;
-  border-radius: 5px;
   height: 180px;
   margin: 0 20px 30px 20px;
   display: -webkit-box;
@@ -374,8 +373,8 @@
   box-shadow: 0 0 11px rgba(33,33,33,.2); 
 }
 
-input[type="text"],
-input[type="password"] {
+.modal-content input[type="text"],
+.modal-content input[type="password"] {
   width: 100%;
   padding: 2% 0;
   margin: 5% auto;
@@ -452,7 +451,7 @@ button[type="submit"]:hover {
 
 /* icon nav css */
 .icon-nav-wrap {
-  width: 980px;
+  width: 1500px;
   margin: 30px auto;
   padding-bottom: 15px;
   border-bottom: 1px solid #e0e0e0;
