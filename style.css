@@ -22,6 +22,14 @@
     -webkit-transform: scale(1);
   }
 }
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 /* flex 공통 css */
 .flex-layout {
   display: flex;
@@ -465,11 +473,11 @@ span.psw {
 }
 .List_content {
   background-color: white;
-  padding: 50px 100px;
+  padding: 5% 10%;
   text-align: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.2);
   position: relative;
-  width: 980px;
+  width: 1280px;
   top: 0px;
   border-radius: 10px;
 }
@@ -477,17 +485,93 @@ span.psw {
   display: none;
 }
 .close_btn {
+  all: unset;
   position: absolute;
   top: 20px;
   right: 20px;
 }
 .edit_btn {
+  all: unset;
   position: absolute;
-  top: 20px;
-  right: 50px;
+  top: 65px;
+  right: 20px;
+  
 }
 .delete_btn {
+  all: unset;
   position: absolute;
-  top: 20px;
-  right: 80px;
+  top: 110px;
+  right: 20px;
+}
+.line {
+  color: rgb(117, 117, 117);
+  margin: 2% 0 2% 0;
+}
+
+/* icon nav css */
+.icon-nav-wrap {
+  width: 980px;
+  margin: 30px auto;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.create-btn {
+  margin-right: 5px;
+}
+.create-btn,
+.dropdown-icon {
+  width: 60px;
+  height: 60px;
+  color: #fff;
+  border: 0;
+  border-radius: 50%;
+  background-color: black;
+}
+.dropdown-icon {
+  text-align: center;
+  line-height: 60px;
+  font-size: 18px;
+}
+
+.create-btn:hover,
+.dropdown-icon:hover {
+  opacity: 0.8;
+}
+.icon-dropdown-container {
+  position: relative;
+}
+.showIcon {
+  display: block;
+}
+.showIcon img {
+  width: 30px;
+  background-color: #fff;
+  vertical-align: middle;
+}
+.icon-dropdown-wrap {
+  display: none;
+}
+.icon-dropdown-wrap2 {
+  font-size: 11px;
+}
+.icon-dropdown-wrap2 .line {
+  margin: 0px 10px;
+}
+.icon-dropdown-wrap2 li:hover {
+  animation: fade 1s;
+  color: red;
+  cursor: pointer;
+}
+.icon-first {
+  position: absolute;
+  top: 0;
+  left: 60px;
+}
+.icon-second {
+  position: absolute;
+  top: 0;
+  left: 120px;
+}
+.icon-dropdown-container:hover > .icon-dropdown-wrap {
+  display: block;
 }

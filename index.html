@@ -84,8 +84,8 @@
         </form>
     </div>
 
-    <!-- 등록버튼 -->
-    <div class="menu-container">
+    <!-- 등록버튼 애니메이션 일단 지우지 않고 주석처리, 추후 한번에 정리할예정 -->
+    <!-- <div class="menu-container">
         <div class="menu-wrap">
             <a href='#' class="writebtn a-content create-btn">➕</a>
             <div class="dropdown">
@@ -96,7 +96,33 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    <!-- <section class="icon-nav-wrap">
+        <nav class="icon-nav flex-layout-between">
+            <div class="icon-dropdown-container">
+                <button class="dropdown-icon showIcon">
+                    <a href="#" title=""><img src="img/list.svg" alt="리스트 정렬"/></a>
+                </button>
+                <ul class="icon-dropdown-wrap">
+                    <li class="dropdown-icon icon-first"><a href="#" title="">👍</a></li>
+                    <li class="dropdown-icon icon-second"><a href="#" title="">🕔</a></li>
+                </ul>
+            </div>
+            <button class="create-btn">등록</button>
+        </nav>
+    </section> -->
+    <section class="icon-nav-wrap">
+        <nav class="icon-nav flex-layout-between">
+            <ul class="icon-dropdown-wrap2 flex-layout">
+                <li>최신순</li>
+                <div class="line">|</div>
+                <li>추천순</li>
+            </ul>
+
+            <button class="create-btn">등록</button>
+        </nav>
+    </section>
+
     <!-- 등록팝업 -->
     <div id="writemodal" class="popup-background">
         <div class="popup-wrap">
@@ -234,16 +260,19 @@
     <!-- 리스트 상세보기 -->
     <div class="List_modal List_hidden">
         <div class="List_overlay"></div>
-            <div class="List_content">
-                <img src="img\생활코딩.PNG" style="height: 70%; width: 70%;">
-                <h1><a href="https://opentutorials.org/course/1" target="_blank">생활코딩</a></h1>
+            <div class="List_content" style="overflow: auto;">
+                <h1><a href="https://opentutorials.org/course/1" target="_blank" style="font-weight: bold; font-size: 32px;">생활코딩</a></h1>
+                <hr class="line">
+                <img src="img\생활코딩.png" style="height: 70%; width: 70%;">
+                <hr class="line">
+                
                 페이스북의 경우 국내 개발자 커뮤니티 중 접근성이 좋고 다양한 사람이 많이 포진되어 있다. 기본적인 설립목적이 누구나 접근하기 쉬운 코딩, 생활코딩이라는 의미처럼 취미로 하는 사람도, 회사에서 개발하고 있는 사람도 다양한 사람이 모여있다.
 
                 오픈 튜토리얼스 사이트는 일종의 강의 사이트로 외국의 codecademy, code.org와 같은 사이트지만 일반 유저가 직접 강의를 제작하여 만들 수 있다.
 
                 코딩과 네트워킹 등 소프트웨어 기술 뿐 아니라 개발자 영어, 독일어 등과 같은 외국어, 심지어 육아에 요리까지 넓은 분야의 강의가 올라온다.
-                <button class="close_btn">X</button>
-                <button class="edit_btn"><img src="img/edit2.png"></button>
+                <button class="close_btn"><img src="img/close.png"></button>
+                <button class="edit_btn"><img src="img/edit.png"></button>
                 <button class="delete_btn"><img src="img/delete.png"></button>
             </div>
     </div>
