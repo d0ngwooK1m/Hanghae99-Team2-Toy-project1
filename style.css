@@ -337,122 +337,53 @@
   padding: 14px 20px;
 }
 
-/* 로그인/회원가입 모달 css */
-/* 모든 테두리 스타일 적용 */
-form {
-  border: 3px solid #f1f1f1;
+/* 로그인모달v2 */
+.login-background {
+  display: none;
+  /* position: ; */
+  background-color: rgba(275, 275, 275, 0.7);
 }
 
-/* 모든 입력창 100% 넓이 */
+.login-form {
+  transition: box-shadow .3s;
+  border: 2px solid #dddddd9c;
+  border-radius: 5px;
+  padding: 5% 5%;
+  margin: 15% auto;
+  width: 30%;
+  height: 50%;
+  background-color: rgba(275, 275, 275, 1);
+}
+
+.show {
+  display: block;
+}
+
+.login-form:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+}
+
 input[type="text"],
 input[type="password"] {
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+  padding: 2% 0;
+  margin: 5% auto;
+  border: 2px solid #dddddd9c;
+  border-radius: 3px;
 }
 
-/* 모든 버튼 스타일링 */
-.loginbtn {
-  background-color: #04aa6d;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
+button[type="submit"] {
+  transition: background-color 1s;
   width: 100%;
-}
-
-.signinbtn {
-  background-color: #3564ff;
+  padding: 2% 0;
+  margin: 10% auto;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-/* 이름만변경함 */
-.close-btn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-  border: 0;
-}
-/* .cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-} */
-
-/* 버튼 호버 효과 */
-button:hover {
-  opacity: 0.8;
+  background-color: black;
+  border-radius: 5px;
 }
 
-/* 이미지 컨테이너 중앙으로 위치 */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-/* 이미지 */
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-/* 컨테이너 패딩 추가 */
-.container {
-  padding: 16px;
-}
-
-/* forgot pw */
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* 모달 배경 */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-  padding-top: 60px;
-}
-
-/* 모달 컨텐츠/박스 */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5px auto;
-  border: 1px solid #888;
-  width: 30%;
-}
-
-/* 닫기 버튼 */
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: white;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-/* 닫기 호버 효과 */
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
+button[type="submit"]:hover {
+  background-color: rgba(8, 8, 8, 0.788);
 }
 
 .List_modal {

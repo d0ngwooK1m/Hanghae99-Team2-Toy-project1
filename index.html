@@ -31,33 +31,21 @@
         </div>    
     </div>
 
-    <!-- 로그인 모달창 -->
+    <!-- 로그인 모달창v2 -->
     <div id="loginmodal" class="login-background">
-        <!--로그인 모달 컨텐츠 -->
-        <form class="modal-content animate" action="#">
-            <div class="imgcontainer">
-                <img src="img/logo.png" alt="Avatar" class="avatar">
-            </div>
+        <!-- <span class="xClose">&times;</span> -->
+        <div class="login-form animate">
+            <!--로그인 모달 컨텐츠 -->
+            <form class="modal-content" action="#">
+                <label for="id" class='login-id'><b>ID</b></label>
+                <input type="text" class="login-input" required>
 
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <label for="password" class='login-pw'><b>Password</b></label>
+                <input type="password" required>
 
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-
-                <button type="submit" class="loginbtn">Login</button>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </div>
-
-            <div class="container" style="background-color:#f1f1f1">
-                <span class="psw">Forgot <a href="#">password?</a>
-                </span>
-                <button class="login-close-btn close-btn">&times;</button>
-            </div>
-        </form>
+                <button type="submit" class="login-btn">Log In</button>
+            </form>
+        </div>
     </div>
 
     <!-- 회원가입 모달창 -->
