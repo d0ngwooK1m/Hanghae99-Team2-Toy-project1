@@ -48,15 +48,15 @@
 }
 
 /* 리스트관련 css */
-.cardCloumn{
+.cardCloumn {
   width: 1500px;
-  margin:auto;
+  margin: auto;
 }
-.cardRow{
+.cardRow {
   display: flex;
   justify-content: center;
 }
-.ListBg:hover{
+.ListBg:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 4px rgba(0, 0, 0, 0.4);
 }
 .ListBg {
@@ -75,15 +75,16 @@
   margin: 20px 20px 10px 20px;
   border: 1px solid black;
 }
-.Option{
-  display:flex;
+.Option {
+  display: flex;
   margin: 20px auto 10px auto;
   justify-content: center;
 }
-.FixedOption, .Like {
+.FixedOption,
+.Like {
   margin: auto 30px auto 30px;
 }
-.Like{
+.Like {
   border: 1px solid black;
   width: 70px;
   height: 70px;
@@ -93,7 +94,7 @@
   font-size: 15px;
 }
 .Like img {
-  margin-top:15%;
+  margin-top: 15%;
   width: 30px;
   height: 30px;
 }
@@ -141,16 +142,16 @@
   -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
 }
-.preview{
+.preview {
   border: 1px solid;
   border-radius: 5px;
   background-color: #202020;
-  color:white;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  width:50%;
+  width: 50%;
   height: 60px;
   margin: 20px auto auto auto;
 }
@@ -345,7 +346,7 @@
 }
 
 .login-form {
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
   border: 2px solid #dddddd9c;
   border-radius: 5px;
   padding: 5% 5%;
@@ -360,7 +361,7 @@
 }
 
 .login-form:hover {
-  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
 input[type="text"],
@@ -426,7 +427,6 @@ button[type="submit"]:hover {
   position: absolute;
   top: 65px;
   right: 20px;
-  
 }
 .delete_btn {
   all: unset;
@@ -505,4 +505,12 @@ button[type="submit"]:hover {
 }
 .icon-dropdown-container:hover > .icon-dropdown-wrap {
   display: block;
+}
+.login-form {
+  position: relative;
+}
+.test {
+  position: absolute;
+  top: 0;
+  right: 10px;
 }
