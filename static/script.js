@@ -227,16 +227,49 @@ loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
 loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
 loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
 
-
+//새로고침
+$(document).ready(function () {
+  viewing();
+});
 //뷰?
-$.ajax({
+function viewing() {
+    $.ajax({
     type: "GET",
-    url: "/test?title_give=봄날은간다",
+    url: "/view",
     data: {},
     success: function(response){
-       console.log(response)
+      let lists = response['all_post']
+        for (let i = 0; i < lists.length; i++) {
+          let url = lists[i]['url']
+          let title = lists[i]['title']
+          let desc = lists[i]['desc']
+          
+          let temp_html = ` <div class ="cardRow">
+                              <div class="ListBg">
+                              <div class="ListFlex">
+                                  <img src="../static/img/vatican.jpg" class="classImg">
+                                  <div class="Option">
+                                      <div class="Like" id="Option_Like">
+                                          <div><img src="../static/img/heart.png" id="heart"></div>
+                                          <div class="LikeNum" id="LikeNum">1</div></div>
+                                      <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/link.png"></a></div>
+                                      <div class="FixedOption" id ="Option_Jjim"><div><img src="../static/img/star.png" id="star"></div></div>
+                                  </div>
+                                  <div class="high-low">
+                                      <div class ="title">${title}</div>
+                                      <div class ="desc">${desc}</div>
+                                  </div>
+                                  <div>
+                                      <button class ="preview" href=".List_modal">preview</button>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>`
+      $('#card_list').append(temp_html);
+        }
     }
   })
+} 
 
 //등록
 function posting() {
@@ -246,7 +279,7 @@ function posting() {
       
       $.ajax({
         type: "POST",
-        url: "/",
+        url: "/test",
         data: {url_give:url,title_give:title,desc_give:desc},
         success: function(response){
             alert(response["msg"]);

@@ -15,14 +15,16 @@ def index():
 def mypage():
     return render_template('my_page.html')
 
-@app.route('/test', methods=['GET'])
-def test_get():
-   title_receive = request.args.get('title_give')
-   print(title_receive)
-   return jsonify({'result':'success', 'msg': '이 요청은 GET!'})
 
-@app.route('/', methods=['POST'])
-def test_post():
+@app.route('/view', methods=['GET'])
+def show_view():
+   lists = list(db.posting.find({},{'_id':False}))
+   return jsonify({'all_post':lists})
+  
+
+
+@app.route('/test', methods=['POST'])
+def posting():
     url_receive = request.form['url_give']
     title_receive = request.form['title_give']
     desc_receive = request.form['desc_give']
