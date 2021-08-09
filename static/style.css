@@ -168,7 +168,20 @@
   border-radius: 20px;
   height: 40px;
   width: 400px;
-  margin-right: 100px;
+}
+.search_btn{
+  border: 0;
+  background-color: white;
+  width: 70px;
+  height: 35px;
+  border-radius:20px;
+  margin:2px 80px 0 -72px;
+  text-align: center;
+}
+.search_icon{
+  width: 17px;
+  height: 17px;
+  margin-left: 45%;
 }
 .mypage {
   display: flex;
@@ -195,6 +208,7 @@
 }
 .search_box {
   width: 500px;
+  display: flex;
 }
 
 /* 버튼 css */
