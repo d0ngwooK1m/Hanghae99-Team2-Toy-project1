@@ -194,6 +194,11 @@ const loginBtn = document.querySelector(".login-btn");
 const loginBg = document.querySelector(".login-background");
 const loginCloseBtn = document.querySelector(".login-close-btn");
 
+
+
+// 아래 url, previewBox 변수는 이미지 미리보기에 사용되며 팝업이 닫힐때 지워져야 합니다.
+let url = document.querySelector('.preview-url')
+let previewBox = document.querySelector('.preview-image-wrap');
 // 팝업 기능을 하는 함수는 하나로 통일하고자 만듬 (팝업의 기능은 같기때문에)
 const handlePopup = (e, tag) => {
   // 전체 영역을 덮는 backgorund에 click 이벤트가 발생되어 자식에도 이벤트 전파되는 현상 막기
@@ -204,6 +209,8 @@ const handlePopup = (e, tag) => {
   if (tag.classList.contains("show")) {
     // tag에 show라는 클래스가 있으면 show 클래스를 지워서 팝업 닫기
     tag.classList.remove("show");
+    url.value = ''
+    previewBox.innerHTML = ''
   } else {
     // tag에 show라는 클래스가 없으면 show 클래스를 추가해서 팝업 보이기
     tag.classList.add("show");
@@ -225,3 +232,32 @@ signupBg.addEventListener("click", (e) => handlePopup(e, signupBg));
 loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
 loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
 loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
+
+
+// 카드 등록에서 URL을 입력하면 해당 OG:IMAGE 미리보게 하는 함수
+const previewBtn = document.querySelector('.preview-btn');
+let previewCount = 0;
+previewBtn.addEventListener('click', () => {
+  const urlValue = url.value
+        $.ajax({
+        type: 'POST',
+        url: '/create/previewImage',
+        data: {url_give:urlValue},
+        success: function (response) {
+          const url = response;
+          // 버튼을 또 클릭했을 경우 이미지가 계속 추가되는 현상 막기
+          if(previewCount > 0){
+            previewCount = 0;
+            previewBox.innerHTML = ``;
+          }
+          if(url !== ''){
+            previewBox.innerHTML += `<img src="${url}" alt="썸네일"/>`;
+            previewCount++;
+          }else{
+            // og:image가 없을 경우 기본 이미지로 대체
+            previewBox.innerHTML += `<img src="../static/img/logo.png" alt="썸네일"/>`;
+            previewCount++;
+          }
+        }
+    })
+});
