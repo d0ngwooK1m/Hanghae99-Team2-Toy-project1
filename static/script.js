@@ -22,6 +22,7 @@ function Jjim() {
   }
 }
 
+
 function Like() {
   if (Like_count) {
     Like_heart.src = "img/red-heart.png";
@@ -225,3 +226,22 @@ signupBg.addEventListener("click", (e) => handlePopup(e, signupBg));
 loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
 loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
 loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
+
+$.ajax({
+    type: "GET",
+    url: "/test?title_give=봄날은간다",
+    data: {},
+    success: function(response){
+       console.log(response)
+    }
+  })
+
+//등록
+$.ajax({
+    type: "POST",
+    url: "/",
+    data: {},
+    success: function(response){
+       console.log(response)
+    }
+  })
