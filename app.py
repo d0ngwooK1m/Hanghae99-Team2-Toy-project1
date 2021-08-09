@@ -21,11 +21,19 @@ def test_get():
    print(title_receive)
    return jsonify({'result':'success', 'msg': '이 요청은 GET!'})
 
-@app.route('/test', methods=['POST'])
+@app.route('/', methods=['POST'])
 def test_post():
+    url_receive = request.form['url_give']
     title_receive = request.form['title_give']
-    print(title_receive)
-    return jsonify({'result':'success', 'msg': '이 요청은 POST!'})
+    desc_receive = request.form['desc_give']
+
+    doc = {
+        'url':url_receive,
+        'title':title_receive,
+        'desc':desc_receive
+    }
+    db.posting.insert_one(doc)
+    return jsonify({'msg': '등록 완료!'})
 
 
 

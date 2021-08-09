@@ -228,7 +228,7 @@ loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
 loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
 
 
-
+//뷰?
 $.ajax({
     type: "GET",
     url: "/test?title_give=봄날은간다",
@@ -239,11 +239,18 @@ $.ajax({
   })
 
 //등록
-$.ajax({
-  type: "POST",
-  url: "/test",
-  data: { title_give:'봄날은간다' },
-  success: function(response){
-     console.log(response)
-  }
-})
+function posting() {
+      let url = document.getElementById("url").value;
+      let title = document.getElementById("title").value;
+      let desc = document.getElementById("description").value;
+      
+      $.ajax({
+        type: "POST",
+        url: "/",
+        data: {url_give:url,title_give:title,desc_give:desc},
+        success: function(response){
+            alert(response["msg"]);
+            window.location.reload();
+        }
+      })
+}
