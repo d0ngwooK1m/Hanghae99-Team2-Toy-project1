@@ -239,33 +239,32 @@ function viewing() {
     data: {},
     success: function(response){
       let lists = response['all_post']
+        console.log(lists)
         for (let i = 0; i < lists.length; i++) {
           let url = lists[i]['url']
           let title = lists[i]['title']
           let desc = lists[i]['desc']
           
-          let temp_html = `<div class ="cardRow">
-                              <div class="ListBg">
-                              <div class="ListFlex">
-                                  <img src="../static/img/vatican.jpg" class="classImg">
-                                  <div class="Option">
-                                      <div class="Like" id="Option_Like">
-                                          <div><img src="../static/img/heart.png" id="heart"></div>
-                                          <div class="LikeNum" id="LikeNum">1</div></div>
-                                      <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/link.png"></a></div>
-                                      <div class="FixedOption" id ="Option_Jjim"><div><img src="../static/img/star.png" id="star"></div></div>
-                                  </div>
-                                  <div class="high-low">
-                                      <div class ="title">${title}</div>
-                                      <div class ="desc">${desc}</div>
-                                  </div>
-                                  <div>
-                                      <button class ="preview" href=".List_modal">preview</button>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>`
-      $('#card_list').append(temp_html);
+          let temp_html = `<div class="ListBg">
+                                <div class="ListFlex">
+                                    <img src="../static/img/vatican.jpg" class="classImg">
+                                    <div class="Option">
+                                        <div class="Like" id="Option_Like">
+                                            <div><img src="../static/img/heart.png" id="heart"></div>
+                                            <div class="LikeNum" id="LikeNum">1</div></div>
+                                        <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/link.png"></a></div>
+                                        <div class="FixedOption" id ="Option_Jjim"><div><img src="../static/img/star.png" id="star"></div></div>
+                                    </div>
+                                    <div class="high-low">
+                                        <div class ="title">${title}</div>
+                                        <div class ="desc">${desc}</div>
+                                    </div>
+                                    <div>
+                                        <button class ="preview" href=".List_modal">preview</button>
+                                    </div>
+                                </div>
+                            </div>`
+      $('.cardRow').append(temp_html);
         }
     }
   })
