@@ -244,7 +244,7 @@ function viewing() {
           let title = lists[i]['title']
           let desc = lists[i]['desc']
           
-          let temp_html = ` <div class ="cardRow">
+          let temp_html = `<div class ="cardRow">
                               <div class="ListBg">
                               <div class="ListFlex">
                                   <img src="../static/img/vatican.jpg" class="classImg">
