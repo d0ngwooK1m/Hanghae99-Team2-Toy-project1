@@ -71,6 +71,7 @@
 }
 .ListFlex{
   padding: 7%;
+
 }
 .titleLine{
   margin: 25px 0;
@@ -82,11 +83,11 @@
 }
 .Option{
   display:flex;
-  margin: 20px auto 10px auto;
+  margin: 20px auto;
   justify-content: center;
 }
 .FixedOption, .Like {
-  margin: auto 30px auto 30px;
+  margin: auto 30px;
 }
 .Like{
   border: 1px solid black;
