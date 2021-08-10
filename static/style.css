@@ -49,11 +49,14 @@
 
 /* 리스트관련 css */
 .cardCloumn{
+  display: flex;
   width: 1500px;
   margin:auto;
 }
 .cardRow{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .ListBg:hover{
   box-shadow: 0 0 11px rgba(33,33,33,.2);
@@ -63,11 +66,12 @@
   height: 700px;
   border: 2px solid #dddddd9c;
   border-radius: 5px;
-  margin-right: 9.5%;
+  margin:20px 20px;
   transition: box-shadow 0.23s linear;
 }
 .ListBg:last-child{
-  margin-right: 0;
+  /* margin-right: 0; */
+  justify-self:left;
 }
 .ListFlex{
   padding:20px;
