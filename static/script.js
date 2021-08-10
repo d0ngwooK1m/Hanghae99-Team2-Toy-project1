@@ -116,24 +116,24 @@ loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
 // 카드 등록에서 URL을 입력하면 해당 OG:IMAGE 미리보게 하는 함수
 const previewBtn = document.querySelector('.preview-btn');
 let previewCount = 0;
-previewBtn.addEventListener('click', () => {
+previewBtn.addEventListener('click', (e) => {
     const urlValue = url.value;
     // input 값 작성안하고 button 클릭 했을 경우
     if(urlValue === ''){
       alert('WEB URL주소를 입력해주세요')
       return null
     }
-    // 버튼을 또 클릭했을 경우 이미지가 계속 추가되는 현상 막기
-    if (previewCount > 0) {
-        previewCount = 0;
-        previewBox.innerHTML = ``;
-    }
     $.ajax({
         type: 'POST',
         url: '/create/previewImage',
         data: {url_give: urlValue},
-        success: function (response) {
+        success:function(response){
             const url = response;
+            // 버튼을 또 클릭했을 경우 이미지가 계속 추가되는 현상 막기
+            if (previewCount > 0) {
+                previewCount = 0;
+                previewBox.innerHTML = ``;
+            }
             if (url !== '') {
                 previewBox.innerHTML += `<img src="${url}" alt="썸네일"/>`;
                 previewCount++;
@@ -141,6 +141,12 @@ previewBtn.addEventListener('click', () => {
                 // og:image가 없을 경우 기본 이미지로 대체
                 previewBox.innerHTML += `<img src="../static/img/logo.png" alt="썸네일"/>`;
                 previewCount++;
+            }
+        },
+        error:function(e){
+            if(e.status === 500){
+                alert("error")
+                console.log("error === ", e)
             }
         }
     })
