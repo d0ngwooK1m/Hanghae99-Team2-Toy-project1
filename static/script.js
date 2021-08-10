@@ -256,6 +256,7 @@ function viewing() {
                                         <div class="FixedOption" id ="Option_Jjim"><div><img src="../static/img/star.png" id="star"></div></div>
                                     </div>
                                     <div class="high-low">
+                                        <hr class="titleLine">
                                         <div class ="title">${title}</div>
                                         <div class ="desc">${desc}</div>
                                     </div>
