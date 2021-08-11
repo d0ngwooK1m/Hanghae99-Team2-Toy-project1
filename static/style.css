@@ -49,59 +49,67 @@
 
 /* 리스트관련 css */
 .cardCloumn{
+  display: grid;
   width: 1500px;
   margin:auto;
 }
 .cardRow{
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .ListBg:hover{
   box-shadow: 0 0 11px rgba(33,33,33,.2);
 }
 .ListBg {
-  width: 27%;
+  /* width: 27%; */
   height: 700px;
   border: 2px solid #dddddd9c;
   border-radius: 5px;
-  margin-right: 9.5%;
+  margin: 6% 6%;
   transition: box-shadow 0.23s linear;
 }
-.ListBg:last-child{
-  margin-right: 0;
-}
 .ListFlex{
-  padding:20px;
+  padding: 7%;
+
+}
+.titleLine{
+  margin: 25px 0;
 }
 .classImg {
   width: 100%;
   height: 20%;
   border: 1px solid black;
 }
+
 .Option{
-  display:flex;
-  margin: 20px auto 10px auto;
-  justify-content: center;
-}
-.FixedOption, .Like {
-  margin: auto 30px auto 30px;
+  display: flex;
+  margin: 20px auto;
+  justify-content: space-evenly;
 }
 .Like{
+  background-color: black;
+  position: relative;
   border: 1px solid black;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  text-align: center;
-  position: relative;
-  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 8px;
 }
 .Like img {
   margin-top:10%;
   width: 30px;
   height: 30px;
+  vertical-align: text-bottom;
+}
+.LikeNum {
+  position:absolute;
 }
 .FixedOption {
+  background-color: black;
   border: 1px solid black;
   width: 60px;
   height: 60px;
@@ -151,9 +159,9 @@
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  width:50%;
-  height: 60px;
-  margin: 20px auto auto auto;
+  width: 35%;
+  height: 45px;
+  margin: 20px auto;
 }
 
 .topmenu {

@@ -16,6 +16,29 @@ def index():
 def mypage():
     return render_template('my_page.html')
 
+
+@app.route('/view', methods=['GET'])
+def show_view():
+   lists = list(db.posting.find({},{'_id':False}))
+   return jsonify({'all_post':lists})
+  
+
+
+@app.route('/test', methods=['POST'])
+def posting():
+    url_receive = request.form['url_give']
+    title_receive = request.form['title_give']
+    desc_receive = request.form['desc_give']
+
+    doc = {
+        'url':url_receive,
+        'title':title_receive,
+        'desc':desc_receive
+    }
+    db.posting.insert_one(doc)
+    return jsonify({'msg': '등록 완료!'})
+
+
 @app.route('/create/previewImage',methods=['POST'])
 def previewImage():
     url_receive = request.form['url_give']
