@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
     <script defer src="{{ url_for('static', filename='script.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -125,7 +125,11 @@
                     <div class="create-form">
                         <div class="create-form-wrap flex-layout">
                             <label for="url">URL</label>
-                            <input type="text" id="url" name="url" placeholder="URL을 입력해주세요"/>
+                            <input class="preview-url" type="text" id="url" name="url" placeholder="URL을 입력해주세요"/>
+                            <button class="preview-btn">이미지 미리보기</button>
+                        </div>
+                        <div class="preview-image-wrap">
+
                         </div>
                         <div class="create-form-wrap flex-layout">
                             <label for="title">제목</label>

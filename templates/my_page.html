@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toy Project1</title>
-    <link rel="stylesheet" href="../static/default.css">
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="stylesheet" href="../static/my_page_style.css">
-    <script defer src="../static/script.js"></script>
-    <script defer src="../static/my_page_script.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='my_page_style.css' )}}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='my_page_script.js') }}"></script>
 </head>
 <body>
     <!-- 상단메뉴 -->
@@ -60,18 +60,18 @@
     <!-- 내 찜목록 -->
     <section class ="cardCloumn" id="card_list">
         <div class ="cardRow">
-            <div class="ListBg">
+             <div class="ListBg">
                 <div class="ListFlex">
                     <img src="../static/img/vatican.jpg" class="classImg">
                     <div class="Option">
-                        <div class="Like" id="Option_Like">
-                            <div><img src="../static/img/heart.png" id="heart"></div>
-                            <div class="LikeNum" id="LikeNum">1</div></div>
+                        <div class="Like Option_Like">
+                            <div><img src="../static/img/heart.png" class="heart"></div>
+                            <div class="LikeNum">1</div></div>
                         <div class="FixedOption"><a href="https://opentutorials.org/course/1" target= '_blank'><img src="../static/img/link.png"></a></div>
-                        <div class="FixedOption" id ="Option_Jjim"><div><img src="../static/img/star.png" id="star"></div></div>
+                        <div class="FixedOption Option_Jjim"><div><img src="../static/img/star.png" class="star"></div></div>
                     </div>
                     <div class="high-low">
-                        <div class ="title">제aaaaaaaaaaaaaaaaaaaaaaaaaaaa목azzzzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        <div class ="title">제aaaaaaaaaa목azzzzaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
                         <div class ="desc">설명입니다.aaaaaa
                             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -88,23 +88,22 @@
                         </div>
                     </div>
                     <div>
-                        <button class ="preview" href=".List_modal">preview</button>
-                    </div>                    
+                        <button class ="preview">preview</button>
+                    </div>
                 </div>
             </div>
             <div class="ListBg">
                 <div class="ListFlex">
                     <img src="../static/img/vatican.jpg" class="classImg">
                     <div class="Option">
-                        <div class="Like" id="Option_Like">
-                            <div><img src="../static/img/heart.png" id="heart"></div>
-                            <div class="LikeNum" id="LikeNum">1</div></div>
+                        <div class="Like Option_Like">
+                            <div><img src="../static/img/heart.png" class="heart"></div>
+                            <div class="LikeNum">1</div></div>
                         <div class="FixedOption"><a href="https://opentutorials.org/course/1" target= '_blank'><img src="../static/img/link.png"></a></div>
-                        <div class="FixedOption" id ="Option_Jjim"><div><img src="../static/img/star.png" id="star"></div></div>
+                        <div class="FixedOption Option_Jjim"><div><img src="../static/img/star.png" class="star"></div></div>
                     </div>
                     <div class="high-low">
-                        <div class ="title">제목aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                        <div class ="title">제목aaaaaaaaaaaaaa</div>
                         <div class ="desc">설명입니다.aaaaaa
                             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                             aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -120,19 +119,19 @@
                         </div>
                     </div>
                     <div>
-                        <button class ="preview" href=".List_modal">preview</button>
-                    </div>                    
+                        <button class ="preview">preview</button>
+                    </div>
                 </div>
             </div>
             <div class="ListBg">
                 <div class="ListFlex">
                     <img src="../static/img/vatican.jpg" class="classImg">
                     <div class="Option">
-                        <div class="Like" id="Option_Like">
-                            <div><img src="../static/img/heart.png" id="heart"></div>
-                            <div class="LikeNum" id="LikeNum">1</div></div>
+                        <div class="Like Option_Like">
+                            <div><img src="../static/img/heart.png" class="heart"></div>
+                            <div class="LikeNum">1</div></div>
                         <div class="FixedOption"><a href="https://opentutorials.org/course/1" target= '_blank'><img src="../static/img/link.png"></a></div>
-                        <div class="FixedOption" id ="Option_Jjim"><div><img src="../static/img/star.png" id="star"></div></div>
+                        <div class="FixedOption Option_Jjim"><div><img src="../static/img/star.png" class="star"></div></div>
                     </div>
                     <div class="high-low">
                         <div class ="title">제목aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
