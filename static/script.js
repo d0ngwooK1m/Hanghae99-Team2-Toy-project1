@@ -16,18 +16,18 @@ function Like_heartControl() {
 
 function Jjim() {
   if (Jjim_count) {
-    Jjim_star.src = "img/yellow-star.png";
+    Jjim_star.src = "../static/img/ystar.svg";
   } else {
-    Jjim_star.src = "img/star.png";
+    Jjim_star.src = "../static/img/wstar.svg";
   }
 }
 
 
 function Like() {
   if (Like_count) {
-    Like_heart.src = "img/red-heart.png";
+    Like_heart.src = "../static/img/rheart.svg";
   } else {
-    Like_heart.src = "img/heart.png";
+    Like_heart.src = "../static/img/wheart.svg";
   }
 }
 
@@ -233,57 +233,59 @@ $(document).ready(function () {
 });
 //뷰?
 function viewing() {
-    $.ajax({
+  $.ajax({
     type: "GET",
     url: "/view",
     data: {},
-    success: function(response){
+    success: function (response) {
       let lists = response['all_post']
-        console.log(lists)
-        for (let i = 0; i < lists.length; i++) {
-          let url = lists[i]['url']
-          let title = lists[i]['title']
-          let desc = lists[i]['desc']
-          
-          let temp_html = `<div class="ListBg">
-                                <div class="ListFlex">
-                                    <img src="../static/img/vatican.jpg" class="classImg">
-                                    <div class="Option">
-                                        <div class="Like" id="Option_Like">
-                                            <div><img src="../static/img/heart.png" id="heart"></div>
-                                            <div class="LikeNum" id="LikeNum">1</div></div>
-                                        <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/link.png"></a></div>
-                                        <div class="FixedOption" id ="Option_Jjim"><div><img src="../static/img/star.png" id="star"></div></div>
-                                    </div>
-                                    <div class="high-low">
-                                        <hr class="titleLine">
-                                        <div class ="title">${title}</div>
-                                        <div class ="desc">${desc}</div>
-                                    </div>
-                                    <div>
-                                        <button class ="preview" href=".List_modal">preview</button>
-                                    </div>
-                                </div>
-                            </div>`
-      $('.cardRow').append(temp_html);
-        }
+      console.log(lists)
+      for (let i = 0; i < lists.length; i++) {
+        let url = lists[i]['url']
+        let title = lists[i]['title']
+        let desc = lists[i]['desc']
+
+        let temp_html = `<div class="ListBg">
+                          <div class="ListFlex">
+                              <img src="../static/img/vatican.jpg" class="classImg">
+                              <div class="Option">
+                                  <div class="Like" id="Option_Like">
+                                      <div><img src="../static/img/heart.png" id="heart"></div>
+                                      <div class="LikeNum" id="LikeNum">1</div>
+                                  </div>
+                                  <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/link.png"></a></div>
+                                  <div class="FixedOption" id ="Option_Jjim">
+                                      <div><img src="../static/img/star.png" id="star"></div>
+                                  </div>
+                              </div>
+                              <div class="high-low">
+                                  <hr class="titleLine">
+                                  <div class ="title">${title}</div>
+                                  <div class ="desc">${desc}</div>
+                              </div>
+                              <div>
+                                  <button class ="preview" href=".List_modal">preview</button>
+                              </div>
+                          </div>`
+        $('.cardRow').append(temp_html);
+      }
     }
   })
-} 
+}
 
 //등록
 function posting() {
-      let url = document.getElementById("url").value;
-      let title = document.getElementById("title").value;
-      let desc = document.getElementById("description").value;
-      
-      $.ajax({
-        type: "POST",
-        url: "/test",
-        data: {url_give:url,title_give:title,desc_give:desc},
-        success: function(response){
-            alert(response["msg"]);
-            window.location.reload();
-        }
-      })
+  let url = document.getElementById("url").value;
+  let title = document.getElementById("title").value;
+  let desc = document.getElementById("description").value;
+
+  $.ajax({
+    type: "POST",
+    url: "/test",
+    data: { url_give: url, title_give: title, desc_give: desc },
+    success: function (response) {
+      alert(response["msg"]);
+      window.location.reload();
+    }
+  })
 }

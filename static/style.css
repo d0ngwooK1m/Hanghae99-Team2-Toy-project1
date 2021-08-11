@@ -88,20 +88,28 @@
   justify-content: space-evenly;
 }
 .Like{
+  background-color: black;
+  position: relative;
   border: 1px solid black;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  text-align: center;
-  position: relative;
-  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 8px;
 }
 .Like img {
   margin-top:10%;
   width: 30px;
   height: 30px;
+  vertical-align: text-bottom;
+}
+.LikeNum {
+  position:absolute;
 }
 .FixedOption {
+  background-color: black;
   border: 1px solid black;
   width: 60px;
   height: 60px;
