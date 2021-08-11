@@ -81,13 +81,11 @@
   height: 20%;
   border: 1px solid black;
 }
+
 .Option{
-  display:flex;
+  display: flex;
   margin: 20px auto;
-  justify-content: center;
-}
-.FixedOption, .Like {
-  margin: auto 30px;
+  justify-content: space-evenly;
 }
 .Like{
   border: 1px solid black;
