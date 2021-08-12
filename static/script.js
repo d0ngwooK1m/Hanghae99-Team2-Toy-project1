@@ -132,27 +132,28 @@ function viewing() {
         let desc = lists[i]['desc']
 
         let temp_html = `<div class="ListBg">
-                          <div class="ListFlex">
-                              <img src="../static/img/vatican.jpg" class="classImg">
-                              <div class="Option">
-                                  <div class="Like Option_Like">
-                                                <div><img src="../static/img/wheart.svg" class="heart"></div>
-                                                <div class="LikeNum">1</div>
-                                  </div>
-                                  <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/wlink.svg"></a></div>
-                                  <div class="FixedOption Option_Jjim">
-                                      <div><img src="../static/img/wstar.svg" class="star"></div>
-                                  </div>
-                              </div>
-                              <div class="high-low">
-                                  <hr class="titleLine">
-                                  <div class ="title">${title}</div>
-                                  <div class ="desc">${desc}</div>
-                              </div>
-                              <div>
-                                  <button class ="preview" href=".List_modal">preview</button>
-                              </div>
-                          </div>`
+                            <div class="ListFlex">
+                                <img src="../static/img/vatican.jpg" class="classImg">
+                                <div class="Option">
+                                    <div class="Like Option_Like">
+                                                  <div><img src="../static/img/wheart.svg" class="heart"></div>
+                                                  <div class="LikeNum">1</div>
+                                    </div>
+                                    <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/wlink.svg"></a></div>
+                                    <div class="FixedOption Option_Jjim">
+                                        <div><img src="../static/img/wstar.svg" class="star"></div>
+                                    </div>
+                                </div>
+                                <div class="high-low">
+                                    <hr class="titleLine">
+                                    <div class ="title">${title}</div>
+                                    <div class ="desc">${desc}</div>
+                                </div>
+                                <div>
+                                    <button class ="preview" href=".List_modal">preview</button>
+                                </div>
+                            </div>
+                        </div>`
         $('.cardRow').append(temp_html);
       }
     }
