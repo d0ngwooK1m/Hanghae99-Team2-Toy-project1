@@ -135,13 +135,13 @@ function viewing() {
                           <div class="ListFlex">
                               <img src="../static/img/vatican.jpg" class="classImg">
                               <div class="Option">
-                                  <div class="Like" id="Option_Like">
-                                      <div><img src="../static/img/heart.png" id="heart"></div>
-                                      <div class="LikeNum" id="LikeNum">1</div>
+                                  <div class="Like Option_Like">
+                                                <div><img src="../static/img/wheart.svg" class="heart"></div>
+                                                <div class="LikeNum">1</div>
                                   </div>
-                                  <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/link.png"></a></div>
-                                  <div class="FixedOption" id ="Option_Jjim">
-                                      <div><img src="../static/img/star.png" id="star"></div>
+                                  <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/wlink.svg"></a></div>
+                                  <div class="FixedOption Option_Jjim">
+                                      <div><img src="../static/img/wstar.svg" class="star"></div>
                                   </div>
                               </div>
                               <div class="high-low">
