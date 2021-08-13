@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toy Project1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <!-- 상단메뉴 -->
+    <nav class="topmenu">
+        <a href="/">
+            <img src="../static/img/logo.png" style="margin-left: 30px; width: 60px; height: 60px;">
+        </a>
+        <div class="search_box">
+            <input class="search_bar" type="text" placeholder="검색어 입력">
+            <button class="search_btn"><img class="search_icon" src="../static/img/search.png"></button>
+        </div>    
+        <div class="member_box">
+            <div class="mypage">
+                <a href="/my_page">마이페이지</a>
+            </div>
+            <div class="login_signup">
+                <a class="login-btn">로그인</a>
+                <a class="signup-btn">회원가입</a>
+            </div>
+        </div>
+    </nav>
+    <!-- 로그인 모달창v2 -->
+    <div id="loginmodal" class="login-background">
+        <div class="login-form animate">
+            <a class="login-close-btn">&times;</a>
+            <!--로그인 모달 컨텐츠 -->
+            <form class="modal-content" action="#">
+                <label class='login-id'><b>ID</b></label>
+                <input type="text" class="login-input" required>
+
+                <label class='login-pw'><b>Password</b></label>
+                <input type="password" required>
+
+                <button type="submit" class="login-submit-btn">Log In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 회원가입 모달창v2 -->
+    <div class="signup-background">
+        <div class="signup-form animate">
+            <a class="signup-close-btn">&times;</a>
+            <!--회원가입 모달 컨텐츠 -->
+            <form class="modal-content" action="#">
+                <label class='login-uname'><b>Username</b></label>
+                <input type="text" class="username-input" required>
+
+                <label class='login-id'><b>ID</b></label>
+                <input type="text" class="login-input" required>
+
+                <label class='login-pw'><b>Password</b></label>
+                <input type="password" class="password-input" required>
+
+                <label class='login-cpw'><b>Check Password</b></label>
+                <input type="password" class="check-password-input" required>
+
+                <button type="submit" class="signup-submit-btn">Log In</button>
+            </form>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+    
+</body>
+</html>
