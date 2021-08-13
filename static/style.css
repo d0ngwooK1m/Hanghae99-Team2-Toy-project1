@@ -48,18 +48,18 @@
 }
 
 /* 리스트관련 css */
-.cardCloumn{
+.cardCloumn {
   display: grid;
   width: 1500px;
-  margin:auto;
+  margin: auto;
 }
-.cardRow{
+.cardRow {
   padding: 0 5%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
-.ListBg:hover{
-  box-shadow: 0 0 11px rgba(33,33,33,.2);
+.ListBg:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 .ListBg {
   /* width: 27%; */
@@ -69,11 +69,10 @@
   margin: 6% 6%;
   transition: box-shadow 0.23s linear;
 }
-.ListFlex{
+.ListFlex {
   padding: 7%;
-
 }
-.titleLine{
+.titleLine {
   margin: 25px 0;
 }
 .classImg {
@@ -82,12 +81,12 @@
   border: 1px solid black;
 }
 
-.Option{
+.Option {
   display: flex;
   margin: 20px auto;
   justify-content: space-evenly;
 }
-.Like{
+.Like {
   background-color: black;
   position: relative;
   border: 1px solid black;
@@ -100,13 +99,13 @@
   font-size: 8px;
 }
 .Like img {
-  margin-top:10%;
+  margin-top: 10%;
   width: 30px;
   height: 30px;
   vertical-align: text-bottom;
 }
 .LikeNum {
-  position:absolute;
+  position: absolute;
 }
 .FixedOption {
   background-color: black;
@@ -150,11 +149,11 @@
   -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
 }
-.preview{
+.preview {
   border: 1px solid;
   border-radius: 5px;
   background-color: #202020;
-  color:white;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,52 +165,57 @@
 
 .topmenu {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-around;
   width: 100%;
-  height: 180px;
+  align-items: center;
   background-color: black;
-  padding-left: 30px;
+}
+.topLogo {
+  width: 35%;
+  height: 35%;
 }
 .search_bar {
   display: flex;
   border-radius: 20px;
   height: 40px;
   width: 400px;
+  padding-left: 4%;
 }
-.search_btn{
+.search_btn {
   border: 0;
   background-color: white;
   width: 70px;
   height: 35px;
-  border-radius:20px;
-  margin:2px 80px 0 -72px;
+  border-radius: 20px;
+  margin: 2px 80px 0 -72px;
   text-align: center;
 }
-.search_icon{
+.search_icon {
   width: 17px;
   height: 17px;
   margin-left: 45%;
 }
 .mypage {
+  color: white;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  background-color: white;
-  height: 40px;
-  width: 200px;
-  border-radius: 20px;
-  margin-right: 100px;
 }
-.login_signup {
+
+.login-btn {
+  color: white;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  background-color: white;
-  height: 40px;
-  width: 200px;
-  margin-right: 60px;
-  border-radius: 20px;
+}
+.signup-btn {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+.login_signLine {
+  width: 0.1rem;
+  height: 1.2rem;
+  margin: 0 1.25rem;
 }
 .member_box {
   display: flex;
@@ -301,13 +305,14 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 1;
 }
 .show {
   display: block;
 }
-.popup-wrap {
+.popup-wrap,
+.login-wrap {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -315,7 +320,9 @@
   max-height: 100vh;
   z-index: 10;
 }
-.popup-content {
+.popup-content,
+.login-content,
+.signup-content {
   width: 900px;
   padding: 20px;
   background-color: #fff;
@@ -326,8 +333,8 @@
   border: 0;
   background-color: black;
 }
-.create-form{
-  margin-top:30px
+.create-form {
+  margin-top: 30px;
 }
 .create-form-wrap {
   margin-top: 10px;
@@ -356,41 +363,53 @@
   border: 0;
   background-color: black;
 }
-.preview-image-wrap{
-  width:100%;
+.preview-image-wrap {
+  width: 100%;
 }
-.preview-btn{
-  padding:5px 10px;
-  color:#fff;
+.preview-btn {
+  padding: 5px 10px;
+  color: #fff;
   background: #000;
-  border:0;
+  border: 0;
 }
-.preview-image-wrap img{
-  width:100%;
-  max-height:300px;
-  margin-top:10px;
+.preview-image-wrap img {
+  width: 100%;
+  max-height: 300px;
+  margin-top: 10px;
   object-fit: contain;
 }
-/* modal 관련 css 추가 */
-.signup-close-btn {
-  width: 100%;
-  padding: 14px 20px;
-}
-
-/* 로그인, 회원가입 모달v2 */
-.login-background,
-.signup-background {
-  display: none;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 .show {
   display: block;
 }
+.login-content {
+  width: 400px;
+}
+.popup-box-wrap {
+  margin-bottom: 30px;
+}
+.login-form label,
+.login-form input {
+  width: 100%;
+  display: inline-block;
+}
+.login-form label {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #333;
+}
+.login-form input {
+  padding: 10px 7px;
+}
+.login-submit-btn {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid black;
+  background-color: #fff;
+}
 
-.login-form {
+/* .login-form {
   position: relative;
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
   border: 2px solid #dddddd9c;
   border-radius: 5px;
   padding: 50px;
@@ -402,7 +421,7 @@
 
 .signup-form {
   position: relative;
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
   border: 2px solid #dddddd9c;
   border-radius: 5px;
   padding: 50px;
@@ -412,19 +431,12 @@
   background-color: rgba(275, 275, 275, 1);
 }
 
-.login-close-btn{
-  position: absolute;
-  right: 15px;
-  top: 8px;
-  font-size: 2rem;
-}
-
 .signup-close-btn {
   position: absolute;
   left: 85%;
   top: 8px;
   font-size: 2rem;
-} 
+}
 
 .login-close-btn:hover,
 .signup-close-btn:hover {
@@ -433,7 +445,7 @@
 
 .login-form:hover,
 .signup-form:hover {
-  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
 .modal-content input[type="text"],
@@ -459,7 +471,7 @@
 .login-submit-btn:hover,
 .signup-submit-btn:hover {
   background-color: rgba(8, 8, 8, 0.788);
-}
+} */
 
 .List_modal {
   position: fixed;
@@ -501,7 +513,6 @@
   position: absolute;
   top: 65px;
   right: 20px;
-  
 }
 .delete_btn {
   all: unset;
