@@ -10,11 +10,11 @@ db = client.dbsparta
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('main.html')
 
 @app.route('/my_page')
 def mypage():
-    return render_template('my_page.html')
+    return render_template('myPage.html')
 
 
 @app.route('/view', methods=['GET'])
