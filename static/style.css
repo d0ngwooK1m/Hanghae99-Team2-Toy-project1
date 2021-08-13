@@ -176,15 +176,21 @@ a { text-decoration: none; color: white; }
 }
 .topmenu{
   width: 1176px;
+  max-height: 70px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin: auto;
 }
 .topLogo{
-  display: block;
-  width: 35%;
-  height: 35%;
+  height: 70px;
+  margin-right: 50px;
+}
+.topLogo img{
+  width: 95%;
+  height: 95%;
+}
+.logoSearch{
+  display: flex;
+  align-items: center;
 }
 
 .search_bar {
@@ -232,10 +238,11 @@ a { text-decoration: none; color: white; }
   margin: 0 1.25rem; 
 }
 .member_box {
+  margin-left: auto;
   display: flex;
 }
 .search_box {
-  width: 500px;
+  width: 50%;
   display: flex;
 }
 
