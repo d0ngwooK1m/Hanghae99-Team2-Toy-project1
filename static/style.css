@@ -1,5 +1,7 @@
 /* 저희가 만든 css중 같이 공통으로 사용할 수 있는 css 상단배치 */
 /* 확대 애니메이션 추가 */
+a { text-decoration: none; color: white; }
+
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s;
@@ -33,13 +35,15 @@
 /* flex 공통 css */
 .flex-layout {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
 }
 .flex-layout-between {
   display: flex;
+  width: 1176px;
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
+  /* border-bottom: 1px solid #e0e0e0; */
 }
 .flex-layout-end {
   display: flex;
@@ -164,18 +168,27 @@
   margin: 20px auto;
 }
 
-.topmenu {
+.topcontainer {
   display: flex;
-  justify-content: space-around;
+  position: relative;
   width: 100%;
-  align-items: center;
   background-color: black;
 }
+.topmenu{
+  width: 1176px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
 .topLogo{
+  display: block;
   width: 35%;
   height: 35%;
 }
+
 .search_bar {
+  outline: none;
   display: flex;
   border-radius: 20px;
   height: 40px;
@@ -453,6 +466,7 @@
 .login-submit-btn,
 .signup-submit-btn {
   transition: background-color 1s;
+  text-align: center;
   width: 100%;
   padding: 2% 0;
   margin: 10% auto;
@@ -521,27 +535,17 @@
 
 /* icon nav css */
 .icon-nav-wrap {
-  width: 1500px;
-  margin: 30px auto;
-  padding-bottom: 15px;
+  display: flex;
+  position: relative;
+  width: 100%;
+  /* padding: 30px 20px; */
+  /* padding-bottom: 15px; */
   border-bottom: 1px solid #e0e0e0;
 }
 .create-btn {
-  margin-right: 5px;
-}
-.create-btn,
-.dropdown-icon {
-  width: 60px;
+  all: unset;
   height: 60px;
-  color: #fff;
-  border: 0;
-  border-radius: 50%;
-  background-color: black;
-}
-.dropdown-icon {
-  text-align: center;
-  line-height: 60px;
-  font-size: 18px;
+  color: black;
 }
 
 .create-btn:hover,
@@ -563,7 +567,8 @@
   display: none;
 }
 .icon-dropdown-wrap2 {
-  font-size: 11px;
+  font-size: 12px;
+  display: flex;
 }
 .icon-dropdown-wrap2 .line {
   margin: 0px 10px;
