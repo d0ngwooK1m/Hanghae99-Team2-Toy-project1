@@ -1,51 +1,46 @@
-//좋아요 기능, 찜 기능
-// const Option_Jjim = document.querySelector("#Option_Jjim");
-// const Jjim_star = document.querySelector("#star");
-// const Option_Like = document.querySelector("#Option_Like");
-// const Like_heart = document.querySelector("#heart");
 const Option_Jjim = document.querySelector(".Option_Jjim");
-const Jjim_star = document.querySelector(".star");
+const Jjim_heart = document.querySelector(".heart");
 const Option_Like = document.querySelector(".Option_Like");
-const Like_heart = document.querySelector(".heart");
+const Like_Thumb = document.querySelector(".thumbsUp");
 let Jjim_count = false;
 
-function Jjim_starControl() {
+function Jjim_heartControl() {
     Jjim_count = !Jjim_count;
 }
 
 let Like_count = false;
 
-function Like_heartControl() {
+function Like_ThumbControl() {
     Like_count = !Like_count;
 }
 
 function Jjim() {
   if (Jjim_count) {
-    Jjim_star.src = "../static/img/ystar.svg";
+    Jjim_heart.src = "../static/img/rheart.svg";
   } else {
-    Jjim_star.src = "../static/img/wstar.svg";
+    Jjim_heart.src = "../static/img/heart.svg";
   }
 }
 
 
 function Like() {
   if (Like_count) {
-    Like_heart.src = "../static/img/rheart.svg";
+    Like_Thumb.src = "../static/img/bthumsup.svg";
   } else {
-    Like_heart.src = "../static/img/wheart.svg";
+    Like_Thumb.src = "../static/img/thumsbup.svg";
   }
 }
 
 Option_Jjim.addEventListener("click", Jjim);
-Jjim_star.addEventListener("click", Jjim);
-Option_Jjim.addEventListener("click", Jjim_starControl);
+Jjim_heart.addEventListener("click", Jjim);
+Option_Jjim.addEventListener("click", Jjim_heartControl);
 
 Option_Like.addEventListener("click", Like);
-Like_heart.addEventListener("click", Like);
-Option_Like.addEventListener("click", Like_heartControl);
+Like_Thumb.addEventListener("click", Like);
+Option_Like.addEventListener("click", Like_ThumbControl);
 
 // Listmodal
-const openButton = document.querySelector(".preview");
+const openButton = document.querySelector(".ListBg");
 const modal = document.querySelector(".List_modal");
 const overlay = modal.querySelector(".List_overlay");
 const closeBtn = modal.querySelector("button");
@@ -154,24 +149,32 @@ function viewing() {
 
         let temp_html = `<div class="ListBg">
                             <div class="ListFlex">
-                                <img src="../static/img/vatican.jpg" class="classImg">
+                                <div class="imgHidden-box">
+                                    <img src="../static/img/vatican.jpg" class="classImg">
+                                    <button class="Jjim Option_Jjim">
+                                            <div><img src="../static/img/heart.svg" class="star"></div>
+                                    </button>
+                                </div>  
+                                <div class ="title">${title}</div>
+                                <div class ="numCount">
+                                    <div class = "likeNum">
+                                        <img src="../static/img/likeUp3.png">
+                                        <span>5342</span>
+                                    </div>
+                                    <div class = "JjimNum">
+                                        <img src="../static/img/rheart.svg">
+                                        <span>1783</span>
+                                    </div>
+                                </div>
+                                <hr/>
                                 <div class="Option">
                                     <div class="Like Option_Like">
-                                                  <div><img src="../static/img/wheart.svg" class="heart"></div>
-                                                  <div class="LikeNum">1</div>
+                                        <img src="../static/img/thumsbup.svg" class="thumbsUp">
+                                        <span>좋아요</span>
                                     </div>
-                                    <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/wlink.svg"></a></div>
-                                    <div class="FixedOption Option_Jjim">
-                                        <div><img src="../static/img/wstar.svg" class="star"></div>
-                                    </div>
-                                </div>
-                                <div class="high-low">
-                                    <hr class="titleLine">
-                                    <div class ="title">${title}</div>
-                                    <div class ="desc">${desc}</div>
-                                </div>
-                                <div>
-                                    <button class ="preview" href=".List_modal">preview</button>
+                                    <a class="Link" href="${url}" target= '_blank'>
+                                        <span>바로가기</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>`
