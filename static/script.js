@@ -97,6 +97,27 @@ const handlePopup = (e, tag) => {
     }
 };
 
+$(".signup-submit-btn").click(function(e) {
+    // const form_give = $(this);
+    // const error_give = $form.find(".error");
+    // const data_give = $form.serialize();
+    console.log('test')
+    $.ajax({
+        url: "/user/signup",
+        type: "POST",
+        data: "data_give",
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    })
+
+    e.preventDefault();
+})
+
 // 변수로 담아둔 태그를 클릭했을때 팝업 함수 실행
 //글작성
 popupBtn.addEventListener("click", (e) => handlePopup(e, popupBg));

@@ -38,12 +38,14 @@
         <div class="login-form animate">
             <a class="login-close-btn">&times;</a>
             <!--로그인 모달 컨텐츠 -->
-            <form class="modal-content" action="#">
+            <form class="modal-content" action="#" name="login_form">
                 <label class='login-id'><b>ID</b></label>
                 <input type="text" class="login-input" required>
 
                 <label class='login-pw'><b>Password</b></label>
                 <input type="password" required>
+
+                <p class="error error--hidden"></p>
 
                 <button type="submit" class="login-submit-btn">Log In</button>
             </form>
@@ -55,7 +57,24 @@
         <div class="signup-form animate">
             <a class="signup-close-btn">&times;</a>
             <!--회원가입 모달 컨텐츠 -->
-            <form class="modal-content" action="#">
+<!--            <form class="modal-content" name="signup_form">-->
+<!--                <label class='login-uname'><b>Username</b></label>-->
+<!--                <input type="text" class="username-input" required>-->
+
+<!--                <label class='login-id'><b>ID</b></label>-->
+<!--                <input type="text" class="login-input" required>-->
+
+<!--                <label class='login-pw'><b>Password</b></label>-->
+<!--                <input type="password" class="password-input" required>-->
+
+<!--                <label class='login-cpw'><b>Check Password</b></label>-->
+<!--                <input type="password" class="check-password-input" required>-->
+
+<!--                <p class="error error&#45;&#45;hidden"></p>-->
+
+<!--                <input type="submit" class="signup-submit-btn" onsubmit="return false">-->
+<!--            </form>-->
+            <div class="modal-content" name="signup_form">
                 <label class='login-uname'><b>Username</b></label>
                 <input type="text" class="username-input" required>
 
@@ -68,8 +87,10 @@
                 <label class='login-cpw'><b>Check Password</b></label>
                 <input type="password" class="check-password-input" required>
 
-                <button type="submit" class="signup-submit-btn">Log In</button>
-            </form>
+                <p class="error error--hidden"></p>
+
+                <button class="signup-submit-btn">Submit</button>
+            </div>
         </div>
     </div>
     {% block content %}
