@@ -1,6 +1,9 @@
 /* 저희가 만든 css중 같이 공통으로 사용할 수 있는 css 상단배치 */
 /* 확대 애니메이션 추가 */
-a { text-decoration: none; color: white; }
+.mypage a{ 
+  text-decoration: none; 
+  color: white; 
+}
 
 .animate {
   -webkit-animation: animatezoom 0.6s;

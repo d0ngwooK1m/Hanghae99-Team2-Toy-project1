@@ -8,7 +8,9 @@
     <title>Toy Project1</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='my_page_style.css' )}}">
     <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='my_page_script.js) }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -28,7 +30,7 @@
             
             <div class="member_box">
                 <div class="mypage">
-                    <a href="/my_page">마이페이지</a>
+                    <a href="/myPage">마이페이지</a>
                 </div>
                 <div class="login_signLine"></div>
                     <a class="login-btn">로그인</a>

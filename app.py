@@ -19,7 +19,7 @@ def index():
     return render_template('main.html')
 
 
-@app.route('/my_page')
+@app.route('/myPage')
 def mypage():
     return render_template('myPage.html')
 
