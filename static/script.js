@@ -1,58 +1,64 @@
+//좋아요 기능, 찜 기능
+// const Option_Jjim = document.querySelector("#Option_Jjim");
+// const Jjim_star = document.querySelector("#star");
+// const Option_Like = document.querySelector("#Option_Like");
+// const Like_heart = document.querySelector("#heart");
+
 // 머지하다가 이 부분 수신 잘못함
-const Option_Jjim = document.querySelector(".Option_Jjim");
-const Jjim_heart = document.querySelector(".heart");
-const Option_Like = document.querySelector(".Option_Like");
-const Like_thumb = document.querySelector(".thumbsUp");
-let Jjim_count = false;
+// const Option_Jjim = document.querySelector(".Option_Jjim");
+// const Jjim_star = document.querySelector(".star");
+// const Option_Like = document.querySelector(".Option_Like");
+// const Like_heart = document.querySelector(".heart");
+// let Jjim_count = false;
 
-function Jjim_heartControl() {
-  Jjim_count = !Jjim_count;
-}
+// function Jjim_starControl() {
+//   Jjim_count = !Jjim_count;
+// }
 
-let Like_count = false;
+// let Like_count = false;
 
-function Like_thumbControl() {
-  Like_count = !Like_count;
-}
+// function Like_heartControl() {
+//   Like_count = !Like_count;
+// }
 
-function Jjim() {
-  if (Jjim_count) {
-    Jjim_heart.src = "../static/img/rheart.svg";
-  } else {
-    Jjim_heart.src = "../static/img/heart.svg";
-  }
-}
+// function Jjim() {
+//   if (Jjim_count) {
+//     Jjim_star.src = "../static/img/ystar.svg";
+//   } else {
+//     Jjim_star.src = "../static/img/wstar.svg";
+//   }
+// }
 
-function Like() {
-  if (Like_count) {
-    Like_thumb.src = "../static/img/bthumsup.svg";
-  } else {
-    Like_thumb.src = "../static/img/thumsbup.svg";
-  }
-}
+// function Like() {
+//   if (Like_count) {
+//     Like_heart.src = "../static/img/rheart.svg";
+//   } else {
+//     Like_heart.src = "../static/img/wheart.svg";
+//   }
+// }
 
-Option_Jjim.addEventListener("click", Jjim);
-Jjim_heart.addEventListener("click", Jjim);
-Option_Jjim.addEventListener("click", Jjim_heartControl);
+// Option_Jjim.addEventListener("click", Jjim);
+// Jjim_star.addEventListener("click", Jjim);
+// Option_Jjim.addEventListener("click", Jjim_starControl);
 
-Option_Like.addEventListener("click", Like);
-Like_thumb.addEventListener("click", Like);
-Option_Like.addEventListener("click", Like_thumbControl);
+// Option_Like.addEventListener("click", Like);
+// Like_heart.addEventListener("click", Like);
+// Option_Like.addEventListener("click", Like_heartControl);
 
-// Listmodal
-const openButton = document.querySelector(".ListBg");
-const modal = document.querySelector(".List_modal");
-const overlay = modal.querySelector(".List_overlay");
-const closeBtn = modal.querySelector("button");
-const openModal = () => {
-  modal.classList.remove("List_hidden");
-};
-const closeModal = () => {
-  modal.classList.add("List_hidden");
-};
-overlay.addEventListener("click", closeModal);
-closeBtn.addEventListener("click", closeModal);
-openButton.addEventListener("click", openModal);
+// // Listmodal
+// const openButton = document.querySelector(".preview");
+// const modal = document.querySelector(".List_modal");
+// const overlay = modal.querySelector(".List_overlay");
+// const closeBtn = modal.querySelector("button");
+// const openModal = () => {
+//   modal.classList.remove("List_hidden");
+// };
+// const closeModal = () => {
+//   modal.classList.add("List_hidden");
+// };
+// overlay.addEventListener("click", closeModal);
+// closeBtn.addEventListener("click", closeModal);
+// openButton.addEventListener("click", openModal);
 
 // html의 태그들을 변수로 담아두기
 //글작성
@@ -91,6 +97,29 @@ const handlePopup = (e, tag) => {
   }
 };
 
+$("form[name=signup_form]").submit(function(e) {
+    const form_give = $(this);
+    const error_give = form_give.find(".error");
+    const data_give = form_give.serialize();
+
+    console.log('test')
+    $.ajax({
+        url: "/user/signup",
+        type: "POST",
+        data: data_give,
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(response) {
+            console.log(response);
+            error_give.text(response.responseJSON.error).removeClass("error--hidden");
+        }
+    })
+
+    e.preventDefault();
+})
+
 // 변수로 담아둔 태그를 클릭했을때 팝업 함수 실행
 //글작성
 popupBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
@@ -127,32 +156,24 @@ function viewing() {
 
         let temp_html = `<div class="ListBg">
                             <div class="ListFlex">
-                                <div class="imgHidden-box">
-                                    <img src="../static/img/vatican.jpg" class="classImg">
-                                    <button class="Jjim Option_Jjim">
-                                            <div><img src="../static/img/heart.svg" class="heart"></div>
-                                    </button>
-                                </div>  
-                                <div class ="title">${title}</div>
-                                <div class ="numCount">
-                                    <div class = "likeNum">
-                                        <img src="../static/img/likeUp3.png">
-                                        <span>5342</span>
-                                    </div>
-                                    <div class = "JjimNum">
-                                        <img src="../static/img/Rheart.svg">
-                                        <span>1783</span>
-                                    </div>
-                                </div>
-                                <hr/>
+                                <img src="../static/img/vatican.jpg" class="classImg">
                                 <div class="Option">
                                     <div class="Like Option_Like">
-                                        <img src="../static/img/thumsbup.svg" class="thumbsUp">
-                                        <span>좋아요</span>
+                                                  <div><img src="../static/img/wheart.svg" class="heart"></div>
+                                                  <div class="LikeNum">1</div>
                                     </div>
-                                    <a class="Link" href="${url}" target= '_blank'>
-                                        <span>바로가기</span>
-                                    </a>
+                                    <div class="FixedOption"><a href="${url}" target= '_blank'><img src="../static/img/wlink.svg"></a></div>
+                                    <div class="FixedOption Option_Jjim">
+                                        <div><img src="../static/img/wstar.svg" class="star"></div>
+                                    </div>
+                                </div>
+                                <div class="high-low">
+                                    <hr class="titleLine">
+                                    <div class ="title">${title}</div>
+                                    <div class ="desc">${desc}</div>
+                                </div>
+                                <div>
+                                    <button class ="preview" href=".List_modal">preview</button>
                                 </div>
                             </div>
                         </div>`;
