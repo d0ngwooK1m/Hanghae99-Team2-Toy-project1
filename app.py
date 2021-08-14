@@ -1,17 +1,17 @@
 from flask import Flask, render_template, jsonify, request
 import requests
+import pymongo
+
 
 # from bs4 import BeautifulSoup
 app = Flask(__name__)
 
+# Database
+client = pymongo.MongoClient('localhost', 27017)
+db = client.user_login_system
+
+# Routes
 from user import routes
-
-from pymongo import MongoClient
-
-client = MongoClient('localhost', 27017)
-db = client.dbsparta
-
-
 
 
 @app.route('/')
@@ -52,9 +52,9 @@ def previewImage():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
-    soup = BeautifulSoup(data.text, 'html.parser')
-    image = soup.select_one('meta[property="og:image"]')['content']
-    return jsonify(image)
+    # soup = BeautifulSoup(data.text, 'html.parser')
+    # image = soup.select_one('meta[property="og:image"]')['content']
+    # return jsonify(image)
 
 # 켜기 터미널
 # set FLASK_APP=app.py
