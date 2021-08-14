@@ -14,15 +14,35 @@
     </section>
 
     <!-- 등록팝업 -->
-    <div id="writemodal" class="popup-background">
+    <div class="popup-background">
         <div class="popup-wrap">
             <section class="popup-content">
-                <h2 class="readable-hidden">팝업</h2>
-                <div class="flex-layout-end">
+                <div class="flex-layout-between">
+                    <h2>등록하기</h2>
                     <button class="popup-close-btn">닫기</button>
                 </div>
-                <div class="create-content">
-                    <h3>개발로그 등록하기 (대충넣음, 나중에 문구 변경)</h3>
+                <div class="popup-form create-form">
+                    <div class="popup-box-wrap">
+                        <label for="url">웹 사이트 URL</label>
+                        <div class="flex-layout">
+                            <input class="preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
+                            <button class="preview-btn">미리보기</button>
+                        </div>
+                    </div>
+                    <div class="preview-image-wrap"> </div>
+                    <div class="popup-box-wrap">
+                        <label for="title">제목</label>
+                        <input  type="text" id="title" name="title" placeholder="******"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label for="description">설명</label>
+                        <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <button onclick="posting()" class="create-form-btn">등록하기</button>
+                    </div>
+                </div>
+                <!-- <div class="create-content">
                     <div class="create-form">
                         <div class="create-form-wrap flex-layout">
                             <label for="url">URL</label>
@@ -44,7 +64,7 @@
                             <button onclick="posting()" class="create-form-btn">등록</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </section>
         </div>
     </div>

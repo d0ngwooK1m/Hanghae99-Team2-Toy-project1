@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 import requests
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 app = Flask(__name__)
 
 from pymongo import MongoClient

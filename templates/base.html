@@ -32,11 +32,65 @@
             </div>
         </div>
     </nav>
+
+    <div class="login-background">
+        <div class="login-wrap">
+            <section class="login-content">
+                <div class="flex-layout-between">
+                    <h2>로그인</h2>
+                    <button class="login-close-btn">닫기</button>
+                </div>
+                <form class="popup-form login-form">
+                    <div class="popup-box-wrap">
+                        <label for="login-id">아이디</label>
+                        <input  type="text" id="login-id" name="login-id" placeholder="example@naver.com"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label for="login-pw">비밀번호</label>
+                        <input  type="text" id="login-pw" name="login-pw" placeholder="******"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <button class="login-submit-btn">로그인</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <div class="signup-background">
+        <div class="login-wrap">
+            <section class="signup-content">
+                <div class="flex-layout-between">
+                    <h2>회원가입</h2>
+                    <button class="signup-close-btn">닫기</button>
+                </div>
+                <form class="popup-form login-form">
+                    <div class="popup-box-wrap">
+                        <label for="signup-name">이름</label>
+                        <input  type="text" id="signup-name" name="signup-name" placeholder="홍길동"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label for="signup-id">아이디</label>
+                        <input  type="text" id="signup-id" name="signup-id" placeholder="example@naver.com"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label for="signup-pw">비밀번호</label>
+                        <input  type="text" id="signup-pw" name="signup-pw" placeholder="******"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label for="signup-check-pw">비밀번호 확인</label>
+                        <input  type="text" id="signup-check-pw" name="signup-check-pw" placeholder="******"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <button class="signup-submit-btn">회원가입</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
     <!-- 로그인 모달창v2 -->
-    <div id="loginmodal" class="login-background">
+    <!-- <div id="loginmodal" class="login-background">
         <div class="login-form animate">
             <a class="login-close-btn">&times;</a>
-            <!--로그인 모달 컨텐츠 -->
             <form class="modal-content" action="#">
                 <label class='login-id'><b>ID</b></label>
                 <input type="text" class="login-input" required>
@@ -47,13 +101,12 @@
                 <button type="submit" class="login-submit-btn">Log In</button>
             </form>
         </div>
-    </div>
+    </div> -->
 
     <!-- 회원가입 모달창v2 -->
-    <div class="signup-background">
+    <!-- <div class="signup-background">
         <div class="signup-form animate">
             <a class="signup-close-btn">&times;</a>
-            <!--회원가입 모달 컨텐츠 -->
             <form class="modal-content" action="#">
                 <label class='login-uname'><b>Username</b></label>
                 <input type="text" class="username-input" required>
@@ -70,7 +123,7 @@
                 <button type="submit" class="signup-submit-btn">Log In</button>
             </form>
         </div>
-    </div>
+    </div> -->
     {% block content %}
     {% endblock %}
     
