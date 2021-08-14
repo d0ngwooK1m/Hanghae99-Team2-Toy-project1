@@ -3,60 +3,62 @@
 // const Jjim_star = document.querySelector("#star");
 // const Option_Like = document.querySelector("#Option_Like");
 // const Like_heart = document.querySelector("#heart");
-const Option_Jjim = document.querySelector(".Option_Jjim");
-const Jjim_star = document.querySelector(".star");
-const Option_Like = document.querySelector(".Option_Like");
-const Like_heart = document.querySelector(".heart");
-let Jjim_count = false;
 
-function Jjim_starControl() {
-  Jjim_count = !Jjim_count;
-}
+// 머지하다가 이 부분 수신 잘못함
+// const Option_Jjim = document.querySelector(".Option_Jjim");
+// const Jjim_star = document.querySelector(".star");
+// const Option_Like = document.querySelector(".Option_Like");
+// const Like_heart = document.querySelector(".heart");
+// let Jjim_count = false;
 
-let Like_count = false;
+// function Jjim_starControl() {
+//   Jjim_count = !Jjim_count;
+// }
 
-function Like_heartControl() {
-  Like_count = !Like_count;
-}
+// let Like_count = false;
 
-function Jjim() {
-  if (Jjim_count) {
-    Jjim_star.src = "../static/img/ystar.svg";
-  } else {
-    Jjim_star.src = "../static/img/wstar.svg";
-  }
-}
+// function Like_heartControl() {
+//   Like_count = !Like_count;
+// }
 
-function Like() {
-  if (Like_count) {
-    Like_heart.src = "../static/img/rheart.svg";
-  } else {
-    Like_heart.src = "../static/img/wheart.svg";
-  }
-}
+// function Jjim() {
+//   if (Jjim_count) {
+//     Jjim_star.src = "../static/img/ystar.svg";
+//   } else {
+//     Jjim_star.src = "../static/img/wstar.svg";
+//   }
+// }
 
-Option_Jjim.addEventListener("click", Jjim);
-Jjim_star.addEventListener("click", Jjim);
-Option_Jjim.addEventListener("click", Jjim_starControl);
+// function Like() {
+//   if (Like_count) {
+//     Like_heart.src = "../static/img/rheart.svg";
+//   } else {
+//     Like_heart.src = "../static/img/wheart.svg";
+//   }
+// }
 
-Option_Like.addEventListener("click", Like);
-Like_heart.addEventListener("click", Like);
-Option_Like.addEventListener("click", Like_heartControl);
+// Option_Jjim.addEventListener("click", Jjim);
+// Jjim_star.addEventListener("click", Jjim);
+// Option_Jjim.addEventListener("click", Jjim_starControl);
 
-// Listmodal
-const openButton = document.querySelector(".preview");
-const modal = document.querySelector(".List_modal");
-const overlay = modal.querySelector(".List_overlay");
-const closeBtn = modal.querySelector("button");
-const openModal = () => {
-  modal.classList.remove("List_hidden");
-};
-const closeModal = () => {
-  modal.classList.add("List_hidden");
-};
-overlay.addEventListener("click", closeModal);
-closeBtn.addEventListener("click", closeModal);
-openButton.addEventListener("click", openModal);
+// Option_Like.addEventListener("click", Like);
+// Like_heart.addEventListener("click", Like);
+// Option_Like.addEventListener("click", Like_heartControl);
+
+// // Listmodal
+// const openButton = document.querySelector(".preview");
+// const modal = document.querySelector(".List_modal");
+// const overlay = modal.querySelector(".List_overlay");
+// const closeBtn = modal.querySelector("button");
+// const openModal = () => {
+//   modal.classList.remove("List_hidden");
+// };
+// const closeModal = () => {
+//   modal.classList.add("List_hidden");
+// };
+// overlay.addEventListener("click", closeModal);
+// closeBtn.addEventListener("click", closeModal);
+// openButton.addEventListener("click", openModal);
 
 // html의 태그들을 변수로 담아두기
 //글작성
