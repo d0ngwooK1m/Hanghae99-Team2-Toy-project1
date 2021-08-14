@@ -216,7 +216,7 @@
   display: flex;
   position: relative;
   width: 100%;
-  background-color:;
+  background-color:black;
 }
 .topmenu {
   width: 1176px;
@@ -227,6 +227,7 @@
 .topLogo {
   height: 70px;
   margin-right: 50px;
+  padding: 10px 0;
 }
 .topLogo img {
   width: 95%;
@@ -620,6 +621,7 @@
   /* padding: 30px 20px; */
   /* padding-bottom: 15px; */
   border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 30px;
 }
 .create-btn {
   all: unset;
