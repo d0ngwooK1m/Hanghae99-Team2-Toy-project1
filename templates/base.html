@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='my_page_style.css' )}}">
     <script defer src="{{ url_for('static', filename='script.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='my_page_script.js) }}"></script>
+    <script defer src="{{ url_for('static', filename='my_page_script.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -63,42 +63,28 @@
         <div class="signup-form animate">
             <a class="signup-close-btn">&times;</a>
             <!--회원가입 모달 컨텐츠 -->
-<!--            <form class="modal-content" name="signup_form">-->
-<!--                <label class='login-uname'><b>Username</b></label>-->
-<!--                <input type="text" class="username-input" required>-->
+                <form class="modal-content" name="signup_form">
+                    <label class='login-uname'><b>Username</b></label>
+                    <input type="text" class="username-input" name="s_name" required>
 
-<!--                <label class='login-id'><b>ID</b></label>-->
-<!--                <input type="text" class="login-input" required>-->
+                    <label class='login-id'><b>email</b></label>
+                    <input type="email" class="login-input" name="s_email" required>
 
-<!--                <label class='login-pw'><b>Password</b></label>-->
-<!--                <input type="password" class="password-input" required>-->
+                    <label class='login-pw'><b>Password</b></label>
+                    <input type="password" class="password-input" name="s_password" required>
 
-<!--                <label class='login-cpw'><b>Check Password</b></label>-->
-<!--                <input type="password" class="check-password-input" required>-->
+                    <label class='login-cpw'><b>Check Password</b></label>
+                    <input type="password" class="check-password-input" name="s_check_password" required>
 
-<!--                <p class="error error&#45;&#45;hidden"></p>-->
+                    <p class="error error--hidden"></p>
 
-<!--                <input type="submit" class="signup-submit-btn" onsubmit="return false">-->
-<!--            </form>-->
-            <div class="modal-content" name="signup_form">
-                <label class='login-uname'><b>Username</b></label>
-                <input type="text" class="username-input" required>
-
-                <label class='login-id'><b>ID</b></label>
-                <input type="text" class="login-input" required>
-
-                <label class='login-pw'><b>Password</b></label>
-                <input type="password" class="password-input" required>
-
-                <label class='login-cpw'><b>Check Password</b></label>
-                <input type="password" class="check-password-input" required>
-
-                <p class="error error--hidden"></p>
-
-                <button class="signup-submit-btn">Submit</button>
+                    <button class="signup-submit-btn">Submit</button>
+                </form>
             </div>
         </div>
     </div>
+
+
     {% block content %}
     {% endblock %}
     
