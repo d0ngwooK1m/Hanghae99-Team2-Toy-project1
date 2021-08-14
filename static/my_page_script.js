@@ -11,5 +11,5 @@ function Showinfo(){
     document.querySelector('#my_information').style.display = 'block'
 }
 
-my_Jjim.addEventListener('click',ShowJjim)
-my_info.addEventListener('click',Showinfo)
+// my_Jjim.addEventListener('click',ShowJjim)
+// my_info.addEventListener('click',Showinfo)

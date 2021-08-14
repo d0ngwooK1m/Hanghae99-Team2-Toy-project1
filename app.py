@@ -1,18 +1,25 @@
 from flask import Flask, render_template, jsonify, request
 import requests
-from bs4 import BeautifulSoup
+import pymongo
+
+
+# from bs4 import BeautifulSoup
 app = Flask(__name__)
 
-from pymongo import MongoClient
+# Database
+client = pymongo.MongoClient('localhost', 27017)
+db = client.user_login_system
 
-client = MongoClient('localhost', 27017)
-db = client.dbsparta
+# Routes
+from user import routes
+
 
 @app.route('/')
 def index():
     return render_template('main.html')
 
-@app.route('/my_page')
+
+@app.route('/myPage')
 def mypage():
     return render_template('myPage.html')
 
@@ -45,9 +52,12 @@ def previewImage():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
-    soup = BeautifulSoup(data.text, 'html.parser')
-    image = soup.select_one('meta[property="og:image"]')['content']
-    return jsonify(image)
+    # soup = BeautifulSoup(data.text, 'html.parser')
+    # image = soup.select_one('meta[property="og:image"]')['content']
+    # return jsonify(image)
 
-if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+# 켜기 터미널
+# set FLASK_APP=app.py
+# set FLASK_ENV=development
+# flask run
+# 끄기 터미널에서 ctrl c

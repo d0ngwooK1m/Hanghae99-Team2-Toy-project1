@@ -8,29 +8,36 @@
     <title>Toy Project1</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='my_page_style.css' )}}">
     <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='my_page_script.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
     <!-- 상단메뉴 -->
-    <nav class="topmenu">
-        <a href="/">
-            <img src="../static/img/logo.png" style="margin-left: 30px; width: 60px; height: 60px;">
-        </a>
-        <div class="search_box">
-            <input class="search_bar" type="text" placeholder="검색어 입력">
-            <button class="search_btn"><img class="search_icon" src="../static/img/search.png"></button>
-        </div>    
-        <div class="member_box">
-            <div class="mypage">
-                <a href="/my_page">마이페이지</a>
+    <nav class="topcontainer">
+        <div class="topmenu">
+            <div class="logoSearch">
+                <a class="topLogo" href="/">
+                    <img src="../static/img/titleLogo.svg" >
+                </a>
+                <div class="search_box">
+                    <input class="search_bar" type="text" placeholder="검색어 입력">
+                    <button class="search_btn"><img class="search_icon" src="../static/img/search.png"></button>
+                </div>
             </div>
-            <div class="login_signup">
-                <a class="login-btn">로그인</a>
-                <a class="signup-btn">회원가입</a>
+            
+            <div class="member_box">
+                <div class="mypage">
+                    <a href="/myPage">마이페이지</a>
+                </div>
+                <div class="login_signLine"></div>
+                    <a class="login-btn">로그인</a>
+                <div class="login_signLine"></div>
+                    <a class="signup-btn">회원가입</a>
             </div>
-        </div>
+        </div>  
     </nav>
 
     <div class="login-background">
@@ -40,17 +47,17 @@
                     <h2>로그인</h2>
                     <button class="login-close-btn">닫기</button>
                 </div>
-                <form class="popup-form login-form">
+                <form class="popup-form login-form" action="#" name="login_form">
                     <div class="popup-box-wrap">
-                        <label for="login-id">아이디</label>
-                        <input  type="text" id="login-id" name="login-id" placeholder="example@naver.com"/>
+                        <label class="login-id" for="login-id">아이디</label>
+                        <input  type="text" class="login-input" name="login-id" required placeholder="example@naver.com"/>
                     </div>
                     <div class="popup-box-wrap">
                         <label for="login-pw">비밀번호</label>
                         <input  type="text" id="login-pw" name="login-pw" placeholder="******"/>
                     </div>
                     <div class="popup-box-wrap">
-                        <button class="login-submit-btn">로그인</button>
+                        <button type="submit" class="login-submit-btn">로그인</button>
                     </div>
                 </form>
             </section>
@@ -63,23 +70,24 @@
                     <h2>회원가입</h2>
                     <button class="signup-close-btn">닫기</button>
                 </div>
-                <form class="popup-form login-form">
+                <form class="popup-form login-form" >
                     <div class="popup-box-wrap">
-                        <label for="signup-name">이름</label>
-                        <input  type="text" id="signup-name" name="signup-name" placeholder="홍길동"/>
+                        <label class="login-uname" for="signup-name">이름</label>
+                        <input  type="text" class="username-input" name="signup-name"  placeholder="홍길동" required/>
                     </div>
                     <div class="popup-box-wrap">
-                        <label for="signup-id">아이디</label>
-                        <input  type="text" id="signup-id" name="signup-id" placeholder="example@naver.com"/>
+                        <label class='login-id' for="signup-id">아이디</label>
+                        <input  type="text" class="login-input" name="signup-id" placeholder="example@naver.com" required/>
                     </div>
                     <div class="popup-box-wrap">
-                        <label for="signup-pw">비밀번호</label>
-                        <input  type="text" id="signup-pw" name="signup-pw" placeholder="******"/>
+                        <label class='login-pw' for="signup-pw">비밀번호</label>
+                        <input  type="password" class="password-input" id="signup-pw" name="signup-pw" placeholder="******" required/>
                     </div>
                     <div class="popup-box-wrap">
                         <label for="signup-check-pw">비밀번호 확인</label>
-                        <input  type="text" id="signup-check-pw" name="signup-check-pw" placeholder="******"/>
+                        <input  type="password" class="password-input" id="signup-check-pw" name="signup-check-pw" placeholder="******" required/>
                     </div>
+                    <p class="error error--hidden"></p>
                     <div class="popup-box-wrap">
                         <button class="signup-submit-btn">회원가입</button>
                     </div>
@@ -87,43 +95,7 @@
             </section>
         </div>
     </div>
-    <!-- 로그인 모달창v2 -->
-    <!-- <div id="loginmodal" class="login-background">
-        <div class="login-form animate">
-            <a class="login-close-btn">&times;</a>
-            <form class="modal-content" action="#">
-                <label class='login-id'><b>ID</b></label>
-                <input type="text" class="login-input" required>
 
-                <label class='login-pw'><b>Password</b></label>
-                <input type="password" required>
-
-                <button type="submit" class="login-submit-btn">Log In</button>
-            </form>
-        </div>
-    </div> -->
-
-    <!-- 회원가입 모달창v2 -->
-    <!-- <div class="signup-background">
-        <div class="signup-form animate">
-            <a class="signup-close-btn">&times;</a>
-            <form class="modal-content" action="#">
-                <label class='login-uname'><b>Username</b></label>
-                <input type="text" class="username-input" required>
-
-                <label class='login-id'><b>ID</b></label>
-                <input type="text" class="login-input" required>
-
-                <label class='login-pw'><b>Password</b></label>
-                <input type="password" class="password-input" required>
-
-                <label class='login-cpw'><b>Check Password</b></label>
-                <input type="password" class="check-password-input" required>
-
-                <button type="submit" class="signup-submit-btn">Log In</button>
-            </form>
-        </div>
-    </div> -->
     {% block content %}
     {% endblock %}
     
