@@ -73,7 +73,6 @@
   width: 276px;
   max-height: 412px;
   position: relative;
-  height: 100%;
   border-radius: 5px;
   margin-right: 24px;
   margin-bottom: 32px;
@@ -127,7 +126,7 @@
 
 .ListFlex .title {
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 700;
   line-height: 20px;
   letter-spacing: -0.15px;
   color: rgb(26, 26, 26);
