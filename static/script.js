@@ -25,9 +25,9 @@ function Jjim() {
 
 function Like() {
   if (Like_count) {
-    Like_thumb.src = "../static/img/bthumsup.svg";
+    Like_thumb.src = "../static/img/bthumbsup.svg";
   } else {
-    Like_thumb.src = "../static/img/thumsbup.svg";
+    Like_thumb.src = "../static/img/thumbsbup.svg";
   }
 }
 
@@ -91,6 +91,29 @@ const handlePopup = (e, tag) => {
   }
 };
 
+$("form[name=signup_form]").submit(function(e) {
+    const form_give = $(this);
+    const error_give = form_give.find(".error");
+    const data_give = form_give.serialize();
+
+    console.log('test')
+    $.ajax({
+        url: "/user/signup",
+        type: "POST",
+        data: data_give,
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(response) {
+            console.log(response);
+            error_give.text(response.responseJSON.error).removeClass("error--hidden");
+        }
+    })
+
+    e.preventDefault();
+})
+
 // 변수로 담아둔 태그를 클릭했을때 팝업 함수 실행
 //글작성
 popupBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
@@ -147,7 +170,7 @@ function viewing() {
                                 <hr/>
                                 <div class="Option">
                                     <div class="Like Option_Like">
-                                        <img src="../static/img/thumsbup.svg" class="thumbsUp">
+                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
                                         <span>좋아요</span>
                                     </div>
                                     <a class="Link" href="${url}" target= '_blank'>
