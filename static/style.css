@@ -1,8 +1,8 @@
 /* 저희가 만든 css중 같이 공통으로 사용할 수 있는 css 상단배치 */
 /* 확대 애니메이션 추가 */
-.mypage a{ 
-  text-decoration: none; 
-  color: white; 
+.mypage a {
+  text-decoration: none;
+  color: white;
 }
 
 .animate {
@@ -55,14 +55,14 @@
 }
 
 /* 리스트관련 css */
-.cardCloumn{
+.cardCloumn {
   display: grid;
   max-width: 1176px;
   width: 100%;
-  margin:auto;
+  margin: auto;
 }
 
-.cardRow{
+.cardRow {
   display: grid;
   max-width: 1176px;
   width: 100%;
@@ -72,7 +72,7 @@
 .ListBg {
   width: 276px;
   max-height: 412px;
-  position:relative;
+  position: relative;
   height: 100%;
   border-radius: 5px;
   margin-right: 24px;
@@ -80,14 +80,14 @@
   cursor: pointer;
 }
 
-.ListBg:last-child{
-  margin-right:0px;
+.ListBg:last-child {
+  margin-right: 0px;
 }
 
-.ListFlex{
+.ListFlex {
   max-height: 412px;
 }
-.imgHidden-box{
+.imgHidden-box {
   overflow: hidden;
   height: 155px;
 }
@@ -96,30 +96,30 @@
   border-radius: 3px;
   margin-bottom: 8px;
 }
-.classImg:hover{
-  transform:scale(1.1);
+.classImg:hover {
+  transform: scale(1.1);
   transition: 0.3s ease 0s, opacity 0.1s linear 0s !important;
 }
-.Jjim{
+.Jjim {
   position: absolute;
-  top:8px;
-  right:8px;
+  top: 8px;
+  right: 8px;
   width: 32px;
   height: 32px;
   border-radius: 100%;
   background-color: transparent;
-  border : 0;
+  border: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 8px;
 }
-.Jjim:hover{
-  background-color:rgb(239, 239, 239,0.2);
+.Jjim:hover {
+  background-color: rgb(239, 239, 239, 0.2);
   transition: background-color 0.1s ease 0s;
 }
 
-.Jjim img{
+.Jjim img {
   width: 24px;
   height: 24px;
   vertical-align: text-bottom;
@@ -139,14 +139,15 @@
   margin: 4px 0px 6px;
 }
 
-.numCount{
+.numCount {
   display: flex;
   -webkit-box-align: center;
   align-items: center;
 }
 
-.likeNum, .JjimNum{
-  display:flex;
+.likeNum,
+.JjimNum {
+  display: flex;
   font-size: 11px;
   font-weight: normal;
   line-height: 16px;
@@ -157,48 +158,51 @@
   align-items: center;
   color: rgb(162, 162, 162);
 }
-.likeNum img, .JjimNum img{
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    flex: 0 0 auto;
-    height: 12px;
-    margin-right: 2px;
+.likeNum img,
+.JjimNum img {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 12px;
+  margin-right: 2px;
 }
-.ListFlex hr{
+.ListFlex hr {
   margin-top: 10px;
   margin-bottom: 10px;
-  border:0.5px solid rgb(242, 244, 245);
+  border: 0.5px solid rgb(242, 244, 245);
 }
 
-.Option{
+.Option {
   display: flex;
   margin: 10px 0 0 0;
-  justify-content:space-between;
+  justify-content: space-between;
 }
 
-.Like,.Link{
-  background-color: rgb(241, 212, 212);/*rgb(248, 248, 248) 변경논의 필요 */
+.Like,
+.Link {
+  background-color: rgb(241, 212, 212); /*rgb(248, 248, 248) 변경논의 필요 */
   color: rgb(26, 26, 26);
   border-radius: 3px;
-  border:0;
+  border: 0;
   width: 49%;
   height: 30px;
   display: flex;
   font-size: 30px;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  position:relative;
+  position: relative;
 }
-.Like img{
+.Like img {
   width: 16px;
   height: 16px;
-  margin-right:4px;
-  margin-bottom:1px;
+  margin-right: 4px;
+  margin-bottom: 1px;
 }
 
-.Like span, .Link span{
-  font-size:13px;
+.Like span,
+.Link span {
+  font-size: 13px;
 }
 
 .Link a:link,
@@ -214,21 +218,21 @@
   width: 100%;
   background-color: black;
 }
-.topmenu{
+.topmenu {
   width: 1176px;
   max-height: 70px;
   display: flex;
   margin: auto;
 }
-.topLogo{
+.topLogo {
   height: 70px;
   margin-right: 50px;
 }
-.topLogo img{
+.topLogo img {
   width: 95%;
   height: 95%;
 }
-.logoSearch{
+.logoSearch {
   display: flex;
   align-items: center;
 }
@@ -241,16 +245,16 @@
   width: 400px;
   padding-left: 4%;
 }
-.search_btn{
+.search_btn {
   border: 0;
   background-color: white;
   width: 70px;
   height: 35px;
-  border-radius:20px;
-  margin:2px 80px 0 -72px;
+  border-radius: 20px;
+  margin: 2px 80px 0 -72px;
   text-align: center;
 }
-.search_icon{
+.search_icon {
   width: 17px;
   height: 17px;
   margin-left: 45%;
@@ -267,15 +271,15 @@
   display: flex;
   align-items: center;
 }
-.signup-btn{
+.signup-btn {
   color: white;
   display: flex;
   align-items: center;
 }
 .login_signLine {
-  width: .1rem;
+  width: 0.1rem;
   height: 1.2rem;
-  margin: 0 1.25rem; 
+  margin: 0 1.25rem;
 }
 .member_box {
   margin-left: auto;
@@ -372,7 +376,8 @@
 .show {
   display: block;
 }
-.popup-wrap {
+.popup-wrap,
+.login-wrap {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -380,82 +385,112 @@
   max-height: 100vh;
   z-index: 10;
 }
-.popup-content {
-  width: 900px;
-  padding: 20px;
+.popup-content,
+.login-content,
+.signup-content {
+  padding: 30px;
   background-color: #fff;
 }
-.popup-close-btn {
-  padding: 10px 20px;
-  color: #fff;
-  border: 0;
-  background-color: black;
+.create-form input::placeholder,
+.create-form textarea::placeholder,
+.login-form input::placeholder {
+  color: #dee2e6;
 }
-.create-form{
-  margin-top:30px
-}
-.create-form-wrap {
+.create-form-btn,
+.login-submit-btn,
+.signup-submit-btn {
+  width: 100%;
   margin-top: 10px;
-}
-.create-form-wrap label {
-  width: 80px;
-}
-.create-form-wrap input {
-  flex: 1;
-  padding: 5px 10px;
-  border: 1px solid #dee2e6;
-}
-.create-form-wrap textarea {
-  flex: 1;
-  padding: 5px 10px;
-  border: 1px solid #dee2e6;
-}
-.create-form-wrap input::placeholder,
-.create-form-wrap textarea::placeholder {
-  color: #adb5bd;
-}
-.create-form-btn {
-  margin-top: 30px;
-  padding: 10px 20px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 700;
   color: #fff;
   border: 0;
-  background-color: black;
+  border-radius: 3px;
+  background-color: #000;
 }
-.preview-image-wrap{
-  width:100%;
+.create-form,
+.login-form {
+  margin-top: 40px;
 }
-.preview-btn{
-  padding:5px 10px;
-  color:#fff;
+.create-form label,
+.create-form input,
+.login-form label,
+.login-form input {
+  width: 100%;
+  display: inline-block;
+}
+.create-form label,
+.login-form label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #333;
+}
+.create-form input,
+.login-form input {
+  padding: 15px 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 3px;
+}
+.popup-content h2,
+.login-content h2,
+.signup-content h2 {
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: -0.6px;
+}
+.login-close-btn,
+.signup-close-btn,
+.popup-close-btn {
+  position: absolute;
+  top: -25px;
+  right: 0px;
+  border: 0;
+  color: #fff;
+  background-color: transparent;
+}
+.popup-content {
+  position: relative;
+  width: 600px;
+}
+.login-content,
+.signup-content {
+  position: relative;
+  width: 450px;
+}
+.create-form textarea {
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 3px;
+}
+.preview-image-wrap {
+  width: 100%;
+}
+.preview-btn {
+  width: 150px;
+  padding: 15px 10px;
+  color: #fff;
   background: #000;
-  border:0;
+  border: 0;
+  border-radius: 0px 3px 3px 0px;
 }
-.preview-image-wrap img{
-  width:100%;
-  max-height:300px;
-  margin-top:10px;
+.preview-image-wrap img {
+  width: 100%;
+  max-height: 300px;
+  margin-top: 10px;
   object-fit: contain;
 }
-/* modal 관련 css 추가 */
-.signup-close-btn {
-  width: 100%;
-  padding: 14px 20px;
+.popup-box-wrap {
+  margin-bottom: 20px;
+}
+.preview-url {
+  border-radius: 3px 0px 0px 3px;
 }
 
-/* 로그인, 회원가입 모달v2 */
-.login-background,
-.signup-background {
-  display: none;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.show {
-  display: block;
-}
-
-.login-form {
+/* .login-form {
   position: relative;
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
   border: 2px solid #dddddd9c;
   border-radius: 5px;
   padding: 50px;
@@ -467,7 +502,7 @@
 
 .signup-form {
   position: relative;
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
   border: 2px solid #dddddd9c;
   border-radius: 5px;
   padding: 50px;
@@ -477,19 +512,12 @@
   background-color: rgba(275, 275, 275, 1);
 }
 
-.login-close-btn{
-  position: absolute;
-  right: 15px;
-  top: 8px;
-  font-size: 2rem;
-}
-
 .signup-close-btn {
   position: absolute;
   left: 85%;
   top: 8px;
   font-size: 2rem;
-} 
+}
 
 .login-close-btn:hover,
 .signup-close-btn:hover {
@@ -498,7 +526,7 @@
 
 .login-form:hover,
 .signup-form:hover {
-  box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
 .modal-content input[type="text"],
@@ -526,7 +554,7 @@
 .login-submit-btn:hover,
 .signup-submit-btn:hover {
   background-color: rgba(8, 8, 8, 0.788);
-}
+} */
 
 .error {
   color: red;
@@ -572,7 +600,6 @@
   position: absolute;
   top: 65px;
   right: 20px;
-  
 }
 .delete_btn {
   all: unset;
