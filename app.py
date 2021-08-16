@@ -58,6 +58,12 @@ def posting():
     return jsonify({'msg': '등록 완료!'})
 
 
+@app.route('/search', methods=['GET'])
+def search():
+    text = request.args.get('desc')
+    searches = list(db.posting.find({'desc': text},{'_id':False}))
+
+
 @app.route('/create/previewImage',methods=['POST'])
 def previewImage():
     url_receive = request.form['url_give']
