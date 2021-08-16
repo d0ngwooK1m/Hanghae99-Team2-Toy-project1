@@ -91,19 +91,43 @@ const handlePopup = (e, tag) => {
   }
 };
 
+
+//회원가입
 $("form[name=signup_form]").submit(function(e) {
     const form_give = $(this);
     const error_give = form_give.find(".error");
     const data_give = form_give.serialize();
 
-    console.log('test')
     $.ajax({
         url: "/user/signup",
         type: "POST",
         data: data_give,
         dataType: "json",
         success: function(response) {
+            window.location.href = "/";
+        },
+        error: function(response) {
             console.log(response);
+            error_give.text(response.responseJSON.error).removeClass("error--hidden");
+        }
+    })
+
+    e.preventDefault();
+})
+
+//로그인
+$("form[name=login_form]").submit(function(e) {
+    const form_give = $(this);
+    const error_give = form_give.find(".error");
+    const data_give = form_give.serialize();
+
+    $.ajax({
+        url: "/user/login",
+        type: "POST",
+        data: data_give,
+        dataType: "json",
+        success: function(response) {
+            window.location.href = "/";
         },
         error: function(response) {
             console.log(response);
