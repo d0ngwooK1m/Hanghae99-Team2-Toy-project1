@@ -42,7 +42,6 @@
 }
 .flex-layout-between {
   display: flex;
-  width: 1176px;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
@@ -54,6 +53,11 @@
   align-items: center;
 }
 
+/* 컨텐츠 넓이 공통 */
+.container {
+  width: 1170px;
+  margin: 0 auto;
+}
 /* 리스트관련 css */
 .cardCloumn {
   display: grid;
@@ -153,7 +157,6 @@
   line-height: 16px;
   letter-spacing: normal;
   margin: 0px 8px 0px 0px;
-  display: flex;
   -webkit-box-align: center;
   align-items: center;
   color: rgb(162, 162, 162);
@@ -216,7 +219,7 @@
   display: flex;
   position: relative;
   width: 100%;
-  background-color:black;
+  background-color: black;
 }
 .topmenu {
   width: 1176px;
@@ -364,7 +367,8 @@
 /* 글 작성 모달 css */
 .popup-background,
 .signup-background,
-.login-background {
+.login-background,
+.popup-detail-background {
   display: none;
   position: fixed;
   top: 0;
@@ -392,6 +396,10 @@
   padding: 30px;
   background-color: #fff;
 }
+.detail-popup-wrap {
+  max-height: 650px;
+  overflow-y: scroll;
+}
 .create-form input::placeholder,
 .create-form textarea::placeholder,
 .login-form input::placeholder {
@@ -413,6 +421,10 @@
 .create-form,
 .login-form {
   margin-top: 40px;
+}
+.detail-modify-form {
+  display: none;
+  margin-top: 0;
 }
 .create-form label,
 .create-form input,
@@ -440,8 +452,13 @@
   font-weight: bold;
   letter-spacing: -0.6px;
 }
+.popup-content {
+  width: 600px;
+}
 .login-close-btn,
 .signup-close-btn,
+.popup-close-btn,
+.popup-detail-close-btn,
 .popup-close-btn {
   position: absolute;
   top: -25px;
@@ -449,10 +466,6 @@
   border: 0;
   color: #fff;
   background-color: transparent;
-}
-.popup-content {
-  position: relative;
-  width: 600px;
 }
 .login-content,
 .signup-content {
@@ -468,7 +481,8 @@
 .preview-image-wrap {
   width: 100%;
 }
-.preview-btn {
+.preview-btn,
+.modify-preview-btn {
   width: 150px;
   padding: 15px 10px;
   color: #fff;
@@ -488,7 +502,36 @@
 .preview-url {
   border-radius: 3px 0px 0px 3px;
 }
+.detail-image-wrap {
+  margin: 20px 0;
+}
+.detail-image-wrap img {
+  width: 100%;
+  max-height: 300px;
+  border: 2px solid black;
+  object-fit: cover;
+}
 
+.detail-modify-btn,
+.detail-delete-btn {
+  padding: 8px 12px;
+  border: 0;
+  background-color: transparent;
+}
+.detail-modify-btn {
+  color: #339af0;
+  border: 1px solid #339af0;
+}
+.detail-delete-btn {
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+.detail-content-wrap h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: -0.6px;
+}
 /* .login-form {
   position: relative;
   transition: box-shadow 0.3s;
@@ -560,7 +603,7 @@
 .error {
   color: red;
 }
-
+/* 
 .List_modal {
   position: fixed;
   top: 0;
@@ -611,7 +654,7 @@
 .line {
   color: rgb(117, 117, 117);
   margin: 2% 0 2% 0;
-}
+} */
 
 /* icon nav css */
 .icon-nav-wrap {
@@ -653,10 +696,11 @@
 }
 .icon-dropdown-wrap2 .line {
   margin: 0px 10px;
+  color: #dee2e6;
 }
-.icon-dropdown-wrap2 li:hover {
+.icon-dropdown-wrap2 span:hover {
   animation: fade 1s;
-  color: red;
+  color: #339af0;
   cursor: pointer;
 }
 .icon-first {
