@@ -40,19 +40,19 @@ Like_thumb.addEventListener("click", Like);
 Option_Like.addEventListener("click", Like_thumbControl);
 
 // Listmodal
-const openButton = document.querySelector(".ListBg");
-const modal = document.querySelector(".List_modal");
-const overlay = modal.querySelector(".List_overlay");
-const closeBtn = modal.querySelector("button");
-const openModal = () => {
-  modal.classList.remove("List_hidden");
-};
-const closeModal = () => {
-  modal.classList.add("List_hidden");
-};
-overlay.addEventListener("click", closeModal);
-closeBtn.addEventListener("click", closeModal);
-openButton.addEventListener("click", openModal);
+// const openButton = document.querySelector(".ListBg");
+// const modal = document.querySelector(".List_modal");
+// const overlay = modal.querySelector(".List_overlay");
+// const closeBtn = modal.querySelector("button");
+// const openModal = () => {
+//   modal.classList.remove("List_hidden");
+// };
+// const closeModal = () => {
+//   modal.classList.add("List_hidden");
+// };
+// overlay.addEventListener("click", closeModal);
+// closeBtn.addEventListener("click", closeModal);
+// openButton.addEventListener("click", openModal);
 
 // html의 태그들을 변수로 담아두기
 //글작성
@@ -70,89 +70,98 @@ const loginBtn = document.querySelector(".login-btn");
 const loginBg = document.querySelector(".login-background");
 const loginCloseBtn = document.querySelector(".login-close-btn");
 
+// 상세보기
+const detailBtn = document.querySelector(".ListBg");
+const detailBg = document.querySelector(".popup-detail-background");
+const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
+
 // 아래 url, previewBox 변수는 이미지 미리보기에 사용되며 팝업이 닫힐때 지워져야 합니다.
 let url = document.querySelector(".preview-url");
 let previewBox = document.querySelector(".preview-image-wrap");
-// 팝업 기능을 하는 함수는 하나로 통일하고자 만듬 (팝업의 기능은 같기때문에)
-const handlePopup = (e, tag) => {
-  // 전체 영역을 덮는 backgorund에 click 이벤트가 발생되어 자식에도 이벤트 전파되는 현상 막기
+let detailUrl = document.querySelector(".modify-preview-url");
+let detailPreviewBox = document.querySelector(".detail-image-wrap");
+
+// popup 함수 show, hide로 분리
+const showPopup = (tag) => {
+  tag.classList.add("show");
+};
+const hidePopup = (e, tag) => {
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
-  // 함수의 매개변수로 받은 tag에 show라는 클래스가 있는지 확인하기
-  if (tag.classList.contains("show")) {
-    // tag에 show라는 클래스가 있으면 show 클래스를 지워서 팝업 닫기
-    tag.classList.remove("show");
-    url.value = "";
-    previewBox.innerHTML = "";
-  } else {
-    // tag에 show라는 클래스가 없으면 show 클래스를 추가해서 팝업 보이기
-    tag.classList.add("show");
+  if (tag.className === "popup-detail-background") {
+    console.log("popup-detail-background");
   }
+  tag.classList.remove("show");
+  url.value = "";
+  previewBox.innerHTML = "";
 };
 
-
-//회원가입
-$("form[name=signup_form]").submit(function(e) {
-    const form_give = $(this);
-    const error_give = form_give.find(".error");
-    const data_give = form_give.serialize();
-
-    $.ajax({
-        url: "/user/signup",
-        type: "POST",
-        data: data_give,
-        dataType: "json",
-        success: function(response) {
-            window.location.href = "/";
-        },
-        error: function(response) {
-            console.log(response);
-            error_give.text(response.responseJSON.error).removeClass("error--hidden");
-        }
-    })
-
-    e.preventDefault();
-})
-
-//로그인
-$("form[name=login_form]").submit(function(e) {
-    const form_give = $(this);
-    const error_give = form_give.find(".error");
-    const data_give = form_give.serialize();
-
-    $.ajax({
-        url: "/user/login",
-        type: "POST",
-        data: data_give,
-        dataType: "json",
-        success: function(response) {
-            window.location.href = "/";
-        },
-        error: function(response) {
-            console.log(response);
-            error_give.text(response.responseJSON.error).removeClass("error--hidden");
-        }
-    })
-
-    e.preventDefault();
-})
-
-// 변수로 담아둔 태그를 클릭했을때 팝업 함수 실행
 //글작성
-popupBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
-popupCloseBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
-popupBg.addEventListener("click", (e) => handlePopup(e, popupBg));
+popupBtn.addEventListener("click", () => showPopup(popupBg));
+popupCloseBtn.addEventListener("click", (e) => hidePopup(e, popupBg));
+popupBg.addEventListener("click", (e) => hidePopup(e, popupBg));
 
 //회원가입
-signupBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
-signupCloseBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
-signupBg.addEventListener("click", (e) => handlePopup(e, signupBg));
+signupBtn.addEventListener("click", () => showPopup(signupBg));
+signupCloseBtn.addEventListener("click", (e) => hidePopup(e, signupBg));
+signupBg.addEventListener("click", (e) => hidePopup(e, signupBg));
 
 //로그인
-loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
-loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
-loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
+loginBtn.addEventListener("click", () => showPopup(loginBg));
+loginCloseBtn.addEventListener("click", (e) => hidePopup(e, loginBg));
+loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
+
+// 상세보기
+detailBtn.addEventListener("click", () => showPopup(detailBg));
+detailCloseBtn.addEventListener("click", (e) => hidePopup(e, detailBg));
+detailBg.addEventListener("click", (e) => hidePopup(e, detailBg));
+
+//회원가입
+$("form[name=signup_form]").submit(function (e) {
+  const form_give = $(this);
+  const error_give = form_give.find(".error");
+  const data_give = form_give.serialize();
+
+  $.ajax({
+    url: "/user/signup",
+    type: "POST",
+    data: data_give,
+    dataType: "json",
+    success: function (response) {
+      window.location.href = "/";
+    },
+    error: function (response) {
+      console.log(response);
+      error_give.text(response.responseJSON.error).removeClass("error--hidden");
+    },
+  });
+
+  e.preventDefault();
+});
+
+//로그인
+$("form[name=login_form]").submit(function (e) {
+  const form_give = $(this);
+  const error_give = form_give.find(".error");
+  const data_give = form_give.serialize();
+
+  $.ajax({
+    url: "/user/login",
+    type: "POST",
+    data: data_give,
+    dataType: "json",
+    success: function (response) {
+      window.location.href = "/";
+    },
+    error: function (response) {
+      console.log(response);
+      error_give.text(response.responseJSON.error).removeClass("error--hidden");
+    },
+  });
+
+  e.preventDefault();
+});
 
 //새로고침
 $(document).ready(function () {
@@ -210,6 +219,7 @@ function viewing() {
 }
 
 //등록
+const createBtn = document.querySelector(".create-form-btn");
 function posting() {
   let url = document.getElementById("url").value;
   let title = document.getElementById("title").value;
@@ -225,29 +235,33 @@ function posting() {
     },
   });
 }
+createBtn.addEventListener("click", posting);
 
 // 카드 등록에서 URL을 입력하면 해당 OG:IMAGE 미리보게 하는 함수
 const previewBtn = document.querySelector(".preview-btn");
-previewBtn.addEventListener("click", (e) => {
+const modifyPreviewBtn = document.querySelector(".modify-preview-btn");
+const previewImage = (e, tag) => {
   const urlValue = url.value;
-  // input 값 작성안하고 button 클릭 했을 경우
-  if (urlValue === "") {
-    alert("WEB URL주소를 입력해주세요");
-    return null;
-  }
+  const modifyUrlValue = detailUrl.value;
   $.ajax({
     type: "POST",
     url: "/create/previewImage",
-    data: { url_give: urlValue },
+    data: {
+      url_give: tag.className === "preview-btn" ? urlValue : modifyUrlValue,
+    },
     success: function (response) {
-      console.log("response === ", response);
       const url = response;
-      if (url !== "") {
+      if (tag.className === "preview-btn" && url !== "") {
         previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
-      } else {
-        // og:image가 없을 경우 기본 이미지로 대체
-        previewBox.innerHTML = `<img src="../static/img/og_base.png" alt="썸네일"/>`;
+      } else if (tag.className === "modify-preview-btn" && url !== "") {
+        detailPreviewBox.src = url;
       }
+      // if (url !== "") {
+      //   previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
+      // } else {
+      //   // og:image가 없을 경우 기본 이미지로 대체
+      //   previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      // }
     },
     error: function (e) {
       if (e.status === 500) {
@@ -256,4 +270,24 @@ previewBtn.addEventListener("click", (e) => {
       }
     },
   });
-});
+};
+previewBtn.addEventListener("click", (e) => previewImage(e, previewBtn));
+modifyPreviewBtn.addEventListener("click", (e) =>
+  previewImage(e, modifyPreviewBtn)
+);
+
+// 수정
+const modifyBtn = document.querySelector(".detail-modify-btn");
+const hideDetailForm = document.querySelector(".detail-form");
+const showDetailForm = document.querySelector(".detail-modify-form");
+
+const detailPopup = (tag) => {
+  console.log("detail === ", tag);
+  if (tag.classList.contains("show")) {
+    tag.classList.remove("show");
+  } else {
+    tag.classList.add("show");
+  }
+};
+
+modifyBtn.addEventListener("click", () => detailPopup(showDetailForm));

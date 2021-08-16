@@ -4,7 +4,7 @@ import requests
 import pymongo
 
 
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 app = Flask(__name__)
 app.secret_key = b'\x8e\xbf(\x11\xfb\x80\xa4<\xd9\xc9\x95\x10\xcf\x85Q\xd1'
 
@@ -64,9 +64,9 @@ def previewImage():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
-    # soup = BeautifulSoup(data.text, 'html.parser')
-    # image = soup.select_one('meta[property="og:image"]')['content']
-    # return jsonify(image)
+    soup = BeautifulSoup(data.text, 'html.parser')
+    image = soup.select_one('meta[property="og:image"]')['content']
+    return jsonify(image)
 
 # 켜기 터미널
 # set FLASK_APP=app.py
@@ -75,5 +75,5 @@ def previewImage():
 # 끄기 터미널에서 ctrl c
 
 
-if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+# if __name__ == '__main__':
+#     app.run('0.0.0.0', port=5000, debug=True)
