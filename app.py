@@ -1,14 +1,25 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, session, redirect
+# from functools import wraps
 import requests
 import pymongo
 
 
 # from bs4 import BeautifulSoup
 app = Flask(__name__)
+app.secret_key = b'\x8e\xbf(\x11\xfb\x80\xa4<\xd9\xc9\x95\x10\xcf\x85Q\xd1'
 
 # Database
 client = pymongo.MongoClient('localhost', 27017)
 db = client.user_login_system
+
+# Decorators
+# def login_required(f):
+#     @wraps(f)
+#     def wrap(*args, **kwargs):
+#         if 'logged_in' in session:
+#             return f(*args, **kwargs)
+#         else:
+#             return redirect('/')
 
 # Routes
 from user import routes
@@ -20,6 +31,7 @@ def index():
 
 
 @app.route('/myPage')
+# @login_required
 def mypage():
     return render_template('myPage.html')
 
