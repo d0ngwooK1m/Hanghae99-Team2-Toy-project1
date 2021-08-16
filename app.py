@@ -4,7 +4,7 @@ import requests
 import pymongo
 
 
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 app = Flask(__name__)
 app.secret_key = b'\x8e\xbf(\x11\xfb\x80\xa4<\xd9\xc9\x95\x10\xcf\x85Q\xd1'
 
@@ -59,9 +59,14 @@ def posting():
 
 
 @app.route('/search', methods=['GET'])
-def search():
-    text = request.args.get('desc')
-    searches = list(db.posting.find({'desc': text},{'_id':False}))
+def view_Search():
+    text = request.args.get('text')
+    splitted_keywords = text.split(' ')
+    print(splitted_keywords)
+    search_T = list(db.posting.find({'title': {'$regex':text}},{'_id':False}))
+    print(search_T)
+    return render_template('search.html', search_T=search_T)
+
 
 
 @app.route('/create/previewImage',methods=['POST'])
@@ -70,9 +75,9 @@ def previewImage():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
-    # soup = BeautifulSoup(data.text, 'html.parser')
-    # image = soup.select_one('meta[property="og:image"]')['content']
-    # return jsonify(image)
+    soup = BeautifulSoup(data.text, 'html.parser')
+    image = soup.select_one('meta[property="og:image"]')['content']
+    return jsonify(image)
 
 # 켜기 터미널
 # set FLASK_APP=app.py

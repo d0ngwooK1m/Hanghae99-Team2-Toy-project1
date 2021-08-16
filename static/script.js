@@ -1,4 +1,4 @@
-// 머지하다가 이 부분 수신 잘못함
+// 찜, 좋아요 기능 임시
 const Option_Jjim = document.querySelector(".Option_Jjim");
 const Jjim_heart = document.querySelector(".heart");
 const Option_Like = document.querySelector(".Option_Like");
@@ -27,7 +27,7 @@ function Like() {
   if (Like_count) {
     Like_thumb.src = "../static/img/bthumbsup.svg";
   } else {
-    Like_thumb.src = "../static/img/thumbsbup.svg";
+    Like_thumb.src = "../static/img/thumbsup.svg";
   }
 }
 
@@ -246,7 +246,7 @@ previewBtn.addEventListener("click", (e) => {
         previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
       } else {
         // og:image가 없을 경우 기본 이미지로 대체
-        previewBox.innerHTML = `<img src="../static/img/og_base.png" alt="썸네일"/>`;
+        previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
       }
     },
     error: function (e) {
