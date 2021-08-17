@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="icon-nav-wrap">
+        <nav class="flex-layout-between">
+            <ul class="icon-dropdown-wrap2 flex-layout">
+                <li>최신순</li>
+                <div class="line">|</div>
+                <li>추천순</li>
+            </ul>
+            <button class="create-btn">등록</button>
+        </nav>
+    </section>
+    
+    <section class ="cardCloumn"id="card_list">
+        <div class ="cardRow2">
+            {% for text in search_T %}
+                        <div class="ListBg">
+                            <div class="ListFlex">
+                                <div class="imgHidden-box">
+                                    <img src="../static/img/vatican.jpg" class="classImg">
+                                    <button class="Jjim Option_Jjim">
+                                            <div><img src="../static/img/heart.svg" class="heart"></div>
+                                    </button>
+                                </div>
+                                <p class ="title"><b>{{text['title']}}</b></p>
+                                <div class ="numCount">
+                                    <div class = "likeNum">
+                                        <img src="../static/img/likeUp3.png">
+                                        <span>5342</span>
+                                    </div>
+                                    <div class = "JjimNum">
+                                        <img src="../static/img/Rheart.svg">
+                                        <span>1783</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="Option">
+                                    <div class="Like Option_Like">
+                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                        <span>좋아요</span>
+                                    </div>
+                                    <a class="Link" href="{{text['url']}}" target= '_blank'>
+                                        <span>바로가기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+            {% endfor %}
+            {% for text in search_D %}
+                        <div class="ListBg">
+                            <div class="ListFlex">
+                                <div class="imgHidden-box">
+                                    <img src="../static/img/vatican.jpg" class="classImg">
+                                    <button class="Jjim Option_Jjim">
+                                            <div><img src="../static/img/heart.svg" class="heart"></div>
+                                    </button>
+                                </div>
+                                <p class ="title"><b>{{text['title']}}</b></p>
+                                <div class ="numCount">
+                                    <div class = "likeNum">
+                                        <img src="../static/img/likeUp3.png">
+                                        <span>5342</span>
+                                    </div>
+                                    <div class = "JjimNum">
+                                        <img src="../static/img/Rheart.svg">
+                                        <span>1783</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="Option">
+                                    <div class="Like Option_Like">
+                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                        <span>좋아요</span>
+                                    </div>
+                                    <a class="Link" href="{{text['url']}}" target= '_blank'>
+                                        <span>바로가기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+            {% endfor %}
+        </div>     
+    </section>
+    
+    <!-- 카드리스트 -->
+    <div class="List_modal List_hidden">
+        <div class="List_overlay"></div>
+            <div class="List_content" style="overflow: auto;">
+                <h1><a href="https://opentutorials.org/course/1" target="_blank" style="font-weight: bold; font-size: 32px;">생활코딩</a></h1>
+                <hr class="line">
+                <img src="/static/img/생활코딩.png" style="height: 70%; width: 70%;">
+                <hr class="line">
+
+                페이스북의 경우 국내 개발자 커뮤니티 중 접근성이 좋고 다양한 사람이 많이 포진되어 있다. 기본적인 설립목적이 누구나 접근하기 쉬운 코딩, 생활코딩이라는 의미처럼 취미로 하는 사람도, 회사에서 개발하고 있는 사람도 다양한 사람이 모여있다.
+
+                오픈 튜토리얼스 사이트는 일종의 강의 사이트로 외국의 codecademy, code.org와 같은 사이트지만 일반 유저가 직접 강의를 제작하여 만들 수 있다.
+
+                코딩과 네트워킹 등 소프트웨어 기술 뿐 아니라 개발자 영어, 독일어 등과 같은 외국어, 심지어 육아에 요리까지 넓은 분야의 강의가 올라온다.
+                <button class="close_btn"><img src="../static/img/close.png"></button>
+                <button class="edit_btn"><img src="../static/img/edit.png"></button>
+                <button class="delete_btn"><img src="../static/img/delete.png"></button>
+            </div>
+    </div>
+
+    <!-- 등록팝업 -->
+    <div class="popup-background">
+        <div class="popup-wrap">
+            <section class="popup-content">
+                <div class="flex-layout-between">
+                    <h2>등록하기</h2>
+                    <button class="popup-close-btn">닫기</button>
+                </div>
+                <div class="popup-form create-form">
+                    <div class="popup-box-wrap">
+                        <label for="url">웹 사이트 URL</label>
+                        <div class="flex-layout">
+                            <input class="preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
+                            <button class="preview-btn">미리보기</button>
+                        </div>
+                    </div>
+                    <div class="preview-image-wrap"> </div>
+                    <div class="popup-box-wrap">
+                        <label for="title">제목</label>
+                        <input  type="text" id="title" name="title" placeholder="******"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label for="description">설명</label>
+                        <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <button onclick="posting()" class="create-form-btn">등록하기</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}
