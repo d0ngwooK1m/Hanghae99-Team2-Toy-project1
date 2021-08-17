@@ -2,73 +2,51 @@
 
 {% block content %}
 <section class="icon-nav-wrap">
-        <nav class="flex-layout-between">
-            <ul class="icon-dropdown-wrap2 flex-layout">
-                <li>최신순</li>
-                <div class="line">|</div>
-                <li>추천순</li>
-            </ul>
+        <nav class="container flex-layout-between">
+            <div class="icon-dropdown-wrap2 flex-layout">
+                <span>최신순</span>
+                <span class="line">|</span>
+                <span>추천순</span>
+            </div>
             <button class="create-btn">등록</button>
         </nav>
     </section>
-
-    <!-- 등록팝업 -->
-    <div class="popup-background">
-        <div class="popup-wrap">
-            <section class="popup-content">
-                <div class="flex-layout-between">
-                    <h2>등록하기</h2>
-                    <button class="popup-close-btn">닫기</button>
-                </div>
-                <div class="popup-form create-form">
-                    <div class="popup-box-wrap">
-                        <label for="url">웹 사이트 URL</label>
-                        <div class="flex-layout">
-                            <input class="preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
-                            <button class="preview-btn">미리보기</button>
-                        </div>
-                    </div>
-                    <div class="preview-image-wrap"> </div>
-                    <div class="popup-box-wrap">
-                        <label for="title">제목</label>
-                        <input  type="text" id="title" name="title" placeholder="******"/>
-                    </div>
-                    <div class="popup-box-wrap">
-                        <label for="description">설명</label>
-                        <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
-                    </div>
-                    <div class="popup-box-wrap">
-                        <button onclick="posting()" class="create-form-btn">등록하기</button>
+ <!-- 등록팝업 -->
+ <div class="popup-background">
+    <div class="popup-wrap">
+        <section class="popup-content">
+            <div class="flex-layout-between">
+                <h2>등록하기</h2>
+                <button class="popup-close-btn">닫기</button>
+            </div>
+            <div class="popup-form create-form">
+                <div class="popup-box-wrap">
+                    <label for="url">웹 사이트 URL</label>
+                    <div class="flex-layout">
+                        <input class="preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
+                        <button class="preview-btn">미리보기</button>
                     </div>
                 </div>
-                <!-- <div class="create-content">
-                    <div class="create-form">
-                        <div class="create-form-wrap flex-layout">
-                            <label for="url">URL</label>
-                            <input class="preview-url" type="text" id="url" name="url" placeholder="URL을 입력해주세요"/>
-                            <button class="preview-btn">이미지 미리보기</button>
-                        </div>
-                        <div class="preview-image-wrap">
-
-                        </div>
-                        <div class="create-form-wrap flex-layout">
-                            <label for="title">제목</label>
-                            <input type="text" id="title" name="title" placeholder="사이트 이름을 입력해주세요"/>
-                        </div>
-                        <div class="create-form-wrap flex-layout">
-                            <label for="description">설명</label>
-                            <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
-                        </div>
-                        <div class="flex-layout-end">
-                            <button onclick="posting()" class="create-form-btn">등록</button>
-                        </div>
-                    </div>
-                </div> -->
-            </section>
-        </div>
+                <div class="preview-image-wrap"> </div>
+                <div class="popup-box-wrap">
+                    <label for="title">제목</label>
+                    <input  type="text" id="title" name="title" placeholder="******"/>
+                </div>
+                <div class="popup-box-wrap">
+                    <label for="description">설명</label>
+                    <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
+                </div>
+                <div class="popup-box-wrap">
+                    <button  class="create-form-btn">등록하기</button>
+                </div>
+            </div>
+           
+        </section>
     </div>
+</div>
+
 <!-- 카드리스트 -->
-    <section class ="cardCloumn"id="card_list">
+    <section class ="cardCloumn" id="card_list">
         <div class ="cardRow">
             <div class="ListBg">
                 <div class="ListFlex">
@@ -106,24 +84,51 @@
     
 
     <!-- 리스트 상세보기 -->
-    <div class="List_modal List_hidden">
-        <div class="List_overlay"></div>
-            <div class="List_content" style="overflow: auto;">
-                <h1><a href="https://opentutorials.org/course/1" target="_blank" style="font-weight: bold; font-size: 32px;">생활코딩</a></h1>
-                <hr class="line">
-                <img src="/static/img/생활코딩.png" style="height: 70%; width: 70%;">
-                <hr class="line">
-
-                페이스북의 경우 국내 개발자 커뮤니티 중 접근성이 좋고 다양한 사람이 많이 포진되어 있다. 기본적인 설립목적이 누구나 접근하기 쉬운 코딩, 생활코딩이라는 의미처럼 취미로 하는 사람도, 회사에서 개발하고 있는 사람도 다양한 사람이 모여있다.
-
-                오픈 튜토리얼스 사이트는 일종의 강의 사이트로 외국의 codecademy, code.org와 같은 사이트지만 일반 유저가 직접 강의를 제작하여 만들 수 있다.
-
-                코딩과 네트워킹 등 소프트웨어 기술 뿐 아니라 개발자 영어, 독일어 등과 같은 외국어, 심지어 육아에 요리까지 넓은 분야의 강의가 올라온다.
-                <button class="close_btn"><img src="../static/img/close.png"></button>
-                <button class="edit_btn"><img src="../static/img/edit.png"></button>
-                <button class="delete_btn"><img src="../static/img/delete.png"></button>
+    <div class="popup-detail-background">
+        <div class="popup-wrap">
+            <button class="popup-detail-close-btn" >닫기</button>
+            <div class="detail-popup-wrap">
+                <section class="popup-content">
+                    <h2 class="readable-hidden">상세보기 팝업</h2>
+                    <div class="detail-btn-wrap flex-layout-between">
+                        <button class="detail-modify-btn">수정</button>
+                        <button class="detail-delete-btn">삭제</button>
+                    </div>
+                    
+                    <div class="preview-image-wrap">
+                        <img class="detail-image-wrap" src="/static/img/생활코딩.png" target="_blank"/>
+                    </div>
+                    <div class="popup-form show">
+                        <div class="detail-content-wrap">
+                            <h3>제목</h3>
+                            <p>상세내용</p>
+                        </div>
+                    </div>
+                    <div class="create-form detail-modify-form">
+                        <div class="popup-box-wrap">
+                            <label for="url">웹 사이트 URL</label>
+                            <div class="flex-layout">
+                                <input class="modify-preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
+                                <button class="modify-preview-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="popup-box-wrap">
+                            <label for="title">제목</label>
+                            <input class="modify-title"  type="text" id="title" name="title" placeholder=""/>
+                        </div>
+                        <div class="popup-box-wrap">
+                            <label for="description">설명</label>
+                            <textarea class="modify-description" type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
+                        </div>
+                        <div class="popup-box-wrap">
+                            <button  class="create-form-btn">수정하기</button>
+                        </div>
+                    </div>
+                </section>
             </div>
+        </div>
     </div>
+
 
 
     {#
@@ -180,29 +185,32 @@
     <!-- 카드리스트 -->
     <section class ="cardCloumn"id="card_list">
         <div class ="cardRow">
-            <div class="ListBg">
-                <div class="ListFlex">
-                    <img src="../static/img/vatican.jpg" class="classImg">
-                    <div class="Option">
-                        <div class="Like Option_Like">
-                                      <div><img src="../static/img/wheart.svg" class="heart"></div>
-                                      <div class="LikeNum">1</div>
+            <div class="test">
+                <div class="ListBg">
+                    <div class="ListFlex">
+                        <img src="../static/img/vatican.jpg" class="classImg">
+                        <div class="Option">
+                            <div class="Like Option_Like">
+                                          <div><img src="../static/img/wheart.svg" class="heart"></div>
+                                          <div class="LikeNum">1</div>
+                            </div>
+                            <div class="FixedOption"><a href="https://opentutorials.org/course/1" target= '_blank'><img src="../static/img/wlink.svg"></a></div>
+                            <div class="FixedOption Option_Jjim">
+                                <div><img src="../static/img/wstar.svg" class="star"></div>
+                            </div>
                         </div>
-                        <div class="FixedOption"><a href="https://opentutorials.org/course/1" target= '_blank'><img src="../static/img/wlink.svg"></a></div>
-                        <div class="FixedOption Option_Jjim">
-                            <div><img src="../static/img/wstar.svg" class="star"></div>
+                        <div class="high-low">
+                            <hr class="titleLine">
+                            <div class ="title">제목</div>
+                            <div class ="desc">설명입니다.</div>
                         </div>
-                    </div>
-                    <div class="high-low">
-                        <hr class="titleLine">
-                        <div class ="title">제목</div>
-                        <div class ="desc">설명입니다.</div>
-                    </div>
-                    <div>
-                        <button class ="preview" href=".List_modal">preview</button>
+                        <div>
+                            <button class ="preview" href=".List_modal">preview</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            
         </div>     
     </section>
     
