@@ -14,7 +14,40 @@
     
     <section class ="cardCloumn"id="card_list">
         <div class ="cardRow2">
-            {% for text in search %}
+            {% for text in search_T %}
+                        <div class="ListBg">
+                            <div class="ListFlex">
+                                <div class="imgHidden-box">
+                                    <img src="../static/img/vatican.jpg" class="classImg">
+                                    <button class="Jjim Option_Jjim">
+                                            <div><img src="../static/img/heart.svg" class="heart"></div>
+                                    </button>
+                                </div>
+                                <p class ="title"><b>{{text['title']}}</b></p>
+                                <div class ="numCount">
+                                    <div class = "likeNum">
+                                        <img src="../static/img/likeUp3.png">
+                                        <span>5342</span>
+                                    </div>
+                                    <div class = "JjimNum">
+                                        <img src="../static/img/Rheart.svg">
+                                        <span>1783</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="Option">
+                                    <div class="Like Option_Like">
+                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                        <span>좋아요</span>
+                                    </div>
+                                    <a class="Link" href="{{text['url']}}" target= '_blank'>
+                                        <span>바로가기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+            {% endfor %}
+            {% for text in search_D %}
                         <div class="ListBg">
                             <div class="ListFlex">
                                 <div class="imgHidden-box">
@@ -99,29 +132,6 @@
                         <button onclick="posting()" class="create-form-btn">등록하기</button>
                     </div>
                 </div>
-                <!-- <div class="create-content">
-                    <div class="create-form">
-                        <div class="create-form-wrap flex-layout">
-                            <label for="url">URL</label>
-                            <input class="preview-url" type="text" id="url" name="url" placeholder="URL을 입력해주세요"/>
-                            <button class="preview-btn">이미지 미리보기</button>
-                        </div>
-                        <div class="preview-image-wrap">
-
-                        </div>
-                        <div class="create-form-wrap flex-layout">
-                            <label for="title">제목</label>
-                            <input type="text" id="title" name="title" placeholder="사이트 이름을 입력해주세요"/>
-                        </div>
-                        <div class="create-form-wrap flex-layout">
-                            <label for="description">설명</label>
-                            <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
-                        </div>
-                        <div class="flex-layout-end">
-                            <button onclick="posting()" class="create-form-btn">등록</button>
-                        </div>
-                    </div>
-                </div> -->
             </section>
         </div>
     </div>
