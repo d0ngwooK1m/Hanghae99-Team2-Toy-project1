@@ -1,3 +1,4 @@
+// 찜, 좋아요 기능 임시
 const Option_Jjim = document.querySelector(".Option_Jjim");
 const Jjim_heart = document.querySelector(".heart");
 const Option_Like = document.querySelector(".Option_Like");
@@ -26,7 +27,7 @@ function Like() {
   if (Like_count) {
     Like_thumb.src = "../static/img/bthumbsup.svg";
   } else {
-    Like_thumb.src = "../static/img/thumbsbup.svg";
+    Like_thumb.src = "../static/img/thumbsup.svg";
   }
 }
 
@@ -255,7 +256,7 @@ const previewImage = (e, tag) => {
         previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
       } else {
         // og:image가 없을 경우 기본 이미지로 대체
-        console.log("없음")
+        console.log("없음");
         previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
       }
     },
@@ -286,7 +287,6 @@ detailCloseBtn.addEventListener("click", (e) => hideDetail(e, detailBg));
 detailBg.addEventListener("click", (e) => hideDetail(e, detailBg));
 modifyBtn.addEventListener("click", (e) => showDetail(showDetailForm));
 
-
 const showDetail = (tag) => {
   if (tag.classList.contains("detail-modify-form")) {
     modifyBtn.style.display = "none";
@@ -306,5 +306,3 @@ const hideDetail = (e, tag) => {
   // image 미리보기 버튼 클릭하고, 수정안하고 팝업닫을때
   // detailPreviewBox.innerHTML = ``;
 };
-
-
