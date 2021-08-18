@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='my_page_style.css' )}}">
-    <!-- <script defer src="{{ url_for('static', filename='script.js') }}"></script> -->
-    <script defer src="{{ url_for('static', filename='my_page_script.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+<!--     <script defer src="{{ url_for('static', filename='my_page_script.js') }}"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 </head>
 <body>
 
@@ -22,20 +23,33 @@
                 <a class="topLogo" href="/">
                     <img src="../static/img/titleLogo.svg" >
                 </a>
-                <form action="/search" method="GET" class="search_box">
-                    <input class="search_bar" type="text" name="text" placeholder="검색어 입력">
-                    <button type="submit" class="search_btn"><img class="search_icon" src="../static/img/search.png"></button>
-                </form>
+                <div class="search_box">
+                    <input class="search_bar" type="text" placeholder="검색어 입력">
+                    <button class="search_btn"><img class="search_icon" src="../static/img/search.png"></button>
+                </div>
             </div>
             
             <div class="member_box">
                 <div class="mypage">
-                    <a href="/myPage">마이페이지</a>
+                    {% if token == False %}
+                        <a href="/myPage">마이페이지</a>
+                    {% else %}
+
+                    {% endif %}
                 </div>
                 <div class="login_signLine"></div>
-                    <a class="login-btn">로그인</a>
-                <div class="login_signLine"></div>
-                    <a class="signup-btn">회원가입</a>
+                    {% if token == False %}
+                        <a class="logout-btn">로그아웃</a>
+                    {% else %}
+                        <a class="signup-btn">회원가입</a>
+                        <div class="login_signLine"></div>
+                    {% endif %}
+
+                    {% if token == False %}
+
+                    {% else %}
+                        <a class="login-btn">로그인</a>
+                    {% endif %}
             </div>
         </div>  
     </nav>

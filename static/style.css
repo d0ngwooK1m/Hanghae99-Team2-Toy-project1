@@ -370,7 +370,7 @@
 .signup-background,
 .login-background,
 .popup-detail-background {
-  display: none;
+play: none;
   position: fixed;
   top: 0;
   right: 0;
@@ -682,6 +682,12 @@
   margin-bottom: 30px;
 }
 .create-btn {
+  all: unset;
+  height: 60px;
+  color: black;
+}
+
+.create-btn-fail {
   all: unset;
   height: 60px;
   color: black;

@@ -138,64 +138,97 @@ const hidePopup = (e, tag) => {
 };
 
 //글작성
-popupBtn.addEventListener("click", (e) => showPopup(e, popupBg));
-popupCloseBtn.addEventListener("click", (e) => hidePopup(e, popupBg));
-popupBg.addEventListener("click", (e) => hidePopup(e, popupBg));
+if(document.querySelector('.create-btn') !== null) {
+  popupBtn.addEventListener("click", (e) => showPopup(e, popupBg));
+  popupCloseBtn.addEventListener("click", (e) => hidePopup(e, popupBg));
+  popupBg.addEventListener("click", (e) => hidePopup(e, popupBg));
+}
+
 
 //회원가입
-signupBtn.addEventListener("click", (e) => showPopup(e, signupBg));
-signupCloseBtn.addEventListener("click", (e) => hidePopup(e, signupBg));
-signupBg.addEventListener("click", (e) => hidePopup(e, signupBg));
+if(document.querySelector('.signup-btn') !== null) {
+  signupBtn.addEventListener("click", (e) => showPopup(e, signupBg));
+  signupCloseBtn.addEventListener("click", (e) => hidePopup(e, signupBg));
+  signupBg.addEventListener("click", (e) => hidePopup(e, signupBg));
+}
 
 //로그인
-loginBtn.addEventListener("click", () => showPopup(loginBg));
-loginCloseBtn.addEventListener("click", (e) => hidePopup(e, loginBg));
-loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
+if(document.querySelector('.login-btn') !== null) {
+  loginBtn.addEventListener("click", () => showPopup(loginBg));
+  loginCloseBtn.addEventListener("click", (e) => hidePopup(e, loginBg));
+  loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
+}
 
-//회원가입
-$("form[name=signup_form]").submit(function (e) {
-  const form_give = $(this);
-  const error_give = form_give.find(".error");
-  const data_give = form_give.serialize();
+//회원가입 API 통신
+$("form[name=signup_form]").submit(function(e) {
+    const form_give = $(this);
+    const error_give = form_give.find(".error");
+    const data_give = form_give.serialize();
 
-  $.ajax({
-    url: "/user/signup",
-    type: "POST",
-    data: data_give,
-    dataType: "json",
-    success: function (response) {
-      window.location.href = "/";
-    },
-    error: function (response) {
-      console.log(response);
-      error_give.text(response.responseJSON.error).removeClass("error--hidden");
-    },
-  });
-  e.preventDefault();
-});
+    $.ajax({
+        url: "/user/signup",
+        type: "POST",
+        data: data_give,
+        dataType: "json",
+        success: function(response) {
+            window.location.href = "/";
+            console.log(response);
+        },
+        error: function(response) {
+            console.log(response);
+            error_give.text(response.responseJSON.error).removeClass("error--hidden");
+        }
+    })
 
-//로그인
-$("form[name=login_form]").submit(function (e) {
-  const form_give = $(this);
-  const error_give = form_give.find(".error");
-  const data_give = form_give.serialize();
+    e.preventDefault();
+})
 
-  $.ajax({
-    url: "/user/login",
-    type: "POST",
-    data: data_give,
-    dataType: "json",
-    success: function (response) {
-      window.location.href = "/";
-    },
-    error: function (response) {
-      console.log(response);
-      error_give.text(response.responseJSON.error).removeClass("error--hidden");
-    },
-  });
+//로그인 API 통신
+$("form[name=login_form]").submit(function(e) {
+    const form_give = $(this);
+    const error_give = form_give.find(".error");
+    const data_give = form_give.serialize();
 
-  e.preventDefault();
-});
+    $.ajax({
+        url: "/user/login",
+        type: "POST",
+        data: data_give,
+        dataType: "json",
+        success: function(response) {
+            window.location.href = "/";
+            $.cookie('login_token', response['login_token'], { path: '/' });
+            // console.log(document.cookie);
+        }
+        ,
+        error: function(response) {
+            console.log(response);
+            error_give.text(response.responseJSON.error).removeClass("error--hidden");
+        }
+    })
+
+    e.preventDefault();
+})
+
+//로그아웃 API 통신
+$('.logout-btn').click(function(e) {
+    $.ajax({
+        url: "user/logout",
+        type: "GET",
+        data: {},
+        dataType: "json",
+        success: function(response) {
+            $.removeCookie('login_token', { path: '/' })
+            window.location.href = "/";
+        }
+    })
+
+    e.preventDefault();
+})
+
+//등록권한 없음
+function postingFail() {
+    alert('사용권한이 없습니다');
+}
 
 //등록
 const createBtn = document.querySelector(".create-form-btn");

@@ -8,7 +8,11 @@
                 <span class="line">|</span>
                 <span>추천순</span>
             </div>
-            <button class="create-btn">등록</button>
+            {% if token == False %}
+                <button class="create-btn">등록</button>
+            {% else %}
+                <button class="create-btn-fail" onclick="postingFail()">등록</button>
+            {% endif %}
         </nav>
     </section>
 
