@@ -251,17 +251,17 @@ const previewImage = (e, tag) => {
     },
     success: function (response) {
       const url = response;
-      if (tag.className === "preview-btn" && url !== "") {
-        previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
-      } else if (tag.className === "modify-preview-btn" && url !== "") {
-        detailPreviewBox.src = url;
-      }
-      // if (url !== "") {
+      // if (tag.className === "preview-btn" && url !== "") {
       //   previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
-      // } else {
-      //   // og:image가 없을 경우 기본 이미지로 대체
-      //   previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      // } else if (tag.className === "modify-preview-btn" && url !== "") {
+      //   detailPreviewBox.src = url;
       // }
+      if (url !== "") {
+        previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
+      } else {
+        // og:image가 없을 경우 기본 이미지로 대체
+        previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      }
     },
     error: function (e) {
       if (e.status === 500) {
