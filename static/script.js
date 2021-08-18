@@ -154,7 +154,7 @@ if(document.querySelector('.signup-btn') !== null) {
 
 //로그인
 if(document.querySelector('.login-btn') !== null) {
-  loginBtn.addEventListener("click", () => showPopup(loginBg));
+  loginBtn.addEventListener("click", (e) => showPopup(e, loginBg));
   loginCloseBtn.addEventListener("click", (e) => hidePopup(e, loginBg));
   loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
 }

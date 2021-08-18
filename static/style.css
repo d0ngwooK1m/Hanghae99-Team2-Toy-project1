@@ -270,8 +270,12 @@
   /* justify-content: center; */
   align-items: center;
 }
-
 .login-btn {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+.logout-btn {
   color: white;
   display: flex;
   align-items: center;
@@ -370,7 +374,7 @@
 .signup-background,
 .login-background,
 .popup-detail-background {
-play: none;
+  display: none;
   position: fixed;
   top: 0;
   right: 0;
