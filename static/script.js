@@ -20,7 +20,7 @@ function viewing() {
                                 <div class="imgHidden-box">
                                     <img src="../static/img/vatican.jpg" class="classImg">
                                     <button class="Option_Jjim">
-                                            <div><img src="../static/img/heart.svg" class="heart"></div>
+                                        <img src="../static/img/heart.svg" class="heart">
                                     </button>
                                 </div>  
                                 <h3 class ="title">${title}</h3>
@@ -125,15 +125,8 @@ const loginCloseBtn = document.querySelector(".login-close-btn");
 
 // 상세보기
 const detailBtn = document.querySelector(".click-wrap");
-console.log(" detailBtn ", detailBtn);
 const detailBg = document.querySelector(".popup-detail-background");
 const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
-
-// 아래 url, previewBox 변수는 이미지 미리보기에 사용되며 팝업이 닫힐때 지워져야 합니다.
-let url = document.querySelector(".preview-url");
-let previewBox = document.querySelector(".preview-image-wrap");
-let detailUrl = document.querySelector(".modify-preview-url");
-let detailPreviewBox = document.querySelector(".detail-image-wrap");
 
 // popup 함수 show, hide로 분리
 const showPopup = (e, tag) => {
@@ -146,13 +139,7 @@ const hidePopup = (e, tag) => {
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
-  if (tag.className === "popup-detail-background") {
-    console.log("popup-detail-background");
-  }
   tag.classList.remove("show");
-  url.value = "";
-  previewBox.innerHTML = "";
-  // showDetailForm.classList.remove("show")
 };
 
 //글작성
@@ -169,11 +156,6 @@ signupBg.addEventListener("click", (e) => hidePopup(e, signupBg));
 loginBtn.addEventListener("click", () => showPopup(loginBg));
 loginCloseBtn.addEventListener("click", (e) => hidePopup(e, loginBg));
 loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
-
-// 상세보기
-detailBtn.addEventListener("click", (e) => showPopup(e, detailBg));
-detailCloseBtn.addEventListener("click", (e) => hidePopup(e, detailBg));
-detailBg.addEventListener("click", (e) => hidePopup(e, detailBg));
 
 //회원가입
 $("form[name=signup_form]").submit(function (e) {
@@ -194,7 +176,6 @@ $("form[name=signup_form]").submit(function (e) {
       error_give.text(response.responseJSON.error).removeClass("error--hidden");
     },
   });
-
   e.preventDefault();
 });
 
@@ -239,46 +220,11 @@ function posting() {
   });
 }
 createBtn.addEventListener("click", posting);
-const previewImage = (e, tag) => {
-  const urlValue = url.value;
-  $.ajax({
-    type: "POST",
-    url: "/create/previewImage",
-    data: {
-      url_give: urlValue,
-    },
-    success: function (response) {
-      const url = response;
-      // if (tag.className === "preview-btn" && url !== "") {
-      //   previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
-      // } else if (tag.className === "modify-preview-btn" && url !== "") {
-      //   detailPreviewBox.src = url;
-      // }else{
-      // }
-      if (url !== "") {
-        previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
-      } else {
-        // og:image가 없을 경우 기본 이미지로 대체
-        console.log("없음");
-        previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
-      }
-    },
-    error: function (e) {
-      if (e.status === 500) {
-        alert("error");
-        console.log("error === ", e);
-      }
-    },
-  });
-};
-const previewBtn = document.querySelector(".preview-btn");
-const modifyPreviewBtn = document.querySelector(".modify-preview-btn");
-console.log(previewBtn);
 
-previewBtn.addEventListener("click", (e) => previewImage(e, previewBtn));
-// modifyPreviewBtn.addEventListener("click", (e) =>
-//   previewImage(e, modifyPreviewBtn)
-// );
+// 상세보기
+detailBtn.addEventListener("click", (e) => showPopup(e, detailBg));
+detailCloseBtn.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
 
 // 상세보기 팝업
 const detailBtn = document.querySelector(".ListBg");
@@ -286,20 +232,23 @@ const detailBg = document.querySelector(".popup-detail-background");
 const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
 // 수정하기 버튼
 const modifyBtn = document.querySelector(".detail-modify-btn");
-const modifyForm = document.querySelector(".detail-form");
-// const hideDetailForm = document.querySelector(".detail-form");
-// const showDetailForm = document.querySelector(".detail-modify-form");
+const detailForm = document.querySelector(".detail-form");
+const modifyForm = document.querySelector(".modify-form");
+modifyBtn.addEventListener("click", () => modifyPopup());
 
-const detailPopup = () => {
+// 수정 팝업
+const modifyPopup = () => {
+  modifyBtn.style.display = "none";
+  detailForm.style.display = "none";
   modifyForm.innerHTML = `
-      <div class="preview-image-wrap">
+      <div class="modify-image-wrap">
         <img class="detail-image-wrap" src="/static/img/생활코딩.png"  alt="image"/>
       </div>
       <div class="popup-box-wrap">
           <label for="url">웹 사이트 URL</label>
           <div class="flex-layout">
-              <input class="preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
-              <button class="preview-btn">미리보기</button>
+              <input class="modify-preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
+              <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
           </div>
       </div>
       <div class="popup-box-wrap">
@@ -311,14 +260,75 @@ const detailPopup = () => {
           <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
       </div>
       <div class="popup-box-wrap">
-          <button  class="create-form-btn">등록하기</button>
+          <button  class="modify-form-btn">수정하기</button>
       </div>
   `;
-  // if (tag.classList.contains("show")) {
-  //   tag.classList.remove("show");
-  // } else {
-  //   tag.classList.add("show");
-  // }
 };
 
-modifyBtn.addEventListener("click", (e) => detailPopup(e));
+// 상세보기 닫기 팝업만 따로 분리함
+const hideDetailPopup = (e, tag) => {
+  if (e.target.className !== e.currentTarget.className) {
+    return null;
+  }
+  if (e.target.className) tag.classList.remove("show");
+  modifyBtn.style.display = "block";
+  detailForm.style.display = "block";
+  modifyForm.innerHTML = ``;
+};
+
+let url = document.querySelector(".preview-url");
+let previewBox = document.querySelector(".preview-image-wrap");
+const previewBtn = document.querySelector(".preview-btn");
+
+previewBtn.addEventListener("click", () => previewImage(previewBtn));
+
+// 미리보기 클릭했을 때 og:image 가져오는 함수.
+// 등록 팝업과 상세보기 팝업에서 공통으로 쓰임
+const previewImage = (tag) => {
+  let value = "";
+  let modifyWrap = ``;
+  const urlValue = url.value;
+  let check = true;
+  // 상세보기 팝업을 클릭했을때 동적으로 html이 생성되어
+  // 수정 버튼의 미리보기 버튼은 등록 팝업에서는 생성되지 않은 상태이기 때문에
+  // undefined 조건값을 추가함
+  if (tag === undefined) {
+    // 수정 팝업의 미리보기 버튼 클릭시
+    const modifyUrlValue = document.querySelector(".modify-preview-url").value;
+    const modifyPreviewWrap = document.querySelector(".modify-image-wrap");
+    value = modifyUrlValue;
+    modifyWrap = modifyPreviewWrap;
+    check = false;
+  } else {
+    value = urlValue;
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "/create/previewImage",
+    data: {
+      url_give: value,
+    },
+    success: function (response) {
+      const url = response;
+      // og:image가 없을 경우 기본 이미지 나오게
+      if (url === "" && check) {
+        previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      } else if (url === "" && !check) {
+        modifyWrap.innerHTML = `<img class="detail-image-wrap" src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      }
+      // og:image가 있을 경우
+      if (value === urlValue) {
+        previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
+      } else {
+        modifyWrap.innerHTML = `<img class="detail-image-wrap" src="${url}" alt="썸네일"/>`;
+      }
+    },
+    error: function (e) {
+      if (e.status === 500) {
+        alert("이미지를 가져올 수 없습니다.");
+        console.log("error === ", e);
+      }
+    },
+  });
+};
