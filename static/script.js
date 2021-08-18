@@ -1,4 +1,57 @@
-// 머지하다가 이 부분 수신 잘못함
+window.addEventListener("load", function () {
+  viewing();
+});
+//뷰?
+function viewing() {
+  $.ajax({
+    type: "GET",
+    url: "/view",
+    data: {},
+    success: function (response) {
+      let lists = response["all_post"];
+      console.log(lists);
+      for (let i = 0; i < lists.length; i++) {
+        let url = lists[i]["url"];
+        let title = lists[i]["title"];
+        let desc = lists[i]["desc"];
+
+        let temp_html = `<div class="ListBg">
+                            <div class="ListFlex">
+                                <div class="imgHidden-box">
+                                    <img src="../static/img/vatican.jpg" class="classImg">
+                                    <button class="Option_Jjim">
+                                        <img src="../static/img/heart.svg" class="heart">
+                                    </button>
+                                </div>  
+                                <h3 class ="title">${title}</h3>
+                                <div class ="numCount">
+                                    <div class = "likeNum">
+                                        <img src="../static/img/likeUp3.png">
+                                        <span>5342</span>
+                                    </div>
+                                    <div class = "JjimNum">
+                                        <img src="../static/img/Rheart.svg">
+                                        <span>1783</span>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="Option">
+                                    <div class="Like Option_Like">
+                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                        <span>추천하기</span>
+                                    </div>
+                                    <a class="Link" href="${url}" target= '_blank'>
+                                        <span>바로가기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>`;
+        $(".cardRow").append(temp_html);
+      }
+    },
+  });
+}
+// 찜, 좋아요 기능 임시
 const Option_Jjim = document.querySelector(".Option_Jjim");
 const Jjim_heart = document.querySelector(".heart");
 const Option_Like = document.querySelector(".Option_Like");
@@ -27,7 +80,7 @@ function Like() {
   if (Like_count) {
     Like_thumb.src = "../static/img/bthumbsup.svg";
   } else {
-    Like_thumb.src = "../static/img/thumbsbup.svg";
+    Like_thumb.src = "../static/img/thumbsup.svg";
   }
 }
 
@@ -40,19 +93,19 @@ Like_thumb.addEventListener("click", Like);
 Option_Like.addEventListener("click", Like_thumbControl);
 
 // Listmodal
-const openButton = document.querySelector(".ListBg");
-const modal = document.querySelector(".List_modal");
-const overlay = modal.querySelector(".List_overlay");
-const closeBtn = modal.querySelector("button");
-const openModal = () => {
-  modal.classList.remove("List_hidden");
-};
-const closeModal = () => {
-  modal.classList.add("List_hidden");
-};
-overlay.addEventListener("click", closeModal);
-closeBtn.addEventListener("click", closeModal);
-openButton.addEventListener("click", openModal);
+// const openButton = document.querySelector(".ListBg");
+// const modal = document.querySelector(".List_modal");
+// const overlay = modal.querySelector(".List_overlay");
+// const closeBtn = modal.querySelector("button");
+// const openModal = () => {
+//   modal.classList.remove("List_hidden");
+// };
+// const closeModal = () => {
+//   modal.classList.add("List_hidden");
+// };
+// overlay.addEventListener("click", closeModal);
+// closeBtn.addEventListener("click", closeModal);
+// openButton.addEventListener("click", openModal);
 
 // html의 태그들을 변수로 담아두기
 //글작성
@@ -70,41 +123,41 @@ const loginBtn = document.querySelector(".login-btn");
 const loginBg = document.querySelector(".login-background");
 const loginCloseBtn = document.querySelector(".login-close-btn");
 
-
-// 아래 url, previewBox 변수는 이미지 미리보기에 사용되며 팝업이 닫힐때 지워져야 합니다.
-let url = document.querySelector(".preview-url");
-let previewBox = document.querySelector(".preview-image-wrap");
-// 팝업 기능을 하는 함수는 하나로 통일하고자 만듬 (팝업의 기능은 같기때문에)
-const handlePopup = (e, tag) => {
-  // 전체 영역을 덮는 backgorund에 click 이벤트가 발생되어 자식에도 이벤트 전파되는 현상 막기
+// popup 함수 show, hide로 분리
+const showPopup = (e, tag) => {
+  if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
+    return null;
+  }
+  tag.classList.add("show");
+};
+const hidePopup = (e, tag) => {
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
-  // 함수의 매개변수로 받은 tag에 show라는 클래스가 있는지 확인하기
-  if (tag.classList.contains("show")) {
-    // tag에 show라는 클래스가 있으면 show 클래스를 지워서 팝업 닫기
-    tag.classList.remove("show");
-    url.value = "";
-    previewBox.innerHTML = "";
-  } else {
-    // tag에 show라는 클래스가 없으면 show 클래스를 추가해서 팝업 보이기
-    tag.classList.add("show");
-  }
+  tag.classList.remove("show");
 };
 
-//시간초과
-// if ($.cookie("login_token") !== undefined) {
-//     $.ajax({
-//         url: "/timeout",
-//         type: "GET",
-//         data: {},
-//         success: function () {
-//             window.location.href = "/";
-//             $.removeCookie('login_token', {path: '/'})
-//             console.log(document.cookie);
-//         }
-//     })
-// }
+//글작성
+if(document.querySelector('.create-btn') !== null) {
+  popupBtn.addEventListener("click", (e) => showPopup(e, popupBg));
+  popupCloseBtn.addEventListener("click", (e) => hidePopup(e, popupBg));
+  popupBg.addEventListener("click", (e) => hidePopup(e, popupBg));
+}
+
+
+//회원가입
+if(document.querySelector('.signup-btn') !== null) {
+  signupBtn.addEventListener("click", (e) => showPopup(e, signupBg));
+  signupCloseBtn.addEventListener("click", (e) => hidePopup(e, signupBg));
+  signupBg.addEventListener("click", (e) => hidePopup(e, signupBg));
+}
+
+//로그인
+if(document.querySelector('.login-btn') !== null) {
+  loginBtn.addEventListener("click", () => showPopup(loginBg));
+  loginCloseBtn.addEventListener("click", (e) => hidePopup(e, loginBg));
+  loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
+}
 
 //회원가입 API 통신
 $("form[name=signup_form]").submit(function(e) {
@@ -172,88 +225,13 @@ $('.logout-btn').click(function(e) {
     e.preventDefault();
 })
 
-// 변수로 담아둔 태그를 클릭했을때 팝업 함수 실행
-//글작성
-if(document.querySelector('.create-btn') !== null) {
-    popupBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
-    popupCloseBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
-    popupBg.addEventListener("click", (e) => handlePopup(e, popupBg));
-}
-
-//회원가입
-if(document.querySelector('.signup-btn') !== null) {
-    signupBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
-    signupCloseBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
-    signupBg.addEventListener("click", (e) => handlePopup(e, signupBg));
-}
-
-//로그인
-if(document.querySelector('.login-btn') !== null) {
-    loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
-    loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
-    loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
-}
-
-//새로고침
-$(document).ready(function () {
-  viewing();
-});
-//뷰?
-function viewing() {
-  $.ajax({
-    type: "GET",
-    url: "/view",
-    data: {},
-    success: function (response) {
-      let lists = response["all_post"];
-      console.log(lists);
-      for (let i = 0; i < lists.length; i++) {
-        let url = lists[i]["url"];
-        let title = lists[i]["title"];
-        let desc = lists[i]["desc"];
-
-        let temp_html = `<div class="ListBg">
-                            <div class="ListFlex">
-                                <div class="imgHidden-box">
-                                    <img src="../static/img/vatican.jpg" class="classImg">
-                                    <button class="Jjim Option_Jjim">
-                                            <div><img src="../static/img/heart.svg" class="heart"></div>
-                                    </button>
-                                </div>  
-                                <div class ="title">${title}</div>
-                                <div class ="numCount">
-                                    <div class = "likeNum">
-                                        <img src="../static/img/likeUp3.png">
-                                        <span>5342</span>
-                                    </div>
-                                    <div class = "JjimNum">
-                                        <img src="../static/img/Rheart.svg">
-                                        <span>1783</span>
-                                    </div>
-                                </div>
-                                <hr/>
-                                <div class="Option">
-                                    <div class="Like Option_Like">
-                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
-                                        <span>좋아요</span>
-                                    </div>
-                                    <a class="Link" href="${url}" target= '_blank'>
-                                        <span>바로가기</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>`;
-        $(".cardRow").append(temp_html);
-      }
-    },
-  });
-}
 //등록권한 없음
 function postingFail() {
     alert('사용권한이 없습니다');
 }
 
 //등록
+const createBtn = document.querySelector(".create-form-btn");
 function posting() {
   let url = document.getElementById("url").value;
   let title = document.getElementById("title").value;
@@ -269,35 +247,115 @@ function posting() {
     },
   });
 }
+createBtn.addEventListener("click", posting);
 
-// 카드 등록에서 URL을 입력하면 해당 OG:IMAGE 미리보게 하는 함수
-const previewBtn = document.querySelector(".preview-btn");
-previewBtn.addEventListener("click", (e) => {
-  const urlValue = url.value;
-  // input 값 작성안하고 button 클릭 했을 경우
-  if (urlValue === "") {
-    alert("WEB URL주소를 입력해주세요");
+// 상세보기 팝업
+const detailBtn = document.querySelector(".ListBg");
+const detailBg = document.querySelector(".popup-detail-background");
+const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
+// 수정하기 버튼
+const modifyBtn = document.querySelector(".detail-modify-btn");
+const detailForm = document.querySelector(".detail-form");
+const modifyForm = document.querySelector(".modify-form");
+modifyBtn.addEventListener("click", () => modifyPopup());
+// 상세보기
+detailBtn.addEventListener("click", (e) => showPopup(e, detailBg));
+detailCloseBtn.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+
+// 수정 팝업
+const modifyPopup = () => {
+  modifyBtn.style.display = "none";
+  detailForm.style.display = "none";
+  modifyForm.innerHTML = `
+      <div class="modify-image-wrap">
+        <img class="detail-image-wrap" src="/static/img/생활코딩.png"  alt="image"/>
+      </div>
+      <div class="popup-box-wrap">
+          <label for="url">웹 사이트 URL</label>
+          <div class="flex-layout">
+              <input class="modify-preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
+              <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
+          </div>
+      </div>
+      <div class="popup-box-wrap">
+          <label for="title">제목</label>
+          <input  type="text" id="title" name="title" placeholder="******"/>
+      </div>
+      <div class="popup-box-wrap">
+          <label for="description">설명</label>
+          <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
+      </div>
+      <div class="popup-box-wrap">
+          <button  class="modify-form-btn">수정하기</button>
+      </div>
+  `;
+};
+
+// 상세보기 닫기 팝업만 따로 분리함
+const hideDetailPopup = (e, tag) => {
+  if (e.target.className !== e.currentTarget.className) {
     return null;
   }
+  if (e.target.className) tag.classList.remove("show");
+  modifyBtn.style.display = "block";
+  detailForm.style.display = "block";
+  modifyForm.innerHTML = ``;
+};
+
+let url = document.querySelector(".preview-url");
+let previewBox = document.querySelector(".preview-image-wrap");
+const previewBtn = document.querySelector(".preview-btn");
+
+previewBtn.addEventListener("click", () => previewImage(previewBtn));
+
+// 미리보기 클릭했을 때 og:image 가져오는 함수.
+// 등록 팝업과 상세보기 팝업에서 공통으로 쓰임
+const previewImage = (tag) => {
+  let value = "";
+  let modifyWrap = ``;
+  const urlValue = url.value;
+  let check = true;
+  // 상세보기 팝업을 클릭했을때 동적으로 html이 생성되어
+  // 수정 버튼의 미리보기 버튼은 등록 팝업에서는 생성되지 않은 상태이기 때문에
+  // undefined 조건값을 추가함
+  if (tag === undefined) {
+    // 수정 팝업의 미리보기 버튼 클릭시
+    const modifyUrlValue = document.querySelector(".modify-preview-url").value;
+    const modifyPreviewWrap = document.querySelector(".modify-image-wrap");
+    value = modifyUrlValue;
+    modifyWrap = modifyPreviewWrap;
+    check = false;
+  } else {
+    value = urlValue;
+  }
+
   $.ajax({
     type: "POST",
     url: "/create/previewImage",
-    data: { url_give: urlValue },
+    data: {
+      url_give: value,
+    },
     success: function (response) {
-      console.log("response === ", response);
       const url = response;
-      if (url !== "") {
+      // og:image가 없을 경우 기본 이미지 나오게
+      if (url === "" && check) {
+        previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      } else if (url === "" && !check) {
+        modifyWrap.innerHTML = `<img class="detail-image-wrap" src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      }
+      // og:image가 있을 경우
+      if (value === urlValue) {
         previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
       } else {
-        // og:image가 없을 경우 기본 이미지로 대체
-        previewBox.innerHTML = `<img src="../static/img/og_base.png" alt="썸네일"/>`;
+        modifyWrap.innerHTML = `<img class="detail-image-wrap" src="${url}" alt="썸네일"/>`;
       }
     },
     error: function (e) {
       if (e.status === 500) {
-        alert("error");
+        alert("이미지를 가져올 수 없습니다.");
         console.log("error === ", e);
       }
     },
   });
-});
+};

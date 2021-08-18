@@ -80,6 +80,35 @@ def posting():
     }
     db.posting.insert_one(doc)
     return jsonify({'msg': '등록 완료!'})
+  
+@app.route('/search', methods=['GET'])
+def view_Search():
+    text = request.args.get('text')
+    #text는 form으로 데이터를 받음
+    splitted_keywords = text.split(' ')
+    #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
+    print(splitted_keywords)
+    sep_keywords_T=[]
+    sep_keywords_D=[]
+    for string in splitted_keywords:
+        sep_keywords_T.append({"title":string})
+        #title이 검색어와 일치하는 것만 sep_keywords_T에 저장
+        sep_keywords_D.append({"$and":[
+            {'$or': [{"desc":{"$regex": string}},{"title":{"$regex": string}}]},
+            {'$or':[{"title":{'$ne': string}}]}
+        ]
+        })
+        #desc에 검색어가 포함되어있는것과 title에 검색어가 포함되어있는것들중
+        #title이 검색어와 정확히 일치하는것을 제외하고 sep_keywords_D에 저장
+    print(sep_keywords_T)
+    print(sep_keywords_D)
+
+    search_T = list(db.posting.find({"$or":sep_keywords_T},{'_id':False}))
+    search_D = list(db.posting.find({"$or":sep_keywords_D},{'_id':False}))
+    print(search_T)
+    print(search_D)
+    return render_template('search.html', search_T=search_T, search_D=search_D)
+    #일치하는것들을 각각 search_T, search_D로 불러서 jinja2 템플릿으로 정보를 전달
 
 
 @app.route('/create/previewImage',methods=['POST'])
