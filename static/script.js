@@ -80,9 +80,6 @@ const showPopup = (tag) => {
   tag.classList.add("show");
 };
 const hidePopup = (e, tag) => {
-  e.preventDefault();
-  e.stopPropagation();
-  console.log("e = ", e);
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
@@ -249,17 +246,18 @@ const previewImage = (e, tag) => {
     },
     success: function (response) {
       const url = response;
-      if (tag.className === "preview-btn" && url !== "") {
-        previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
-      } else if (tag.className === "modify-preview-btn" && url !== "") {
-        detailPreviewBox.innerHTML = `<img src="${url}" alt="img" />`;
-      }
-      // if (url !== "") {
+      // if (tag.className === "preview-btn" && url !== "") {
       //   previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
-      // } else {
-      //   // og:image가 없을 경우 기본 이미지로 대체
-      //   previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      // } else if (tag.className === "modify-preview-btn" && url !== "") {
+      //   detailPreviewBox.innerHTML = `<img src="${url}" alt="img" />`;
       // }
+      if (url !== "") {
+        previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
+      } else {
+        // og:image가 없을 경우 기본 이미지로 대체
+        console.log("없음")
+        previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      }
     },
     error: function (e) {
       if (e.status === 500) {
@@ -288,8 +286,7 @@ detailCloseBtn.addEventListener("click", (e) => hideDetail(e, detailBg));
 detailBg.addEventListener("click", (e) => hideDetail(e, detailBg));
 modifyBtn.addEventListener("click", (e) => showDetail(showDetailForm));
 
-const test = document.querySelector(".detail-popup-wrap");
-const test2 = document.querySelector(".detail-popup");
+
 const showDetail = (tag) => {
   if (tag.classList.contains("detail-modify-form")) {
     modifyBtn.style.display = "none";
