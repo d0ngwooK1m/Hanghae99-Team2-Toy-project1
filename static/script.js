@@ -123,11 +123,6 @@ const loginBtn = document.querySelector(".login-btn");
 const loginBg = document.querySelector(".login-background");
 const loginCloseBtn = document.querySelector(".login-close-btn");
 
-// 상세보기
-const detailBtn = document.querySelector(".click-wrap");
-const detailBg = document.querySelector(".popup-detail-background");
-const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
-
 // popup 함수 show, hide로 분리
 const showPopup = (e, tag) => {
   if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
@@ -221,11 +216,6 @@ function posting() {
 }
 createBtn.addEventListener("click", posting);
 
-// 상세보기
-detailBtn.addEventListener("click", (e) => showPopup(e, detailBg));
-detailCloseBtn.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
-detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
-
 // 상세보기 팝업
 const detailBtn = document.querySelector(".ListBg");
 const detailBg = document.querySelector(".popup-detail-background");
@@ -235,6 +225,10 @@ const modifyBtn = document.querySelector(".detail-modify-btn");
 const detailForm = document.querySelector(".detail-form");
 const modifyForm = document.querySelector(".modify-form");
 modifyBtn.addEventListener("click", () => modifyPopup());
+// 상세보기
+detailBtn.addEventListener("click", (e) => showPopup(e, detailBg));
+detailCloseBtn.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
 
 // 수정 팝업
 const modifyPopup = () => {
