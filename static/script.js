@@ -250,7 +250,7 @@ function posting() {
 createBtn.addEventListener("click", posting);
 
 // 상세보기 팝업
-const detailBtn = document.querySelector(".ListBg");
+const detailBtn = document.querySelector(".click-wrap");
 const detailBg = document.querySelector(".popup-detail-background");
 const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
 // 수정하기 버튼
