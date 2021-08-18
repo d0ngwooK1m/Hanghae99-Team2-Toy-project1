@@ -398,17 +398,20 @@
   background-color: #fff;
 }
 .popup-scroll-wrap {
-  max-height: 650px;
+  max-height: 550px;
   overflow-y: scroll;
 }
 .create-form input::placeholder,
 .create-form textarea::placeholder,
-.login-form input::placeholder {
+.login-form input::placeholder,
+.detail-form-wrap input::placeholder,
+.detail-form-wrap textarea::placeholder {
   color: #dee2e6;
 }
 .create-form-btn,
 .login-submit-btn,
-.signup-submit-btn {
+.signup-submit-btn,
+.modify-form-btn {
   width: 100%;
   margin-top: 10px;
   padding: 20px;
@@ -430,18 +433,22 @@
 .create-form label,
 .create-form input,
 .login-form label,
-.login-form input {
+.login-form input,
+.detail-form-wrap label,
+.detail-form-wrap input {
   width: 100%;
   display: inline-block;
 }
 .create-form label,
-.login-form label {
+.login-form label,
+.detail-form-wrap label {
   margin-bottom: 10px;
   font-size: 14px;
   color: #333;
 }
 .create-form input,
-.login-form input {
+.login-form input,
+.detail-form-wrap input {
   padding: 15px 10px;
   border: 1px solid #dee2e6;
   border-radius: 3px;
@@ -473,13 +480,15 @@
   position: relative;
   width: 450px;
 }
-.create-form textarea {
+.create-form textarea,
+.detail-form-wrap textarea {
   width: 100%;
   padding: 5px 10px;
   border: 1px solid #dee2e6;
   border-radius: 3px;
 }
-.preview-image-wrap {
+.preview-image-wrap,
+.modify-image-wrap {
   width: 100%;
 }
 .preview-btn,
@@ -491,17 +500,21 @@
   border: 0;
   border-radius: 0px 3px 3px 0px;
 }
-.preview-image-wrap img {
+.preview-image-wrap img,
+.modify-image-wrap img {
   width: 100%;
   max-height: 300px;
   margin-bottom: 20px;
-  object-fit: contain;
+  object-fit: cover;
 }
 .popup-box-wrap {
   margin-bottom: 20px;
 }
 .preview-url {
   border-radius: 3px 0px 0px 3px;
+}
+.detail-form {
+  margin-top: 0;
 }
 .detail-image-wrap {
   margin: 20px 0;
@@ -524,6 +537,7 @@
   border: 1px solid #339af0;
 }
 .detail-delete-btn {
+  margin-left: 15px;
   color: #ff6b6b;
   border: 1px solid #ff6b6b;
 }
