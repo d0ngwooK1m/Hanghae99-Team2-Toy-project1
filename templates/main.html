@@ -14,34 +14,37 @@
  <!-- 등록팝업 -->
  <div class="popup-background">
     <div class="popup-wrap">
-        <section class="popup-content">
-            <div class="flex-layout-between">
-                <h2>등록하기</h2>
-                <button class="popup-close-btn">닫기</button>
-            </div>
-            <div class="popup-form create-form">
-                <div class="popup-box-wrap">
-                    <label for="url">웹 사이트 URL</label>
-                    <div class="flex-layout">
-                        <input class="preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
-                        <button class="preview-btn">미리보기</button>
+        <div class="create-popup-wrap">
+            <section class="popup-content">
+                <div class="flex-layout-between">
+                    <h2>등록하기</h2>
+                    <button class="popup-close-btn">닫기</button>
+                </div>
+                <div class="popup-form create-form">
+                    <div class="preview-image-wrap"> </div>
+                    <div class="popup-box-wrap">
+                        <label for="url">웹 사이트 URL</label>
+                        <div class="flex-layout">
+                            <input class="preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
+                            <button class="preview-btn">미리보기</button>
+                        </div>
+                    </div>
+                    
+                    <div class="popup-box-wrap">
+                        <label for="title">제목</label>
+                        <input  type="text" id="title" name="title" placeholder="******"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label for="description">설명</label>
+                        <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <button  class="create-form-btn">등록하기</button>
                     </div>
                 </div>
-                <div class="preview-image-wrap"> </div>
-                <div class="popup-box-wrap">
-                    <label for="title">제목</label>
-                    <input  type="text" id="title" name="title" placeholder="******"/>
-                </div>
-                <div class="popup-box-wrap">
-                    <label for="description">설명</label>
-                    <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
-                </div>
-                <div class="popup-box-wrap">
-                    <button  class="create-form-btn">등록하기</button>
-                </div>
-            </div>
-           
-        </section>
+               
+            </section>
+        </div>
     </div>
 </div>
 
@@ -88,17 +91,17 @@
         <div class="popup-wrap">
             <button class="popup-detail-close-btn" >닫기</button>
             <div class="detail-popup-wrap">
-                <section class="popup-content">
+                <section class="popup-content detail-popup">
                     <h2 class="readable-hidden">상세보기 팝업</h2>
-                    <div class="detail-btn-wrap flex-layout-between">
+                    <div class="detail-btn-wrap flex-layout-end">
                         <button class="detail-modify-btn">수정</button>
                         <button class="detail-delete-btn">삭제</button>
                     </div>
                     
-                    <div class="preview-image-wrap">
+                    <div class="detail-image-wrap">
                         <img class="detail-image-wrap" src="/static/img/생활코딩.png" target="_blank"/>
                     </div>
-                    <div class="popup-form show">
+                    <div class="popup-form detail-form">
                         <div class="detail-content-wrap">
                             <h3>제목</h3>
                             <p>상세내용</p>
@@ -121,7 +124,7 @@
                             <textarea class="modify-description" type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
                         </div>
                         <div class="popup-box-wrap">
-                            <button  class="create-form-btn">수정하기</button>
+                            <button  class="modify-submit-btn">수정하기</button>
                         </div>
                     </div>
                 </section>

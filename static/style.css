@@ -393,10 +393,11 @@
 .popup-content,
 .login-content,
 .signup-content {
-  padding: 30px;
+  padding: 30px 50px;
   background-color: #fff;
 }
-.detail-popup-wrap {
+.detail-popup-wrap,
+.create-popup-wrap {
   max-height: 650px;
   overflow-y: scroll;
 }
@@ -407,7 +408,8 @@
 }
 .create-form-btn,
 .login-submit-btn,
-.signup-submit-btn {
+.signup-submit-btn,
+.modify-submit-btn {
   width: 100%;
   margin-top: 10px;
   padding: 20px;
@@ -493,7 +495,7 @@
 .preview-image-wrap img {
   width: 100%;
   max-height: 300px;
-  margin-top: 10px;
+  margin: 0 0 20px;
   object-fit: contain;
 }
 .popup-box-wrap {
@@ -508,7 +510,7 @@
 .detail-image-wrap img {
   width: 100%;
   max-height: 300px;
-  border: 2px solid black;
+  margin: 0;
   object-fit: cover;
 }
 
@@ -523,6 +525,7 @@
   border: 1px solid #339af0;
 }
 .detail-delete-btn {
+  margin-left: 10px;
   color: #ff6b6b;
   border: 1px solid #ff6b6b;
 }

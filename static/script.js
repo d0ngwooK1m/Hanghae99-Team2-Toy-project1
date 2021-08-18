@@ -1,4 +1,3 @@
-// 머지하다가 이 부분 수신 잘못함
 const Option_Jjim = document.querySelector(".Option_Jjim");
 const Jjim_heart = document.querySelector(".heart");
 const Option_Like = document.querySelector(".Option_Like");
@@ -70,11 +69,6 @@ const loginBtn = document.querySelector(".login-btn");
 const loginBg = document.querySelector(".login-background");
 const loginCloseBtn = document.querySelector(".login-close-btn");
 
-// 상세보기
-const detailBtn = document.querySelector(".ListBg");
-const detailBg = document.querySelector(".popup-detail-background");
-const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
-
 // 아래 url, previewBox 변수는 이미지 미리보기에 사용되며 팝업이 닫힐때 지워져야 합니다.
 let url = document.querySelector(".preview-url");
 let previewBox = document.querySelector(".preview-image-wrap");
@@ -86,6 +80,9 @@ const showPopup = (tag) => {
   tag.classList.add("show");
 };
 const hidePopup = (e, tag) => {
+  e.preventDefault();
+  e.stopPropagation();
+  console.log("e = ", e);
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
@@ -95,6 +92,7 @@ const hidePopup = (e, tag) => {
   tag.classList.remove("show");
   url.value = "";
   previewBox.innerHTML = "";
+  // showDetailForm.classList.remove("show")
 };
 
 //글작성
@@ -113,9 +111,9 @@ loginCloseBtn.addEventListener("click", (e) => hidePopup(e, loginBg));
 loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
 
 // 상세보기
-detailBtn.addEventListener("click", () => showPopup(detailBg));
-detailCloseBtn.addEventListener("click", (e) => hidePopup(e, detailBg));
-detailBg.addEventListener("click", (e) => hidePopup(e, detailBg));
+// detailBtn.addEventListener("click", () => showPopup(detailBg));
+// detailCloseBtn.addEventListener("click", (e) => hidePopup(e, detailBg));
+// detailBg.addEventListener("click", (e) => hidePopup(e, detailBg));
 
 //회원가입
 $("form[name=signup_form]").submit(function (e) {
@@ -254,7 +252,7 @@ const previewImage = (e, tag) => {
       if (tag.className === "preview-btn" && url !== "") {
         previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
       } else if (tag.className === "modify-preview-btn" && url !== "") {
-        detailPreviewBox.src = url;
+        detailPreviewBox.innerHTML = `<img src="${url}" alt="img" />`;
       }
       // if (url !== "") {
       //   previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
@@ -276,18 +274,40 @@ modifyPreviewBtn.addEventListener("click", (e) =>
   previewImage(e, modifyPreviewBtn)
 );
 
-// 수정
+// 상세보기 팝업
+const detailBtn = document.querySelector(".ListBg");
+const detailBg = document.querySelector(".popup-detail-background");
+const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
+// 수정하기 버튼
 const modifyBtn = document.querySelector(".detail-modify-btn");
 const hideDetailForm = document.querySelector(".detail-form");
 const showDetailForm = document.querySelector(".detail-modify-form");
 
-const detailPopup = (tag) => {
-  console.log("detail === ", tag);
-  if (tag.classList.contains("show")) {
-    tag.classList.remove("show");
-  } else {
-    tag.classList.add("show");
+detailBtn.addEventListener("click", () => showDetail(detailBg));
+detailCloseBtn.addEventListener("click", (e) => hideDetail(e, detailBg));
+detailBg.addEventListener("click", (e) => hideDetail(e, detailBg));
+modifyBtn.addEventListener("click", (e) => showDetail(showDetailForm));
+
+const test = document.querySelector(".detail-popup-wrap");
+const test2 = document.querySelector(".detail-popup");
+const showDetail = (tag) => {
+  if (tag.classList.contains("detail-modify-form")) {
+    modifyBtn.style.display = "none";
+    hideDetailForm.style.display = "none";
   }
+  tag.classList.add("show");
+};
+const hideDetail = (e, tag) => {
+  if (e.target.className !== e.currentTarget.className) {
+    return null;
+  }
+  tag.classList.remove("show");
+  showDetailForm.classList.remove("show");
+  modifyBtn.style.display = "block";
+  hideDetailForm.style.display = "block";
+  previewBox.innerHTML = "";
+  // image 미리보기 버튼 클릭하고, 수정안하고 팝업닫을때
+  // detailPreviewBox.innerHTML = ``;
 };
 
-modifyBtn.addEventListener("click", () => detailPopup(showDetailForm));
+
