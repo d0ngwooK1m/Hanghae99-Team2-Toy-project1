@@ -267,7 +267,8 @@
   align-items: center;
 }
 
-.login-btn {
+.login-btn,
+.logout-btn{
   color: white;
   display: flex;
   align-items: center;
@@ -624,6 +625,12 @@
   margin-bottom: 30px;
 }
 .create-btn {
+  all: unset;
+  height: 60px;
+  color: black;
+}
+
+.create-btn-fail {
   all: unset;
   height: 60px;
   color: black;

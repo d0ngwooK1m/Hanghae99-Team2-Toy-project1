@@ -70,6 +70,7 @@ const loginBtn = document.querySelector(".login-btn");
 const loginBg = document.querySelector(".login-background");
 const loginCloseBtn = document.querySelector(".login-close-btn");
 
+
 // 아래 url, previewBox 변수는 이미지 미리보기에 사용되며 팝업이 닫힐때 지워져야 합니다.
 let url = document.querySelector(".preview-url");
 let previewBox = document.querySelector(".preview-image-wrap");
@@ -91,8 +92,21 @@ const handlePopup = (e, tag) => {
   }
 };
 
+//시간초과
+// if ($.cookie("login_token") !== undefined) {
+//     $.ajax({
+//         url: "/timeout",
+//         type: "GET",
+//         data: {},
+//         success: function () {
+//             window.location.href = "/";
+//             $.removeCookie('login_token', {path: '/'})
+//             console.log(document.cookie);
+//         }
+//     })
+// }
 
-//회원가입
+//회원가입 API 통신
 $("form[name=signup_form]").submit(function(e) {
     const form_give = $(this);
     const error_give = form_give.find(".error");
@@ -105,6 +119,7 @@ $("form[name=signup_form]").submit(function(e) {
         dataType: "json",
         success: function(response) {
             window.location.href = "/";
+            console.log(response);
         },
         error: function(response) {
             console.log(response);
@@ -115,7 +130,7 @@ $("form[name=signup_form]").submit(function(e) {
     e.preventDefault();
 })
 
-//로그인
+//로그인 API 통신
 $("form[name=login_form]").submit(function(e) {
     const form_give = $(this);
     const error_give = form_give.find(".error");
@@ -128,7 +143,10 @@ $("form[name=login_form]").submit(function(e) {
         dataType: "json",
         success: function(response) {
             window.location.href = "/";
-        },
+            $.cookie('login_token', response['login_token'], { path: '/' });
+            // console.log(document.cookie);
+        }
+        ,
         error: function(response) {
             console.log(response);
             error_give.text(response.responseJSON.error).removeClass("error--hidden");
@@ -138,21 +156,43 @@ $("form[name=login_form]").submit(function(e) {
     e.preventDefault();
 })
 
+//로그아웃 API 통신
+$('.logout-btn').click(function(e) {
+    $.ajax({
+        url: "user/logout",
+        type: "GET",
+        data: {},
+        dataType: "json",
+        success: function(response) {
+            $.removeCookie('login_token', { path: '/' })
+            window.location.href = "/";
+        }
+    })
+
+    e.preventDefault();
+})
+
 // 변수로 담아둔 태그를 클릭했을때 팝업 함수 실행
 //글작성
-popupBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
-popupCloseBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
-popupBg.addEventListener("click", (e) => handlePopup(e, popupBg));
+if(document.querySelector('.create-btn') !== null) {
+    popupBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
+    popupCloseBtn.addEventListener("click", (e) => handlePopup(e, popupBg));
+    popupBg.addEventListener("click", (e) => handlePopup(e, popupBg));
+}
 
 //회원가입
-signupBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
-signupCloseBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
-signupBg.addEventListener("click", (e) => handlePopup(e, signupBg));
+if(document.querySelector('.signup-btn') !== null) {
+    signupBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
+    signupCloseBtn.addEventListener("click", (e) => handlePopup(e, signupBg));
+    signupBg.addEventListener("click", (e) => handlePopup(e, signupBg));
+}
 
 //로그인
-loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
-loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
-loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
+if(document.querySelector('.login-btn') !== null) {
+    loginBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
+    loginCloseBtn.addEventListener("click", (e) => handlePopup(e, loginBg));
+    loginBg.addEventListener("click", (e) => handlePopup(e, loginBg));
+}
 
 //새로고침
 $(document).ready(function () {
@@ -207,6 +247,10 @@ function viewing() {
       }
     },
   });
+}
+//등록권한 없음
+function postingFail() {
+    alert('사용권한이 없습니다');
 }
 
 //등록
