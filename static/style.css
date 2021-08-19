@@ -264,6 +264,11 @@
   height: 17px;
   margin-left: 45%;
 }
+.search_result{
+  margin:0 auto;
+  width:1170px;
+  font-size:11px;
+}
 .mypage {
   color: white;
   display: flex;

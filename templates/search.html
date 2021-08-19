@@ -4,6 +4,8 @@
     <section class="icon-nav-wrap">
         <nav class="container flex-layout-between">
             <div class="icon-dropdown-wrap2 flex-layout">
+                <span>정확도순</span>
+                <span class="line">|</span>
                 <span>최신순</span>
                 <span class="line">|</span>
                 <span>추천순</span>
@@ -11,7 +13,14 @@
             <button class="create-btn">등록</button>
         </nav>
     </section>
-    
+    <div>
+        <div class="search_result">
+            {% for keyword in keywords %}
+            <strong>'{{keyword}}'</strong>
+            {% endfor %}
+            (으)로 검색한 결과입니다.
+        </div>
+    </div>
     <section class ="cardCloumn"id="card_list">
         <div class ="cardRow2">
             {% for text in search_T %}
@@ -24,7 +33,7 @@
                                                 <div><img src="../static/img/heart.svg" class="heart"></div>
                                         </button>
                                     </div>
-                                    <p class ="title"><b>{{text['title']}}</b></p>
+                                    <p class ="title">{{text['title']}}</p>
                                     <div class ="numCount">
                                         <div class = "likeNum">
                                             <img src="../static/img/likeUp3.png">
@@ -37,6 +46,39 @@
                                     </div>
                                     <hr/>
                                 </div>
+                                <div class="Option">
+                                    <div class="Like Option_Like">
+                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                        <span>좋아요</span>
+                                    </div>
+                                    <a class="Link" href="{{text['url']}}" target= '_blank'>
+                                        <span>바로가기</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+            {% endfor %}
+            {% for text in search_RT %}
+                        <div class="ListBg">
+                            <div class="ListFlex">
+                                <div class="imgHidden-box">
+                                    <img src="../static/img/vatican.jpg" class="classImg">
+                                    <button class="Jjim Option_Jjim">
+                                            <div><img src="../static/img/heart.svg" class="heart"></div>
+                                    </button>
+                                </div>
+                                <p class ="title"><b>{{text['title']}}</b></p>
+                                <div class ="numCount">
+                                    <div class = "likeNum">
+                                        <img src="../static/img/likeUp3.png">
+                                        <span>5342</span>
+                                    </div>
+                                    <div class = "JjimNum">
+                                        <img src="../static/img/Rheart.svg">
+                                        <span>1783</span>
+                                    </div>
+                                </div>
+                                <hr/>
                                 <div class="Option">
                                     <div class="Like Option_Like">
                                         <img src="../static/img/thumbsup.svg" class="thumbsUp">

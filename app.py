@@ -89,24 +89,35 @@ def view_Search():
     #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
     print(splitted_keywords)
     sep_keywords_T=[]
+    sep_keywords_RT=[]
     sep_keywords_D=[]
     for string in splitted_keywords:
         sep_keywords_T.append({"title":string})
         #title이 검색어와 일치하는 것만 sep_keywords_T에 저장
-        sep_keywords_D.append({"$and":[
-            {'$or': [{"desc":{"$regex": string}},{"title":{"$regex": string}}]},
-            {'$or':[{"title":{'$ne': string}}]}
+        sep_keywords_RT.append({'$and':[
+            {"title":{'$ne':string}},
+            {"title": {'$regex': string}},
+            {"desc": {'$ne': {'$regex': string}}}
         ]})
-        #desc에 검색어가 포함되어있는것과 title에 검색어가 포함되어있는것들중
-        #title이 검색어와 정확히 일치하는것을 제외하고 sep_keywords_D에 저장
+        #title이 검색어가 포함되어있는 것 중 desc에 검색어가 없는 것
+        sep_keywords_D.append({"$and":[
+            {"desc": {'$regex':string}},
+            {"title":{'$not':{'$regex':string}}}
+        ]})
+        #desc에 검색어가 포함되어있는것 중
+        #title이 검색어와 포함되는 것을 제외하고 sep_keywords_D에 저장
     print(sep_keywords_T)
+    print(sep_keywords_RT)
     print(sep_keywords_D)
 
     search_T = list(db.posting.find({"$or":sep_keywords_T},{'_id':False}))
+    search_RT = list(db.posting.find({"$or":sep_keywords_RT},{'_id':False}))
     search_D = list(db.posting.find({"$or":sep_keywords_D},{'_id':False}))
     print(search_T)
+    print(search_RT)
     print(search_D)
-    return render_template('search.html', search_T=search_T, search_D=search_D)
+    return render_template('search.html', search_T=search_T, search_D=search_D, search_RT=search_RT,
+                           keywords=splitted_keywords)
     #일치하는것들을 각각 search_T, search_D로 불러서 jinja2 템플릿으로 정보를 전달
 
 
