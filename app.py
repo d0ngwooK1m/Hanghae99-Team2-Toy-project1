@@ -2,6 +2,8 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 import requests
 import pymongo
 import jwt
+import uuid
+import datetime
 
 
 from bs4 import BeautifulSoup
@@ -69,17 +71,57 @@ def show_view():
 
 @app.route('/test', methods=['POST'])
 def posting():
+    token_receive = request.cookies.get('login_token')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+
     url_receive = request.form['url_give']
     title_receive = request.form['title_give']
     desc_receive = request.form['desc_give']
+    token_email = payload['email']
 
     doc = {
+        "id": uuid.uuid4().hex,
         'url':url_receive,
         'title':title_receive,
-        'desc':desc_receive
+        'desc':desc_receive,
+        'likes': 0,
+        'heart': 0,
+        'uploadtime': datetime.datetime.utcnow(),
+        'email': token_email
     }
     db.posting.insert_one(doc)
     return jsonify({'msg': '등록 완료!'})
+
+@app.route('/test/detail', methods=['GET'])
+def detail():
+    id_receive = request.args.get('id_give')
+    detail = list(db.posting.find({"id": id_receive}, {"_id":False}))
+    # print(id_receive, detail)
+    return jsonify({"response": detail})
+
+@app.route('/test/edit', methods=['GET'])
+def edit():
+    id_receive = request.args.get('id_give')
+    detail = list(db.posting.find({"id": id_receive}, {"_id": False}))
+    # print(id_receive, detail)
+    return jsonify({"response": detail})
+
+@app.route('/test/delete', methods=['POST'])
+def delete():
+    id_receive = request.form['id_give']
+    db.posting.delete_one({"id": id_receive})
+    # print(id_receive, detail)
+    return jsonify({"response": "삭제 완료!"})
+
+@app.route('/test/submitEdit', methods=['POST'])
+def submitEdit():
+    id_receive = request.form['id']
+    url_receive = request.form['url']
+    title_receive = request.form['title']
+    desc_receive = request.form['description']
+    db.posting.update_one({'id':id_receive},{'$set':{'url': url_receive, 'title': title_receive, 'desc': desc_receive}})
+    # print(id_receive, detail)
+    return render_template("main.html")
   
 @app.route('/search', methods=['GET'])
 def view_Search():

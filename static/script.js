@@ -13,28 +13,33 @@ function viewing() {
       for (let i = 0; i < lists.length; i++) {
         let url = lists[i]["url"];
         let title = lists[i]["title"];
-        let desc = lists[i]["desc"];
+        let likes = lists[i]["likes"];
+        let id = lists[i]['id'];
+        //_id는 안잡힌다, id를 따로 주어야 잡힐 듯?
+        console.log(String(id));
 
         let temp_html = `<div class="ListBg">
                             <div class="ListFlex">
-                                <div class="imgHidden-box">
-                                    <img src="../static/img/vatican.jpg" class="classImg">
-                                    <button class="Option_Jjim">
-                                        <img src="../static/img/heart.svg" class="heart">
-                                    </button>
-                                </div>  
-                                <h3 class ="title">${title}</h3>
-                                <div class ="numCount">
-                                    <div class = "likeNum">
-                                        <img src="../static/img/likeUp3.png">
-                                        <span>5342</span>
+                                <div class="click-wrap" onclick="showDetail('${id}')">
+                                    <div class="imgHidden-box">
+                                        <img src="../static/img/vatican.jpg" class="classImg">
+                                        <button class="Option_Jjim">
+                                            <img src="../static/img/heart.svg" class="heart">
+                                        </button>
+                                    </div>  
+                                    <h3 class ="title">${title}</h3>
+                                    <div class ="numCount">
+                                        <div class = "likeNum">
+                                            <img src="../static/img/likeUp3.png">
+                                            <span>5342</span>
+                                        </div>
+                                        <div class = "JjimNum">
+                                            <img src="../static/img/Rheart.svg">
+                                            <span>${likes}</span>
+                                        </div>
                                     </div>
-                                    <div class = "JjimNum">
-                                        <img src="../static/img/Rheart.svg">
-                                        <span>1783</span>
-                                    </div>
+                                    <hr/>
                                 </div>
-                                <hr/>
                                 <div class="Option">
                                     <div class="Like Option_Like">
                                         <img src="../static/img/thumbsup.svg" class="thumbsUp">
@@ -47,10 +52,160 @@ function viewing() {
                             </div>
                         </div>`;
         $(".cardRow").append(temp_html);
+
       }
     },
   });
 }
+
+function showDetail(id) {
+    $.ajax({
+        type: "GET",
+        url: "/test/detail",
+        data: {id_give: id},
+        success: function (response) {
+            const detail = response['response'][0];
+            const title = detail['title'];
+            const desc = detail['desc'];
+            const id = detail['id'];
+            const detailWrap = document.querySelector('.popup-detail-wrap');
+            console.log(detail);
+
+                const html =
+                    `<div class="popup-detail-background show">
+                            <div class="popup-wrap">
+                                <button class="popup-detail-close-btn">닫기</button>
+                                <div class="popup-scroll-wrap">
+                                    <section class="popup-content">
+                                        <h2 class="readable-hidden">상세보기 팝업</h2>
+                                        <div class="detail-btn-wrap flex-layout-end">
+                                            <button class="detail-modify-btn" onclick="editPopup('${id}')">수정</button>
+                                            <button class="detail-delete-btn" onclick="deletePopup('${id}')">삭제</button>
+                                        </div>
+
+                                        <div class="popup-form detail-form-wrap">
+                                            <div class="detail-form">
+                                                <div class="preview-image-wrap">
+                                                    <img class="detail-image-wrap" src="/static/img/생활코딩.png" target="_blank"/>
+                                                </div>
+                                                <div class="detail-content-wrap">
+                                                    <h3>${title}</h3>
+                                                    <p>${desc}</p>
+                                                </div>
+                                            </div>
+                                            <div class="modify-form"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>`
+            detailWrap.innerHTML = html;
+            const detailBg = document.querySelector(".popup-detail-background");
+            const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
+
+            if (document.querySelector('.show') !== null) {
+                detailCloseBtn.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+                detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+            }
+
+        }
+
+    })
+
+}
+
+function editPopup(id) {
+    $.ajax({
+        type: "GET",
+        url: "/test/edit",
+        data: {id_give: id},
+        success: function (response) {
+            const detail = response['response'][0];
+            const title = detail['title'];
+            const desc = detail['desc'];
+            const url = detail['url'];
+            const id = detail['id'];
+            const detailWrap = document.querySelector('.popup-detail-wrap');
+            const modifyBtn = document.querySelector(".detail-modify-btn");
+            const detailForm = document.querySelector(".detail-form");
+            const modifyForm = document.querySelector(".modify-form");
+            // console.log(detail);
+            // const editUrl = document.getElementById('url').value;
+            // const editTitle = document.getElementById('title').value;
+            // const editDesc = document.getElementById('desc').value;
+
+            modifyBtn.style.display = "none";
+            detailForm.style.display = "none";
+            modifyForm.innerHTML = `
+                                    <form action="/test/submitEdit" method="POST" class="edit-form">
+                                      <div class="modify-image-wrap">
+                                        <img class="detail-image-wrap" src="/static/img/생활코딩.png"  alt="image"/>
+                                      </div>
+                                      <div class="popup-box-wrap">
+                                          <label for="url">웹 사이트 URL</label>
+                                          <div class="flex-layout">
+                                              <input class="modify-preview-url" type="text" id="url" name="url" placeholder="${url}"/>
+                                              <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
+                                          </div>
+                                      </div>
+                                      <div class="popup-box-wrap">
+                                          <label for="title">제목</label>
+                                          <input  type="text" id="title" name="title" placeholder="${title}"/>
+                                      </div>
+                                      <div class="popup-box-wrap">
+                                          <label for="description">설명</label>
+                                          <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
+                                      </div>
+                                      <textarea name="id" id="" cols="0" rows="0" style="display: none">${id}</textarea>
+                                      <div class="popup-box-wrap">
+                                          <button  class="modify-form-btn">수정하기</button>
+                                      </div>
+                                    </form>
+                                    `;
+
+        }
+
+    })
+
+}
+
+function submitEdit(id, url, title, desc) {
+    console.log(id, url, title, desc);
+    $.ajax({
+        type: "POST",
+        url: "/test/submitEdit",
+        data: {
+            id_give: id,
+            url_give: url,
+            title_give: title,
+            desc_give: desc
+        },
+        success: function (response) {
+            alert(response['response']);
+            window.location.href='/';
+        }
+
+    })
+
+}
+
+function deletePopup(id) {
+    $.ajax({
+        type: "POST",
+        url: "/test/delete",
+        data: {id_give: id},
+        success: function (response) {
+            alert(response['response']);
+            window.location.href='/';
+        }
+
+    })
+
+}
+
+
+
+
 // 찜, 좋아요 기능 임시
 const Option_Jjim = document.querySelector(".Option_Jjim");
 const Jjim_heart = document.querySelector(".heart");
@@ -84,28 +239,18 @@ function Like() {
   }
 }
 
-Option_Jjim.addEventListener("click", Jjim);
-Jjim_heart.addEventListener("click", Jjim);
-Option_Jjim.addEventListener("click", Jjim_heartControl);
+if(document.querySelector('.Option_Jjim')) {
+    Option_Jjim.addEventListener("click", Jjim);
+    Jjim_heart.addEventListener("click", Jjim);
+    Option_Jjim.addEventListener("click", Jjim_heartControl);
+}
 
-Option_Like.addEventListener("click", Like);
-Like_thumb.addEventListener("click", Like);
-Option_Like.addEventListener("click", Like_thumbControl);
+if(document.querySelector('.Option_Like') !== null) {
+    Option_Like.addEventListener("click", Like);
+    Like_thumb.addEventListener("click", Like);
+    Option_Like.addEventListener("click", Like_thumbControl);
+}
 
-// Listmodal
-// const openButton = document.querySelector(".ListBg");
-// const modal = document.querySelector(".List_modal");
-// const overlay = modal.querySelector(".List_overlay");
-// const closeBtn = modal.querySelector("button");
-// const openModal = () => {
-//   modal.classList.remove("List_hidden");
-// };
-// const closeModal = () => {
-//   modal.classList.add("List_hidden");
-// };
-// overlay.addEventListener("click", closeModal);
-// closeBtn.addEventListener("click", closeModal);
-// openButton.addEventListener("click", openModal);
 
 // html의 태그들을 변수로 담아두기
 //글작성
@@ -125,16 +270,19 @@ const loginCloseBtn = document.querySelector(".login-close-btn");
 
 // popup 함수 show, hide로 분리
 const showPopup = (e, tag) => {
-  if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
-    return null;
-  }
-  tag.classList.add("show");
+    console.log(e, tag)
+    if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
+        return null;
+    }
+    return tag.classList.add("show");
 };
+
 const hidePopup = (e, tag) => {
-  if (e.target.className !== e.currentTarget.className) {
-    return null;
-  }
-  tag.classList.remove("show");
+    console.log(e, tag);
+    if (e.target.className !== e.currentTarget.className) {
+        return null;
+    }
+    tag.classList.remove("show");
 };
 
 //글작성
@@ -236,7 +384,6 @@ function posting() {
   let url = document.getElementById("url").value;
   let title = document.getElementById("title").value;
   let desc = document.getElementById("description").value;
-
   $.ajax({
     type: "POST",
     url: "/test",
@@ -247,67 +394,30 @@ function posting() {
     },
   });
 }
-createBtn.addEventListener("click", posting);
+if (createBtn !== null) {
+    createBtn.addEventListener("click", posting);
+}
 
-// 상세보기 팝업
-const detailBtn = document.querySelector(".click-wrap");
-const detailBg = document.querySelector(".popup-detail-background");
-const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
-// 수정하기 버튼
-const modifyBtn = document.querySelector(".detail-modify-btn");
-const detailForm = document.querySelector(".detail-form");
-const modifyForm = document.querySelector(".modify-form");
-modifyBtn.addEventListener("click", () => modifyPopup());
-// 상세보기
-detailBtn.addEventListener("click", (e) => showPopup(e, detailBg));
-detailCloseBtn.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
-detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
-
-// 수정 팝업
-const modifyPopup = () => {
-  modifyBtn.style.display = "none";
-  detailForm.style.display = "none";
-  modifyForm.innerHTML = `
-      <div class="modify-image-wrap">
-        <img class="detail-image-wrap" src="/static/img/생활코딩.png"  alt="image"/>
-      </div>
-      <div class="popup-box-wrap">
-          <label for="url">웹 사이트 URL</label>
-          <div class="flex-layout">
-              <input class="modify-preview-url" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
-              <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
-          </div>
-      </div>
-      <div class="popup-box-wrap">
-          <label for="title">제목</label>
-          <input  type="text" id="title" name="title" placeholder="******"/>
-      </div>
-      <div class="popup-box-wrap">
-          <label for="description">설명</label>
-          <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
-      </div>
-      <div class="popup-box-wrap">
-          <button  class="modify-form-btn">수정하기</button>
-      </div>
-  `;
-};
 
 // 상세보기 닫기 팝업만 따로 분리함
 const hideDetailPopup = (e, tag) => {
-  if (e.target.className !== e.currentTarget.className) {
-    return null;
-  }
-  if (e.target.className) tag.classList.remove("show");
-  modifyBtn.style.display = "block";
-  detailForm.style.display = "block";
-  modifyForm.innerHTML = ``;
+    console.log(e, tag);
+    if (e.target.className !== e.currentTarget.className) {
+        return null;
+    }
+    if (e.target.className) tag.classList.remove("show");
+    modifyBtn.style.display = "block";
+    detailForm.style.display = "block";
+    modifyForm.innerHTML = ``;
 };
 
 let url = document.querySelector(".preview-url");
 let previewBox = document.querySelector(".preview-image-wrap");
 const previewBtn = document.querySelector(".preview-btn");
 
-previewBtn.addEventListener("click", () => previewImage(previewBtn));
+if (previewBtn !== null) {
+    previewBtn.addEventListener("click", () => previewImage(previewBtn));
+}
 
 // 미리보기 클릭했을 때 og:image 가져오는 함수.
 // 등록 팝업과 상세보기 팝업에서 공통으로 쓰임
