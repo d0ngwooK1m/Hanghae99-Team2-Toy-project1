@@ -70,7 +70,7 @@ def editAuthCheck(type):
         if user_info['email'] == check['email'] and type == "GET":
             return jsonify({"response": detail}), 200
         elif user_info['email'] == check['email'] and type == "POST":
-            db.posting.delete_one({'email': check['email']})
+            db.posting.delete_one({'id':id_receive})
             return jsonify({"response": '삭제 완료!'}), 200
         else:
             return jsonify({"response": "권한 없음"}), 400
