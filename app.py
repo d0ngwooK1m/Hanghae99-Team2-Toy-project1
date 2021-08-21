@@ -97,6 +97,8 @@ def fail():
 @app.route('/myPage')
 # @login_required
 def mypage():
+    token_receive = request.cookies.get('login_token')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     return userAuthCheck("myPage.html")
 
 
@@ -118,7 +120,7 @@ def posting():
     token_email = payload['email']
     now = datetime.datetime.now()
     now_date_time = now.strftime("%Y%m%d%H%M%S")
-    print("now_date_time = ", now_date_time)
+
     doc = {
         "id": uuid.uuid4().hex,
         'url': url_receive,
