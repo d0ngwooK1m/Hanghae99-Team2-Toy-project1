@@ -220,6 +220,16 @@ def previewImage():
     image = soup.select_one('meta[property="og:image"]')['content']
     return jsonify(image)
 
+# 추천하기 기능구현
+@app.route('/update/likes', methods=['POST'])
+def updateLikes():
+    id_receive = request.get_json()
+    find_id = id_receive['id_give']
+    find_list = db.posting.find_one({'id': find_id})
+    target_like = find_list['likes']
+    new_like = target_like + 1
+    db.posting.update_one({'id': find_id}, {'$set': {'likes': new_like}})
+    return jsonify({'msg':"추천되었습니다."})
 # 켜기 터미널
 # set FLASK_APP=app.py
 # set FLASK_ENV=development
