@@ -52,7 +52,7 @@ class User():
         if user is not None and pbkdf2_sha256.verify(request.form.get("l_password"), user["password"]):
             payload = {
                 'email': user['email'],
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=1)
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=5)
 
             }
 

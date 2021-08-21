@@ -81,7 +81,6 @@
   height: 100%;
   border-radius: 5px;
   margin-right: 24px;
-  margin-bottom: 32px;
   cursor: pointer;
 }
 
@@ -91,6 +90,7 @@
 
 .ListFlex {
   max-height: 412px;
+  margin-bottom: 32px;
 }
 .imgHidden-box {
   overflow: hidden;
@@ -190,12 +190,11 @@
   border-radius: 3px;
   border: 0;
   width: 49%;
-  height: 30px;
+  padding: 8px 10px;
   display: flex;
   font-size: 30px;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 .Like img {
   width: 16px;
@@ -264,10 +263,10 @@
   height: 17px;
   margin-left: 45%;
 }
-.search_result{
-  margin:0 auto;
-  width:1170px;
-  font-size:11px;
+.search_result {
+  margin: 0 auto;
+  width: 1170px;
+  font-size: 11px;
 }
 .mypage {
   color: white;
@@ -745,4 +744,11 @@
 }
 .icon-dropdown-container:hover > .icon-dropdown-wrap {
   display: block;
+}
+.color-blue {
+  color: #339af0;
+}
+.mypage-nav {
+  height: 60px;
+  line-height: 60px;
 }
