@@ -2,6 +2,7 @@ window.addEventListener("load", function () {
   viewing();
 });
 //뷰?
+let cardRow = document.querySelector(".cardRow");
 function viewing() {
   $.ajax({
     type: "GET",
@@ -14,7 +15,7 @@ function viewing() {
         let url = lists[i]["url"];
         let title = lists[i]["title"];
         let likes = lists[i]["likes"];
-        let id = lists[i]['id'];
+        let id = lists[i]["id"];
         //_id는 안잡힌다, id를 따로 주어야 잡힐 듯?
         console.log(String(id));
 
@@ -52,27 +53,93 @@ function viewing() {
                             </div>
                         </div>`;
         $(".cardRow").append(temp_html);
-
       }
     },
   });
 }
+//회원가입 API 통신
+$("form[name=signup_form]").submit(function (e) {
+  const form_give = $(this);
+  const error_give = form_give.find(".error");
+  const data_give = form_give.serialize();
+
+  $.ajax({
+    url: "/user/signup",
+    type: "POST",
+    data: data_give,
+    dataType: "json",
+    success: function (response) {
+      window.location.href = "/";
+      console.log(response);
+    },
+    error: function (response) {
+      console.log(response);
+      error_give.text(response.responseJSON.error).removeClass("error--hidden");
+    },
+  });
+
+  e.preventDefault();
+});
+//로그인 API 통신
+$("form[name=login_form]").submit(function (e) {
+  const form_give = $(this);
+  const error_give = form_give.find(".error");
+  const data_give = form_give.serialize();
+
+  $.ajax({
+    url: "/user/login",
+    type: "POST",
+    data: data_give,
+    dataType: "json",
+    success: function (response) {
+      window.location.href = "/";
+      $.cookie("login_token", response["login_token"], { path: "/" });
+      // console.log(document.cookie);
+    },
+    error: function (response) {
+      console.log(response);
+      error_give.text(response.responseJSON.error).removeClass("error--hidden");
+    },
+  });
+
+  e.preventDefault();
+});
+
+//로그아웃 API 통신
+$(".logout-btn").click(function (e) {
+  $.ajax({
+    url: "user/logout",
+    type: "GET",
+    data: {},
+    dataType: "json",
+    success: function (response) {
+      $.removeCookie("login_token", { path: "/" });
+      window.location.href = "/";
+    },
+  });
+
+  e.preventDefault();
+});
+
+//등록권한 없음
+function postingFail() {
+  alert("사용권한이 없습니다");
+}
 
 function showDetail(id) {
-    $.ajax({
-        type: "GET",
-        url: "/test/detail",
-        data: {id_give: id},
-        success: function (response) {
-            const detail = response['response'][0];
-            const title = detail['title'];
-            const desc = detail['desc'];
-            const id = detail['id'];
-            const detailWrap = document.querySelector('.popup-detail-wrap');
-            console.log(detail);
+  $.ajax({
+    type: "GET",
+    url: "/test/detail",
+    data: { id_give: id },
+    success: function (response) {
+      const detail = response["response"][0];
+      const title = detail["title"];
+      const desc = detail["desc"];
+      const id = detail["id"];
+      const detailWrap = document.querySelector(".popup-detail-wrap");
+      console.log(detail);
 
-                const html =
-                    `<div class="popup-detail-background show">
+      const html = `<div class="popup-detail-background show">
                             <div class="popup-wrap">
                                 <button class="popup-detail-close-btn">닫기</button>
                                 <div class="popup-scroll-wrap">
@@ -98,42 +165,40 @@ function showDetail(id) {
                                     </section>
                                 </div>
                             </div>
-                        </div>`
-            detailWrap.innerHTML = html;
-            const detailBg = document.querySelector(".popup-detail-background");
-            const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
+                        </div>`;
+      detailWrap.innerHTML = html;
+      const detailBg = document.querySelector(".popup-detail-background");
+      const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
 
-            if (document.querySelector('.show') !== null) {
-                detailCloseBtn.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
-                detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
-            }
-
-        }
-
-    })
-
+      if (document.querySelector(".show") !== null) {
+        detailCloseBtn.addEventListener("click", (e) =>
+          hideDetailPopup(e, detailBg)
+        );
+        detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+      }
+    },
+  });
 }
 
-
 function editPopup(id) {
-    $.ajax({
-        type: "GET",
-        url: "/test/edit",
-        data: {id_give: id},
-        success: function (response) {
-            const detail = response['response'][0];
-            const title = detail['title'];
-            const desc = detail['desc'];
-            const url = detail['url'];
-            const id = detail['id'];
-            const detailWrap = document.querySelector('.popup-detail-wrap');
-            const modifyBtn = document.querySelector(".detail-modify-btn");
-            const detailForm = document.querySelector(".detail-form");
-            const modifyForm = document.querySelector(".modify-form");
+  $.ajax({
+    type: "GET",
+    url: "/test/edit",
+    data: { id_give: id },
+    success: function (response) {
+      const detail = response["response"][0];
+      const title = detail["title"];
+      const desc = detail["desc"];
+      const url = detail["url"];
+      const id = detail["id"];
+      const detailWrap = document.querySelector(".popup-detail-wrap");
+      const modifyBtn = document.querySelector(".detail-modify-btn");
+      const detailForm = document.querySelector(".detail-form");
+      const modifyForm = document.querySelector(".modify-form");
 
-            modifyBtn.style.display = "none";
-            detailForm.style.display = "none";
-            modifyForm.innerHTML = `
+      modifyBtn.style.display = "none";
+      detailForm.style.display = "none";
+      modifyForm.innerHTML = `
                                     <form action="/test/submitEdit" method="POST" class="edit-form">
                                       <div class="modify-image-wrap">
                                         <img class="detail-image-wrap" src="/static/img/생활코딩.png"  alt="image"/>
@@ -159,37 +224,29 @@ function editPopup(id) {
                                       </div>
                                     </form>
                                     `;
-
-        },
-        error: function(response) {
-            alert(response.responseJSON['response']);
-            // console.log(response.responseJSON['response'])
-        }
-
-    })
-
+    },
+    error: function (response) {
+      alert(response.responseJSON["response"]);
+      // console.log(response.responseJSON['response'])
+    },
+  });
 }
 
 function deletePopup(id) {
-    $.ajax({
-        type: "POST",
-        url: "/test/delete",
-        data: {id_give: id},
-        success: function (response) {
-            alert(response['response']);
-            window.location.href='/';
-        },
-        error: function (response) {
-            alert(response.responseJSON['response'])
-            // console.log(response.responseJSON['response'])
-        }
-
-    })
-
+  $.ajax({
+    type: "POST",
+    url: "/test/delete",
+    data: { id_give: id },
+    success: function (response) {
+      alert(response["response"]);
+      window.location.href = "/";
+    },
+    error: function (response) {
+      alert(response.responseJSON["response"]);
+      // console.log(response.responseJSON['response'])
+    },
+  });
 }
-
-
-
 
 // 찜, 좋아요 기능 임시
 const Option_Jjim = document.querySelector(".Option_Jjim");
@@ -224,18 +281,17 @@ function Like() {
   }
 }
 
-if(document.querySelector('.Option_Jjim')) {
-    Option_Jjim.addEventListener("click", Jjim);
-    Jjim_heart.addEventListener("click", Jjim);
-    Option_Jjim.addEventListener("click", Jjim_heartControl);
+if (document.querySelector(".Option_Jjim")) {
+  Option_Jjim.addEventListener("click", Jjim);
+  Jjim_heart.addEventListener("click", Jjim);
+  Option_Jjim.addEventListener("click", Jjim_heartControl);
 }
 
-if(document.querySelector('.Option_Like') !== null) {
-    Option_Like.addEventListener("click", Like);
-    Like_thumb.addEventListener("click", Like);
-    Option_Like.addEventListener("click", Like_thumbControl);
+if (document.querySelector(".Option_Like") !== null) {
+  Option_Like.addEventListener("click", Like);
+  Like_thumb.addEventListener("click", Like);
+  Option_Like.addEventListener("click", Like_thumbControl);
 }
-
 
 // html의 태그들을 변수로 담아두기
 //글작성
@@ -255,112 +311,38 @@ const loginCloseBtn = document.querySelector(".login-close-btn");
 
 // popup 함수 show, hide로 분리
 const showPopup = (e, tag) => {
-    console.log(e, tag)
-    if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
-        return null;
-    }
-    return tag.classList.add("show");
+  if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
+    return null;
+  }
+  return tag.classList.add("show");
 };
 
 const hidePopup = (e, tag) => {
-    console.log(e, tag);
-    if (e.target.className !== e.currentTarget.className) {
-        return null;
-    }
-    tag.classList.remove("show");
+  if (e.target.className !== e.currentTarget.className) {
+    return null;
+  }
+  tag.classList.remove("show");
 };
 
 //글작성
-if(document.querySelector('.create-btn') !== null) {
+if (document.querySelector(".create-btn") !== null) {
   popupBtn.addEventListener("click", (e) => showPopup(e, popupBg));
   popupCloseBtn.addEventListener("click", (e) => hidePopup(e, popupBg));
   popupBg.addEventListener("click", (e) => hidePopup(e, popupBg));
 }
 
-
 //회원가입
-if(document.querySelector('.signup-btn') !== null) {
+if (document.querySelector(".signup-btn") !== null) {
   signupBtn.addEventListener("click", (e) => showPopup(e, signupBg));
   signupCloseBtn.addEventListener("click", (e) => hidePopup(e, signupBg));
   signupBg.addEventListener("click", (e) => hidePopup(e, signupBg));
 }
 
 //로그인
-if(document.querySelector('.login-btn') !== null) {
+if (document.querySelector(".login-btn") !== null) {
   loginBtn.addEventListener("click", (e) => showPopup(e, loginBg));
   loginCloseBtn.addEventListener("click", (e) => hidePopup(e, loginBg));
   loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
-}
-
-//회원가입 API 통신
-$("form[name=signup_form]").submit(function(e) {
-    const form_give = $(this);
-    const error_give = form_give.find(".error");
-    const data_give = form_give.serialize();
-
-    $.ajax({
-        url: "/user/signup",
-        type: "POST",
-        data: data_give,
-        dataType: "json",
-        success: function(response) {
-            window.location.href = "/";
-            console.log(response);
-        },
-        error: function(response) {
-            console.log(response);
-            error_give.text(response.responseJSON.error).removeClass("error--hidden");
-        }
-    })
-
-    e.preventDefault();
-})
-
-//로그인 API 통신
-$("form[name=login_form]").submit(function(e) {
-    const form_give = $(this);
-    const error_give = form_give.find(".error");
-    const data_give = form_give.serialize();
-
-    $.ajax({
-        url: "/user/login",
-        type: "POST",
-        data: data_give,
-        dataType: "json",
-        success: function(response) {
-            window.location.href = "/";
-            $.cookie('login_token', response['login_token'], { path: '/' });
-            // console.log(document.cookie);
-        }
-        ,
-        error: function(response) {
-            console.log(response);
-            error_give.text(response.responseJSON.error).removeClass("error--hidden");
-        }
-    })
-
-    e.preventDefault();
-})
-
-//로그아웃 API 통신
-$('.logout-btn').click(function(e) {
-    $.ajax({
-        url: "user/logout",
-        type: "GET",
-        data: {},
-        dataType: "json",
-        success: function(response) {
-            $.removeCookie('login_token', { path: '/' })
-            window.location.href = "/";
-        }
-    })
-
-    e.preventDefault();
-})
-
-//등록권한 없음
-function postingFail() {
-    alert('사용권한이 없습니다');
 }
 
 //등록
@@ -380,23 +362,22 @@ function posting() {
   });
 }
 if (createBtn !== null) {
-    createBtn.addEventListener("click", posting);
+  createBtn.addEventListener("click", posting);
 }
-
 
 // 상세보기 닫기 팝업만 따로 분리함
 const hideDetailPopup = (e, tag) => {
-    const modifyBtn = document.querySelector(".detail-modify-btn");
-    const detailForm = document.querySelector(".detail-form");
-    const modifyForm = document.querySelector(".modify-form");
-    console.log(e, tag);
-    if (e.target.className !== e.currentTarget.className) {
-        return null;
-    }
-    if (e.target.className) tag.classList.remove("show");
-    modifyBtn.style.display = "block";
-    detailForm.style.display = "block";
-    modifyForm.innerHTML = ``;
+  const modifyBtn = document.querySelector(".detail-modify-btn");
+  const detailForm = document.querySelector(".detail-form");
+  const modifyForm = document.querySelector(".modify-form");
+
+  if (e.target.className !== e.currentTarget.className) {
+    return null;
+  }
+  if (e.target.className) tag.classList.remove("show");
+  modifyBtn.style.display = "block";
+  detailForm.style.display = "block";
+  modifyForm.innerHTML = ``;
 };
 
 let url = document.querySelector(".preview-url");
@@ -404,7 +385,7 @@ let previewBox = document.querySelector(".preview-image-wrap");
 const previewBtn = document.querySelector(".preview-btn");
 
 if (previewBtn !== null) {
-    previewBtn.addEventListener("click", () => previewImage(previewBtn));
+  previewBtn.addEventListener("click", () => previewImage(previewBtn));
 }
 
 // 미리보기 클릭했을 때 og:image 가져오는 함수.
@@ -457,3 +438,66 @@ const previewImage = (tag) => {
     },
   });
 };
+
+// 최신순 정렬
+const newCardBtn = document.querySelector(".new-card-btn");
+newCardBtn.addEventListener("click", () => {
+  console.log("최신순");
+  newCardBtn.classList.add("color-blue");
+  fetch("/view", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      cardRow.innerHTML = "";
+      const list = response["all_post"];
+      const newList = list.sort(function (a, b) {
+        return b.uploadtime - a.uploadtime;
+      });
+
+      for (let i = 0; i < newList.length; i++) {
+        const title = newList[i].title;
+        const url = newList[i].url;
+        const likes = newList[i].likes;
+        // const previewImage = newList[i].image
+        const id = newList[i].id;
+        const newHtml = `<div class="ListBg">
+                          <div class="ListFlex">
+                              <div class="click-wrap" onclick="showDetail('${id}')">
+                                  <div class="imgHidden-box">
+                                      <img src="../static/img/vatican.jpg" class="classImg">
+                                      <button class="Option_Jjim">
+                                          <img src="../static/img/heart.svg" class="heart">
+                                      </button>
+                                  </div>  
+                                  <h3 class ="title">${title}</h3>
+                                  <div class ="numCount">
+                                      <div class = "likeNum">
+                                          <img src="../static/img/likeUp3.png">
+                                          <span>5342</span>
+                                      </div>
+                                      <div class = "JjimNum">
+                                          <img src="../static/img/Rheart.svg">
+                                          <span>${likes}</span>
+                                      </div>
+                                  </div>
+                                  <hr/>
+                              </div>
+                              <div class="Option">
+                                  <div class="Like Option_Like">
+                                      <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                      <span>추천하기</span>
+                                  </div>
+                                  <a class="Link" href="${url}" target= '_blank'>
+                                      <span>바로가기</span>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>`;
+        cardRow.innerHTML += newHtml;
+      }
+    });
+});
