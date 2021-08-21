@@ -15,6 +15,7 @@ function viewing() {
         let url = lists[i]["url"];
         let title = lists[i]["title"];
         let likes = lists[i]["likes"];
+        let imgsrc = lists[i]["imgsrc"];
         let id = lists[i]["id"];
         //_id는 안잡힌다, id를 따로 주어야 잡힐 듯?
         console.log(String(id));
@@ -23,7 +24,7 @@ function viewing() {
                             <div class="ListFlex">
                                 <div class="click-wrap" onclick="showDetail('${id}')">
                                     <div class="imgHidden-box">
-                                        <img src="../static/img/vatican.jpg" class="classImg">
+                                        <img src="${imgsrc}" class="classImg">
                                         <button class="Option_Jjim">
                                             <img src="../static/img/heart.svg" class="heart">
                                         </button>
@@ -137,6 +138,7 @@ function showDetail(id) {
       const title = detail["title"];
       const desc = detail["desc"];
       const id = detail["id"];
+      const imgsrc = detail["imgsrc"];
       const detailWrap = document.querySelector(".popup-detail-wrap");
       console.log(detail);
 
@@ -154,7 +156,7 @@ function showDetail(id) {
                                         <div class="popup-form detail-form-wrap">
                                             <div class="detail-form">
                                                 <div class="preview-image-wrap">
-                                                    <img class="detail-image-wrap" src="/static/img/생활코딩.png" target="_blank"/>
+                                                    <img class="detail-image-wrap" src="${imgsrc}" target="_blank"/>
                                                 </div>
                                                 <div class="detail-content-wrap">
                                                     <h3>${title}</h3>
@@ -192,7 +194,8 @@ function editPopup(id) {
       const desc = detail["desc"];
       const url = detail["url"];
       const id = detail["id"];
-      const detailWrap = document.querySelector(".popup-detail-wrap");
+      const imgsrc = detail["imgsrc"];
+      // const detailWrap = document.querySelector(".popup-detail-wrap");
       const modifyBtn = document.querySelector(".detail-modify-btn");
       const detailForm = document.querySelector(".detail-form");
       const modifyForm = document.querySelector(".modify-form");
@@ -202,25 +205,25 @@ function editPopup(id) {
       modifyForm.innerHTML = `
                                     <form action="/test/submitEdit" method="POST" class="edit-form">
                                       <div class="modify-image-wrap">
-                                        <img class="detail-image-wrap" src="/static/img/생활코딩.png"  alt="image"/>
+                                        <img class="detail-image-wrap" src="${imgsrc}"  alt="image"/>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="url">웹 사이트 URL</label>
                                           <div class="flex-layout">
-                                              <input class="modify-preview-url" type="text" id="url" name="url" placeholder="${url}"/>
-                                              <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
+                                                <input class="modify-preview-url" type="text" id="url" name="url" value="${url}"/>
+                                              <button type="button" class="modify-preview-btn" onclick="previewImage()">미리보기</button>
                                           </div>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="title">제목</label>
-                                          <input  type="text" id="title" name="title" placeholder="${title}"/>
+                                            <input  type="text" id="title" name="title" value="${title}"/>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="description">설명</label>
-                                          <textarea type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
+                                          <textarea type="text" id="description" name="description" rows="6" value="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
                                       </div>
-                                      <textarea name="id" id="" cols="0" rows="0" style="display: none">${id}</textarea>
                                       <div class="popup-box-wrap">
+                                      <input type="hidden" value="${id}" name="id" style="display: none">
                                           <button  class="modify-form-btn">수정하기</button>
                                       </div>
                                     </form>
@@ -348,14 +351,16 @@ if (document.querySelector(".login-btn") !== null) {
 
 //등록
 const createBtn = document.querySelector(".create-form-btn");
+let imgsrc = "";
 function posting() {
   let url = document.getElementById("url").value;
   let title = document.getElementById("title").value;
   let desc = document.getElementById("description").value;
+  console.log("imgsrc",imgsrc)
   $.ajax({
     type: "POST",
     url: "/test",
-    data: { url_give: url, title_give: title, desc_give: desc },
+    data: { url_give: url, title_give: title, desc_give: desc, imgsrc_give:imgsrc },
     success: function (response) {
       alert(response["msg"]);
       window.location.reload();
@@ -418,6 +423,7 @@ const previewImage = (tag) => {
     },
     success: function (response) {
       const url = response;
+      imgsrc = url;
       // og:image가 없을 경우 기본 이미지 나오게
       if (url === "" && check) {
         previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
@@ -478,13 +484,14 @@ newCardBtn.addEventListener("click", () => {
         const title = newList[i].title;
         const url = newList[i].url;
         const likes = newList[i].likes;
+        const imgsrc = newList[i].imgsrc;
         // const previewImage = newList[i].image
         const id = newList[i].id;
         const newHtml = `<div class="ListBg">
                           <div class="ListFlex">
                               <div class="click-wrap" onclick="showDetail('${id}')">
                                   <div class="imgHidden-box">
-                                      <img src="../static/img/vatican.jpg" class="classImg">
+                                      <img src="${imgsrc}" class="classImg">
                                       <button class="Option_Jjim">
                                           <img src="../static/img/heart.svg" class="heart">
                                       </button>
@@ -540,13 +547,14 @@ likeBtn.addEventListener("click", () => {
         const title = newList[i].title;
         const url = newList[i].url;
         const likes = newList[i].likes;
+        const imgsrc = newList[i].imgsrc;
         // const previewImage = newList[i].image
         const id = newList[i].id;
         const newHtml = `<div class="ListBg">
                           <div class="ListFlex">
                               <div class="click-wrap" onclick="showDetail('${id}')">
                                   <div class="imgHidden-box">
-                                      <img src="../static/img/vatican.jpg" class="classImg">
+                                      <img src="${imgsrc}" class="classImg">
                                       <button class="Option_Jjim">
                                           <img src="../static/img/heart.svg" class="heart">
                                       </button>

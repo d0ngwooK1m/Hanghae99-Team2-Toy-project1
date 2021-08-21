@@ -114,6 +114,7 @@ def posting():
     url_receive = request.form['url_give']
     title_receive = request.form['title_give']
     desc_receive = request.form['desc_give']
+    imgsrc_receive = request.form['imgsrc_give']
     token_email = payload['email']
     now = datetime.datetime.now()
     now_date_time = now.strftime("%Y%m%d%H%M%S")
@@ -126,7 +127,8 @@ def posting():
         'likes': 0,
         'heart': 0,
         'uploadtime': now_date_time,
-        'email': token_email
+        'email': token_email,
+        'imgsrc':imgsrc_receive
     }
     db.posting.insert_one(doc)
     return jsonify({'msg': '등록 완료!'})
@@ -156,9 +158,8 @@ def submitEdit():
     url_receive = request.form['url']
     title_receive = request.form['title']
     desc_receive = request.form['description']
-    db.posting.update_one({'id': id_receive}, {
-                          '$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive}})
-    # print(id_receive, detail)
+    db.posting.update_one({'id': id_receive}, {'$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive}})
+    print(id_receive, url_receive, title_receive, desc_receive)
     return render_template("main.html")
 
 
