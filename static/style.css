@@ -94,7 +94,10 @@
 }
 .imgHidden-box {
   overflow: hidden;
+  justify-content: center;
   height: 155px;
+  align-items: center;
+  display: flex;
 }
 .classImg {
   width: 100%;

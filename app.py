@@ -70,7 +70,7 @@ def editAuthCheck(type):
         if user_info['email'] == check['email'] and type == "GET":
             return jsonify({"response": detail}), 200
         elif user_info['email'] == check['email'] and type == "POST":
-            db.posting.delete_one({'email': check['email']})
+            db.posting.delete_one({'id':id_receive})
             return jsonify({"response": '삭제 완료!'}), 200
         else:
             return jsonify({"response": "권한 없음"}), 400
@@ -114,6 +114,7 @@ def posting():
     url_receive = request.form['url_give']
     title_receive = request.form['title_give']
     desc_receive = request.form['desc_give']
+    imgsrc_receive = request.form['imgsrc_give']
     token_email = payload['email']
     now = datetime.datetime.now()
     now_date_time = now.strftime("%Y%m%d%H%M%S")
@@ -126,7 +127,8 @@ def posting():
         'likes': 0,
         'heart': 0,
         'uploadtime': now_date_time,
-        'email': token_email
+        'email': token_email,
+        'imgsrc':imgsrc_receive
     }
     db.posting.insert_one(doc)
     return jsonify({'msg': '등록 완료!'})
