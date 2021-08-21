@@ -481,13 +481,14 @@ newCardBtn.addEventListener("click", () => {
         const title = newList[i].title;
         const url = newList[i].url;
         const likes = newList[i].likes;
+        const imgsrc = newList[i].imgsrc;
         // const previewImage = newList[i].image
         const id = newList[i].id;
         const newHtml = `<div class="ListBg">
                           <div class="ListFlex">
                               <div class="click-wrap" onclick="showDetail('${id}')">
                                   <div class="imgHidden-box">
-                                      <img src="../static/img/vatican.jpg" class="classImg">
+                                      <img src="${imgsrc}" class="classImg">
                                       <button class="Option_Jjim">
                                           <img src="../static/img/heart.svg" class="heart">
                                       </button>
@@ -543,13 +544,14 @@ likeBtn.addEventListener("click", () => {
         const title = newList[i].title;
         const url = newList[i].url;
         const likes = newList[i].likes;
+        const imgsrc = newList[i].imgsrc;
         // const previewImage = newList[i].image
         const id = newList[i].id;
         const newHtml = `<div class="ListBg">
                           <div class="ListFlex">
                               <div class="click-wrap" onclick="showDetail('${id}')">
                                   <div class="imgHidden-box">
-                                      <img src="../static/img/vatican.jpg" class="classImg">
+                                      <img src="${imgsrc}" class="classImg">
                                       <button class="Option_Jjim">
                                           <img src="../static/img/heart.svg" class="heart">
                                       </button>
