@@ -351,14 +351,16 @@ if (document.querySelector(".login-btn") !== null) {
 
 //등록
 const createBtn = document.querySelector(".create-form-btn");
+let imgsrc = "";
 function posting() {
   let url = document.getElementById("url").value;
   let title = document.getElementById("title").value;
   let desc = document.getElementById("description").value;
+  console.log("imgsrc",imgsrc)
   $.ajax({
     type: "POST",
     url: "/test",
-    data: { url_give: url, title_give: title, desc_give: desc },
+    data: { url_give: url, title_give: title, desc_give: desc, imgsrc_give:imgsrc },
     success: function (response) {
       alert(response["msg"]);
       window.location.reload();
@@ -421,6 +423,7 @@ const previewImage = (tag) => {
     },
     success: function (response) {
       const url = response;
+      imgsrc = url;
       // og:image가 없을 경우 기본 이미지 나오게
       if (url === "" && check) {
         previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
