@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for, flash
 import requests
 import pymongo
 import jwt
@@ -39,6 +39,41 @@ def userAuthCheck(str):
         return redirect(url_for('fail', msg="로그인 시간 만료"))
     except jwt.exceptions.DecodeError:
         return redirect(url_for('fail', msg="로그인 정보 없음"))
+
+def editAuthCheck(type):
+    token_receive = request.cookies.get('login_token')
+
+    if type == "GET":
+        id_receive = request.args.get('id_give')
+    elif type == "POST":
+        id_receive = request.form['id_give']
+
+    detail = list(db.posting.find({"id": id_receive}, {"_id": False}))
+    if detail != []:
+        check = db.posting.find_one({"email": detail[0]["email"]})
+    else:
+        check = ""
+    # print(detail)
+    try:
+        if not token_receive:
+            return jsonify({ "response": "권한 없음" }), 400
+
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"email": payload["email"]})
+        print(user_info['email'], check['email'])
+
+        if user_info['email'] == check['email'] and type == "GET":
+            return jsonify({"response": detail}), 200
+        elif user_info['email'] == check['email'] and type == "POST":
+            db.posting.delete_one({'email': check['email']})
+            return jsonify({"response": '삭제 완료!'}), 200
+        else:
+            return jsonify({ "response": "권한 없음" }), 400
+
+    except jwt.ExpiredSignatureError:
+        return jsonify({ "response": "로그인 시간 만료" }), 400
+    except jwt.exceptions.DecodeError:
+        return jsonify({ "response": "로그인 정보 없음" }), 400
 
 
 
@@ -101,17 +136,11 @@ def detail():
 
 @app.route('/test/edit', methods=['GET'])
 def edit():
-    id_receive = request.args.get('id_give')
-    detail = list(db.posting.find({"id": id_receive}, {"_id": False}))
-    # print(id_receive, detail)
-    return jsonify({"response": detail})
+    return editAuthCheck("GET")
 
 @app.route('/test/delete', methods=['POST'])
 def delete():
-    id_receive = request.form['id_give']
-    db.posting.delete_one({"id": id_receive})
-    # print(id_receive, detail)
-    return jsonify({"response": "삭제 완료!"})
+    return editAuthCheck("POST")
 
 @app.route('/test/submitEdit', methods=['POST'])
 def submitEdit():

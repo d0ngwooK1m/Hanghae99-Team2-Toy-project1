@@ -114,6 +114,7 @@ function showDetail(id) {
 
 }
 
+
 function editPopup(id) {
     $.ajax({
         type: "GET",
@@ -129,10 +130,6 @@ function editPopup(id) {
             const modifyBtn = document.querySelector(".detail-modify-btn");
             const detailForm = document.querySelector(".detail-form");
             const modifyForm = document.querySelector(".modify-form");
-            // console.log(detail);
-            // const editUrl = document.getElementById('url').value;
-            // const editTitle = document.getElementById('title').value;
-            // const editDesc = document.getElementById('desc').value;
 
             modifyBtn.style.display = "none";
             detailForm.style.display = "none";
@@ -163,26 +160,10 @@ function editPopup(id) {
                                     </form>
                                     `;
 
-        }
-
-    })
-
-}
-
-function submitEdit(id, url, title, desc) {
-    console.log(id, url, title, desc);
-    $.ajax({
-        type: "POST",
-        url: "/test/submitEdit",
-        data: {
-            id_give: id,
-            url_give: url,
-            title_give: title,
-            desc_give: desc
         },
-        success: function (response) {
-            alert(response['response']);
-            window.location.href='/';
+        error: function(response) {
+            alert(response.responseJSON['response']);
+            // console.log(response.responseJSON['response'])
         }
 
     })
@@ -197,6 +178,10 @@ function deletePopup(id) {
         success: function (response) {
             alert(response['response']);
             window.location.href='/';
+        },
+        error: function (response) {
+            alert(response.responseJSON['response'])
+            // console.log(response.responseJSON['response'])
         }
 
     })
@@ -401,6 +386,9 @@ if (createBtn !== null) {
 
 // 상세보기 닫기 팝업만 따로 분리함
 const hideDetailPopup = (e, tag) => {
+    const modifyBtn = document.querySelector(".detail-modify-btn");
+    const detailForm = document.querySelector(".detail-form");
+    const modifyForm = document.querySelector(".modify-form");
     console.log(e, tag);
     if (e.target.className !== e.currentTarget.className) {
         return null;
