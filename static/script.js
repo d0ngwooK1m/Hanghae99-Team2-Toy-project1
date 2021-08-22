@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
   viewing();
 });
-//뷰?
+// 리스트 뷰
 let cardRow = document.querySelector(".cardRow");
 function viewing() {
   $.ajax({
@@ -128,6 +128,7 @@ function postingFail() {
   alert("사용권한이 없습니다");
 }
 
+// 카드 상세화면 팝업
 function showDetail(id) {
   $.ajax({
     type: "GET",
@@ -140,9 +141,8 @@ function showDetail(id) {
       const id = detail["id"];
       const imgsrc = detail["imgsrc"];
       const detailWrap = document.querySelector(".popup-detail-wrap");
-      console.log(detail);
 
-      const html = `<div class="popup-detail-background show">
+      const html = `<div class="popup-detail-background">
                             <div class="popup-wrap">
                                 <button class="popup-detail-close-btn">닫기</button>
                                 <div class="popup-scroll-wrap">
@@ -171,6 +171,7 @@ function showDetail(id) {
                         </div>`;
       detailWrap.innerHTML = html;
       const detailBg = document.querySelector(".popup-detail-background");
+      detailBg.classList.add("show");
       const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
 
       if (document.querySelector(".show") !== null) {
@@ -182,7 +183,33 @@ function showDetail(id) {
     },
   });
 }
-
+// 카드 등록
+const createBtn = document.querySelector(".create-form-btn");
+let imgsrc = "";
+function posting() {
+  let url = document.getElementById("url").value;
+  let title = document.getElementById("title").value;
+  let desc = document.getElementById("description").value;
+  console.log("imgsrc", imgsrc);
+  $.ajax({
+    type: "POST",
+    url: "/test",
+    data: {
+      url_give: url,
+      title_give: title,
+      desc_give: desc,
+      imgsrc_give: imgsrc,
+    },
+    success: function (response) {
+      alert(response["msg"]);
+      window.location.reload();
+    },
+  });
+}
+if (createBtn !== null) {
+  createBtn.addEventListener("click", posting);
+}
+// 수정
 function editPopup(id) {
   $.ajax({
     type: "GET",
@@ -194,7 +221,7 @@ function editPopup(id) {
       const desc = detail["desc"];
       const url = detail["url"];
       const id = detail["id"];
-      const imgsrc = detail["imgsrc"];
+      const imgsrc = detail["imgsrc"]; // 수정하기 전 받아온 이미지
       // const detailWrap = document.querySelector(".popup-detail-wrap");
       const modifyBtn = document.querySelector(".detail-modify-btn");
       const detailForm = document.querySelector(".detail-form");
@@ -210,18 +237,19 @@ function editPopup(id) {
                                       <div class="popup-box-wrap">
                                           <label for="url">웹 사이트 URL</label>
                                           <div class="flex-layout">
-                                                <input class="modify-preview-url" type="text" id="url" name="url" value="${url}"/>
+                                              <input class="modify-preview-url blur-edit-input" type="text" id="url" name="url" value="${url}"/>
                                               <button type="button" class="modify-preview-btn" onclick="previewImage()">미리보기</button>
                                           </div>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="title">제목</label>
-                                            <input  type="text" id="title" name="title" value="${title}"/>
+                                            <input class="blur-edit-input" type="text" id="title" name="title" value="${title}"/>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="description">설명</label>
-                                          <textarea type="text" id="description" name="description" rows="6" value="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
+                                          <textarea class="blur-edit-input" type="text" id="description" name="description" rows="6" value="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
                                       </div>
+                                      <textarea class="blur-edit-input" name="id" id="" cols="0" rows="0" style="display: none">${id}</textarea>
                                       <div class="popup-box-wrap">
                                       <input type="hidden" value="${id}" name="id" style="display: none">
                                           <button  class="modify-form-btn">수정하기</button>
@@ -252,39 +280,6 @@ function deletePopup(id) {
   });
 }
 
-// 찜, 좋아요 기능 임시
-const Option_Jjim = document.querySelector(".Option_Jjim");
-const Jjim_heart = document.querySelector(".heart");
-const Option_Like = document.querySelector(".Option_Like");
-const Like_thumb = document.querySelector(".thumbsUp");
-let Jjim_count = false;
-
-function Jjim_heartControl() {
-  Jjim_count = !Jjim_count;
-}
-
-let Like_count = false;
-
-function Like_thumbControl() {
-  Like_count = !Like_count;
-}
-
-function Jjim() {
-  if (Jjim_count) {
-    Jjim_heart.src = "../static/img/rheart.svg";
-  } else {
-    Jjim_heart.src = "../static/img/heart.svg";
-  }
-}
-
-function Like() {
-  if (Like_count) {
-    Like_thumb.src = "../static/img/bthumbsup.svg";
-  } else {
-    Like_thumb.src = "../static/img/thumbsup.svg";
-  }
-}
-
 if (document.querySelector(".Option_Jjim")) {
   Option_Jjim.addEventListener("click", Jjim);
   Jjim_heart.addEventListener("click", Jjim);
@@ -313,21 +308,6 @@ const loginBtn = document.querySelector(".login-btn");
 const loginBg = document.querySelector(".login-background");
 const loginCloseBtn = document.querySelector(".login-close-btn");
 
-// popup 함수 show, hide로 분리
-const showPopup = (e, tag) => {
-  if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
-    return null;
-  }
-  return tag.classList.add("show");
-};
-
-const hidePopup = (e, tag) => {
-  if (e.target.className !== e.currentTarget.className) {
-    return null;
-  }
-  tag.classList.remove("show");
-};
-
 //글작성
 if (document.querySelector(".create-btn") !== null) {
   popupBtn.addEventListener("click", (e) => showPopup(e, popupBg));
@@ -349,44 +329,86 @@ if (document.querySelector(".login-btn") !== null) {
   loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
 }
 
-//등록
-const createBtn = document.querySelector(".create-form-btn");
-let imgsrc = "";
-function posting() {
-  let url = document.getElementById("url").value;
-  let title = document.getElementById("title").value;
-  let desc = document.getElementById("description").value;
-  console.log("imgsrc",imgsrc)
-  $.ajax({
-    type: "POST",
-    url: "/test",
-    data: { url_give: url, title_give: title, desc_give: desc, imgsrc_give:imgsrc },
-    success: function (response) {
-      alert(response["msg"]);
-      window.location.reload();
-    },
-  });
-}
-if (createBtn !== null) {
-  createBtn.addEventListener("click", posting);
-}
+// popup 함수 show, hide로 분리
+const inputs = document.querySelectorAll(".blur-input");
+// querySelectorAll 는 동일한 클래스명을 갖는 모든 태그를 찾습니다.
+// querySelector 는 동일한 클래스명을 갖는 태그가 여러개일 경우, 제일 첫번째것만 찾습니다.
+const showPopup = (e, tag) => {
+  if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
+    return null;
+  }
+  // tag.classList.add("show");
 
+  // input 에서 포커스 아웃되었을때 팝업창 닫히는 부분 막기
+  const inputs = document.querySelectorAll(".blur-input");
+  // blur-input을 갖고 있는 모든 태그를 찾아서 inputs란 변수에 담는다.
+  // 모든 태그(inputs)를 forEach로 돌린다.
+  inputs.forEach((input) => {
+    // blur-input을 갖는 태그 하나하나마다 blur이벤트를 준다.
+    input.addEventListener("blur", () => {
+      if (tag.className === "signup-background") {
+        // 회원가입 팝업창일때, 회원가입 팝업창 외에 모두 show 클래스 지움
+        signupBg.classList.add("show");
+        loginBg.classList.remove("show");
+        popupBg.classList.remove("show");
+      } else if (tag.className === "login-background") {
+        // 로그인 팝업창일때, 로그입 팝업창 외에 모두 show 클래스 지움
+        signupBg.classList.remove("show");
+        loginBg.classList.add("show");
+        popupBg.classList.remove("show");
+      } else if (tag.className === "popup-background") {
+        // 글등록 팝업창일때 글등록 팝업창 외에 모두 show 클래스 지움
+        signupBg.classList.remove("show");
+        loginBg.classList.remove("show");
+        popupBg.classList.add("show");
+      }
+    });
+  });
+
+  return tag.classList.add("show");
+};
+
+const hidePopup = (e, tag) => {
+  if (e.target.className !== e.currentTarget.className) {
+    return null;
+  }
+  return tag.classList.remove("show");
+};
 // 상세보기 닫기 팝업만 따로 분리함
 const hideDetailPopup = (e, tag) => {
   const modifyBtn = document.querySelector(".detail-modify-btn");
   const detailForm = document.querySelector(".detail-form");
   const modifyForm = document.querySelector(".modify-form");
+  const detailBg = document.querySelector(".popup-detail-background");
 
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
+
   if (e.target.className) tag.classList.remove("show");
   modifyBtn.style.display = "block";
   detailForm.style.display = "block";
-  modifyForm.innerHTML = ``;
+
+  // modifyForm.innerHTML = ``;
+
+  // 수정하는 input에서 포커스 아웃되면 팝업창 닫히지 않게
+  const inputs = document.querySelectorAll(".blur-edit-input");
+  // 동일한 클래스명을 갖는 태그를 모두 찾아서 forEach로 돌린다.
+  inputs.forEach((input) => {
+    // 동일한 클래스 명을 갖는 태그 하나하나에 blur이벤트를 준다.
+    input.addEventListener("blur", (e) => {
+      if (e.target.classList.contains("blur-edit-input")) {
+        modifyBtn.style.display = "none";
+        detailForm.style.display = "none";
+        detailBg.classList.add("show");
+      }
+    });
+  });
+
+  return detailBg.classList.remove("show");
 };
 
-let url = document.querySelector(".preview-url");
+let url = document.querySelector(".preview-url"); // input
 let previewBox = document.querySelector(".preview-image-wrap");
 const previewBtn = document.querySelector(".preview-btn");
 
@@ -399,7 +421,7 @@ if (previewBtn !== null) {
 const previewImage = (tag) => {
   let value = "";
   let modifyWrap = ``;
-  const urlValue = url.value;
+  const urlValue = url.value; // 등록 값 등록 input / 수정 input
   let check = true;
   // 상세보기 팝업을 클릭했을때 동적으로 html이 생성되어
   // 수정 버튼의 미리보기 버튼은 등록 팝업에서는 생성되지 않은 상태이기 때문에
@@ -422,12 +444,13 @@ const previewImage = (tag) => {
       url_give: value,
     },
     success: function (response) {
+      // 서버랑 크롤링 img
       const url = response;
-      imgsrc = url;
+      imgsrc = url; // imgsrt = '';/
       // og:image가 없을 경우 기본 이미지 나오게
       if (url === "" && check) {
         previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
-      } else if (url === "" && !check) {
+      } else if ((url === "" && !check) || (!check && url.spl)) {
         modifyWrap.innerHTML = `<img class="detail-image-wrap" src="../static/img/og_base.jpg" alt="썸네일"/>`;
       }
       // og:image가 있을 경우
@@ -587,3 +610,36 @@ likeBtn.addEventListener("click", () => {
       }
     });
 });
+
+// 찜, 좋아요 기능 임시
+const Option_Jjim = document.querySelector(".Option_Jjim");
+const Jjim_heart = document.querySelector(".heart");
+const Option_Like = document.querySelector(".Option_Like");
+const Like_thumb = document.querySelector(".thumbsUp");
+let Jjim_count = false;
+
+function Jjim_heartControl() {
+  Jjim_count = !Jjim_count;
+}
+
+let Like_count = false;
+
+function Like_thumbControl() {
+  Like_count = !Like_count;
+}
+
+function Jjim() {
+  if (Jjim_count) {
+    Jjim_heart.src = "../static/img/rheart.svg";
+  } else {
+    Jjim_heart.src = "../static/img/heart.svg";
+  }
+}
+
+function Like() {
+  if (Like_count) {
+    Like_thumb.src = "../static/img/bthumbsup.svg";
+  } else {
+    Like_thumb.src = "../static/img/thumbsup.svg";
+  }
+}

@@ -118,7 +118,7 @@ def posting():
     token_email = payload['email']
     now = datetime.datetime.now()
     now_date_time = now.strftime("%Y%m%d%H%M%S")
-    print("now_date_time = ", now_date_time)
+
     doc = {
         "id": uuid.uuid4().hex,
         'url': url_receive,
