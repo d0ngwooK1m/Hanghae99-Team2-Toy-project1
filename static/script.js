@@ -102,8 +102,8 @@ $("form[name=login_form]").submit(function (e) {
     data: data_give,
     dataType: "json",
     success: function (response) {
-      window.location.href = "/";
       $.cookie("login_token", response["login_token"], { path: "/" });
+      return window.location.href = "/";
       // console.log(document.cookie);
     },
     error: function (response) {
@@ -124,7 +124,7 @@ $(".logout-btn").click(function (e) {
     dataType: "json",
     success: function (response) {
       $.removeCookie("login_token", { path: "/" });
-      window.location.href = "/";
+      return window.location.href = "/";
     },
   });
 
@@ -133,7 +133,7 @@ $(".logout-btn").click(function (e) {
 
 //등록권한 없음
 function postingFail() {
-  alert("사용권한이 없습니다");
+  return alert("사용권한이 없습니다");
 }
 
 // 카드 상세화면 팝업
@@ -238,31 +238,31 @@ function editPopup(id) {
       modifyBtn.style.display = "none";
       detailForm.style.display = "none";
       modifyForm.innerHTML = `
-                                    <form action="/test/submitEdit" method="POST" class="edit-form">
+
                                       <div class="modify-image-wrap">
-                                        <img class="detail-image-wrap" src="${imgsrc}"  alt="image"/>
+                                        <img class="detail-image-wrap" id="imgSource" src="${imgsrc}"  alt="image"/>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="url">웹 사이트 URL</label>
                                           <div class="flex-layout">
-                                              <input class="modify-preview-url blur-edit-input" type="text" id="url" name="url" value="${url}"/>
-                                              <button type="button" class="modify-preview-btn" onclick="previewImage()">미리보기</button>
+                                              <input class="modify-preview-url blur-edit-input" type="text" id="urlNew" name="url" value="${url}"/>
+                                              <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
                                           </div>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="title">제목</label>
-                                            <input class="blur-edit-input" type="text" id="title" name="title" value="${title}"/>
+                                            <input class="blur-edit-input" type="text" id="titleNew" name="title" value="${title}"/>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="description">설명</label>
-                                          <textarea class="blur-edit-input" type="text" id="description" name="description" rows="6" value="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
+                                          <textarea class="blur-edit-input" type="text" id="descriptionNew" name="description" rows="6" value="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
                                       </div>
                                       <textarea class="blur-edit-input" name="id" id="" cols="0" rows="0" style="display: none">${id}</textarea>
                                       <div class="popup-box-wrap">
                                       <input type="hidden" value="${id}" name="id" style="display: none">
-                                          <button  class="modify-form-btn">수정하기</button>
+                                          <button  class="modify-form-btn" onclick="submitEdit('${id}')">수정하기</button>
                                       </div>
-                                    </form>
+
                                     `;
     },
     error: function (response) {
@@ -272,6 +272,30 @@ function editPopup(id) {
   });
 }
 
+function submitEdit(id) {
+  const urlNew = document.getElementById('urlNew').value;
+  const titleNew = document.getElementById('titleNew').value;
+  const descNew = document.getElementById('descriptionNew').value;
+  const imgNew = document.getElementById('imgSource').src;
+
+  // console.log(urlNew, titleNew, descNew);
+  $.ajax({
+    type:"POST",
+    url:"/test/submitEdit",
+    data: {
+      id_give: id,
+      img_give: imgNew,
+      url_give: urlNew,
+      title_give: titleNew,
+      desc_give: descNew
+    },
+    success: function (response) {
+        alert(response["response"]);
+        return window.location.href = "/";
+    }
+  })
+}
+
 function deletePopup(id) {
   $.ajax({
     type: "POST",
@@ -279,7 +303,7 @@ function deletePopup(id) {
     data: { id_give: id },
     success: function (response) {
       alert(response["response"]);
-      window.location.href = "/";
+      return window.location.href = "/";
     },
     error: function (response) {
       alert(response.responseJSON["response"]);
@@ -420,9 +444,9 @@ let url = document.querySelector(".preview-url"); // input
 let previewBox = document.querySelector(".preview-image-wrap");
 const previewBtn = document.querySelector(".preview-btn");
 
-if (previewBtn !== null) {
-  previewBtn.addEventListener("click", () => previewImage(previewBtn));
-}
+
+previewBtn.addEventListener("click", () => previewImage(previewBtn));
+
 
 // 미리보기 클릭했을 때 og:image 가져오는 함수.
 // 등록 팝업과 상세보기 팝업에서 공통으로 쓰임
@@ -463,9 +487,9 @@ const previewImage = (tag) => {
       }
       // og:image가 있을 경우
       if (value === urlValue) {
-        previewBox.innerHTML = `<img src="${url}" alt="썸네일"/>`;
+        previewBox.innerHTML = `<img src="${url}" id="imgSource" alt="썸네일"/>`;
       } else {
-        modifyWrap.innerHTML = `<img class="detail-image-wrap" src="${url}" alt="썸네일"/>`;
+        modifyWrap.innerHTML = `<img class="detail-image-wrap" id="imgSource" src="${url}" alt="썸네일"/>`;
       }
     },
     error: function (e) {
