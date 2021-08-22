@@ -212,11 +212,14 @@ function editPopup(id) {
                                           <div class="flex-layout">
                                               <input class="modify-preview-url blur-edit-input" type="text" id="url" name="url" value="${url}"/>
                                               <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
+                                                <input class="modify-preview-url" type="text" id="url" name="url" value="${url}"/>
+                                              <button type="button" class="modify-preview-btn" onclick="previewImage()">미리보기</button>
                                           </div>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="title">제목</label>
                                           <input class="blur-edit-input" type="text" id="title" name="title" value="${title}"/>
+                                            <input  type="text" id="title" name="title" value="${title}"/>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="description">설명</label>
@@ -224,6 +227,7 @@ function editPopup(id) {
                                       </div>
                                       <textarea class="blur-edit-input" name="id" id="" cols="0" rows="0" style="display: none">${id}</textarea>
                                       <div class="popup-box-wrap">
+                                      <input type="hidden" value="${id}" name="id" style="display: none">
                                           <button  class="modify-form-btn">수정하기</button>
                                       </div>
                                     </form>

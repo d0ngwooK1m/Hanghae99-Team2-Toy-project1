@@ -70,7 +70,7 @@ def editAuthCheck(type):
         if user_info['email'] == check['email'] and type == "GET":
             return jsonify({"response": detail}), 200
         elif user_info['email'] == check['email'] and type == "POST":
-            db.posting.delete_one({'id':id_receive})
+            db.posting.delete_one({'id': id_receive})
             return jsonify({"response": '삭제 완료!'}), 200
         else:
             return jsonify({"response": "권한 없음"}), 400
@@ -160,9 +160,8 @@ def submitEdit():
     url_receive = request.form['url']
     title_receive = request.form['title']
     desc_receive = request.form['description']
-    db.posting.update_one({'id': id_receive}, {
-                          '$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive}})
-    # print(id_receive, detail)
+    db.posting.update_one({'id': id_receive}, {'$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive}})
+    print(id_receive, url_receive, title_receive, desc_receive)
     return render_template("main.html")
 
 
