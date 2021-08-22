@@ -5,6 +5,7 @@ import pymongo
 import jwt
 import uuid
 import datetime
+# import beautifulsoup4
 
 
 from bs4 import BeautifulSoup
@@ -154,13 +155,14 @@ def delete():
 
 @app.route('/test/submitEdit', methods=['POST'])
 def submitEdit():
-    id_receive = request.form['id']
-    url_receive = request.form['url']
-    title_receive = request.form['title']
-    desc_receive = request.form['description']
-    db.posting.update_one({'id': id_receive}, {'$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive}})
+    id_receive = request.form['id_give']
+    img_receive = request.form['img_give']
+    url_receive = request.form['url_give']
+    title_receive = request.form['title_give']
+    desc_receive = request.form['desc_give']
     print(id_receive, url_receive, title_receive, desc_receive)
-    return render_template("main.html")
+    db.posting.update_one({'id': id_receive}, {'$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive, 'imgsrc': img_receive}})
+    return jsonify({ "response": "수정 완료!"})
 
 
 @app.route('/search', methods=['GET'])
