@@ -33,6 +33,7 @@ def userAuthCheck(str):
 
         if not token_receive:
             return render_template('main.html', token=tokenExist)
+
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
 
         user_info = db.users.find_one({"email": payload["email"]})
@@ -128,7 +129,7 @@ def posting():
         'heart': 0,
         'uploadtime': now_date_time,
         'email': token_email,
-        'imgsrc':imgsrc_receive
+        'imgsrc': imgsrc_receive
     }
     db.posting.insert_one(doc)
     return jsonify({'msg': '등록 완료!'})
@@ -158,7 +159,8 @@ def submitEdit():
     url_receive = request.form['url']
     title_receive = request.form['title']
     desc_receive = request.form['description']
-    db.posting.update_one({'id': id_receive}, {'$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive}})
+    db.posting.update_one({'id': id_receive}, {
+                          '$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive}})
     print(id_receive, url_receive, title_receive, desc_receive)
     return render_template("main.html")
 
@@ -214,6 +216,8 @@ def previewImage():
     return jsonify(image)
 
 # 추천하기 기능구현
+
+
 @app.route('/update/likes', methods=['POST'])
 def updateLikes():
     id_receive = request.get_json()
@@ -222,7 +226,7 @@ def updateLikes():
     target_like = find_list['likes']
     new_like = target_like + 1
     db.posting.update_one({'id': find_id}, {'$set': {'likes': new_like}})
-    return jsonify({'msg':"추천되었습니다."})
+    return jsonify({'msg': "추천되었습니다."})
 # 켜기 터미널
 # set FLASK_APP=app.py
 # set FLASK_ENV=development
