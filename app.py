@@ -100,6 +100,15 @@ def fail():
 def mypage():
     return userAuthCheck("myPage.html")
 
+@app.route('/myPage/list', methods=['GET'])
+def mypage_list():
+    token_receive = request.cookies.get('login_token')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    token_email = payload['email']
+    lists = list(db.posting.find({'email': token_email}, {'_id': False}))
+    print("mypage lists = ", lists)
+    return jsonify({'my_list': lists})
+
 
 @app.route('/view', methods=['GET'])
 def show_view():

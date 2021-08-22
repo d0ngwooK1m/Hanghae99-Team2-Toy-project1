@@ -1,6 +1,7 @@
+const locationHref = window.location.href;
+const findeMypage = locationHref.split("/").reverse()[0];
+// 메인페이지와 마이페이지의 리스트 불러오는 함수 구분처리함.
 window.addEventListener("load", function () {
-  const locationHref = window.location.href;
-  const findeMypage = locationHref.split("/").reverse()[0];
   if (findeMypage === "myPage") {
     myPageList();
   } else {
@@ -488,7 +489,11 @@ function updateLike(id) {
     .then((response) => response.json())
     .then((response) => {
       alert(response["msg"]);
-      window.location.href = "/";
+      if (findeMypage === "myPage") {
+        window.location.href = "/myPage";
+      } else {
+        window.location.href = "/";
+      }
     });
 }
 // 최신순 정렬
