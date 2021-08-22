@@ -97,8 +97,6 @@ def fail():
 @app.route('/myPage')
 # @login_required
 def mypage():
-    token_receive = request.cookies.get('login_token')
-    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     return userAuthCheck("myPage.html")
 
 

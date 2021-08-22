@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
   viewing();
 });
-//뷰?
+// 리스트 뷰
 let cardRow = document.querySelector(".cardRow");
 function viewing() {
   $.ajax({
@@ -128,6 +128,7 @@ function postingFail() {
   alert("사용권한이 없습니다");
 }
 
+// 카드 상세화면 팝업
 function showDetail(id) {
   $.ajax({
     type: "GET",
@@ -182,7 +183,33 @@ function showDetail(id) {
     },
   });
 }
-
+// 카드 등록
+const createBtn = document.querySelector(".create-form-btn");
+let imgsrc = "";
+function posting() {
+  let url = document.getElementById("url").value;
+  let title = document.getElementById("title").value;
+  let desc = document.getElementById("description").value;
+  console.log("imgsrc", imgsrc);
+  $.ajax({
+    type: "POST",
+    url: "/test",
+    data: {
+      url_give: url,
+      title_give: title,
+      desc_give: desc,
+      imgsrc_give: imgsrc,
+    },
+    success: function (response) {
+      alert(response["msg"]);
+      window.location.reload();
+    },
+  });
+}
+if (createBtn !== null) {
+  createBtn.addEventListener("click", posting);
+}
+// 수정
 function editPopup(id) {
   $.ajax({
     type: "GET",
@@ -194,7 +221,7 @@ function editPopup(id) {
       const desc = detail["desc"];
       const url = detail["url"];
       const id = detail["id"];
-      const imgsrc = detail["imgsrc"];
+      const imgsrc = detail["imgsrc"]; // 수정하기 전 받아온 이미지
       // const detailWrap = document.querySelector(".popup-detail-wrap");
       const modifyBtn = document.querySelector(".detail-modify-btn");
       const detailForm = document.querySelector(".detail-form");
@@ -211,15 +238,12 @@ function editPopup(id) {
                                           <label for="url">웹 사이트 URL</label>
                                           <div class="flex-layout">
                                               <input class="modify-preview-url blur-edit-input" type="text" id="url" name="url" value="${url}"/>
-                                              <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
-                                                <input class="modify-preview-url" type="text" id="url" name="url" value="${url}"/>
                                               <button type="button" class="modify-preview-btn" onclick="previewImage()">미리보기</button>
                                           </div>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="title">제목</label>
-                                          <input class="blur-edit-input" type="text" id="title" name="title" value="${title}"/>
-                                            <input  type="text" id="title" name="title" value="${title}"/>
+                                            <input class="blur-edit-input" type="text" id="title" name="title" value="${title}"/>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="description">설명</label>
@@ -305,33 +329,6 @@ if (document.querySelector(".login-btn") !== null) {
   loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
 }
 
-//등록
-const createBtn = document.querySelector(".create-form-btn");
-let imgsrc = "";
-function posting() {
-  let url = document.getElementById("url").value;
-  let title = document.getElementById("title").value;
-  let desc = document.getElementById("description").value;
-  console.log("imgsrc", imgsrc);
-  $.ajax({
-    type: "POST",
-    url: "/test",
-    data: {
-      url_give: url,
-      title_give: title,
-      desc_give: desc,
-      imgsrc_give: imgsrc,
-    },
-    success: function (response) {
-      alert(response["msg"]);
-      window.location.reload();
-    },
-  });
-}
-if (createBtn !== null) {
-  createBtn.addEventListener("click", posting);
-}
-
 // popup 함수 show, hide로 분리
 const inputs = document.querySelectorAll(".blur-input");
 // querySelectorAll 는 동일한 클래스명을 갖는 모든 태그를 찾습니다.
@@ -375,8 +372,7 @@ const hidePopup = (e, tag) => {
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
-
-  tag.classList.remove("show");
+  return tag.classList.remove("show");
 };
 // 상세보기 닫기 팝업만 따로 분리함
 const hideDetailPopup = (e, tag) => {
@@ -412,7 +408,7 @@ const hideDetailPopup = (e, tag) => {
   return detailBg.classList.remove("show");
 };
 
-let url = document.querySelector(".preview-url");
+let url = document.querySelector(".preview-url"); // input
 let previewBox = document.querySelector(".preview-image-wrap");
 const previewBtn = document.querySelector(".preview-btn");
 
@@ -425,7 +421,7 @@ if (previewBtn !== null) {
 const previewImage = (tag) => {
   let value = "";
   let modifyWrap = ``;
-  const urlValue = url.value;
+  const urlValue = url.value; // 등록 값 등록 input / 수정 input
   let check = true;
   // 상세보기 팝업을 클릭했을때 동적으로 html이 생성되어
   // 수정 버튼의 미리보기 버튼은 등록 팝업에서는 생성되지 않은 상태이기 때문에
@@ -448,12 +444,13 @@ const previewImage = (tag) => {
       url_give: value,
     },
     success: function (response) {
+      // 서버랑 크롤링 img
       const url = response;
-      imgsrc = url;
+      imgsrc = url; // imgsrt = '';/
       // og:image가 없을 경우 기본 이미지 나오게
       if (url === "" && check) {
         previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
-      } else if (url === "" && !check) {
+      } else if ((url === "" && !check) || (!check && url.spl)) {
         modifyWrap.innerHTML = `<img class="detail-image-wrap" src="../static/img/og_base.jpg" alt="썸네일"/>`;
       }
       // og:image가 있을 경우
