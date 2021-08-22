@@ -1,9 +1,17 @@
+const locationHref = window.location.href;
+const findeMypage = locationHref.split("/").reverse()[0];
+// 메인페이지와 마이페이지의 리스트 불러오는 함수 구분처리함.
 window.addEventListener("load", function () {
-  viewing();
+  if (findeMypage === "myPage") {
+    myPageList();
+  } else {
+    viewing();
+  }
 });
 // 리스트 뷰
 let cardRow = document.querySelector(".cardRow");
 function viewing() {
+  // cardRow.innerHTML = "";
   $.ajax({
     type: "GET",
     url: "/view",
@@ -361,13 +369,13 @@ const showPopup = (e, tag) => {
   if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
     return null;
   }
-  // tag.classList.add("show");
+  tag.classList.add("show");
 
   // input 에서 포커스 아웃되었을때 팝업창 닫히는 부분 막기
   const inputs = document.querySelectorAll(".blur-input");
   // blur-input을 갖고 있는 모든 태그를 찾아서 inputs란 변수에 담는다.
   // 모든 태그(inputs)를 forEach로 돌린다.
-  inputs.forEach((input) => {
+  return inputs.forEach((input) => {
     // blur-input을 갖는 태그 하나하나마다 blur이벤트를 준다.
     input.addEventListener("blur", () => {
       if (tag.className === "signup-background") {
@@ -389,7 +397,7 @@ const showPopup = (e, tag) => {
     });
   });
 
-  return tag.classList.add("show");
+  // return tag.classList.add("show");
 };
 
 const hidePopup = (e, tag) => {
@@ -505,7 +513,11 @@ function updateLike(id) {
     .then((response) => response.json())
     .then((response) => {
       alert(response["msg"]);
-      window.location.href = "/";
+      if (findeMypage === "myPage") {
+        window.location.href = "/myPage";
+      } else {
+        window.location.href = "/";
+      }
     });
 }
 // 최신순 정렬
