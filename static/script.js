@@ -103,7 +103,7 @@ $("form[name=login_form]").submit(function (e) {
     dataType: "json",
     success: function (response) {
       $.cookie("login_token", response["login_token"], { path: "/" });
-      return window.location.href = "/";
+      return (window.location.href = "/");
       // console.log(document.cookie);
     },
     error: function (response) {
@@ -124,7 +124,7 @@ $(".logout-btn").click(function (e) {
     dataType: "json",
     success: function (response) {
       $.removeCookie("login_token", { path: "/" });
-      return window.location.href = "/";
+      return (window.location.href = "/");
     },
   });
 
@@ -273,27 +273,27 @@ function editPopup(id) {
 }
 
 function submitEdit(id) {
-  const urlNew = document.getElementById('urlNew').value;
-  const titleNew = document.getElementById('titleNew').value;
-  const descNew = document.getElementById('descriptionNew').value;
-  const imgNew = document.getElementById('imgSource').src;
+  const urlNew = document.getElementById("urlNew").value;
+  const titleNew = document.getElementById("titleNew").value;
+  const descNew = document.getElementById("descriptionNew").value;
+  const imgNew = document.getElementById("imgSource").src;
 
   // console.log(urlNew, titleNew, descNew);
   $.ajax({
-    type:"POST",
-    url:"/test/submitEdit",
+    type: "POST",
+    url: "/test/submitEdit",
     data: {
       id_give: id,
       img_give: imgNew,
       url_give: urlNew,
       title_give: titleNew,
-      desc_give: descNew
+      desc_give: descNew,
     },
     success: function (response) {
-        alert(response["response"]);
-        return window.location.href = "/";
-    }
-  })
+      alert(response["response"]);
+      return (window.location.href = "/");
+    },
+  });
 }
 
 function deletePopup(id) {
@@ -303,7 +303,7 @@ function deletePopup(id) {
     data: { id_give: id },
     success: function (response) {
       alert(response["response"]);
-      return window.location.href = "/";
+      return (window.location.href = "/");
     },
     error: function (response) {
       alert(response.responseJSON["response"]);
@@ -444,9 +444,7 @@ let url = document.querySelector(".preview-url"); // input
 let previewBox = document.querySelector(".preview-image-wrap");
 const previewBtn = document.querySelector(".preview-btn");
 
-
 previewBtn.addEventListener("click", () => previewImage(previewBtn));
-
 
 // 미리보기 클릭했을 때 og:image 가져오는 함수.
 // 등록 팝업과 상세보기 팝업에서 공통으로 쓰임
