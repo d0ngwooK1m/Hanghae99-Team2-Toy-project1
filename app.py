@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for, flash
 import requests
 import pymongo
@@ -113,7 +112,7 @@ def mypage_list():
 
 @app.route('/view', methods=['GET'])
 def show_view():
-    lists = list(db.posting.find({}, {'_id': False}))
+    lists = list(db.posting.find({}, {'_id': False}).sort('uploadtime',-1))
     return jsonify({'all_post': lists})
 
 
@@ -180,41 +179,38 @@ def submitEdit():
 @app.route('/search', methods=['GET'])
 def view_Search():
     text = request.args.get('text')
-    # text는 form으로 데이터를 받음
+    #text는 form으로 데이터를 받음
     splitted_keywords = text.split(' ')
-    # text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
+    #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
     print(splitted_keywords)
-    sep_keywords_T = []
-    sep_keywords_RT = []
-    sep_keywords_D = []
-    for string in splitted_keywords:
-        sep_keywords_T.append({"title": string})
-        # title이 검색어와 일치하는 것만 sep_keywords_T에 저장
-        sep_keywords_RT.append({'$and': [
-            {"title": {'$ne': string}},
-            {"title": {'$regex': string}},
-            {"desc": {'$ne': {'$regex': string}}}
-        ]})
-        # title이 검색어가 포함되어있는 것 중 desc에 검색어가 없는 것
-        sep_keywords_D.append({"$and": [
-            {"desc": {'$regex': string}},
-            {"title": {'$not': {'$regex': string}}}
-        ]})
-        # desc에 검색어가 포함되어있는것 중
-        # title이 검색어와 포함되는 것을 제외하고 sep_keywords_D에 저장
-    print(sep_keywords_T)
-    print(sep_keywords_RT)
-    print(sep_keywords_D)
-
-    search_T = list(db.posting.find({"$or": sep_keywords_T}, {'_id': False}))
-    search_RT = list(db.posting.find({"$or": sep_keywords_RT}, {'_id': False}))
-    search_D = list(db.posting.find({"$or": sep_keywords_D}, {'_id': False}))
-    print(search_T)
-    print(search_RT)
-    print(search_D)
-    return render_template('search.html', search_T=search_T, search_D=search_D, search_RT=search_RT,
-                           keywords=splitted_keywords)
-    # 일치하는것들을 각각 search_T, search_D로 불러서 jinja2 템플릿으로 정보를 전달
+    pipelines = list()
+    for str in splitted_keywords:
+        pipelines.append({
+            '$match':{
+                '$or':[
+                    {'title':{'$regex':str}},
+                    {'desc':{"$regex":str}}
+                ]}
+        })
+        pipelines.append({
+            '$project': {
+                'title': 1,
+                'desc': 1,
+                'uploadtime': 1,
+                'id': 1,
+                'imgsrc': 1,
+                'likes':1,
+                'url':1
+            }
+        })
+        pipelines.append({
+            '$sort':{
+                'uploadtime':-1
+            }
+        })
+    search = list(db.posting.aggregate(pipelines))
+    print(search)
+    return render_template('search.html', keywords=splitted_keywords, search=search)
 
 
 @app.route('/create/previewImage', methods=['POST'])
