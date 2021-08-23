@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+
+
 {% block content %}
      <section class="icon-nav-wrap">
         <nav class="container flex-layout-between">
@@ -61,9 +63,13 @@
             {% endfor %}
         </div>     
     </section>
+    <!-- 리스트 상세보기 -->
+    <div class="popup-detail-wrap">
+        {#        상세보기#}
+    </div>
 
     <!-- 등록팝업 -->
-    <!-- <div class="popup-background">
+    <div class="popup-background">
         <div class="popup-wrap">
             <section class="popup-content">
                 <div class="flex-layout-between">
@@ -95,10 +101,6 @@
                 </div>
             </section>
         </div>
-    </div> -->
-
-    <!-- 리스트 상세보기 -->
-    <div class="popup-detail-wrap">
-{#        상세보기#}
     </div>
+
 {% endblock %}
