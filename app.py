@@ -197,28 +197,38 @@ def view_Search():
     splitted_keywords = text.split(' ')
     #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
     print(splitted_keywords)
-    pipelines = list()
-    for str in splitted_keywords:
-        pipelines.append({
-            '$match':{
-                '$or':[
-                    {'title':{'$regex':str}},
-                    {'desc':{"$regex":str}}
-                ]}
-            # '$text':{'$search':str}
-        })
-        pipelines.append({
-            '$project': {
-                '_id': 0
-            }
-        })
-        pipelines.append({
-            '$sort':{
-                'uploadtime':-1
-                # '$meta':{'score':'textScore'}
-            }
-        })
-    search = list(db.posting.aggregate(pipelines))
+    # pipelines = list()
+    # for str in splitted_keywords:
+    #     pipelines.append({
+    #         '$match':{
+    #             '$or':[
+    #                 {'title':{'$regex':str}},
+    #                 {'desc':{"$regex":str}}
+    #             ]}
+    #         # '$text':{'$search':str}
+    #     })
+    #     pipelines.append({
+    #         '$project': {
+    #             '_id': 0
+    #         }
+    #     })
+    #     pipelines.append({
+    #         '$sort':{
+    #             'uploadtime':-1
+    #             # '$meta':{'score':'textScore'}
+    #         }
+    #     })
+    # print(pipelines)
+    # search = list(db.posting.aggregate(pipelines))
+    # print(search)
+    sep_keywords = []
+    for string in splitted_keywords:
+        sep_keywords.append({'$or':[
+            {'title':{'$regex':string}},
+            {'desc':{'$regex':string}}
+        ]})
+    print(sep_keywords)
+    search = list(db.posting.find({"$or":sep_keywords},{'_id':False}).sort('uploadtime',-1))
     print(search)
     return render_template('search.html', keywords=splitted_keywords, search=search)
 
