@@ -133,7 +133,7 @@ def posting():
     now = datetime.datetime.now()
     now_date_time = now.strftime("%Y%m%d%H%M%S")
     # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
-    if image.split("/")[1] == "static":
+    if image.split("/")[1] == "static" or image == "":
         image = "../static/img/linkgather.png"
     doc = {
         "id": uuid.uuid4().hex,
