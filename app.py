@@ -191,21 +191,17 @@ def view_Search():
                     {'title':{'$regex':str}},
                     {'desc':{"$regex":str}}
                 ]}
+            # '$text':{'$search':str}
         })
         pipelines.append({
             '$project': {
-                'title': 1,
-                'desc': 1,
-                'uploadtime': 1,
-                'id': 1,
-                'imgsrc': 1,
-                'likes':1,
-                'url':1
+                '_id': 0
             }
         })
         pipelines.append({
             '$sort':{
                 'uploadtime':-1
+                # '$meta':{'score':'textScore'}
             }
         })
     search = list(db.posting.aggregate(pipelines))
