@@ -124,7 +124,11 @@ def posting():
     url_receive = request.form['url_give']
     title_receive = request.form['title_give']
     desc_receive = request.form['desc_give']
-    imgsrc_receive = request.form['imgsrc_give']
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    data = requests.get(url_receive, headers=headers)
+    soup = BeautifulSoup(data.text, 'html.parser')
+    image = soup.select_one('meta[property="og:image"]')['content']
     token_email = payload['email']
     now = datetime.datetime.now()
     now_date_time = now.strftime("%Y%m%d%H%M%S")
@@ -138,7 +142,7 @@ def posting():
         'heart': 0,
         'uploadtime': now_date_time,
         'email': token_email,
-        'imgsrc': imgsrc_receive
+        'imgsrc': image
     }
     db.posting.insert_one(doc)
     return jsonify({'msg': '등록 완료!'})
@@ -166,8 +170,13 @@ def delete():
 def submitEdit():
 
     id_receive = request.form['id_give']
-    img_receive = request.form['img_give']
+    # img_receive = request.form['img_give']
     url_receive = request.form['url_give']
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+    data = requests.get(url_receive, headers=headers)
+    soup = BeautifulSoup(data.text, 'html.parser')
+    img_receive = soup.select_one('meta[property="og:image"]')['content']
     title_receive = request.form['title_give']
     desc_receive = request.form['desc_give']
 
