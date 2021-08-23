@@ -1,5 +1,12 @@
 {% extends "base.html" %}
-
+<script>
+          if (document.querySelector(".show") !== null) {
+        detailCloseBtn.addEventListener("click", (e) =>
+          hideDetailPopup(e, detailBg)
+        );
+        detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+      }
+</script>
 {% block content %}
      <section class="icon-nav-wrap">
         <nav class="container flex-layout-between">
@@ -24,47 +31,47 @@
         </div>
     </div>
     <section class ="cardCloumn" id="card_list">
-        <div class ="cardRow">
+        <div class ="cardRow2">
             {% for text in search %}
-                        <div class="ListBg">
-                            <div class="ListFlex">
-                                <div class="click-wrap" onclick="showDetail('{{text['id']}}')">
-                                    <div class="imgHidden-box">
-                                        <img src="{{text['imgsrc']}}" class="classImg">
-                                        <button class="Option_Jjim">
-                                            <img src="../static/img/heart.svg" class="heart">
-                                        </button>
-                                    </div>  
-                                    <h3 class ="title">{{text['title']}}</h3>
-                                    <div class ="numCount">
-                                        <div class = "likeNum">
-                                            <img src="../static/img/likeUp3.png">
-                                            <span>{{text['likes']}}</span>
-                                        </div>
-                                        <div class = "JjimNum">
-                                            <img src="../static/img/Rheart.svg">
-                                            <span>0</span>
-                                        </div>
-                                    </div>
-                                    <hr/>
+                <div class="ListBg">
+                    <div class="ListFlex">
+                        <div class="click-wrap" onclick="showDetail('{{text['id']}}')">
+                            <div class="imgHidden-box">
+                                <img src="{{text['imgsrc']}}" class="classImg">
+                                <button class="Option_Jjim">
+                                    <img src="../static/img/heart.svg" class="heart">
+                                </button>
+                            </div>  
+                            <h3 class ="title">{{text['title']}}</h3>
+                            <div class ="numCount">
+                                <div class = "likeNum">
+                                    <img src="../static/img/likeUp3.png">
+                                    <span>{{text['likes']}}</span>
                                 </div>
-                                <div class="Option">
-                                    <div class="Like Option_Like" onclick="updateLike('{{text['id']}}')">
-                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
-                                        <span class="likes-btn">추천하기</span>
-                                    </div>
-                                    <a class="Link" href="{{text['url']}}" target= '_blank'>
-                                        <span>바로가기</span>
-                                    </a>
+                                <div class = "JjimNum">
+                                    <img src="../static/img/Rheart.svg">
+                                    <span>0</span>
                                 </div>
                             </div>
+                            <hr/>
                         </div>
+                        <div class="Option">
+                            <div class="Like Option_Like" onclick="updateLike('{{text['id']}}')">
+                                <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                <span class="likes-btn">추천하기</span>
+                            </div>
+                            <a class="Link" href="{{text['url']}}" target= '_blank'>
+                                <span>바로가기</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
         </div>     
     </section>
 
     <!-- 등록팝업 -->
-    <div class="popup-background">
+    <!-- <div class="popup-background">
         <div class="popup-wrap">
             <section class="popup-content">
                 <div class="flex-layout-between">
@@ -96,7 +103,7 @@
                 </div>
             </section>
         </div>
-    </div>
+    </div> -->
 
     <!-- 리스트 상세보기 -->
     <div class="popup-detail-wrap">

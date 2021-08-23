@@ -135,7 +135,36 @@ $(".logout-btn").click(function (e) {
 function postingFail() {
   return alert("사용권한이 없습니다");
 }
+// 상세보기 닫기 팝업만 따로 분리함
+const hideDetailPopup = (e, tag) => {
+  const modifyBtn = document.querySelector(".detail-modify-btn");
+  const detailForm = document.querySelector(".detail-form");
+  const detailBg = document.querySelector(".popup-detail-background");
 
+  if (e.target.className !== e.currentTarget.className) {
+    return null;
+  }
+
+  if (e.target.className) tag.classList.remove("show");
+  modifyBtn.style.display = "block";
+  detailForm.style.display = "block";
+
+  // 수정하는 input에서 포커스 아웃되면 팝업창 닫히지 않게
+  const inputs = document.querySelectorAll(".blur-edit-input");
+  // 동일한 클래스명을 갖는 태그를 모두 찾아서 forEach로 돌린다.
+  inputs.forEach((input) => {
+    // 동일한 클래스 명을 갖는 태그 하나하나에 blur이벤트를 준다.
+    input.addEventListener("blur", (e) => {
+      if (e.target.classList.contains("blur-edit-input")) {
+        modifyBtn.style.display = "none";
+        detailForm.style.display = "none";
+        detailBg.classList.add("show");
+      }
+    });
+  });
+
+  return detailBg.classList.remove("show");
+};
 // 카드 상세화면 팝업
 function showDetail(id) {
   $.ajax({
@@ -181,13 +210,18 @@ function showDetail(id) {
       const detailBg = document.querySelector(".popup-detail-background");
       detailBg.classList.add("show");
       const detailCloseBtn = document.querySelector(".popup-detail-close-btn");
-
-      if (document.querySelector(".show") !== null) {
-        detailCloseBtn.addEventListener("click", (e) =>
-          hideDetailPopup(e, detailBg)
-        );
-        detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
-      }
+      detailCloseBtn.addEventListener("click", (e) =>
+        hideDetailPopup(e, detailBg)
+      );
+      detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+      // if (document.querySelector(".show") !== null) {
+      //   console.log("2");
+      //   detailCloseBtn.addEventListener("click", (e) => {
+      //     console.log("???");
+      //     hideDetailPopup(e, detailBg);
+      //   });
+      //   detailBg.addEventListener("click", (e) => hideDetailPopup(e, detailBg));
+      // }
     },
   });
 }
@@ -411,36 +445,6 @@ const hidePopup = (e, tag) => {
     return null;
   }
   return tag.classList.remove("show");
-};
-// 상세보기 닫기 팝업만 따로 분리함
-const hideDetailPopup = (e, tag) => {
-  const modifyBtn = document.querySelector(".detail-modify-btn");
-  const detailForm = document.querySelector(".detail-form");
-  const detailBg = document.querySelector(".popup-detail-background");
-
-  if (e.target.className !== e.currentTarget.className) {
-    return null;
-  }
-
-  if (e.target.className) tag.classList.remove("show");
-  modifyBtn.style.display = "block";
-  detailForm.style.display = "block";
-
-  // 수정하는 input에서 포커스 아웃되면 팝업창 닫히지 않게
-  const inputs = document.querySelectorAll(".blur-edit-input");
-  // 동일한 클래스명을 갖는 태그를 모두 찾아서 forEach로 돌린다.
-  inputs.forEach((input) => {
-    // 동일한 클래스 명을 갖는 태그 하나하나에 blur이벤트를 준다.
-    input.addEventListener("blur", (e) => {
-      if (e.target.classList.contains("blur-edit-input")) {
-        modifyBtn.style.display = "none";
-        detailForm.style.display = "none";
-        detailBg.classList.add("show");
-      }
-    });
-  });
-
-  return detailBg.classList.remove("show");
 };
 
 let url = document.querySelector(".preview-url"); // input
