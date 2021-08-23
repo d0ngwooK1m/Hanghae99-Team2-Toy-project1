@@ -24,8 +24,8 @@
         </div>
     </div>
     <section class ="cardCloumn" id="card_list">
-        <div class ="cardRow">
-            {% for text in search %}
+        <div class ="cardRow2">
+            {% comment %} {% for text in search %}
                         <div class="ListBg">
                             <div class="ListFlex">
                                 <div class="click-wrap" onclick="showDetail('{{text['id']}}')">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-            {% endfor %}
+            {% endfor %} {% endcomment %}
         </div>     
     </section>
 

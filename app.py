@@ -220,7 +220,8 @@ def view_Search():
         })
     search = list(db.posting.aggregate(pipelines))
     print(search)
-    return render_template('search.html', keywords=splitted_keywords, search=search)
+    # return render_template('search.html', keywords=splitted_keywords, search=search)
+    return jsonify({'search':search})
 
 
 @app.route('/create/previewImage', methods=['POST'])
