@@ -212,6 +212,10 @@ function posting() {
       alert(response["msg"]);
       window.location.reload();
     },
+    error: function (e) {
+      alert("url 주소를 다시 확인해주세요");
+      console.log(e);
+    },
   });
 }
 if (createBtn !== null) {
@@ -292,6 +296,10 @@ function submitEdit(id) {
     success: function (response) {
       alert(response["response"]);
       return (window.location.href = "/");
+    },
+    error: function (e) {
+      alert("url 주소를 다시 확인해주세요");
+      console.log(e);
     },
   });
 }
@@ -396,8 +404,6 @@ const showPopup = (e, tag) => {
       }
     });
   });
-
-  // return tag.classList.add("show");
 };
 
 const hidePopup = (e, tag) => {
@@ -410,7 +416,6 @@ const hidePopup = (e, tag) => {
 const hideDetailPopup = (e, tag) => {
   const modifyBtn = document.querySelector(".detail-modify-btn");
   const detailForm = document.querySelector(".detail-form");
-  const modifyForm = document.querySelector(".modify-form");
   const detailBg = document.querySelector(".popup-detail-background");
 
   if (e.target.className !== e.currentTarget.className) {
@@ -420,8 +425,6 @@ const hideDetailPopup = (e, tag) => {
   if (e.target.className) tag.classList.remove("show");
   modifyBtn.style.display = "block";
   detailForm.style.display = "block";
-
-  // modifyForm.innerHTML = ``;
 
   // 수정하는 input에서 포커스 아웃되면 팝업창 닫히지 않게
   const inputs = document.querySelectorAll(".blur-edit-input");
@@ -475,24 +478,26 @@ const previewImage = (tag) => {
     },
     success: function (response) {
       // 서버랑 크롤링 img
-      const url = response;
-      imgsrc = url; // imgsrt = '';/
-      // og:image가 없을 경우 기본 이미지 나오게
-      if (url === "" && check) {
-        previewBox.innerHTML = `<img src="../static/img/og_base.jpg" alt="썸네일"/>`;
-      } else if ((url === "" && !check) || (!check && url.spl)) {
-        modifyWrap.innerHTML = `<img class="detail-image-wrap" src="../static/img/og_base.jpg" alt="썸네일"/>`;
+      let CheckImage = response;
+      // og:image가 없거나, 잘못내려올 경우 예외처리
+      if (CheckImage.split("/")[1] === "static" || CheckImage === "") {
+        CheckImage = "../static/img/linkgather.png";
+      } else {
+        CheckImage = response;
       }
+      imgsrc = CheckImage;
       // og:image가 있을 경우
       if (value === urlValue) {
-        previewBox.innerHTML = `<img src="${url}" id="imgSource" alt="썸네일"/>`;
+        previewBox.innerHTML = `<img src="${CheckImage}" id="imgSource" alt="썸네일"/>`;
       } else {
-        modifyWrap.innerHTML = `<img class="detail-image-wrap" id="imgSource" src="${url}" alt="썸네일"/>`;
+        modifyWrap.innerHTML = `<img class="detail-image-wrap" id="imgSource" src="${CheckImage}" alt="썸네일"/>`;
       }
     },
     error: function (e) {
+      // 예외처리
+      // 500으로 떨어져서 이미지를 못찾는 것도 기본 이미지를 보여준다.
       if (e.status === 500) {
-        alert("이미지를 가져올 수 없습니다.");
+        alert("url 주소를 다시 확인해주세요");
         console.log("error === ", e);
       }
     },
