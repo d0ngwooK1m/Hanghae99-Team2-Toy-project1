@@ -65,39 +65,11 @@
     </section>
     <!-- 리스트 상세보기 -->
     <div class="popup-detail-wrap">
-        {% for text in search %}
-                <div class="popup-detail-background_S">
-                    <div class="popup-wrap">
-                        <button class="popup-detail-close-btn">닫기</button>
-                        <div class="popup-scroll-wrap">
-                            <section class="popup-content">
-                                <h2 class="readable-hidden">상세보기 팝업</h2>
-                                <div class="detail-btn-wrap flex-layout-end">
-                                    <button class="detail-modify-btn" onclick="editPopup('{{text['id']}}')">수정</button>
-                                    <button class="detail-delete-btn" onclick="deletePopup('{{text['id']}}')">삭제</button>
-                                </div>
-
-                                <div class="popup-form detail-form-wrap">
-                                    <div class="detail-form">
-                                        <div class="preview-image-wrap">
-                                            <img class="detail-image-wrap" src="{{text['imgsrc']}}" target="_blank"/>
-                                        </div>
-                                        <div class="detail-content-wrap">
-                                            <h3>{{text['title']}}</h3>
-                                            <p>{{text['desc']}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="modify-form"></div>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-        {% endfor %}
+        {#        상세보기#}
     </div>
 
     <!-- 등록팝업 -->
-    <!-- <div class="popup-background">
+    <div class="popup-background">
         <div class="popup-wrap">
             <section class="popup-content">
                 <div class="flex-layout-between">
@@ -129,6 +101,6 @@
                 </div>
             </section>
         </div>
-    </div> -->
+    </div>
 
 {% endblock %}
