@@ -132,7 +132,9 @@ def posting():
     token_email = payload['email']
     now = datetime.datetime.now()
     now_date_time = now.strftime("%Y%m%d%H%M%S")
-
+    # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
+    if image.split("/")[1] == "static":
+        image = "../static/img/linkgather.png"
     doc = {
         "id": uuid.uuid4().hex,
         'url': url_receive,
@@ -179,7 +181,10 @@ def submitEdit():
     img_receive = soup.select_one('meta[property="og:image"]')['content']
     title_receive = request.form['title_give']
     desc_receive = request.form['desc_give']
-
+    # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
+    if img_receive.split("/")[1] == "static":
+        img_receive = "../static/img/linkgather.png"
+        
     print(id_receive, url_receive, title_receive, desc_receive)
     db.posting.update_one({'id': id_receive}, {'$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive, 'imgsrc': img_receive}})
     return jsonify({ "response": "수정 완료!"})

@@ -188,8 +188,8 @@
 
 .Like,
 .Link {
-  background-color: rgb(241, 212, 212); /*rgb(248, 248, 248) 변경논의 필요 */
-  color: rgb(26, 26, 26);
+  background-color: #fff;
+  color: #343a40;
   border-radius: 3px;
   border: 0;
   width: 49%;
@@ -198,7 +198,9 @@
   font-size: 30px;
   justify-content: center;
   align-items: center;
+  border: 1px solid #343a40;
 }
+
 .Like img {
   width: 16px;
   height: 16px;
