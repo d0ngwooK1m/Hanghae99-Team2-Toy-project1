@@ -1,4 +1,6 @@
 function myPageList() {
+  const mypageList = document.querySelector(".mypage_cardList");
+  const mypage = document.querySelector(".mypage_cloumn");
   fetch("/myPage/list", {
     method: "GET",
     headers: {
@@ -11,7 +13,7 @@ function myPageList() {
       console.log("mypage response ", myList);
       if (myList.length === 0) {
         const text = `<p class="mypage_text">찜한 카드가 없습니다. 마음에 드는 카드를 찜해주세요.</p>`;
-        $(".mypage_cloumn").append(text);
+        mypage.innerHTML = text;
       } else {
         for (let i = 0; i < myList.length; i++) {
           const url = myList[i]["url"];
@@ -54,7 +56,7 @@ function myPageList() {
                             </div>
                         </div>
         `;
-          $(".mypage_cardList").append(mypage_html);
+          mypageList.innerHTML += mypage_html;
         }
       }
     });
