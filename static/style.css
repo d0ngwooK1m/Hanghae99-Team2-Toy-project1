@@ -382,7 +382,8 @@
 .popup-background,
 .signup-background,
 .login-background,
-.popup-detail-background {
+.popup-detail-background,
+.popup-detail-background_S {
   display: none;
   position: fixed;
   top: 0;

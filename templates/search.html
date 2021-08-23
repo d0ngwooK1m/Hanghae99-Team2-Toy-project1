@@ -25,43 +25,75 @@
     </div>
     <section class ="cardCloumn" id="card_list">
         <div class ="cardRow2">
-            {% comment %} {% for text in search %}
-                        <div class="ListBg">
-                            <div class="ListFlex">
-                                <div class="click-wrap" onclick="showDetail('{{text['id']}}')">
-                                    <div class="imgHidden-box">
-                                        <img src="{{text['imgsrc']}}" class="classImg">
-                                        <button class="Option_Jjim">
-                                            <img src="../static/img/heart.svg" class="heart">
-                                        </button>
-                                    </div>  
-                                    <h3 class ="title">{{text['title']}}</h3>
-                                    <div class ="numCount">
-                                        <div class = "likeNum">
-                                            <img src="../static/img/likeUp3.png">
-                                            <span>{{text['likes']}}</span>
-                                        </div>
-                                        <div class = "JjimNum">
-                                            <img src="../static/img/Rheart.svg">
-                                            <span>0</span>
-                                        </div>
-                                    </div>
-                                    <hr/>
+            {% for text in search %}
+                <div class="ListBg">
+                    <div class="ListFlex">
+                        <div class="click-wrap" onclick="showDetail('{{text['id']}}')">
+                            <div class="imgHidden-box">
+                                <img src="{{text['imgsrc']}}" class="classImg">
+                                <button class="Option_Jjim">
+                                    <img src="../static/img/heart.svg" class="heart">
+                                </button>
+                            </div>  
+                            <h3 class ="title">{{text['title']}}</h3>
+                            <div class ="numCount">
+                                <div class = "likeNum">
+                                    <img src="../static/img/likeUp3.png">
+                                    <span>{{text['likes']}}</span>
                                 </div>
-                                <div class="Option">
-                                    <div class="Like Option_Like" onclick="updateLike('{{text['id']}}')">
-                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
-                                        <span class="likes-btn">추천하기</span>
-                                    </div>
-                                    <a class="Link" href="{{text['url']}}" target= '_blank'>
-                                        <span>바로가기</span>
-                                    </a>
+                                <div class = "JjimNum">
+                                    <img src="../static/img/Rheart.svg">
+                                    <span>0</span>
                                 </div>
                             </div>
+                            <hr/>
                         </div>
-            {% endfor %} {% endcomment %}
+                        <div class="Option">
+                            <div class="Like Option_Like" onclick="updateLike('{{text['id']}}')">
+                                <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                <span class="likes-btn">추천하기</span>
+                            </div>
+                            <a class="Link" href="{{text['url']}}" target= '_blank'>
+                                <span>바로가기</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>     
     </section>
+    <!-- 리스트 상세보기 -->
+    <div class="popup-detail-wrap">
+        {% for text in search %}
+                <div class="popup-detail-background_S">
+                    <div class="popup-wrap">
+                        <button class="popup-detail-close-btn">닫기</button>
+                        <div class="popup-scroll-wrap">
+                            <section class="popup-content">
+                                <h2 class="readable-hidden">상세보기 팝업</h2>
+                                <div class="detail-btn-wrap flex-layout-end">
+                                    <button class="detail-modify-btn" onclick="editPopup('{{text['id']}}')">수정</button>
+                                    <button class="detail-delete-btn" onclick="deletePopup('{{text['id']}}')">삭제</button>
+                                </div>
+
+                                <div class="popup-form detail-form-wrap">
+                                    <div class="detail-form">
+                                        <div class="preview-image-wrap">
+                                            <img class="detail-image-wrap" src="{{text['imgsrc']}}" target="_blank"/>
+                                        </div>
+                                        <div class="detail-content-wrap">
+                                            <h3>{{text['title']}}</h3>
+                                            <p>{{text['desc']}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="modify-form"></div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
 
     <!-- 등록팝업 -->
     <div class="popup-background">
@@ -97,9 +129,8 @@
             </section>
         </div>
     </div>
+    <script>
 
-    <!-- 리스트 상세보기 -->
-    <div class="popup-detail-wrap">
-{#        상세보기#}
-    </div>
+    </script>
+    
 {% endblock %}
