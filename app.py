@@ -133,7 +133,7 @@ def posting():
     now = datetime.datetime.now()
     now_date_time = now.strftime("%Y%m%d%H%M%S")
     # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
-    if image.split("/")[1] == "static":
+    if image.split("/")[1] == "static" or image == "":
         image = "../static/img/linkgather.png"
     doc = {
         "id": uuid.uuid4().hex,
@@ -192,6 +192,14 @@ def submitEdit():
 
 @app.route('/search', methods=['GET'])
 def view_Search():
+    try:
+        tokenExist = checkExpired()
+
+    except jwt.ExpiredSignatureError:
+        tokenExist=True
+    except jwt.exceptions.DecodeError:
+        tokenExist=True
+
     text = request.args.get('text')
     #text는 form으로 데이터를 받음
     splitted_keywords = text.split(' ')
@@ -221,6 +229,7 @@ def view_Search():
     # print(pipelines)
     # search = list(db.posting.aggregate(pipelines))
     # print(search)
+
     sep_keywords = []
     for string in splitted_keywords:
         sep_keywords.append({'$or':[
@@ -230,7 +239,7 @@ def view_Search():
     print(sep_keywords)
     search = list(db.posting.find({"$or":sep_keywords},{'_id':False}).sort('uploadtime',-1))
     print(search)
-    return render_template('search.html', keywords=splitted_keywords, search=search)
+    return render_template('search.html', keywords=splitted_keywords, search=search, token=tokenExist)
 
 
 @app.route('/create/previewImage', methods=['POST'])

@@ -1,4 +1,5 @@
 
+
 // const my_Jjim = document.querySelector('.my_Jjim')
 // const my_info = document.querySelector('.my_info')
 
