@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% block head %}
+    <script defer src="{{ url_for('static', filename='search.js') }}"></script>
+{% endblock %}
 
 {% block content %}
      <section class="icon-nav-wrap">
@@ -29,7 +32,7 @@
             {% for text in search %}
                 <div class="ListBg">
                     <div class="ListFlex">
-                        <div class="click-wrap" onclick="showDetail('{{text['id']}}')">
+                        <div class="click-wrap" onclick="showDetail('{{text['id']}}', event)">
                             <div class="imgHidden-box">
                                 <img src="{{text['imgsrc']}}" class="classImg">
                                 <button class="Option_Jjim">
