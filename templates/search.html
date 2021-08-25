@@ -30,8 +30,8 @@
                         <div class="click-wrap" onclick="showDetail(event,'{{text['id']}}')">
                             <div class="imgHidden-box">
                                 <img src="{{text['imgsrc']}}" class="classImg">
-                                <button class="Option_Jjim">
-                                    <img src="../static/img/heart.svg" class="heart">
+                                <button class="Option_Jjim" onclick="jjim('{{text['id']}}')">
+                                    <img src="{{text['heart']}}" class="heart">
                                 </button>
                             </div>  
                             <h3 class ="title">{{text['title']}}</h3>
@@ -41,8 +41,8 @@
                                     <span>{{text['likes']}}</span>
                                 </div>
                                 <div class = "JjimNum">
-                                    <img src="../static/img/Rheart.svg">
-                                    <span>0</span>
+                                    <img src="{{text['heart']}}">
+                                    <span></span>
                                 </div>
                             </div>
                             <hr/>

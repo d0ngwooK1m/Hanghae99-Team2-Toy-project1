@@ -22,6 +22,7 @@ function myPageList() {
           const title = myList[i]["title"];
           const likes = myList[i]["likes"];
           const imgsrc = myList[i]["imgsrc"];
+          let Jjim = myList[i]["heart"];
           const id = myList[i]["id"];
           const mypage_html = `
         <div class="ListBg">
@@ -30,8 +31,8 @@ function myPageList() {
                                 <div class="click-wrap" onclick="showDetail(event,'${id}')">
                                     <div class="imgHidden-box">
                                         <img src="${imgsrc}" class="classImg">
-                                        <button class="Option_Jjim">
-                                            <img src="../static/img/heart.svg" class="heart">
+                                        <button class="Option_Jjim" onclick="jjim('${id}')">
+                                            <img src="${Jjim}" class="heart">
                                         </button>
                                     </div>  
                                     <h3 class ="title">${title}</h3>
@@ -41,8 +42,8 @@ function myPageList() {
                                             <span>${likes}</span>
                                         </div>
                                         <div class = "JjimNum">
-                                            <img src="../static/img/Rheart.svg">
-                                            <span>0</span>
+                                            <img src="${Jjim}">
+                                            <span></span>
                                         </div>
                                     </div>
                                     <hr/>

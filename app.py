@@ -141,7 +141,8 @@ def posting():
         'title': title_receive,
         'desc': desc_receive,
         'likes': 0,
-        'heart': 0,
+        'heart': './static/img/heart.svg',
+        'Jjim':True,
         'uploadtime': now_date_time,
         'email': token_email,
         'imgsrc': image
@@ -268,11 +269,18 @@ def updateLikes():
 @app.route('/update/jjim', methods=['POST'])
 def updatejjim():
     id_receive = request.form['id_give']
-    target_jjim = db.posting.find_one({'id':id_receive})
-    
-    current_jjim = target_jjim['heart']
-    new_jjim = current_jjim + 1
-    db.posting.update_one({'id':id_receive}, {'$set': {'heart':new_jjim}})  
+    target = db.posting.find_one({'id':id_receive})
+    target_Heart = target['Jjim']
+    print(target_Heart)
+    target_Heart = not(target_Heart)
+    print(target_Heart)
+    if target_Heart:
+        Heart = '../static/img/heart.svg'
+    else:
+        Heart = '../static/img/rheart.svg'
+    print(Heart)
+    db.posting.update_one({'id':id_receive}, {'$set': {'heart':Heart, 'Jjim':target_Heart}})
+
     return jsonify({'msg':"찜하기 완료!"})    
 # 켜기 터미널
 # set FLASK_APP=app.py

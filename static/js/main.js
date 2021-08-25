@@ -25,7 +25,7 @@ function viewing() {
                                     <div class="imgHidden-box">
                                         <img src="${imgsrc}" class="classImg">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
-                                            <img src="../static/img/heart.svg" id="heartImg">
+                                            <img src="${jjim}" id="heartImg">
                                         </button>
                                     </div>  
                                     <h3 class ="title">${title}</h3>
@@ -35,8 +35,8 @@ function viewing() {
                                             <span>${likes}</span>
                                         </div>
                                         <div class = "JjimNum">
-                                            <img src="../static/img/Rheart.svg">
-                                            <span>${jjim}</span>
+                                            <img src="${jjim}">
+                                            <span></span>
                                         </div>
                                     </div>
                                     <hr/>
@@ -187,33 +187,3 @@ likeBtn.addEventListener("click", () => {
       }
     });
 });
-
-let image_tracker = 'white';
-function jjim(id) {
-  let image = document.getElementById("heartImg");
-  // let jjcount = document.querySelector(".count");
-  // let number = jjcount.innerText;
-  
-  if (image_tracker== 'white'){
-      image.src = '../static/img/rheart.svg'
-      image_tracker = 'red';
-      // number =  parseInt(number) +1;
-      // jjcount.innerText = number;
-  } else {
-      // 현재 image_tracker = 'red'인 상태이므로 다시 클릭시 비어있는 하트로 만들어줌
-      image.src = '../static/img/heart.svg'
-      image_tracker = 'white';
-      // number =  parseInt(number) -1;
-      // jjcount.innerText = number;
-  
-    $.ajax({
-      type: 'POST',
-      url: '/update/jjim',
-      data: { id_give : id },
-      success: function (response) {
-        alert(response['msg']);
-        window.location.reload()
-      }
-    })
-  }
-}

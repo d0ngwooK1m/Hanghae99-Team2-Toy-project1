@@ -133,6 +133,19 @@ const inputCheck = () => {
   });
 };
 
+//찜기능
+function jjim(id) {
+  event.stopPropagation()
+  $.ajax({
+    type: 'POST',
+    url: '/update/jjim',
+    data: { id_give : id},
+    success: function (response) {
+      alert(response['msg']);
+      window.location.reload()
+    }
+  })
+}
 // 카드 상세화면 팝업
 function showDetail(event, id) {
   if (
@@ -416,50 +429,50 @@ searchInput.addEventListener('keydown', (event)=>{
   keyPrevent(event)
 })
 
-if (document.querySelector(".Option_Jjim")) {
-  Option_Jjim.addEventListener("click", Jjim);
-  Jjim_heart.addEventListener("click", Jjim);
-  Option_Jjim.addEventListener("click", Jjim_heartControl);
-}
+// if (document.querySelector(".Option_Jjim")) {
+//   Option_Jjim.addEventListener("click", Jjim);
+//   Jjim_heart.addEventListener("click", Jjim);
+//   Option_Jjim.addEventListener("click", Jjim_heartControl);
+// }
 
-if (document.querySelector(".Option_Like") !== null) {
-  Option_Like.addEventListener("click", Like);
-  Like_thumb.addEventListener("click", Like);
-  Option_Like.addEventListener("click", Like_thumbControl);
-}
+// if (document.querySelector(".Option_Like") !== null) {
+//   Option_Like.addEventListener("click", Like);
+//   Like_thumb.addEventListener("click", Like);
+//   Option_Like.addEventListener("click", Like_thumbControl);
+// }
 
 // 찜, 좋아요 기능 임시
-const Option_Jjim = document.querySelector(".Option_Jjim");
-const Jjim_heart = document.querySelector(".heart");
-const Option_Like = document.querySelector(".Option_Like");
-const Like_thumb = document.querySelector(".thumbsUp");
-let Jjim_count = false;
+// const Option_Jjim = document.querySelector(".Option_Jjim");
+// const Jjim_heart = document.querySelector(".heart");
+// const Option_Like = document.querySelector(".Option_Like");
+// const Like_thumb = document.querySelector(".thumbsUp");
+// let Jjim_count = false;
 
-function Jjim_heartControl() {
-  Jjim_count = !Jjim_count;
-}
+// function Jjim_heartControl() {
+//   Jjim_count = !Jjim_count;
+// }
 
-let Like_count = false;
+// let Like_count = false;
 
-function Like_thumbControl() {
-  Like_count = !Like_count;
-}
+// function Like_thumbControl() {
+//   Like_count = !Like_count;
+// }
 
-function Jjim() {
-  if (Jjim_count) {
-    Jjim_heart.src = "../static/img/rheart.svg";
-  } else {
-    Jjim_heart.src = "../static/img/heart.svg";
-  }
-}
+// function Jjim() {
+//   if (Jjim_count) {
+//     Jjim_heart.src = "../static/img/rheart.svg";
+//   } else {
+//     Jjim_heart.src = "../static/img/heart.svg";
+//   }
+// }
 
-function Like() {
-  if (Like_count) {
-    Like_thumb.src = "../static/img/bthumbsup.svg";
-  } else {
-    Like_thumb.src = "../static/img/thumbsup.svg";
-  }
-}
+// function Like() {
+//   if (Like_count) {
+//     Like_thumb.src = "../static/img/bthumbsup.svg";
+//   } else {
+//     Like_thumb.src = "../static/img/thumbsup.svg";
+//   }
+// }
 
 // 추천하기
 function updateLike(id) {
@@ -482,4 +495,3 @@ function updateLike(id) {
       }
     });
 }
-
