@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-
-
+{% block search%}
+<script defer src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% endblock%}
+{% block listsort%}
+<script defer src="{{ url_for('static', filename='js/listsort.js') }}"></script>
+{% endblock%}
 {% block content %}
      <section class="icon-nav-wrap">
         <nav class="container flex-layout-between">
@@ -29,7 +33,7 @@
             {% for text in search %}
                 <div class="ListBg">
                     <div class="ListFlex">
-                        <div class="click-wrap" onclick="showDetail('{{text['id']}}')">
+                        <div class="click-wrap" onclick="showDetail(event,'{{text['id']}}')">
                             <div class="imgHidden-box">
                                 <img src="{{text['imgsrc']}}" class="classImg">
                                 <button class="Option_Jjim">
@@ -65,42 +69,9 @@
     </section>
     <!-- 리스트 상세보기 -->
     <div class="popup-detail-wrap">
-        {#        상세보기#}
+        {#상세보기#}
     </div>
 
-    <!-- 등록팝업 -->
-    <div class="popup-background">
-        <div class="popup-wrap">
-            <section class="popup-content">
-                <div class="flex-layout-between">
-                    <h2>등록하기</h2>
-                    <button class="popup-close-btn">닫기</button>
-                </div>
-                <div class="popup-scroll-wrap">
-                    <div class="popup-form create-form">
-                        <div class="preview-image-wrap"></div>
-                        <div class="popup-box-wrap">
-                            <label for="url">웹 사이트 URL</label>
-                            <div class="flex-layout">
-                                <input class="preview-url blur-input" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
-                                <button class="preview-btn">미리보기</button>
-                            </div>
-                        </div>
-                        <div class="popup-box-wrap">
-                            <label for="title">제목</label>
-                            <input class="blur-input"  type="text" id="title" name="title" placeholder="제목을 입력해주세요"/>
-                        </div>
-                        <div class="popup-box-wrap">
-                            <label for="description">설명</label>
-                            <textarea class="blur-input" type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
-                        </div>
-                        <div class="popup-box-wrap">
-                            <button  class="create-form-btn">등록하기</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
+
 
 {% endblock %}

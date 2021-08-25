@@ -1,3 +1,7 @@
+console.log("mypage.js");
+window.addEventListener("load", function () {
+  myPageList();
+});
 function myPageList() {
   const mypageList = document.querySelector(".mypage_cardList");
   const mypage = document.querySelector(".mypage_cloumn");
@@ -24,7 +28,8 @@ function myPageList() {
           const mypage_html = `
         <div class="ListBg">
                             <div class="ListFlex">
-                                <div class="click-wrap" onclick="showDetail('${id}')">
+                 
+                                <div class="click-wrap" onclick="showDetail(event,'${id}')">
                                     <div class="imgHidden-box">
                                         <img src="${imgsrc}" class="classImg">
                                         <button class="Option_Jjim">
@@ -61,19 +66,3 @@ function myPageList() {
       }
     });
 }
-
-// const my_Jjim = document.querySelector('.my_Jjim')
-// const my_info = document.querySelector('.my_info')
-
-// function ShowJjim(){
-//     document.querySelector('#card_list').style.display = 'block'
-//     document.querySelector('#my_information').style.display = 'none'
-// }
-
-// function Showinfo(){
-//     document.querySelector('#card_list').style.display = 'none'
-//     document.querySelector('#my_information').style.display = 'block'
-// }
-
-// my_Jjim.addEventListener('click',ShowJjim)
-// my_info.addEventListener('click',Showinfo)

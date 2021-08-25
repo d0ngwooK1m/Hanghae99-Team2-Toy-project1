@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block mypage%}
+<script defer src="{{ url_for('static', filename='js/mypage.js') }}"></script>
+{% endblock%}
 
 {% block content %}
     <section class="icon-nav-wrap">

@@ -6,13 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toy Project1</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='my_page_style.css' )}}">
-    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='my_page_script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' )}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_page_style.css' )}}">
+    <script defer src="{{ url_for('static', filename='js/base.js') }}"></script>
+    <!-- <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/mypage.js') }}"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    {% block main%}
+    {% endblock%}
+    {% block search%}
+    {% endblock%}
+    {% block mypage%}
+    {% endblock%}
+    {% block listsort%}
+    {% endblock%}
 </head>
 <body>
 
@@ -54,30 +63,8 @@
         </div>  
     </nav>
 
-    <div class="login-background">
-        <div class="login-wrap">
-            <section class="login-content">
-                <div class="flex-layout-between">
-                    <h2>로그인</h2>
-                    <button class="login-close-btn">닫기</button>
-                </div>
-                <form class="popup-form login-form" name="login_form">
-                    <div class="popup-box-wrap">
-                        <label class="login-id" for="login-id">이메일</label>
-                        <input type="text" class="login-input blur-input" name="l_email" required placeholder="example@naver.com"/>
-                    </div>
-                    <div class="popup-box-wrap">
-                        <label for="login-pw">비밀번호</label>
-                        <input class="blur-input" type="password" id="login-pw" name="l_password" placeholder="******"/>
-                    </div>
-                    <p class="error error--hidden"></p>
-                    <div class="popup-box-wrap">
-                        <button type="submit" class="login-submit-btn">로그인</button>
-                    </div>
-                </form>
-            </section>
-        </div>
-    </div>
+   
+     <!-- 회원가입 팝업 --> 
     <div class="signup-background">
         <div class="login-wrap">
             <section class="signup-content">
@@ -110,9 +97,66 @@
             </section>
         </div>
     </div>
-
+     <!-- 로그인 팝업 --> 
+     <div class="login-background">
+        <div class="login-wrap">
+            <section class="login-content">
+                <div class="flex-layout-between">
+                    <h2>로그인</h2>
+                    <button class="login-close-btn">닫기</button>
+                </div>
+                <form class="popup-form login-form" name="login_form">
+                    <div class="popup-box-wrap">
+                        <label class="login-id" for="login-id">이메일</label>
+                        <input type="text" class="login-input blur-input" name="l_email" required placeholder="example@naver.com"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label for="login-pw">비밀번호</label>
+                        <input class="blur-input" type="password" id="login-pw" name="l_password" placeholder="******"/>
+                    </div>
+                    <p class="error error--hidden"></p>
+                    <div class="popup-box-wrap">
+                        <button type="submit" class="login-submit-btn">로그인</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <!-- 등록팝업 -->
+    <div class="popup-background">
+        <div class="popup-wrap">
+            <section class="popup-content">
+                <div class="flex-layout-between">
+                    <h2>등록하기</h2>
+                    <button class="popup-close-btn">닫기</button>
+                </div>
+                <div class="popup-scroll-wrap">
+                    <div class="popup-form create-form">
+                        <div class="preview-image-wrap"></div>
+                        <div class="popup-box-wrap">
+                            <label for="url">웹 사이트 URL</label>
+                            <div class="flex-layout">
+                                <input class="preview-url blur-input" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
+                                <button class="preview-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="popup-box-wrap">
+                            <label for="title">제목</label>
+                            <input class="blur-input"  type="text" id="title" name="title" placeholder="제목을 입력해주세요"/>
+                        </div>
+                        <div class="popup-box-wrap">
+                            <label for="description">설명</label>
+                            <textarea class="blur-input" type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
+                        </div>
+                        <div class="popup-box-wrap">
+                            <button  class="create-form-btn">등록하기</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
     {% block content %}
     {% endblock %}
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
