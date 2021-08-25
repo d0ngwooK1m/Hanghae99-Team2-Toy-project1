@@ -1,0 +1,764 @@
+/* 저희가 만든 css중 같이 공통으로 사용할 수 있는 css 상단배치 */
+/* 확대 애니메이션 추가 */
+.mypage a {
+  text-decoration: none;
+  color: white;
+}
+
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes animatezoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* flex 공통 css */
+.flex-layout {
+  display: flex;
+  align-items: center;
+}
+.flex-layout-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  /* border-bottom: 1px solid #e0e0e0; */
+}
+.flex-layout-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* 컨텐츠 넓이 공통 */
+.container {
+  width: 1170px;
+  margin: 0 auto;
+}
+/* 리스트관련 css */
+.cardCloumn {
+  display: grid;
+  max-width: 1176px;
+  width: 100%;
+  margin: auto;
+}
+
+.cardRow,
+.cardRow2 {
+  display: grid;
+  max-width: 1176px;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.ListBg {
+  width: 276px;
+  max-height: 412px;
+  position: relative;
+  height: 100%;
+  border-radius: 5px;
+  margin-right: 24px;
+  cursor: pointer;
+}
+
+.ListBg:last-child {
+  margin-right: 0px;
+}
+
+.ListFlex {
+  max-height: 412px;
+  margin-bottom: 32px;
+}
+.imgHidden-box {
+  overflow: hidden;
+  justify-content: center;
+  height: 155px;
+  align-items: center;
+  display: flex;
+}
+.classImg {
+  width: 100%;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+.classImg:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease 0s, opacity 0.1s linear 0s !important;
+}
+.Option_Jjim {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 8px;
+}
+.Option_Jjim:hover {
+  background-color: rgb(239, 239, 239, 0.2);
+  transition: background-color 0.1s ease 0s;
+}
+
+.Option_Jjim img {
+  width: 24px;
+  height: 24px;
+  vertical-align: text-bottom;
+}
+
+.ListFlex .title {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  color: rgb(26, 26, 26);
+  height: 20px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 4px 0px 6px;
+}
+
+.numCount {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.likeNum,
+.JjimNum {
+  display: flex;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 16px;
+  letter-spacing: normal;
+  margin: 0px 8px 0px 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  color: rgb(162, 162, 162);
+}
+.likeNum img,
+.JjimNum img {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 12px;
+  margin-right: 2px;
+}
+.ListFlex hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 0.5px solid rgb(242, 244, 245);
+}
+
+.Option {
+  display: flex;
+  margin: 10px 0 0 0;
+  justify-content: space-between;
+}
+
+.Like,
+.Link {
+  background-color: #fff;
+  color: #343a40;
+  border-radius: 3px;
+  border: 0;
+  width: 49%;
+  padding: 8px 10px;
+  display: flex;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #343a40;
+}
+
+.Like img {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  margin-bottom: 1px;
+}
+
+.Like span,
+.Link span {
+  font-size: 13px;
+}
+
+.Link a:link,
+.Link a:visited,
+.Link a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.topcontainer {
+  display: flex;
+  position: relative;
+  width: 100%;
+  background-color: black;
+}
+.topmenu {
+  width: 1176px;
+  max-height: 70px;
+  display: flex;
+  margin: auto;
+}
+.topLogo {
+  height: 70px;
+  margin-right: 50px;
+  padding: 10px 0;
+}
+.topLogo img {
+  width: 95%;
+  height: 95%;
+}
+.logoSearch {
+  display: flex;
+  align-items: center;
+}
+
+.search_bar {
+  outline: none;
+  display: flex;
+  border-radius: 20px;
+  height: 40px;
+  width: 400px;
+  padding-left: 4%;
+}
+.search_btn {
+  border: 0;
+  background-color: white;
+  width: 70px;
+  height: 35px;
+  border-radius: 20px;
+  margin: 2px 80px 0 -50px;
+  text-align: center;
+}
+.search_icon {
+  width: 17px;
+  height: 17px;
+  margin-left: 45%;
+}
+.search_result {
+  margin: 0 auto;
+  width: 1170px;
+  font-size: 11px;
+}
+.mypage {
+  color: white;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+.login-btn {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+.logout-btn {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+.signup-btn {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+.login_signLine {
+  width: 0.1rem;
+  height: 1.2rem;
+  margin: 0 1.25rem;
+}
+.member_box {
+  margin-left: auto;
+  display: flex;
+}
+.search_box {
+  width: 50%;
+  display: flex;
+}
+
+/* 버튼 css */
+.menu-container {
+  width: 980px;
+  margin: 15px auto;
+}
+.menu-wrap {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 5px 0px auto;
+}
+
+.a-content {
+  text-decoration: none;
+}
+
+/* 드롭다운 버튼 */
+.dropbtn,
+.writebtn {
+  background-color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: solid 0.5px black;
+  border-radius: 50%;
+}
+
+/* 드롭다운 컨텐츠 위치 조정 */
+.dropdown {
+  position: relative;
+  /* display: inline-block; */
+}
+
+/* 드롭다운 컨텐츠 숨기기 (기본설정) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 16px;
+  z-index: 1;
+}
+
+/* 드롭다운 안에 있는 링크들 */
+.dropdown-content a {
+  background-color: white;
+  border: solid 0.5px black;
+  border-radius: 50%;
+  margin-top: 5px;
+  padding: 16px;
+  display: block;
+}
+
+/* 드롭다운 호버 색깔 바꾸기 */
+.dropdown-content a:hover {
+  background-color: gold;
+}
+
+/* 드롭다운 호버 메뉴 보이기 */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* 메뉴 보이면 색 바꾸기 */
+.dropdown:hover .dropbtn {
+  background-color: gold;
+}
+
+.writebtn:hover {
+  background-color: gold;
+}
+
+/* 글 작성 모달 css */
+.popup-background,
+.signup-background,
+.login-background,
+.popup-detail-background,
+.popup-detail-background_S {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1;
+}
+.show {
+  display: block;
+}
+.popup-wrap,
+.login-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100vh;
+  z-index: 10;
+}
+.popup-content,
+.login-content,
+.signup-content {
+  padding: 30px 40px;
+  background-color: #fff;
+}
+.popup-scroll-wrap {
+  max-height: 550px;
+  overflow-y: scroll;
+}
+.create-form input::placeholder,
+.create-form textarea::placeholder,
+.login-form input::placeholder,
+.detail-form-wrap input::placeholder,
+.detail-form-wrap textarea::placeholder {
+  color: #dee2e6;
+}
+.create-form-btn,
+.login-submit-btn,
+.signup-submit-btn,
+.modify-form-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+  background-color: #000;
+}
+.create-form,
+.login-form {
+  margin-top: 30px;
+}
+.detail-modify-form {
+  display: none;
+  margin-top: 0;
+}
+.create-form label,
+.create-form input,
+.login-form label,
+.login-form input,
+.detail-form-wrap label,
+.detail-form-wrap input {
+  width: 100%;
+  display: inline-block;
+}
+.create-form label,
+.login-form label,
+.detail-form-wrap label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #333;
+}
+.create-form input,
+.login-form input,
+.detail-form-wrap input {
+  padding: 15px 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 3px;
+}
+.popup-content h2,
+.login-content h2,
+.signup-content h2 {
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: -0.6px;
+}
+.popup-content {
+  width: 600px;
+}
+.login-close-btn,
+.signup-close-btn,
+.popup-close-btn,
+.popup-detail-close-btn,
+.popup-close-btn {
+  position: absolute;
+  top: -25px;
+  right: 0px;
+  border: 0;
+  color: #fff;
+  background-color: transparent;
+}
+.login-content,
+.signup-content {
+  position: relative;
+  width: 450px;
+}
+.create-form textarea,
+.detail-form-wrap textarea {
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 3px;
+}
+.preview-image-wrap,
+.modify-image-wrap {
+  width: 100%;
+}
+.preview-btn,
+.modify-preview-btn {
+  width: 150px;
+  padding: 15px 10px;
+  color: #fff;
+  background: #000;
+  border: 0;
+  border-radius: 0px 3px 3px 0px;
+}
+.preview-image-wrap img,
+.modify-image-wrap img {
+  width: 100%;
+  max-height: 300px;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+.popup-box-wrap {
+  margin-bottom: 20px;
+}
+.preview-url {
+  border-radius: 3px 0px 0px 3px;
+}
+.detail-form {
+  margin-top: 0;
+}
+.detail-image-wrap {
+  margin: 20px 0;
+}
+.detail-image-wrap img {
+  width: 100%;
+  max-height: 300px;
+  margin: 0;
+  object-fit: cover;
+}
+
+.detail-modify-btn,
+.detail-delete-btn {
+  padding: 8px 12px;
+  border: 0;
+  background-color: transparent;
+}
+.detail-modify-btn {
+  color: #339af0;
+  border: 1px solid #339af0;
+}
+.detail-delete-btn {
+  margin-left: 15px;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+.detail-content-wrap h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: -0.6px;
+}
+/* .login-form {
+  position: relative;
+  transition: box-shadow 0.3s;
+  border: 2px solid #dddddd9c;
+  border-radius: 5px;
+  padding: 50px;
+  margin: 15% auto;
+  width: 500px;
+  height: 400px;
+  background-color: rgba(275, 275, 275, 1);
+}
+
+.signup-form {
+  position: relative;
+  transition: box-shadow 0.3s;
+  border: 2px solid #dddddd9c;
+  border-radius: 5px;
+  padding: 50px;
+  margin: 5% auto;
+  width: 500px;
+  height: 600px;
+  background-color: rgba(275, 275, 275, 1);
+}
+
+.signup-close-btn {
+  position: absolute;
+  left: 85%;
+  top: 8px;
+  font-size: 2rem;
+}
+
+.login-close-btn:hover,
+.signup-close-btn:hover {
+  color: red;
+}
+
+.login-form:hover,
+.signup-form:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="password"] {
+  width: 100%;
+  padding: 2% 0;
+  margin: 5% auto;
+  border: 2px solid #dddddd9c;
+  border-radius: 3px;
+}
+
+.login-submit-btn,
+.signup-submit-btn {
+  transition: background-color 1s;
+  text-align: center;
+  width: 100%;
+  padding: 2% 0;
+  margin: 10% auto;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+}
+
+.login-submit-btn:hover,
+.signup-submit-btn:hover {
+  background-color: rgba(8, 8, 8, 0.788);
+} */
+
+.error {
+  color: red;
+}
+/* 
+.List_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.List_overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.List_content {
+  background-color: white;
+  padding: 5% 10%;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 66%;
+  top: 0px;
+  border-radius: 10px;
+}
+.List_hidden {
+  display: none;
+}
+.close_btn {
+  all: unset;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.edit_btn {
+  all: unset;
+  position: absolute;
+  top: 65px;
+  right: 20px;
+}
+.delete_btn {
+  all: unset;
+  position: absolute;
+  top: 110px;
+  right: 20px;
+}
+.line {
+  color: rgb(117, 117, 117);
+  margin: 2% 0 2% 0;
+} */
+
+/* icon nav css */
+.icon-nav-wrap {
+  display: flex;
+  position: relative;
+  width: 100%;
+  /* padding: 30px 20px; */
+  /* padding-bottom: 15px; */
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 30px;
+}
+.create-btn {
+  all: unset;
+  height: 60px;
+  color: black;
+}
+
+.create-btn-fail {
+  all: unset;
+  height: 60px;
+  color: black;
+}
+
+.create-btn:hover,
+.dropdown-icon:hover {
+  opacity: 0.8;
+}
+.icon-dropdown-container {
+  position: relative;
+}
+.showIcon {
+  display: block;
+}
+.showIcon img {
+  width: 30px;
+  background-color: #fff;
+  vertical-align: middle;
+}
+.icon-dropdown-wrap {
+  display: none;
+}
+.icon-dropdown-wrap2 {
+  font-size: 12px;
+  display: flex;
+}
+.icon-dropdown-wrap2 .line {
+  margin: 0px 10px;
+  color: #dee2e6;
+}
+.icon-dropdown-wrap2 span:hover {
+  animation: fade 1s;
+  color: #339af0;
+  cursor: pointer;
+}
+.icon-first {
+  position: absolute;
+  top: 0;
+  left: 60px;
+}
+.icon-second {
+  position: absolute;
+  top: 0;
+  left: 120px;
+}
+.icon-dropdown-container:hover > .icon-dropdown-wrap {
+  display: block;
+}
+.color-blue {
+  color: #339af0;
+}
+.mypage-nav {
+  height: 60px;
+  line-height: 60px;
+}
+.mypage_text {
+  font-size: 13px;
+  color: #ff6b6b;
+}

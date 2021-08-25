@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toy Project1</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='my_page_style.css' )}}">
-    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='my_page_script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' )}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_page_style.css' )}}">
+    <script defer src="{{ url_for('static', filename='js/common.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    {% block head %}
+    {% endblock %}
 </head>
 <body>
 
