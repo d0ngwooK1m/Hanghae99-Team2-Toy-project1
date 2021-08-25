@@ -6,10 +6,11 @@
 {% block content %}
      <section class="icon-nav-wrap">
         <nav class="container flex-layout-between">
-            <div class="icon-dropdown-wrap2 flex-layout">
-                <span class="new-card-btn">최신순</span>
-                <span class="line">|</span>
-                <span class="likes-card-btn">추천순</span>
+            <div class="search_result">
+                {% for keyword in keywords %}
+                    <b>'{{keyword}}'</b>
+                {% endfor %}
+                (으)로 검색한 결과입니다.
             </div>
             {% if token == False %}
                 <button class="create-btn">등록</button>
@@ -19,12 +20,7 @@
         </nav>
     </section>
     <div>
-        <div class="search_result">
-            {% for keyword in keywords %}
-            <strong>'{{keyword}}'</strong>
-            {% endfor %}
-            (으)로 검색한 결과입니다.
-        </div>
+        
     </div>
     <section class ="cardCloumn" id="card_list">
         <div class ="cardRow2">

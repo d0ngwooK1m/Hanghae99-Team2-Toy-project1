@@ -104,7 +104,6 @@ let focusCheck = false;
 // 회원가입, 로그인, 글쓰기용 팝업
 const inputs = document.querySelectorAll(".blur-input");
 const showPopup = (tag) => {
-  focusCheck = false;
   inputCheck();
   return tag.classList.add("show");
 };

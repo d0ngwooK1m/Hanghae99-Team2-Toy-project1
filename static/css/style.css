@@ -269,9 +269,8 @@
   margin-left: 45%;
 }
 .search_result {
-  margin: 0 auto;
-  width: 1170px;
-  font-size: 11px;
+  align-items: center;
+  font-size: 14.5px;
 }
 .mypage {
   color: white;
