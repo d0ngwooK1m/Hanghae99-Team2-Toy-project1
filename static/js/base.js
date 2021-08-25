@@ -1,4 +1,7 @@
-console.log("base.js");
+const locationHref = window.location.href;
+const findPage = locationHref.split("/").reverse()[0];
+const findQueryPage = findPage.split("?")[0];
+
 //회원가입 API 통신
 $("form[name=signup_form]").submit(function (e) {
   const form_give = $(this);
@@ -12,10 +15,8 @@ $("form[name=signup_form]").submit(function (e) {
     dataType: "json",
     success: function (response) {
       window.location.href = "/";
-      console.log(response);
     },
     error: function (response) {
-      console.log(response);
       error_give.text(response.responseJSON.error).removeClass("error--hidden");
     },
   });
@@ -36,10 +37,8 @@ $("form[name=login_form]").submit(function (e) {
     success: function (response) {
       $.cookie("login_token", response["login_token"], { path: "/" });
       return (window.location.href = "/");
-      // console.log(document.cookie);
     },
     error: function (response) {
-      console.log(response);
       error_give.text(response.responseJSON.error).removeClass("error--hidden");
     },
   });
@@ -138,8 +137,6 @@ const hidePopup = (e, tag) => {
 
 // 카드 상세화면 팝업
 function showDetail(event, id) {
-  console.log("event == ", event);
-  console.log("id == ", id);
   if (
     event.target.className === "Option_Jjim" ||
     event.target.className === "heart"
@@ -152,7 +149,6 @@ function showDetail(event, id) {
     data: { id_give: id },
     success: function (response) {
       const detail = response["response"][0];
-      console.log("response = ", response);
       const title = detail["title"];
       const desc = detail["desc"];
       const id = detail["id"];
@@ -234,7 +230,6 @@ function posting() {
   let url = document.getElementById("url").value;
   let title = document.getElementById("title").value;
   let desc = document.getElementById("description").value;
-  console.log("imgsrc", imgsrc);
   $.ajax({
     type: "POST",
     url: "/test",
@@ -250,7 +245,6 @@ function posting() {
     },
     error: function (e) {
       alert("url 주소를 다시 확인해주세요");
-      console.log(e);
     },
   });
 }
@@ -308,7 +302,6 @@ function editPopup(id) {
     },
     error: function (response) {
       alert(response.responseJSON["response"]);
-      // console.log(response.responseJSON['response'])
     },
   });
 }
@@ -335,7 +328,6 @@ function submitEdit(id) {
     },
     error: function (e) {
       alert("url 주소를 다시 확인해주세요");
-      console.log(e);
     },
   });
 }
@@ -410,7 +402,6 @@ const previewImage = (tag) => {
       // 500으로 떨어져서 이미지를 못찾는 것도 기본 이미지를 보여준다.
       if (e.status === 500) {
         alert("url 주소를 다시 확인해주세요");
-        console.log("error === ", e);
       }
     },
   });
@@ -459,4 +450,27 @@ function Like() {
   } else {
     Like_thumb.src = "../static/img/thumbsup.svg";
   }
+}
+
+// 추천하기
+function updateLike(id) {
+  fetch("update/likes", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id_give: id }),
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      alert(response["msg"]);
+      if (findPage === "myPage") {
+        window.location.href = "/myPage";
+      } else if(findQueryPage === "search"){
+        window.location.href = `/${findPage}`;
+      }
+      else {
+        window.location.href = "/";
+      }
+    });
 }

@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
-{% block main%}
+{% block head%}
 <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
-{% endblock%}
-{% block listsort%}
 <script defer src="{{ url_for('static', filename='js/listsort.js') }}"></script>
 {% endblock%}
 {% block content %}

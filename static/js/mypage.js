@@ -1,4 +1,3 @@
-console.log("mypage.js");
 window.addEventListener("load", function () {
   myPageList();
 });
@@ -14,7 +13,6 @@ function myPageList() {
     .then((response) => response.json())
     .then((response) => {
       const myList = response["my_list"];
-      console.log("mypage response ", myList);
       if (myList.length === 0) {
         const text = `<p class="mypage_text">찜한 카드가 없습니다. 마음에 드는 카드를 찜해주세요.</p>`;
         mypage.innerHTML = text;
