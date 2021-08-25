@@ -1,34 +1,34 @@
 window.addEventListener("load", function () {
-      myPageList();
-  });
+  myPageList();
+});
 
-  function myPageList() {
-    const mypageList = document.querySelector(".mypage_cardList");
-    const mypage = document.querySelector(".mypage_cloumn");
-    fetch("/myPage/list", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        const myList = response["my_list"];
-        console.log("mypage response ", myList);
-        if (myList.length === 0) {
-          const text = `<p class="mypage_text">찜한 카드가 없습니다. 마음에 드는 카드를 찜해주세요.</p>`;
-          mypage.innerHTML = text;
-        } else {
-          for (let i = 0; i < myList.length; i++) {
-            const url = myList[i]["url"];
-            const title = myList[i]["title"];
-            const likes = myList[i]["likes"];
-            const imgsrc = myList[i]["imgsrc"];
-            const id = myList[i]["id"];
-            const mypage_html = `
+function myPageList() {
+  const mypageList = document.querySelector(".mypage_cardList");
+  const mypage = document.querySelector(".mypage_cloumn");
+  fetch("/myPage/list", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((response) => {
+      const myList = response["my_list"];
+      console.log("mypage response ", myList);
+      if (myList.length === 0) {
+        const text = `<p class="mypage_text">찜한 카드가 없습니다. 마음에 드는 카드를 찜해주세요.</p>`;
+        mypage.innerHTML = text;
+      } else {
+        for (let i = 0; i < myList.length; i++) {
+          const url = myList[i]["url"];
+          const title = myList[i]["title"];
+          const likes = myList[i]["likes"];
+          const imgsrc = myList[i]["imgsrc"];
+          const id = myList[i]["id"];
+          const mypage_html = `
           <div class="ListBg">
                               <div class="ListFlex">
-                                  <div class="click-wrap" onclick="showDetail('${id}')">
+                                  <div class="click-wrap" onclick="showDetail('${id}',event)">
                                       <div class="imgHidden-box">
                                           <img src="${imgsrc}" class="classImg">
                                           <button class="Option_Jjim">
@@ -60,9 +60,8 @@ window.addEventListener("load", function () {
                               </div>
                           </div>
           `;
-            mypageList.innerHTML += mypage_html;
-          }
+          mypageList.innerHTML += mypage_html;
         }
-      });
-  }
-  
+      }
+    });
+}

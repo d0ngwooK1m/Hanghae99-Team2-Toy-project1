@@ -15,7 +15,6 @@ $("form[name=signup_form]").submit(function (e) {
     dataType: "json",
     success: function (response) {
       window.location.href = "/";
-      console.log(response);
     },
     error: function (response) {
       console.log(response);
@@ -39,7 +38,6 @@ $("form[name=login_form]").submit(function (e) {
     success: function (response) {
       $.cookie("login_token", response["login_token"], { path: "/" });
       return (window.location.href = "/");
-      // console.log(document.cookie);
     },
     error: function (response) {
       console.log(response);
@@ -70,39 +68,28 @@ $(".logout-btn").click(function (e) {
 function postingFail() {
   return alert("사용권한이 없습니다");
 }
-// 상세보기 닫기 팝업만 따로 분리함
+// 상세보기 닫기 팝업
+let focusCheck = false;
 const hideDetailPopup = (e, tag) => {
   const modifyBtn = document.querySelector(".detail-modify-btn");
   const detailForm = document.querySelector(".detail-form");
-  const detailBg = document.querySelector(".popup-detail-background");
 
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
-
-  if (e.target.className) tag.classList.remove("show");
+  // focuse 상태 체크해서 팝업 닫히는 부분 막기
+  if (focusCheck) {
+    return null;
+  }
+  // 팝업이 닫혀지면서, 수정버튼과 상세보기 화면 숨김처리해둔걸
+  // 다시 block으로 변경해준다.
   modifyBtn.style.display = "block";
   detailForm.style.display = "block";
 
-  // 수정하는 input에서 포커스 아웃되면 팝업창 닫히지 않게
-  const inputs = document.querySelectorAll(".blur-edit-input");
-  // 동일한 클래스명을 갖는 태그를 모두 찾아서 forEach로 돌린다.
-  inputs.forEach((input) => {
-    // 동일한 클래스 명을 갖는 태그 하나하나에 blur이벤트를 준다.
-    input.addEventListener("blur", (e) => {
-      if (e.target.classList.contains("blur-edit-input")) {
-        modifyBtn.style.display = "none";
-        detailForm.style.display = "none";
-        detailBg.classList.add("show");
-      }
-    });
-  });
-
-  return detailBg.classList.remove("show");
+  return tag.classList.remove("show");
 };
 // 카드 상세화면 팝업
 function showDetail(id, e) {
-  console.log(e.target)
   if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
     return null;
   }
@@ -157,7 +144,7 @@ function showDetail(id, e) {
   });
 }
 
-// 수정
+// 수정 팝업
 function editPopup(id) {
   $.ajax({
     type: "GET",
@@ -185,40 +172,39 @@ function editPopup(id) {
                                       <div class="popup-box-wrap">
                                           <label for="url">웹 사이트 URL</label>
                                           <div class="flex-layout">
-                                              <input class="modify-preview-url blur-edit-input" type="text" id="urlNew" name="url" value="${url}"/>
+                                              <input class="modify-preview-url blur-input" type="text" id="urlNew" name="url" value="${url}"/>
                                               <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
                                           </div>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="title">제목</label>
-                                            <input class="blur-edit-input" type="text" id="titleNew" name="title" value="${title}"/>
+                                            <input class="blur-input" type="text" id="titleNew" name="title" value="${title}"/>
                                       </div>
                                       <div class="popup-box-wrap">
                                           <label for="description">설명</label>
-                                          <textarea class="blur-edit-input" type="text" id="descriptionNew" name="description" rows="6" value="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
+                                          <textarea class="blur-input" type="text" id="descriptionNew" name="description" rows="6" value="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
                                       </div>
-                                      <textarea class="blur-edit-input" name="id" id="" cols="0" rows="0" style="display: none">${id}</textarea>
+                                      <textarea class="blur-input" name="id" id="" cols="0" rows="0" style="display: none">${id}</textarea>
                                       <div class="popup-box-wrap">
                                       <input type="hidden" value="${id}" name="id" style="display: none">
                                           <button  class="modify-form-btn" onclick="submitEdit('${id}')">수정하기</button>
                                       </div>
 
                                     `;
+      inputCheck();
     },
     error: function (response) {
       alert(response.responseJSON["response"]);
-      // console.log(response.responseJSON['response'])
     },
   });
 }
 
+// 수정하기
 function submitEdit(id) {
   const urlNew = document.getElementById("urlNew").value;
   const titleNew = document.getElementById("titleNew").value;
   const descNew = document.getElementById("descriptionNew").value;
   const imgNew = document.getElementById("imgSource").src;
-
-  // console.log(urlNew, titleNew, descNew);
   $.ajax({
     type: "POST",
     url: "/test/submitEdit",
@@ -239,7 +225,7 @@ function submitEdit(id) {
     },
   });
 }
-
+// 삭제하기
 function deletePopup(id) {
   $.ajax({
     type: "POST",
@@ -251,7 +237,6 @@ function deletePopup(id) {
     },
     error: function (response) {
       alert(response.responseJSON["response"]);
-      // console.log(response.responseJSON['response'])
     },
   });
 }
@@ -267,8 +252,6 @@ if (document.querySelector(".Option_Like") !== null) {
   Like_thumb.addEventListener("click", Like);
   Option_Like.addEventListener("click", Like_thumbControl);
 }
-
-// html의 태그들을 변수로 담아두기
 
 //회원가입
 const signupBtn = document.querySelector(".signup-btn");
@@ -294,48 +277,41 @@ if (document.querySelector(".login-btn") !== null) {
   loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
 }
 
-// popup 함수 show, hide로 분리
-const inputs = document.querySelectorAll(".blur-input");
-// querySelectorAll 는 동일한 클래스명을 갖는 모든 태그를 찾습니다.
-// querySelector 는 동일한 클래스명을 갖는 태그가 여러개일 경우, 제일 첫번째것만 찾습니다.
+// 회원가입, 로그인, 글 등록에서 공통으로 쓰여지는 팝업
 const showPopup = (e, tag) => {
+  focusCheck = false;
   if (e.target.className === "Option_Jjim" || e.target.className === "heart") {
     return null;
   }
   tag.classList.add("show");
-
-  // input 에서 포커스 아웃되었을때 팝업창 닫히는 부분 막기
-  const inputs = document.querySelectorAll(".blur-input");
-  // blur-input을 갖고 있는 모든 태그를 찾아서 inputs란 변수에 담는다.
-  // 모든 태그(inputs)를 forEach로 돌린다.
-  return inputs.forEach((input) => {
-    // blur-input을 갖는 태그 하나하나마다 blur이벤트를 준다.
-    input.addEventListener("blur", () => {
-      if (tag.className === "signup-background") {
-        // 회원가입 팝업창일때, 회원가입 팝업창 외에 모두 show 클래스 지움
-        signupBg.classList.add("show");
-        loginBg.classList.remove("show");
-        popupBg.classList.remove("show");
-      } else if (tag.className === "login-background") {
-        // 로그인 팝업창일때, 로그입 팝업창 외에 모두 show 클래스 지움
-        signupBg.classList.remove("show");
-        loginBg.classList.add("show");
-        popupBg.classList.remove("show");
-      } else if (tag.className === "popup-background") {
-        // 글등록 팝업창일때 글등록 팝업창 외에 모두 show 클래스 지움
-        signupBg.classList.remove("show");
-        loginBg.classList.remove("show");
-        popupBg.classList.add("show");
-      }
-    });
-  });
+  inputCheck();
 };
 
 const hidePopup = (e, tag) => {
+  // focusCheck의 상태에 따라 팝업 닫히는 함수를 제어한다.
+  if (focusCheck) {
+    return null;
+  }
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
   return tag.classList.remove("show");
+};
+// 현재 input에 포커스 상태 체크하는 함수.
+const inputCheck = () => {
+  // blur-input 클래스를 쓰는 모든 input을 inputs에 담는다.
+  const inputs = document.querySelectorAll(".blur-input");
+  // inputs을 forEach로 돌려서 포커스 이벤트가 발생한 input를 찾아서
+  inputs.forEach((input) => {
+    // 현재  focus가 일어난 input이면 focusCheck = true 로 상태변경해줌
+    input.addEventListener("focus", () => {
+      focusCheck = true;
+    });
+    // input이 포커스 아웃되면 다시 focusCheck 상태를 false로 변경해줌.
+    input.addEventListener("focusout", () => {
+      focusCheck = false;
+    });
+  });
 };
 
 let url = document.querySelector(".preview-url"); // input
@@ -413,10 +389,9 @@ function updateLike(id) {
       alert(response["msg"]);
       if (findPage === "myPage") {
         window.location.href = "/myPage";
-      } else if(findQueryPage === "search"){
+      } else if (findQueryPage === "search") {
         window.location.href = `/${findPage}`;
-      }
-      else {
+      } else {
         window.location.href = "/";
       }
     });

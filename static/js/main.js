@@ -1,26 +1,22 @@
 window.addEventListener("load", function () {
-      viewing();
-  });
+  viewing();
+});
 
 // 리스트 뷰
 let cardRow = document.querySelector(".cardRow");
 function viewing() {
-  // cardRow.innerHTML = "";
   $.ajax({
     type: "GET",
     url: "/view",
     data: {},
     success: function (response) {
       let lists = response["all_post"];
-      console.log(lists);
       for (let i = 0; i < lists.length; i++) {
         let url = lists[i]["url"];
         let title = lists[i]["title"];
         let likes = lists[i]["likes"];
         let imgsrc = lists[i]["imgsrc"];
         let id = lists[i]["id"];
-        //_id는 안잡힌다, id를 따로 주어야 잡힐 듯?
-        console.log(String(id));
 
         let temp_html = `<div class="ListBg">
                             <div class="ListFlex">
@@ -55,16 +51,17 @@ function viewing() {
                                 </div>
                             </div>
                         </div>`;
-        $(".cardRow").append(temp_html);
+        // $(".cardRow").append(temp_html);
+        cardRow.innerHTML += temp_html;
       }
     },
   });
 }
 
 if (document.querySelector(".create-btn") !== null) {
-    popupBtn.addEventListener("click", (e) => showPopup(e, popupBg));
-    popupCloseBtn.addEventListener("click", (e) => hidePopup(e, popupBg));
-    popupBg.addEventListener("click", (e) => hidePopup(e, popupBg));
+  popupBtn.addEventListener("click", (e) => showPopup(e, popupBg));
+  popupCloseBtn.addEventListener("click", (e) => hidePopup(e, popupBg));
+  popupBg.addEventListener("click", (e) => hidePopup(e, popupBg));
 }
 
 // 최신순 정렬

@@ -421,6 +421,9 @@
 .detail-form-wrap input::placeholder,
 .detail-form-wrap textarea::placeholder {
   color: #dee2e6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
 }
 .create-form-btn,
 .login-submit-btn,
