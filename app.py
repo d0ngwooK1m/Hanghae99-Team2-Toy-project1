@@ -264,6 +264,16 @@ def updateLikes():
     new_like = target_like + 1
     db.posting.update_one({'id': find_id}, {'$set': {'likes': new_like}})
     return jsonify({'msg': "추천되었습니다."})
+
+@app.route('/update/jjim', methods=['POST'])
+def updatejjim():
+    id_receive = request.form['id_give']
+    target_jjim = db.posting.find_one({'id':id_receive})
+    
+    current_jjim = target_jjim['heart']
+    new_jjim = current_jjim + 1
+    db.posting.update_one({'id':id_receive}, {'$set': {'heart':new_jjim}})  
+    return jsonify({'msg':"찜하기 완료!"})    
 # 켜기 터미널
 # set FLASK_APP=app.py
 # set FLASK_ENV=development
