@@ -398,6 +398,23 @@ const previewImage = (tag) => {
     },
   });
 };
+// "\"문자 입력 방지 함수
+const searchInput = document.querySelector('.search_bar');
+
+function keyPrevent(event){
+  let keyvalue = event.keyCode;
+  console.log(event)
+  if(keyvalue == 220 ){
+    alert(`'\\'(은)는 사용하실 수 없습니다.`);
+    event.returnValue = false;
+  }else{
+    return false;
+  }
+}
+
+searchInput.addEventListener('keydown', (event)=>{
+  keyPrevent(event)
+})
 
 if (document.querySelector(".Option_Jjim")) {
   Option_Jjim.addEventListener("click", Jjim);
@@ -466,20 +483,3 @@ function updateLike(id) {
     });
 }
 
-// "\"문자 입력 방지 함수
-const searchInput = document.querySelector('.search_bar');
-
-function keyPrevent(event){
-  let keyvalue = event.keyCode;
-  console.log(event)
-  if(keyvalue == 220 ){
-    alert(`'\\'(은)는 사용하실 수 없습니다.`);
-    event.returnValue = false;
-  }else{
-    return false;
-  }
-}
-
-searchInput.addEventListener('keydown', (event)=>{
-  keyPrevent(event)
-})
