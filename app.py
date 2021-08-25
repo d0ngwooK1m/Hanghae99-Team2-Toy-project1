@@ -4,7 +4,6 @@ import pymongo
 import jwt
 import uuid
 import datetime
-# import beautifulsoup4
 
 
 from bs4 import BeautifulSoup
@@ -154,7 +153,6 @@ def posting():
 def detail():
     id_receive = request.args.get('id_give')
     detail = list(db.posting.find({"id": id_receive}, {"_id": False}))
-    # print(id_receive, detail)
     return jsonify({"response": detail})
 
 
@@ -172,7 +170,6 @@ def delete():
 def submitEdit():
 
     id_receive = request.form['id_give']
-    # img_receive = request.form['img_give']
     url_receive = request.form['url_give']
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -192,6 +189,7 @@ def submitEdit():
 
 @app.route('/search', methods=['GET'])
 def view_Search():
+
     try:
         tokenExist = checkExpired()
 
@@ -201,35 +199,11 @@ def view_Search():
         tokenExist=True
 
     text = request.args.get('text')
+    print(text)
     #text는 form으로 데이터를 받음
     splitted_keywords = text.split(' ')
     #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
     print(splitted_keywords)
-    # pipelines = list()
-    # for str in splitted_keywords:
-    #     pipelines.append({
-    #         '$match':{
-    #             '$or':[
-    #                 {'title':{'$regex':str}},
-    #                 {'desc':{"$regex":str}}
-    #             ]}
-    #         # '$text':{'$search':str}
-    #     })
-    #     pipelines.append({
-    #         '$project': {
-    #             '_id': 0
-    #         }
-    #     })
-    #     pipelines.append({
-    #         '$sort':{
-    #             'uploadtime':-1
-    #             # '$meta':{'score':'textScore'}
-    #         }
-    #     })
-    # print(pipelines)
-    # search = list(db.posting.aggregate(pipelines))
-    # print(search)
-
     sep_keywords = []
     for string in splitted_keywords:
         sep_keywords.append({'$or':[
@@ -237,9 +211,11 @@ def view_Search():
             {'desc':{'$regex':string}}
         ]})
     print(sep_keywords)
-    search = list(db.posting.find({"$or":sep_keywords},{'_id':False}).sort('uploadtime',-1))
-    print(search)
-    return render_template('search.html', keywords=splitted_keywords, search=search, token=tokenExist)
+    search_Recent = list(db.posting.find({"$or":sep_keywords},{'_id':False}).sort('uploadtime',-1))
+    search_Likes = list(db.posting.find({"$or":sep_keywords},{'_id':False}).sort('likes',-1))
+
+    return render_template('search.html', R=True, keywords=splitted_keywords, search_R=search_Recent, search_L=search_Likes, token=tokenExist)
+
 
 
 @app.route('/create/previewImage', methods=['POST'])
@@ -264,6 +240,7 @@ def updateLikes():
     new_like = target_like + 1
     db.posting.update_one({'id': find_id}, {'$set': {'likes': new_like}})
     return jsonify({'msg': "추천되었습니다."})
+
 # 켜기 터미널
 # set FLASK_APP=app.py
 # set FLASK_ENV=development

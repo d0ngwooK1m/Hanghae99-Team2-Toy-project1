@@ -60,41 +60,6 @@ function viewing() {
     },
   });
 }
-// 카드 등록
-const createBtn = document.querySelector(".create-form-btn");
-let imgsrc = "";
-function posting() {
-  let url = document.getElementById("url").value;
-  let title = document.getElementById("title").value;
-  let desc = document.getElementById("description").value;
-  console.log("imgsrc", imgsrc);
-  $.ajax({
-    type: "POST",
-    url: "/test",
-    data: {
-      url_give: url,
-      title_give: title,
-      desc_give: desc,
-      imgsrc_give: imgsrc,
-    },
-    success: function (response) {
-      alert(response["msg"]);
-      window.location.reload();
-    },
-    error: function (e) {
-      alert("url 주소를 다시 확인해주세요");
-      console.log(e);
-    },
-  });
-}
-if (createBtn !== null) {
-  createBtn.addEventListener("click", posting);
-}
-
-//글작성 팝업
-const popupBtn = document.querySelector(".create-btn");
-const popupBg = document.querySelector(".popup-background");
-const popupCloseBtn = document.querySelector(".popup-close-btn");
 
 if (document.querySelector(".create-btn") !== null) {
     popupBtn.addEventListener("click", (e) => showPopup(e, popupBg));
@@ -181,16 +146,12 @@ likeBtn.addEventListener("click", () => {
     .then((response) => {
       cardRow.innerHTML = "";
       const list = response["all_post"];
-      const newList = list.sort(function (a, b) {
-        return b.likes - a.likes;
-      });
-      for (let i = 0; i < newList.length; i++) {
-        const title = newList[i].title;
-        const url = newList[i].url;
-        const likes = newList[i].likes;
-        const imgsrc = newList[i].imgsrc;
-        // const previewImage = newList[i].image
-        const id = newList[i].id;
+      for (let i = 0; i < list.length; i++) {
+        const title = list[i].title;
+        const url = list[i].url;
+        const likes = list[i].likes;
+        const imgsrc = list[i].imgsrc;
+        const id = list[i].id;
         const newHtml = `<div class="ListBg">
                           <div class="ListFlex">
                               <div class="click-wrap" onclick="showDetail('${id}')">
