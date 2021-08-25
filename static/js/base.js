@@ -73,7 +73,7 @@ const signupBg = document.querySelector(".signup-background");
 const signupCloseBtn = document.querySelector(".signup-close-btn");
 
 if (document.querySelector(".signup-btn") !== null) {
-  signupBtn.addEventListener("click", (e) => showPopup(e, signupBg));
+  signupBtn.addEventListener("click", () => showPopup(signupBg));
   signupCloseBtn.addEventListener("click", (e) => hidePopup(e, signupBg));
   signupBg.addEventListener("click", (e) => hidePopup(e, signupBg));
 }
@@ -83,7 +83,7 @@ const loginBtn = document.querySelector(".login-btn");
 const loginBg = document.querySelector(".login-background");
 const loginCloseBtn = document.querySelector(".login-close-btn");
 if (document.querySelector(".login-btn") !== null) {
-  loginBtn.addEventListener("click", (e) => showPopup(e, loginBg));
+  loginBtn.addEventListener("click", () => showPopup(loginBg));
   loginCloseBtn.addEventListener("click", (e) => hidePopup(e, loginBg));
   loginBg.addEventListener("click", (e) => hidePopup(e, loginBg));
 }
@@ -95,44 +95,43 @@ const popupCloseBtn = document.querySelector(".popup-close-btn");
 
 //글작성
 if (document.querySelector(".create-btn") !== null) {
-  popupBtn.addEventListener("click", (e) => showPopup(e, popupBg));
+  popupBtn.addEventListener("click", () => showPopup(popupBg));
   popupCloseBtn.addEventListener("click", (e) => hidePopup(e, popupBg));
   popupBg.addEventListener("click", (e) => hidePopup(e, popupBg));
 }
 
-// 회원가입, 로그인용 팝업
+let focusCheck = false;
+// 회원가입, 로그인, 글쓰기용 팝업
 const inputs = document.querySelectorAll(".blur-input");
-const showPopup = (e, tag) => {
-  tag.classList.add("show");
-
-  const inputs = document.querySelectorAll(".blur-input");
-  return inputs.forEach((input) => {
-    input.addEventListener("blur", () => {
-      if (tag.className === "signup-background") {
-        // 회원가입 팝업창일때, 회원가입 팝업창 외에 모두 show 클래스 지움
-        signupBg.classList.add("show");
-        loginBg.classList.remove("show");
-        popupBg.classList.remove("show");
-      } else if (tag.className === "login-background") {
-        // 로그인 팝업창일때, 로그입 팝업창 외에 모두 show 클래스 지움
-        signupBg.classList.remove("show");
-        loginBg.classList.add("show");
-        popupBg.classList.remove("show");
-      } else if (tag.className === "popup-background") {
-        // 글등록 팝업창일때 글등록 팝업창 외에 모두 show 클래스 지움
-        signupBg.classList.remove("show");
-        loginBg.classList.remove("show");
-        popupBg.classList.add("show");
-      }
-    });
-  });
+const showPopup = (tag) => {
+  focusCheck = false;
+  inputCheck();
+  return tag.classList.add("show");
 };
 
 const hidePopup = (e, tag) => {
+  // focusCheck 의 상태가 true이면 팝업 닫히는 함수의 동작을 막는다.
+  if (focusCheck) {
+    return null;
+  }
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
   return tag.classList.remove("show");
+};
+// input의 포커스 상태에 따라 팝업 닫히는 부분 막기
+const inputCheck = () => {
+  // blur-input의 클래스명을 가지는 모든 태그들을 inputs에 담는다.
+  const inputs = document.querySelectorAll(".blur-input");
+  // 모든 inputs를 forEach로 돌려서 이벤트가 발생한 input의 포커스 상태에 따라 focusCheck 상태값을 변경해준다.
+  inputs.forEach((input) => {
+    input.addEventListener("focus", () => {
+      focusCheck = true;
+    });
+    input.addEventListener("focusout", () => {
+      focusCheck = false;
+    });
+  });
 };
 
 // 카드 상세화면 팝업
@@ -197,31 +196,20 @@ function showDetail(event, id) {
 const hideDetailPopup = (e, tag) => {
   const modifyBtn = document.querySelector(".detail-modify-btn");
   const detailForm = document.querySelector(".detail-form");
-  const detailBg = document.querySelector(".popup-detail-background");
 
   if (e.target.className !== e.currentTarget.className) {
     return null;
   }
 
-  if (e.target.className) tag.classList.remove("show");
+  // focuse 상태 체크해서 팝업 닫히는 부분 막기
+  if (focusCheck) {
+    return null;
+  }
+
   modifyBtn.style.display = "block";
   detailForm.style.display = "block";
 
-  // 수정하는 input에서 포커스 아웃되면 팝업창 닫히지 않게
-  const inputs = document.querySelectorAll(".blur-edit-input");
-  // 동일한 클래스명을 갖는 태그를 모두 찾아서 forEach로 돌린다.
-  inputs.forEach((input) => {
-    // 동일한 클래스 명을 갖는 태그 하나하나에 blur이벤트를 준다.
-    input.addEventListener("blur", (e) => {
-      if (e.target.classList.contains("blur-edit-input")) {
-        modifyBtn.style.display = "none";
-        detailForm.style.display = "none";
-        detailBg.classList.add("show");
-      }
-    });
-  });
-
-  return detailBg.classList.remove("show");
+  return tag.classList.remove("show");
 };
 // 카드 등록
 const createBtn = document.querySelector(".create-form-btn");
@@ -280,25 +268,26 @@ function editPopup(id) {
                                         <div class="popup-box-wrap">
                                             <label for="url">웹 사이트 URL</label>
                                             <div class="flex-layout">
-                                                <input class="modify-preview-url blur-edit-input" type="text" id="urlNew" name="url" value="${url}"/>
-                                                <button class="modify-preview-btn" onclick="previewImage()">미리보기</button>
+                                                <input class="modify-preview-url blur-input" type="text" id="urlNew" name="url" value="${url}"/>
+                                                <button class="modify-preview-btn" onclick="previewImage()">이미지 등록</button>
                                             </div>
                                         </div>
                                         <div class="popup-box-wrap">
                                             <label for="title">제목</label>
-                                              <input class="blur-edit-input" type="text" id="titleNew" name="title" value="${title}"/>
+                                              <input class="blur-input" type="text" id="titleNew" name="title" value="${title}"/>
                                         </div>
                                         <div class="popup-box-wrap">
                                             <label for="description">설명</label>
-                                            <textarea class="blur-edit-input" type="text" id="descriptionNew" name="description" rows="6" value="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
+                                            <textarea class="blur-input" type="text" id="descriptionNew" name="description" rows="6" value="사이트에 대한 간략한 설명을 입력해주세요" >${desc}</textarea>
                                         </div>
-                                        <textarea class="blur-edit-input" name="id" id="" cols="0" rows="0" style="display: none">${id}</textarea>
+                                        <textarea class="blur-input" name="id" id="" cols="0" rows="0" style="display: none">${id}</textarea>
                                         <div class="popup-box-wrap">
                                         <input type="hidden" value="${id}" name="id" style="display: none">
                                             <button  class="modify-form-btn" onclick="submitEdit('${id}')">수정하기</button>
                                         </div>
   
                                       `;
+      inputCheck();
     },
     error: function (response) {
       alert(response.responseJSON["response"]);
@@ -392,14 +381,12 @@ const previewImage = (tag) => {
       imgsrc = CheckImage;
       // og:image가 있을 경우
       if (value === urlValue) {
-        previewBox.innerHTML = `<img src="${CheckImage}" id="imgSource" alt="썸네일"/>`;
+        previewBox.innerHTML = `<img src="${CheckImage}" alt="썸네일"/>`;
       } else {
-        modifyWrap.innerHTML = `<img class="detail-image-wrap" id="imgSource" src="${CheckImage}" alt="썸네일"/>`;
+        modifyWrap.innerHTML = `<img class="detail-image-wrap" src="${CheckImage}" alt="썸네일"/>`;
       }
     },
     error: function (e) {
-      // 예외처리
-      // 500으로 떨어져서 이미지를 못찾는 것도 기본 이미지를 보여준다.
       if (e.status === 500) {
         alert("url 주소를 다시 확인해주세요");
       }
@@ -466,10 +453,9 @@ function updateLike(id) {
       alert(response["msg"]);
       if (findPage === "myPage") {
         window.location.href = "/myPage";
-      } else if(findQueryPage === "search"){
+      } else if (findQueryPage === "search") {
         window.location.href = `/${findPage}`;
-      }
-      else {
+      } else {
         window.location.href = "/";
       }
     });

@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' )}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/my_page_style.css' )}}">
     <script defer src="{{ url_for('static', filename='js/base.js') }}"></script>
-    <!-- <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='js/mypage.js') }}"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     {% block head%}
@@ -35,7 +33,7 @@
             <div class="member_box">
                 <div class="mypage">
                     {% if token == False %}
-                        <a href="/myPage">찜목록</a>
+                        <a href="/myPage">작성글보기</a>
                     {% else %}
 
                     {% endif %}
@@ -131,7 +129,7 @@
                             <label for="url">웹 사이트 URL</label>
                             <div class="flex-layout">
                                 <input class="preview-url blur-input" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
-                                <button class="preview-btn">미리보기</button>
+                                <button class="preview-btn">이미지 등록</button>
                             </div>
                         </div>
                         <div class="popup-box-wrap">
