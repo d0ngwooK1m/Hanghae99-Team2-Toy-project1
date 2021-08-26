@@ -392,10 +392,10 @@
 .arrow {
   position: fixed;
   cursor: pointer;
-  bottom: 50px;
-  right: 50px;
-  width: 50px;
-  height: 50px;
+  bottom: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
 }
 /* 리스트관련 css */
 .cardCloumn {
@@ -604,12 +604,58 @@
   }
   /* 팝업 크기 수정이 필요하시면 아래 widht를 조절해주세요. */
   .popup-content {
-    width: 500px;
-    border: 2px solid red;
+    width: 100%
   }
   .login-content,
   .signup-content {
     width: 250px;
     border: 2px solid pink;
+  }
+  .cardRow,
+  .cardRow2 {
+  display: flex;
+  flex-wrap: wrap;
+  }
+  .ListBg {
+    position: relative;
+    cursor: pointer;
+    min-width: 270px;
+    margin: 10px auto;
+  }
+  .popup-wrap, .login-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 100vh;
+    z-index: 10;
+    width: 75%;
+  }
+  .popup-scroll-wrap {
+    max-height: 550px;
+  }
+  .topLogo {
+    display: inline-block;
+    height: 70px;
+    margin-right: 0px;
+    padding: 10px 0;
+  }
+  .search_form {
+    position: relative;
+    width: 120px;
+  }
+  .search_bar {
+    width: 120px;
+    height: 40px;
+    padding-left: 20px;
+    outline: none;
+    border-radius: 20px;
+  }
+  .member_box {
+    font-size: 12px;
+  }
+  .create-btn-fail {
+    
+    font-size: 12px;
   }
 }
