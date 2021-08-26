@@ -34,10 +34,6 @@ function viewing() {
                                             <img src="../static/img/likeUp3.png">
                                             <span>${likes}</span>
                                         </div>
-                                        <div class = "JjimNum">
-                                            <img src="${jjim}">
-                                            <span></span>
-                                        </div>
                                     </div>
                                     <hr/>
                                 </div>
@@ -101,10 +97,6 @@ newCardBtn.addEventListener("click", () => {
                                             <img src="../static/img/likeUp3.png">
                                             <span>${likes}</span>
                                         </div>
-                                        <div class = "JjimNum">
-                                            <img src="../static/img/Rheart.svg">
-                                            <span>${jjim}</span>
-                                        </div>
                                     </div>
                                     <hr/>
                                 </div>
@@ -164,10 +156,6 @@ likeBtn.addEventListener("click", () => {
                                         <div class = "likeNum">
                                             <img src="../static/img/likeUp3.png">
                                             <span>${likes}</span>
-                                        </div>
-                                        <div class = "JjimNum">
-                                            <img src="../static/img/Rheart.svg">
-                                            <span>${jjim}</span>
                                         </div>
                                     </div>
                                     <hr/>
