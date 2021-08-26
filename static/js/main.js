@@ -34,10 +34,6 @@ function viewing() {
                                             <img src="../static/img/likeUp3.png">
                                             <span>${likes}</span>
                                         </div>
-                                        <div class = "JjimNum">
-                                            <img src="${jjim}">
-                                            <span></span>
-                                        </div>
                                     </div>
                                     <hr/>
                                 </div>
@@ -92,7 +88,7 @@ newCardBtn.addEventListener("click", () => {
                                     <div class="imgHidden-box">
                                         <img src="${imgsrc}" class="classImg">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
-                                            <img src="../static/img/heart.svg" class="heart">
+                                            <img src="${jjim}" class="heart">
                                         </button>
                                     </div>  
                                     <h3 class ="title">${title}</h3>
@@ -100,10 +96,6 @@ newCardBtn.addEventListener("click", () => {
                                         <div class = "likeNum">
                                             <img src="../static/img/likeUp3.png">
                                             <span>${likes}</span>
-                                        </div>
-                                        <div class = "JjimNum">
-                                            <img src="../static/img/Rheart.svg">
-                                            <span>${jjim}</span>
                                         </div>
                                     </div>
                                     <hr/>
@@ -156,7 +148,7 @@ likeBtn.addEventListener("click", () => {
                                     <div class="imgHidden-box">
                                         <img src="${imgsrc}" class="classImg">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
-                                            <img src="../static/img/heart.svg" class="heart">
+                                            <img src="${jjim}" class="heart">
                                         </button>
                                     </div>
                                     <h3 class ="title">${title}</h3>
@@ -164,10 +156,6 @@ likeBtn.addEventListener("click", () => {
                                         <div class = "likeNum">
                                             <img src="../static/img/likeUp3.png">
                                             <span>${likes}</span>
-                                        </div>
-                                        <div class = "JjimNum">
-                                            <img src="../static/img/Rheart.svg">
-                                            <span>${jjim}</span>
                                         </div>
                                     </div>
                                     <hr/>

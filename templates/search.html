@@ -7,10 +7,14 @@
      <section class="icon-nav-wrap">
         <nav class="container flex-layout-between">
             <div class="search_result">
-                {% for keyword in keywords %}
-                    <b>'{{keyword}}'</b>
-                {% endfor %}
-                (으)로 검색한 결과입니다.
+                {%if keywords == [""] %}
+                    검색어를 입력하지 않으면 랜덤으로 카드 한장이 나옵니다.
+                {% else %}
+                    {% for keyword in keywords %}
+                        <b>'{{keyword}}'</b>
+                    {% endfor %}
+                    (으)로 검색한 결과입니다.
+                {% endif %}
             </div>
             {% if token == False %}
                 <button class="create-btn">등록</button>
@@ -39,10 +43,6 @@
                                 <div class = "likeNum">
                                     <img src="../static/img/likeUp3.png">
                                     <span>{{text['likes']}}</span>
-                                </div>
-                                <div class = "JjimNum">
-                                    <img src="{{text['heart']}}">
-                                    <span></span>
                                 </div>
                             </div>
                             <hr/>

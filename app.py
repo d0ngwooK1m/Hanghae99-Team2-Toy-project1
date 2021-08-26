@@ -206,30 +206,13 @@ def view_Search():
     splitted_keywords = text.split(' ')
     #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
     print(splitted_keywords)
-    # pipelines = list()
-    # for str in splitted_keywords:
-    #     pipelines.append({
-    #         '$match':{
-    #             '$or':[
-    #                 {'title':{'$regex':str}},
-    #                 {'desc':{"$regex":str}}
-    #             ]}
-    #         # '$text':{'$search':str}
-    #     })
-    #     pipelines.append({
-    #         '$project': {
-    #             '_id': 0
-    #         }
-    #     })
-    #     pipelines.append({
-    #         '$sort':{
-    #             'uploadtime':-1
-    #             # '$meta':{'score':'textScore'}
-    #         }
-    #     })
-    # print(pipelines)
-    # search = list(db.posting.aggregate(pipelines))
-    # print(search)
+    pipelines = list()
+    pipelines.append({
+        '$sample':{'size':1}
+    })
+    print(pipelines)
+    search_R = list(db.posting.aggregate(pipelines))
+    print(search_R)
 
     sep_keywords = []
     for string in splitted_keywords:
@@ -238,9 +221,13 @@ def view_Search():
             {'desc':{'$regex':string}}
         ]})
     print(sep_keywords)
+
     search = list(db.posting.find({"$or":sep_keywords},{'_id':False}).sort('uploadtime',-1))
     print(search)
-    return render_template('search.html', keywords=splitted_keywords, search=search, token=tokenExist)
+    if text == "":
+        return render_template('search.html', keywords=splitted_keywords, search=search_R, token=tokenExist)
+    else :
+        return render_template('search.html', keywords=splitted_keywords, search=search, token=tokenExist)
 
 
 @app.route('/create/previewImage', methods=['POST'])
@@ -276,12 +263,14 @@ def updatejjim():
     print(target_Heart)
     if target_Heart:
         Heart = '../static/img/heart.svg'
+        msg = '찜하기 취소!'
     else:
         Heart = '../static/img/rheart.svg'
+        msg = '찜하기 완료!'
     print(Heart)
     db.posting.update_one({'id':id_receive}, {'$set': {'heart':Heart, 'Jjim':target_Heart}})
-
-    return jsonify({'msg':"찜하기 완료!"})    
+    
+    return jsonify({'msg':msg })    
 # 켜기 터미널
 # set FLASK_APP=app.py
 # set FLASK_ENV=development

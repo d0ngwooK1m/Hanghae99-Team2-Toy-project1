@@ -131,6 +131,7 @@
   width: 24px;
   height: 24px;
   vertical-align: text-bottom;
+  filter: drop-shadow(rgba(41, 42, 43, 0.1) 0px 1px 3px) drop-shadow(rgba(0, 0, 0, 0.1) 0px 0px 0.5px);
 }
 
 .ListFlex .title {
@@ -153,8 +154,7 @@
   align-items: center;
 }
 
-.likeNum,
-.JjimNum {
+.likeNum{
   display: flex;
   font-size: 11px;
   font-weight: normal;
@@ -165,8 +165,7 @@
   align-items: center;
   color: rgb(162, 162, 162);
 }
-.likeNum img,
-.JjimNum img {
+.likeNum img{
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -221,8 +220,6 @@
 }
 
 .topcontainer {
-  display: flex;
-  position: relative;
   width: 100%;
   background-color: black;
 }
@@ -690,7 +687,6 @@
 /* icon nav css */
 .icon-nav-wrap {
   display: flex;
-  position: relative;
   width: 100%;
   /* padding: 30px 20px; */
   /* padding-bottom: 15px; */

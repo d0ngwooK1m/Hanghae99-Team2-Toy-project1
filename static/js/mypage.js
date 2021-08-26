@@ -41,10 +41,6 @@ function myPageList() {
                                             <img src="../static/img/likeUp3.png">
                                             <span>${likes}</span>
                                         </div>
-                                        <div class = "JjimNum">
-                                            <img src="${Jjim}">
-                                            <span></span>
-                                        </div>
                                     </div>
                                     <hr/>
                                 </div>
