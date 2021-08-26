@@ -546,9 +546,9 @@
 }
 @media screen and (max-width: 1200px) {
   /* 981~1200 */
-  body {
+  /* body {
     border: 2px solid yellow;
-  }
+  } */
   .topcontainer,
   .container,
   .topmenu {
@@ -574,7 +574,11 @@
     border: 2px solid red;
   }
   .imgHidden-box {
-    height: auto;
+    height: 100%;
+  }
+  .classImg {
+    height: 150px;
+    border: 2px solid pink;
   }
 }
 @media screen and (max-width: 767px) {
