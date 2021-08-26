@@ -221,6 +221,10 @@
 
 .topcontainer {
   width: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top:0;
+  z-index: 1;
   background-color: black;
 }
 .topmenu {
@@ -687,6 +691,11 @@
 /* icon nav css */
 .icon-nav-wrap {
   display: flex;
+  position: -webkit-sticky;
+  position: sticky;
+  top:70px;
+  z-index: 1;
+  background-color: white;
   width: 100%;
   /* padding: 30px 20px; */
   /* padding-bottom: 15px; */
@@ -762,6 +771,7 @@
 }
 .arrow {
   position: fixed;
+  cursor: pointer;
   bottom: 50px;
   right: 50px;
   width: 50px;
