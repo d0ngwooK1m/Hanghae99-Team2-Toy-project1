@@ -595,9 +595,12 @@
     width: 70%;
     min-width: 340px;
   }
+  .login-wrap{
+    width: 60%;
+  }
   .login-content,
   .signup-content {
-    width: 250px;
+    width: 100%;
     border: 2px solid pink;
   }
   .cardRow,
