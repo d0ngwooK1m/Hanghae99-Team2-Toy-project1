@@ -269,16 +269,13 @@ def updateLikes():
 @app.route('/update/jjim', methods=['POST'])
 def updatejjim():
     id_receive = request.form['id_give']
-    target = db.posting.find_one({'id':id_receive})
+    target = db.posting.find_one({'id':id_receive}) 
     target_Heart = target['Jjim']
-    print(target_Heart)
     target_Heart = not(target_Heart)
-    print(target_Heart)
     if target_Heart:
-        Heart = '../static/img/heart.svg'
+        Heart = '../static/img/heart.svg'    
     else:
         Heart = '../static/img/rheart.svg'
-    print(Heart)
     db.posting.update_one({'id':id_receive}, {'$set': {'heart':Heart, 'Jjim':target_Heart}})
 
     return jsonify({'msg':"찜하기 완료!"})    

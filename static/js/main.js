@@ -187,3 +187,11 @@ likeBtn.addEventListener("click", () => {
       }
     });
 });
+
+// 최상단으로
+toparrow = document.querySelector(".arrow")
+toparrow.addEventListener('click', scrolltop)
+
+function scrolltop() {
+  window.scrollTo(0,0)
+ }
