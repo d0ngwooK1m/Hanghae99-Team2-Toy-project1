@@ -131,7 +131,8 @@
   width: 24px;
   height: 24px;
   vertical-align: text-bottom;
-  filter: drop-shadow(rgba(41, 42, 43, 0.1) 0px 1px 3px) drop-shadow(rgba(0, 0, 0, 0.1) 0px 0px 0.5px);
+  filter: drop-shadow(rgba(41, 42, 43, 0.1) 0px 1px 3px)
+    drop-shadow(rgba(0, 0, 0, 0.1) 0px 0px 0.5px);
 }
 
 .ListFlex .title {
@@ -154,7 +155,7 @@
   align-items: center;
 }
 
-.likeNum{
+.likeNum {
   display: flex;
   font-size: 11px;
   font-weight: normal;
@@ -165,7 +166,7 @@
   align-items: center;
   color: rgb(162, 162, 162);
 }
-.likeNum img{
+.likeNum img {
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -219,11 +220,11 @@
   color: black;
 }
 
-.topcontainer {
+.header {
   width: 100%;
   position: -webkit-sticky;
   position: sticky;
-  top:0;
+  top: 0;
   z-index: 1;
   background-color: black;
 }
@@ -245,6 +246,7 @@
 .logoSearch {
   display: flex;
   align-items: center;
+  border: 2px solid yellow;
 }
 
 .search_bar {
@@ -302,80 +304,12 @@
 .member_box {
   margin-left: auto;
   display: flex;
+  border: 2px solid blue;
 }
 .search_box {
   width: 50%;
   display: flex;
-}
-
-/* 버튼 css */
-.menu-container {
-  width: 980px;
-  margin: 15px auto;
-}
-.menu-wrap {
-  width: 120px;
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 5px 0px auto;
-}
-
-.a-content {
-  text-decoration: none;
-}
-
-/* 드롭다운 버튼 */
-.dropbtn,
-.writebtn {
-  background-color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: solid 0.5px black;
-  border-radius: 50%;
-}
-
-/* 드롭다운 컨텐츠 위치 조정 */
-.dropdown {
-  position: relative;
-  /* display: inline-block; */
-}
-
-/* 드롭다운 컨텐츠 숨기기 (기본설정) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: white;
-  min-width: 16px;
-  z-index: 1;
-}
-
-/* 드롭다운 안에 있는 링크들 */
-.dropdown-content a {
-  background-color: white;
-  border: solid 0.5px black;
-  border-radius: 50%;
-  margin-top: 5px;
-  padding: 16px;
-  display: block;
-}
-
-/* 드롭다운 호버 색깔 바꾸기 */
-.dropdown-content a:hover {
-  background-color: gold;
-}
-
-/* 드롭다운 호버 메뉴 보이기 */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* 메뉴 보이면 색 바꾸기 */
-.dropdown:hover .dropbtn {
-  background-color: gold;
-}
-
-.writebtn:hover {
-  background-color: gold;
+  border: 2px solid pink;
 }
 
 /* 글 작성 모달 css */
@@ -391,7 +325,7 @@
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1;
+  z-index: 10;
 }
 .show {
   display: block;
@@ -564,136 +498,17 @@
   font-weight: bold;
   letter-spacing: -0.6px;
 }
-/* .login-form {
-  position: relative;
-  transition: box-shadow 0.3s;
-  border: 2px solid #dddddd9c;
-  border-radius: 5px;
-  padding: 50px;
-  margin: 15% auto;
-  width: 500px;
-  height: 400px;
-  background-color: rgba(275, 275, 275, 1);
-}
-
-.signup-form {
-  position: relative;
-  transition: box-shadow 0.3s;
-  border: 2px solid #dddddd9c;
-  border-radius: 5px;
-  padding: 50px;
-  margin: 5% auto;
-  width: 500px;
-  height: 600px;
-  background-color: rgba(275, 275, 275, 1);
-}
-
-.signup-close-btn {
-  position: absolute;
-  left: 85%;
-  top: 8px;
-  font-size: 2rem;
-}
-
-.login-close-btn:hover,
-.signup-close-btn:hover {
-  color: red;
-}
-
-.login-form:hover,
-.signup-form:hover {
-  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-}
-
-.modal-content input[type="text"],
-.modal-content input[type="email"],
-.modal-content input[type="password"] {
-  width: 100%;
-  padding: 2% 0;
-  margin: 5% auto;
-  border: 2px solid #dddddd9c;
-  border-radius: 3px;
-}
-
-.login-submit-btn,
-.signup-submit-btn {
-  transition: background-color 1s;
-  text-align: center;
-  width: 100%;
-  padding: 2% 0;
-  margin: 10% auto;
-  color: white;
-  background-color: black;
-  border-radius: 5px;
-}
-
-.login-submit-btn:hover,
-.signup-submit-btn:hover {
-  background-color: rgba(8, 8, 8, 0.788);
-} */
 
 .error {
   color: red;
 }
-/* 
-.List_modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.List_overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-.List_content {
-  background-color: white;
-  padding: 5% 10%;
-  text-align: center;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.2);
-  position: relative;
-  width: 66%;
-  top: 0px;
-  border-radius: 10px;
-}
-.List_hidden {
-  display: none;
-}
-.close_btn {
-  all: unset;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-.edit_btn {
-  all: unset;
-  position: absolute;
-  top: 65px;
-  right: 20px;
-}
-.delete_btn {
-  all: unset;
-  position: absolute;
-  top: 110px;
-  right: 20px;
-}
-.line {
-  color: rgb(117, 117, 117);
-  margin: 2% 0 2% 0;
-} */
 
 /* icon nav css */
 .icon-nav-wrap {
   display: flex;
   position: -webkit-sticky;
   position: sticky;
-  top:70px;
+  top: 70px;
   z-index: 1;
   background-color: white;
   width: 100%;
@@ -779,19 +594,61 @@
 }
 
 @media screen and (max-width: 1200px) {
+  /* 981~1200 */
   body {
-    border: 2px solid yellow; 
+    border: 2px solid yellow;
+    overflow-x: auto;
   }
-} 
+  .topcontainer,
+  .container,
+  .cardCloumn,
+  .cardRow,
+  .cardRow2,
+  .topmenu {
+    width: 100%;
+    /* width: 1170px; 
+    margin: 0 auto; */
+    padding: 0px 10px;
+  }
+  .popup-scroll-wrap {
+    max-height: 550px;
+    overflow-y: scroll;
+  }
+  .popup-content {
+    width: 600px;
+  }
+  .login-content,
+  .signup-content {
+    width: 450px;
+  }
+}
 @media screen and (max-width: 980px) {
   body {
-    border: 2px solid red; 
-  } 
-} 
+    border: 2px solid red;
+  }
+  .topcontainer,
+  .container,
+  .cardCloumn,
+  .cardRow,
+  .cardRow2,
+  .topmenu {
+    width: 100%;
+    padding: 0px 10px;
+  }
+  .popup-content {
+    width: 400px;
+    border: 2px solid red;
+  }
+  .login-content,
+  .signup-content {
+    width: 250px;
+    border: 2px solid pink;
+  }
+}
 @media screen and (max-width: 767px) {
   body {
-    border: 2px solid blue; 
-  } 
+    border: 2px solid blue;
+  }
 }
 @media screen and (max-width: 420px) {
   body {
