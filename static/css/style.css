@@ -392,10 +392,10 @@
 .arrow {
   position: fixed;
   cursor: pointer;
-  bottom: 15px;
-  right: 15px;
-  width: 35px;
-  height: 35px;
+  bottom: 50px;
+  right: 50px;
+  width: 50px;
+  height: 50px;
 }
 /* 리스트관련 css */
 .cardCloumn {
@@ -629,7 +629,7 @@
     transform: translate(-50%, -50%);
     max-height: 100vh;
     z-index: 10;
-    width: 75%;
+    min-width: 40%;
   }
   .popup-scroll-wrap {
     max-height: 550px;
@@ -657,5 +657,13 @@
   .create-btn-fail {
     
     font-size: 12px;
+  }
+  .arrow {
+    position: fixed;
+    cursor: pointer;
+    bottom: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
   }
 }
