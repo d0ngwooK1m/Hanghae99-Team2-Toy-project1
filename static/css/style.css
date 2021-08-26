@@ -576,6 +576,10 @@
   .imgHidden-box {
     height: auto;
   }
+  .classImg {
+    height: 150px;
+    object-fit: cover;
+  }
 }
 @media screen and (max-width: 767px) {
   /* 디바이스 크기 421~767 */
