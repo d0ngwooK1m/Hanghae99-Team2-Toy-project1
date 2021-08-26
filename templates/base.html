@@ -16,45 +16,48 @@
     {% endblock%}
 </head>
 <body>
+<!-- 상단메뉴 -->
+<div class="nav">
+    <div class="container flex-layout">
+        <h1 class="logo-wrap">
+            <a class="topLogo" href="/">
+                <img src="../static/img/titleLogo.svg" alt="로고"/>
+            </a>
+        </h1>
+        <form action="/search" method="GET" class="search_form">
+            <input class="search_bar" type="text" name="text" placeholder="검색어 입력" />
+            <button type="submit" class="search_btn">
+                <img class="search_icon" src="../static/img/search.png">
+            </button>
+        </form>
+        <div class="member-wrap">
+            <ul class="member_box flex-layout-end">
+                {% if token == False %}
+                <li class="mypage">
+                    <a href="/myPage">작성글 관리</a>
+                </li>
+                {% else %}
+                {% endif %}
+                {% if token == False %}
+                <li>
+                    <a class="logout-btn">로그아웃</a>
+                </li>
+                {% else %}
+                <li>
+                    <a class="signup-btn">회원가입</a>
+                </li>
+                {% endif %}
+                {% if token == False %}
+                {% else %}
+                <li>
+                    <a class="login-btn">로그인</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
 
-    <!-- 상단메뉴 -->
-
-    <nav class="topcontainer header">
-        <div class="topmenu">
-            <div class="logoSearch">
-                <a class="topLogo" href="/">
-                    <img src="../static/img/titleLogo.svg" >
-                </a>
-                <form action="/search" method="GET" class="search_box">
-                    <input class="search_bar" type="text" name="text" placeholder="검색어 입력">
-                    <button type="submit" class="search_btn"><img class="search_icon" src="../static/img/search.png"></button>
-                </form>
-            </div>
-            
-            <div class="member_box">
-                <div class="mypage">
-                    {% if token == False %}
-                        <a href="/myPage">작성글 관리</a>
-                    {% else %}
-
-                    {% endif %}
-                </div>
-                <div class="login_signLine"></div>
-                    {% if token == False %}
-                        <a class="logout-btn">로그아웃</a>
-                    {% else %}
-                        <a class="signup-btn">회원가입</a>
-                        <div class="login_signLine"></div>
-                    {% endif %}
-
-                    {% if token == False %}
-
-                    {% else %}
-                        <a class="login-btn">로그인</a>
-                    {% endif %}
-            </div>
-        </div>  
-    </nav>
 
    
      <!-- 회원가입 팝업 --> 
