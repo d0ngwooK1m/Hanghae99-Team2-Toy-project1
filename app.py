@@ -255,12 +255,15 @@ def updateLikes():
 
 @app.route('/update/jjim', methods=['POST'])
 def updatejjim():
+    # base jjim에서 id_give로 id값(52dfb19125fb4d1f8021d7281b56ca04)을 받아와 변수로 지정
     id_receive = request.form['id_give']
+    # db에서 해당 id값이 있는 자료를 찾아줌 
     target = db.posting.find_one({'id':id_receive})
+    # id값이 속해있는 자료의 jjim 값을 변수로 지정 >> 처음 글 등록시 true 값을 가짐 
     target_Heart = target['Jjim']
-    print(target_Heart)
+    # True가 false로 바뀜
     target_Heart = not(target_Heart)
-    print(target_Heart)
+    # jjim이 true일 경우 heart(이미지 경로)에 테두리만 있는 하트의 경로를 내려주고
     if target_Heart:
         Heart = '../static/img/heart.svg'
         msg = '찜하기 취소!'
