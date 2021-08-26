@@ -156,7 +156,7 @@ function showDetail(event, id) {
   }
   $.ajax({
     type: "GET",
-    url: "/test/detail",
+    url: "/post/detail",
     data: { id_give: id },
     success: function (response) {
       const detail = response["response"][0];
@@ -237,7 +237,7 @@ function posting() {
   } else {
     $.ajax({
       type: "POST",
-      url: "/test",
+      url: "/post",
       data: {
         url_give: url,
         title_give: title,
@@ -262,7 +262,7 @@ if (createBtn !== null) {
 function editPopup(id) {
   $.ajax({
     type: "GET",
-    url: "/test/edit",
+    url: "/post/edit",
     data: { id_give: id },
     success: function (response) {
       const detail = response["response"][0];
@@ -321,7 +321,7 @@ function submitEdit(id) {
   const imgNew = document.getElementById("imgSource").src;
   $.ajax({
     type: "POST",
-    url: "/test/submitEdit",
+    url: "/post/submitEdit",
     data: {
       id_give: id,
       img_give: imgNew,
@@ -342,7 +342,7 @@ function submitEdit(id) {
 function deletePopup(id) {
   $.ajax({
     type: "POST",
-    url: "/test/delete",
+    url: "/post/delete",
     data: { id_give: id },
     success: function (response) {
       alert(response["response"]);

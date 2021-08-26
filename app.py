@@ -38,7 +38,7 @@ def userAuthCheck(str):
 
         user_info = db.users.find_one({"email": payload["email"]})
         if user_info:
-            return render_template(str, token=tokenExist), print(tokenExist)
+            return render_template(str, token=tokenExist)
 
     except jwt.ExpiredSignatureError:
         return redirect(url_for('fail', msg="로그인 시간 만료"))
@@ -66,7 +66,7 @@ def editAuthCheck(type):
 
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"email": payload["email"]})
-        print(user_info['email'], check['email'])
+        # print(user_info['email'], check['email'])
 
         if user_info['email'] == check['email'] and type == "GET":
             return jsonify({"response": detail}), 200
@@ -106,7 +106,7 @@ def mypage_list():
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     token_email = payload['email']
     lists = list(db.posting.find({'email': token_email}, {'_id': False}))
-    print("mypage lists = ", lists)
+    # print("mypage lists = ", lists)
     return jsonify({'my_list': lists})
 
 
@@ -116,7 +116,7 @@ def show_view():
     return jsonify({'all_post': lists})
 
 
-@app.route('/test', methods=['POST'])
+@app.route('/post', methods=['POST'])
 def posting():
     token_receive = request.cookies.get('login_token')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -151,7 +151,7 @@ def posting():
     return jsonify({'msg': '등록 완료!'})
 
 
-@app.route('/test/detail', methods=['GET'])
+@app.route('/post/detail', methods=['GET'])
 def detail():
     id_receive = request.args.get('id_give')
     detail = list(db.posting.find({"id": id_receive}, {"_id": False}))
@@ -159,17 +159,17 @@ def detail():
     return jsonify({"response": detail})
 
 
-@app.route('/test/edit', methods=['GET'])
+@app.route('/post/edit', methods=['GET'])
 def edit():
     return editAuthCheck("GET")
 
 
-@app.route('/test/delete', methods=['POST'])
+@app.route('/post/delete', methods=['POST'])
 def delete():
     return editAuthCheck("POST")
 
 
-@app.route('/test/submitEdit', methods=['POST'])
+@app.route('/post/submitEdit', methods=['POST'])
 def submitEdit():
 
     id_receive = request.form['id_give']
@@ -186,7 +186,7 @@ def submitEdit():
     if img_receive.split("/")[1] == "static":
         img_receive = "../static/img/linkgather.png"
         
-    print(id_receive, url_receive, title_receive, desc_receive)
+    # print(id_receive, url_receive, title_receive, desc_receive)
     db.posting.update_one({'id': id_receive}, {'$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive, 'imgsrc': img_receive}})
     return jsonify({ "response": "수정 완료!"})
 
@@ -205,14 +205,14 @@ def view_Search():
     #text는 form으로 데이터를 받음
     splitted_keywords = text.split(' ')
     #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
-    print(splitted_keywords)
+    # print(splitted_keywords)
     pipelines = list()
     pipelines.append({
         '$sample':{'size':1}
     })
-    print(pipelines)
+    # print(pipelines)
     search_R = list(db.posting.aggregate(pipelines))
-    print(search_R)
+    # print(search_R)
 
     sep_keywords = []
     for string in splitted_keywords:
@@ -220,10 +220,10 @@ def view_Search():
             {'title':{'$regex':string}},
             {'desc':{'$regex':string}}
         ]})
-    print(sep_keywords)
+    # print(sep_keywords)
 
     search = list(db.posting.find({"$or":sep_keywords},{'_id':False}).sort('uploadtime',-1))
-    print(search)
+    # print(search)
     if text == "":
         return render_template('search.html', keywords=splitted_keywords, search=search_R, token=tokenExist)
     else :
@@ -270,7 +270,7 @@ def updatejjim():
     else:
         Heart = '../static/img/rheart.svg'
         msg = '찜하기 완료!'
-    print(Heart)
+    # print(Heart)
     db.posting.update_one({'id':id_receive}, {'$set': {'heart':Heart, 'Jjim':target_Heart}})
     
     return jsonify({'msg':msg })    
