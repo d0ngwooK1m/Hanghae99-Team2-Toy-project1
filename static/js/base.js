@@ -432,7 +432,7 @@ const searchInput = document.querySelector('.search_bar');
 
 function keyPrevent(event){
   let keyvalue = event.keyCode;
-  console.log(event)
+  // console.log(event)
   if(keyvalue == 220 ){
     alert(`'\\'(은)는 사용하실 수 없습니다.`);
     event.returnValue = false;

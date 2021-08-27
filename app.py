@@ -133,8 +133,8 @@ def login():
             }
 
             token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-            print(token)
-            print(type(token))
+            # print(token)
+            # print(type(token))
             # token = str(jwt.encode(payload, SECRET_KEY, algorithm='HS256'))
 
             return ujson.dumps({ "success": "True", "message": "로그인 성공!", "login_token":token}), 200
