@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block head%}
+<script defer src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% endblock%}
+{% block content %}
+     <section class="icon-nav-wrap">
+        <nav class="container flex-layout-between">
+            <div class="search_result">
+                {%if keywords == [""] %}
+                    검색어를 입력하지 않으면 랜덤으로 카드 한장이 나옵니다.
+                {% else %}
+                    {% for keyword in keywords %}
+                        <b>'{{keyword}}'</b>
+                    {% endfor %}
+                    (으)로 검색한 결과입니다.
+                {% endif %}
+            </div>
+            {% if token == False %}
+                <button class="create-btn">등록</button>
+            {% else %}
+                <button class="create-btn-fail" onclick="postingFail()">등록</button>
+            {% endif %}
+        </nav>
+    </section>
+    <div>
+        
+    </div>
+    <section class ="cardCloumn" id="card_list">
+        <div class ="cardRow2">
+            {% for text in search %}
+                <div class="ListBg">
+                    <div class="ListFlex">
+                        <div class="click-wrap" onclick="showDetail(event,'{{text['id']}}')">
+                            <div class="imgHidden-box">
+                                <img src="{{text['imgsrc']}}" class="classImg">
+                                <button class="Option_Jjim" onclick="jjim('{{text['id']}}')">
+                                    <img src="{{text['heart']}}" class="heart">
+                                </button>
+                            </div>  
+                            <h3 class ="title">{{text['title']}}</h3>
+                            <div class ="numCount">
+                                <div class = "likeNum">
+                                    <img src="../static/img/likeUp3.png">
+                                    <span>{{text['likes']}}</span>
+                                </div>
+                            </div>
+                            <hr/>
+                        </div>
+                        <div class="Option">
+                            <div class="Like Option_Like" onclick="updateLike('{{text['id']}}')">
+                                <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                <span class="likes-btn">추천하기</span>
+                            </div>
+                            <a class="Link" href="{{text['url']}}" target= '_blank'>
+                                <span>바로가기</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>     
+    </section>
+    <!-- 리스트 상세보기 -->
+    <div class="popup-detail-wrap">
+        {#상세보기#}
+    </div>
+
+
+
+{% endblock %}

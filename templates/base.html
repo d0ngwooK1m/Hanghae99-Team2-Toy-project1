@@ -5,74 +5,156 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toy Project1</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
-    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta property="og:title" content="Link Gather" />
+    <meta property="og:description" content="좋아하는 링크를 모아보세요!" />
+    <meta property="og:image" content="{{ url_for('static', filename='img/linkgather.png') }}" />
+    <title>Link Gather</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' )}}">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script defer src="{{ url_for('static', filename='js/base.js') }}"></script>
+    {% block head%}
+    {% endblock%}
 </head>
 <body>
-
-    <!-- 상단메뉴 -->
-    <nav class="topmenu">
-        <a href="/">
-            <img src="../static/img/logo.png" style="margin-left: 30px; width: 60px; height: 60px;">
-        </a>
-        <div class="search_box">
-            <input class="search_bar" type="text" placeholder="검색어 입력">
-            <button class="search_btn"><img class="search_icon" src="../static/img/search.png"></button>
-        </div>    
-        <div class="member_box">
-            <div class="mypage">
-                <a href="/my_page">마이페이지</a>
-            </div>
-            <div class="login_signup">
-                <a class="login-btn">로그인</a>
-                <a class="signup-btn">회원가입</a>
-            </div>
-        </div>
-    </nav>
-    <!-- 로그인 모달창v2 -->
-    <div id="loginmodal" class="login-background">
-        <div class="login-form animate">
-            <a class="login-close-btn">&times;</a>
-            <!--로그인 모달 컨텐츠 -->
-            <form class="modal-content" action="#">
-                <label class='login-id'><b>ID</b></label>
-                <input type="text" class="login-input" required>
-
-                <label class='login-pw'><b>Password</b></label>
-                <input type="password" required>
-
-                <button type="submit" class="login-submit-btn">Log In</button>
-            </form>
+<!-- 상단메뉴 -->
+<div class="nav">
+    <div class="container flex-layout">
+        <h1 class="logo-wrap">
+            <a class="topLogo" href="/">
+                <img src="../static/img/titleLogo.svg" alt="로고"/>
+            </a>
+        </h1>
+        <form action="/search" method="GET" class="search_form">
+            <input class="search_bar" type="text" name="text" placeholder="검색어 입력" />
+            <button type="submit" class="search_btn">
+                <img class="search_icon" src="../static/img/search.png">
+            </button>
+        </form>
+        <div class="member-wrap">
+            <ul class="member_box flex-layout-end">
+                {% if token == False %}
+                <li class="mypage">
+                    <a href="/myPage">작성글 관리</a>
+                </li>
+                {% else %}
+                {% endif %}
+                {% if token == False %}
+                <li>
+                    <a class="logout-btn">로그아웃</a>
+                </li>
+                {% else %}
+                <li>
+                    <a class="signup-btn">회원가입</a>
+                </li>
+                {% endif %}
+                {% if token == False %}
+                {% else %}
+                <li>
+                    <a class="login-btn">로그인</a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
     </div>
+</div>
 
-    <!-- 회원가입 모달창v2 -->
+
+   
+     <!-- 회원가입 팝업 --> 
     <div class="signup-background">
-        <div class="signup-form animate">
-            <a class="signup-close-btn">&times;</a>
-            <!--회원가입 모달 컨텐츠 -->
-            <form class="modal-content" action="#">
-                <label class='login-uname'><b>Username</b></label>
-                <input type="text" class="username-input" required>
-
-                <label class='login-id'><b>ID</b></label>
-                <input type="text" class="login-input" required>
-
-                <label class='login-pw'><b>Password</b></label>
-                <input type="password" class="password-input" required>
-
-                <label class='login-cpw'><b>Check Password</b></label>
-                <input type="password" class="check-password-input" required>
-
-                <button type="submit" class="signup-submit-btn">Log In</button>
-            </form>
+        <div class="login-wrap">
+            <section class="signup-content">
+                <div class="flex-layout-between">
+                    <h2>회원가입</h2>
+                    <button class="signup-close-btn">닫기</button>
+                </div>
+                <form class="popup-form login-form" name="signup_form">
+                    <div class="popup-box-wrap">
+                        <label class="login-uname" >이름</label>
+                        <input type="text" class="username-input blur-input" name="s_name"  placeholder="홍길동" required/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label class="login-id" >이메일</label>
+                        <input type="email" class="login-input blur-input" name="s_email" placeholder="example@naver.com" required/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label class="login-pw" >비밀번호</label>
+                        <input type="password" class="password-input blur-input" id="signup-pw" name="s_password" placeholder="******" required/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label>비밀번호 확인</label>
+                        <input  type="password" class="password-input blur-input" id="signup-check-pw" name="s_check_password" placeholder="******" required/>
+                    </div>
+                    <p class="error error--hidden"></p>
+                    <div class="popup-box-wrap">
+                        <button class="signup-submit-btn">회원가입</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+     <!-- 로그인 팝업 --> 
+     <div class="login-background">
+        <div class="login-wrap">
+            <section class="login-content">
+                <div class="flex-layout-between">
+                    <h2>로그인</h2>
+                    <button class="login-close-btn">닫기</button>
+                </div>
+                <form class="popup-form login-form" name="login_form">
+                    <div class="popup-box-wrap">
+                        <label class="login-id" for="login-id">이메일</label>
+                        <input type="text" class="login-input blur-input" name="l_email" required placeholder="example@naver.com"/>
+                    </div>
+                    <div class="popup-box-wrap">
+                        <label for="login-pw">비밀번호</label>
+                        <input class="blur-input" type="password" id="login-pw" name="l_password" placeholder="******"/>
+                    </div>
+                    <p class="error error--hidden"></p>
+                    <div class="popup-box-wrap">
+                        <button type="submit" class="login-submit-btn">로그인</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <!-- 등록팝업 -->
+    <div class="popup-background">
+        <div class="popup-wrap">
+            <section class="popup-content">
+                <div class="flex-layout-between">
+                    <h2>등록하기</h2>
+                    <button class="popup-close-btn">닫기</button>
+                </div>
+                <div class="popup-scroll-wrap">
+                    <div class="popup-form create-form">
+                        <div class="preview-image-wrap"></div>
+                        <div class="popup-box-wrap">
+                            <label for="url">웹 사이트 URL</label>
+                            <div class="flex-layout">
+                                <input class="preview-url blur-input" type="text" id="url" name="url" placeholder="https://www.inflearn.com"/>
+                                <button class="preview-btn">이미지 등록</button>
+                            </div>
+                        </div>
+                        <div class="popup-box-wrap">
+                            <label for="title">제목</label>
+                            <input class="blur-input"  type="text" id="title" name="title" placeholder="제목을 입력해주세요"/>
+                        </div>
+                        <div class="popup-box-wrap">
+                            <label for="description">설명</label>
+                            <textarea class="blur-input" type="text" id="description" name="description" rows="6" placeholder="사이트에 대한 간략한 설명을 입력해주세요"></textarea>
+                        </div>
+                        <div class="popup-box-wrap">
+                            <button  class="create-form-btn">등록하기</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
     {% block content %}
     {% endblock %}
-    
 </body>
 </html>
