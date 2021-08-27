@@ -84,13 +84,13 @@
   height: 40px;
   padding-left: 20px;
   outline: none;
-  border-radius: 20px;
+  border-radius: 22px;
 }
 .search_btn {
   position: absolute;
   top: 2px;
   right: 2px;
-  width: 50px;
+  width: 45px;
   height: 35px;
   border-radius: 20px;
   border: 0;
@@ -592,13 +592,39 @@
   }
   /* 팝업 크기 수정이 필요하시면 아래 widht를 조절해주세요. */
   .popup-content {
-    width: 500px;
+    width: 100%;
     border: 2px solid red;
+  }
+  .popup-wrap{
+    width: 70%;
+    min-width: 340px;
+  }
+  .login-wrap{
+    width: 60%;
   }
   .login-content,
   .signup-content {
-    width: 250px;
+    width: 100%;
     border: 2px solid pink;
+  }
+  .cardRow,
+  .cardRow2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .listBg{
+    min-width: 270px;
+  }
+  .search_form{
+    width: 35%;
+  }
+  .search_bar{
+    width:100%;
+  }
+  .member_box li:nth-child(even){
+    margin-left: 10%
+  }
+  .Option{
+    min-width: 192px;
   }
 }
 @media screen and (max-width: 420px) {
@@ -608,12 +634,66 @@
   }
   /* 팝업 크기 수정이 필요하시면 아래 widht를 조절해주세요. */
   .popup-content {
-    width: 500px;
-    border: 2px solid red;
+    width: 100%
   }
   .login-content,
   .signup-content {
     width: 250px;
     border: 2px solid pink;
+  }
+  .cardRow,
+  .cardRow2 {
+  display: flex;
+  flex-wrap: wrap;
+  }
+  .ListBg {
+    position: relative;
+    cursor: pointer;
+    min-width: 270px;
+    margin: 10px auto;
+  }
+  .popup-wrap, .login-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 100vh;
+    z-index: 10;
+    min-width: 40%;
+  }
+  .popup-scroll-wrap {
+    max-height: 550px;
+  }
+  .topLogo {
+    display: inline-block;
+    height: 70px;
+    margin-right: 0px;
+    padding: 10px 0;
+  }
+  .search_form {
+    position: relative;
+    width: 120px;
+  }
+  .search_bar {
+    width: 120px;
+    height: 40px;
+    padding-left: 20px;
+    outline: none;
+    border-radius: 20px;
+  }
+  .member_box {
+    font-size: 12px;
+  }
+  .create-btn-fail {
+    
+    font-size: 12px;
+  }
+  .arrow {
+    position: fixed;
+    cursor: pointer;
+    bottom: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
   }
 }
