@@ -4,6 +4,8 @@ import pymongo
 import jwt
 import uuid
 import datetime
+from passlib.hash import pbkdf2_sha256
+
 # import beautifulsoup4
 
 
@@ -82,9 +84,59 @@ def editAuthCheck(type):
     except jwt.exceptions.DecodeError:
         return jsonify({"response": "로그인 정보 없음"}), 400
 
+@app.route('/user/signup', methods=["POST"])
+def signup():
+    print(request.form)
 
-# Routes
-from user import routes
+    # Create the user object
+    user = {
+        "_id": uuid.uuid4().hex,
+        "name": request.form.get('name'),
+        "email": request.form.get('email'),
+        "password": request.form.get('password')
+    }
+    print(user)
+
+    # Check the password
+    if user["password"] != request.form.get('C_password'):
+        return jsonify({ "error": "비밀번호가 다릅니다." }), 400
+
+    # Encrypt the password
+    user["password"] = pbkdf2_sha256.encrypt(user["password"])
+
+    # Check for existing email address
+    if db.users.find_one({ "email": user["email"] }):
+        return jsonify({ "error": "이미 사용되고 있는 이메일 입니다." }), 400
+
+    if db.users.insert_one(user):
+        return jsonify({'result':'회원가입 성공!'}),200
+
+    return jsonify({ "error": "회원가입 실패" }), 400
+
+
+@app.route('/user/logout')
+def logout():
+    return jsonify({ "result": "success" }), 200
+
+@app.route('/user/login', methods=["POST"])
+def login():
+        user = db.users.find_one({
+            "email": request.form.get("email")
+        })
+
+        if user is not None and pbkdf2_sha256.verify(request.form.get("password"), user["password"]):
+            payload = {
+                'email': user['email'],
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=100)
+
+            }
+
+            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
+            return jsonify({ "success": True, "message": "로그인 성공!", "login_token": token }), 200
+
+        return jsonify({ "error": "로그인 실패" }), 400
+
 
 @app.route('/')
 def index():
@@ -203,7 +255,6 @@ def view_Search():
         tokenExist=True
 
     text = request.args.get('text')
-    print(text)
     #text는 form으로 데이터를 받음
     splitted_keywords = text.split(' ')
     #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
