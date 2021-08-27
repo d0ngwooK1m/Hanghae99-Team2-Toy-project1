@@ -14,7 +14,7 @@ SECRET_KEY = 'LinkGather'
 
 # Database
 # client = pymongo.MongoClient('localhost', 27017)
-client = pymongo.MongoClient('mongodb://test:test@localhost', 27017)
+client = pymongo.MongoClient('3.34.200.254', 27017, username="test", password="test")
 db = client.linkgather
 
 # Authentication
@@ -203,6 +203,7 @@ def view_Search():
         tokenExist=True
 
     text = request.args.get('text')
+    print(text)
     #text는 form으로 데이터를 받음
     splitted_keywords = text.split(' ')
     #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
