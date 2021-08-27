@@ -545,23 +545,16 @@
   color: black;
 }
 @media screen and (max-width: 1200px) {
-  /* 981~1200 */
-  body {
-    border: 2px solid yellow;
-  }
   .topcontainer,
   .container,
-  .topmenu {
+  .topmenu,
+  .cardCloumn {
     width: 100%;
-    padding: 0px 10px;
+    padding: 0px 15px;
   }
   .popup-scroll-wrap {
     max-height: 550px;
     overflow-y: scroll;
-  }
-  .cardCloumn {
-    width: 100%;
-    padding: 0px 10px;
   }
   .cardRow,
   .cardRow2 {
@@ -569,12 +562,11 @@
   }
 }
 @media screen and (max-width: 980px) {
-  /* 768~981 */
-  body {
-    border: 2px solid red;
-  }
   .imgHidden-box {
-    height: auto;
+    height: 100%;
+  }
+  .classImg {
+    height: 150px;
   }
   .classImg {
     height: 150px;
@@ -582,73 +574,72 @@
   }
 }
 @media screen and (max-width: 767px) {
-  /* 디바이스 크기 421~767 */
-  body {
-    border: 2px solid blue;
-  }
-  /* 팝업 크기 수정이 필요하시면 아래 widht를 조절해주세요. */
-  .popup-content {
-    width: 100%;
-    border: 2px solid red;
-  }
-  .popup-wrap{
+  .popup-wrap {
     width: 70%;
     min-width: 340px;
   }
-  .login-wrap{
+  .login-wrap {
     width: 60%;
   }
+  .popup-content,
   .login-content,
   .signup-content {
     width: 100%;
-    border: 2px solid pink;
   }
   .cardRow,
   .cardRow2 {
     grid-template-columns: repeat(2, 1fr);
   }
-  .listBg{
+  .listBg {
     min-width: 270px;
   }
-  .search_form{
+  .search_form {
     width: 35%;
   }
-  .search_bar{
-    width:100%;
+  .search_bar {
+    width: 100%;
   }
-  .member_box li:nth-child(even){
-    margin-left: 10%
+  .member_box li:nth-child(even) {
+    margin-left: 10%;
   }
-  .Option{
+  .Option {
     min-width: 192px;
   }
 }
-@media screen and (max-width: 420px) {
-  /* 디바이스 크기 0~420px */
+
+@media screen and (max-width: 575px) {
   body {
-    border: 2px solid green;
+    font-size: 10px;
   }
-  /* 팝업 크기 수정이 필요하시면 아래 widht를 조절해주세요. */
+  .topLogo {
+    margin-right: 30px;
+  }
+  .search_bar {
+    width: 100%;
+    padding-left: 10px;
+  }
+  .popup-content,
+  .login-content,
+  .signup-content {
+    padding: 20px;
+  }
   .popup-content {
-    width: 100%
+    width: 100%;
   }
   .login-content,
   .signup-content {
     width: 250px;
-    border: 2px solid pink;
   }
   .cardRow,
   .cardRow2 {
-  display: flex;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
   }
   .ListBg {
-    position: relative;
-    cursor: pointer;
-    min-width: 270px;
-    margin: 10px auto;
+    min-width: 100%;
   }
-  .popup-wrap, .login-wrap {
+  .popup-wrap,
+  .login-wrap {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -660,29 +651,9 @@
   .popup-scroll-wrap {
     max-height: 550px;
   }
-  .topLogo {
-    display: inline-block;
-    height: 70px;
-    margin-right: 0px;
-    padding: 10px 0;
-  }
-  .search_form {
-    position: relative;
-    width: 120px;
-  }
-  .search_bar {
-    width: 120px;
-    height: 40px;
-    padding-left: 20px;
-    outline: none;
-    border-radius: 20px;
-  }
-  .member_box {
-    font-size: 12px;
-  }
+  .member_box,
   .create-btn-fail {
-    
-    font-size: 12px;
+    font-size: 0.8rem;
   }
   .arrow {
     position: fixed;
@@ -691,5 +662,63 @@
     right: 15px;
     width: 35px;
     height: 35px;
+  }
+  .classImg {
+    height: 200px;
+  }
+  .detail-modify-btn,
+  .detail-delete-btn {
+    padding: 6px 8px;
+    font-size: 0.7rem;
+  }
+  .search_bar::placeholder,
+  .create-form input::placeholder,
+  .create-form textarea::placeholder,
+  .login-form input::placeholder,
+  .detail-form-wrap input::placeholder,
+  .detail-form-wrap textarea::placeholder,
+  .create-form label,
+  .login-form label,
+  .detail-form-wrap label,
+  .preview-btn,
+  .modify-preview-btn,
+  .search_result,
+  .icon-dropdown-wrap2,
+  .create-btn {
+    font-size: 0.8rem;
+  }
+
+  .detail-content-wrap h3 {
+    font-size: 1.3rem;
+  }
+  .detail-content-wrap p {
+    font-size: 0.9rem;
+  }
+  .create-form input,
+  .login-form input,
+  .detail-form-wrap input,
+  .preview-btn,
+  .modify-preview-btn {
+    padding: 8px;
+  }
+  .popup-content h2,
+  .login-content h2,
+  .signup-content h2 {
+    font-size: 1.4rem;
+  }
+  .create-form-btn,
+  .login-submit-btn,
+  .signup-submit-btn,
+  .modify-form-btn {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  .popup-box-wrap {
+    margin-bottom: 15px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .topLogo {
+    margin-right: 20px;
   }
 }
