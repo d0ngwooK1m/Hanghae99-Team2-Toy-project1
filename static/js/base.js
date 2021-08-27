@@ -6,12 +6,20 @@ const findQueryPage = findPage.split("?")[0];
 $("form[name=signup_form]").submit(function (e) {
   const form_give = $(this);
   const error_give = form_give.find(".error");
-  const data_give = form_give.serialize();
+  const name = $("input[name=s_name]").val();
+  const email = $('input[name=s_email]').val();
+  const password = $('input[name=s_password]').val();
+  const C_password = $('input[name=s_check_password]').val();
 
   $.ajax({
     url: "/user/signup",
     type: "POST",
-    data: data_give,
+    data: {
+      'name':name,
+      'email':email,
+      'password':password,
+      'C_password':C_password
+    },
     dataType: "json",
     success: function (response) {
       window.location.href = "/";
@@ -27,12 +35,17 @@ $("form[name=signup_form]").submit(function (e) {
 $("form[name=login_form]").submit(function (e) {
   const form_give = $(this);
   const error_give = form_give.find(".error");
-  const data_give = form_give.serialize();
+  const email = $('input[name=l_email]').val();
+  const password = $('input[name=l_password]').val();
+
 
   $.ajax({
     url: "/user/login",
     type: "POST",
-    data: data_give,
+    data: {
+      'email':email,
+      'password':password
+    },
     dataType: "json",
     success: function (response) {
       $.cookie("login_token", response["login_token"], { path: "/" });
