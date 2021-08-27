@@ -3,6 +3,8 @@ import requests
 import pymongo
 import jwt
 import uuid
+import json
+import ujson
 import datetime
 from passlib.hash import pbkdf2_sha256
 
@@ -16,11 +18,10 @@ SECRET_KEY = 'LinkGather'
 
 # Database
 # client = pymongo.MongoClient('localhost', 27017)
-client = pymongo.MongoClient('3.34.200.254', 27017, username="test", password="test")
+client = pymongo.MongoClient('mongodb://test:test@localhost', 27017)
 db = client.linkgather
 
 # Authentication
-
 
 def checkExpired():
     if request.cookies.get('login_token') is not None:
@@ -91,14 +92,14 @@ def signup():
     # Create the user object
     user = {
         "_id": uuid.uuid4().hex,
-        "name": request.form.get('name'),
-        "email": request.form.get('email'),
-        "password": request.form.get('password')
+        "name": request.form['name'],
+        "email": request.form['email'],
+        "password": request.form['password']
     }
     print(user)
 
     # Check the password
-    if user["password"] != request.form.get('C_password'):
+    if user["password"] != request.form['C_password']:
         return jsonify({ "error": "비밀번호가 다릅니다." }), 400
 
     # Encrypt the password
@@ -121,19 +122,22 @@ def logout():
 @app.route('/user/login', methods=["POST"])
 def login():
         user = db.users.find_one({
-            "email": request.form.get("email")
+            "email": request.form["email"]
         })
 
-        if user is not None and pbkdf2_sha256.verify(request.form.get("password"), user["password"]):
+        if user is not None and pbkdf2_sha256.verify(request.form["password"], user["password"]):
             payload = {
                 'email': user['email'],
                 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=100)
 
             }
 
-            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+            print(token)
+            print(type(token))
+            # token = str(jwt.encode(payload, SECRET_KEY, algorithm='HS256'))
 
-            return jsonify({ "success": True, "message": "로그인 성공!", "login_token": token }), 200
+            return ujson.dumps({ "success": "True", "message": "로그인 성공!", "login_token":token}), 200
 
         return jsonify({ "error": "로그인 실패" }), 400
 

@@ -3,7 +3,8 @@ const findPage = locationHref.split("/").reverse()[0];
 const findQueryPage = findPage.split("?")[0];
 
 //회원가입 API 통신
-$("form[name=signup_form]").submit(function (e) {
+const signupform = document.querySelector(".signup-form"); 
+signupform.addEventListener("submit", (e) => {
   const form_give = $(this);
   const error_give = form_give.find(".error");
   const name = $("input[name=s_name]").val();
@@ -31,8 +32,10 @@ $("form[name=signup_form]").submit(function (e) {
 
   e.preventDefault();
 });
+
 //로그인 API 통신
-$("form[name=login_form]").submit(function (e) {
+const loginsubmit = document.querySelector(".login-submit")
+loginsubmit.addEventListener('submit', (e)=>{
   const form_give = $(this);
   const error_give = form_give.find(".error");
   const email = $('input[name=l_email]').val();
@@ -57,7 +60,7 @@ $("form[name=login_form]").submit(function (e) {
   });
 
   e.preventDefault();
-});
+})
 
 //로그아웃 API 통신
 $(".logout-btn").click(function (e) {
