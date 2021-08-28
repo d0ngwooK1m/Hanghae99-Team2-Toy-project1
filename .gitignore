@@ -3,3 +3,4 @@
 __pycache__
 user/__pycache__
 initial_ec2.sh
+nohup.out
