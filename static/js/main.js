@@ -23,7 +23,7 @@ function viewing() {
                             <div class="ListFlex">
                                 <div class="click-wrap" onclick="showDetail(event,'${id}')">
                                     <div class="imgHidden-box">
-                                        <img src="${imgsrc}" class="classImg" onerror="this.src='../static/img/linkgather.png';">
+                                        <img src="${imgsrc}" class="classImg">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
                                             <img src="${jjim}" id="heartImg">
                                         </button>
@@ -39,8 +39,8 @@ function viewing() {
                                 </div>
                                 <div class="Option">
                                     <div class="Like Option_Like" onclick="updateLike('${id}')">
-                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
-                                        <span class="likes-btn">추천하기</span>
+                                      <span class="thumbsUp"></span>
+                                      <span class="likes-btn">추천하기</span>
                                     </div>
                                     <a class="Link" href="${url}" target= '_blank'>
                                         <span>바로가기</span>
@@ -53,6 +53,7 @@ function viewing() {
     },
   });
 }
+
 
 // 최신순 정렬
 const newCardBtn = document.querySelector(".new-card-btn");
@@ -85,7 +86,7 @@ newCardBtn.addEventListener("click", () => {
                             <div class="ListFlex">
                                 <div class="click-wrap" onclick="showDetail(event,'${id}')">
                                     <div class="imgHidden-box">
-                                        <img src="${imgsrc}" class="classImg" onerror="this.src='../static/img/linkgather.png';">
+                                        <img src="${imgsrc}" class="classImg">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
                                             <img src="${jjim}" class="heart">
                                         </button>
@@ -101,8 +102,8 @@ newCardBtn.addEventListener("click", () => {
                                 </div>
                                 <div class="Option">
                                     <div class="Like Option_Like" onclick="updateLike('${id}')">
-                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
-                                        <span>추천하기</span>
+                                      <span class="thumbsUp"></span>
+                                      <span class="likes-btn">추천하기</span>
                                     </div>
                                     <a class="Link" href="${url}" target= '_blank'>
                                         <span>바로가기</span>
@@ -145,7 +146,7 @@ likeBtn.addEventListener("click", () => {
                             <div class="ListFlex">
                                 <div class="click-wrap" onclick="showDetail(event,'${id}')">
                                     <div class="imgHidden-box">
-                                        <img src="${imgsrc}" class="classImg" onerror="this.src='../static/img/linkgather.png';">
+                                        <img src="${imgsrc}" class="classImg">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
                                             <img src="${jjim}" class="heart">
                                         </button>
@@ -161,8 +162,8 @@ likeBtn.addEventListener("click", () => {
                                 </div>
                                 <div class="Option">
                                     <div class="Like Option_Like" onclick="updateLike('${id}')">
-                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
-                                        <span>추천하기</span>
+                                      <span class="thumbsUp"></span>
+                                      <span class="likes-btn">추천하기</span>
                                     </div>
                                     <a class="Link" href="${url}" target= '_blank'>
                                         <span>바로가기</span>
@@ -176,9 +177,9 @@ likeBtn.addEventListener("click", () => {
 });
 
 // 최상단으로
-toparrow = document.querySelector(".arrow");
-toparrow.addEventListener("click", scrolltop);
+toparrow = document.querySelector(".arrow")
+toparrow.addEventListener('click', scrolltop)
 
 function scrolltop() {
-  window.scrollTo(0, 0);
-}
+  window.scrollTo(0,0)
+ }

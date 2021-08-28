@@ -544,6 +544,22 @@
   text-decoration: none;
   color: black;
 }
+.Like:hover,
+.Link:hover{
+  background-color: black;
+  color: white;
+}
+.thumbsUp{
+  background-image: url("../img/thumbsup.png");
+  /* background-repeat : no-repeat;  */
+  background-size : cover;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+.Option_Like:hover > .thumbsUp {
+   background-image: url("../img/thumbsup2.png");
+  }
 @media screen and (max-width: 1200px) {
   .topcontainer,
   .container,

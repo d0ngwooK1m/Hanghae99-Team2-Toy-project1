@@ -4,7 +4,7 @@ import pymongo
 import jwt
 import uuid
 import json
-import ujson
+# import ujson
 import datetime
 from passlib.hash import pbkdf2_sha256
 
@@ -131,9 +131,8 @@ def login():
 
         }
 
-        token = jwt.encode(payload, SECRET_KEY,
-                           algorithm='HS256').decode('utf-8')
-        return ujson.dumps({"success": "True", "message": "로그인 성공!", "login_token": token}), 200
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        return jsonify({"success": "True", "message": "로그인 성공!", "login_token": token}), 200
 
     return jsonify({"error": "로그인 실패"}), 400
 

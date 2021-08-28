@@ -303,7 +303,7 @@ function editPopup(id) {
                                             <label for="url">웹 사이트 URL</label>
                                             <div class="flex-layout">
                                                 <input class="modify-preview-url blur-input" type="text" id="urlNew" name="url" value="${url}"/>
-                                                <button class="modify-preview-btn" onclick="previewImage()">이미지 등록</button>
+                                                <button class="modify-preview-btn" onclick="previewImage()">이미지 미리보기</button>
                                             </div>
                                         </div>
                                         <div class="popup-box-wrap">
