@@ -17,8 +17,8 @@ app.secret_key = b'\x8e\xbf(\x11\xfb\x80\xa4<\xd9\xc9\x95\x10\xcf\x85Q\xd1'
 SECRET_KEY = 'LinkGather'
 
 # Database
-# client = pymongo.MongoClient('localhost', 27017)
-client = pymongo.MongoClient('mongodb://test:test@localhost', 27017)
+client = pymongo.MongoClient('localhost', 27017)
+# client = pymongo.MongoClient('mongodb://test:test@localhost', 27017)
 db = client.linkgather
 
 # Authentication
@@ -133,10 +133,11 @@ def login():
             }
 
             token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+            # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
             # print(token)
             # print(type(token))
             # token = str(jwt.encode(payload, SECRET_KEY, algorithm='HS256'))
-
+            # return jsonify({"success": "True", "message": "로그인 성공!", "login_token": token}), 200
             return ujson.dumps({ "success": "True", "message": "로그인 성공!", "login_token":token}), 200
 
         return jsonify({ "error": "로그인 실패" }), 400
