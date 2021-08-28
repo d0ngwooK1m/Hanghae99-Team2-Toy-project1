@@ -32,7 +32,7 @@
                     <div class="ListFlex">
                         <div class="click-wrap" onclick="showDetail(event,'{{text['id']}}')">
                             <div class="imgHidden-box">
-                                <img src="{{text['imgsrc']}}" class="classImg">
+                                <img src="{{text['imgsrc']}}" class="classImg" onerror="this.src='../static/img/linkgather.png';">
                                 <button class="Option_Jjim" onclick="jjim('{{text['id']}}')">
                                     <img src="{{text['heart']}}" class="heart">
                                 </button>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="Option">
                             <div class="Like Option_Like" onclick="updateLike('{{text['id']}}')">
-                                <img src="../static/img/thumbsup.svg" class="thumbsUp">
+                                <span class="thumbsUp"></span>
                                 <span class="likes-btn">추천하기</span>
                             </div>
                             <a class="Link" href="{{text['url']}}" target= '_blank'>

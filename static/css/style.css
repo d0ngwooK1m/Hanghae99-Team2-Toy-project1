@@ -317,8 +317,6 @@
   z-index: 1;
   background-color: white;
   width: 100%;
-  /* padding: 30px 20px; */
-  /* padding-bottom: 15px; */
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
 }
@@ -428,7 +426,7 @@
 }
 .classImg {
   height: 155px;
-  object-fit:cover;
+  object-fit: cover;
   width: 100%;
   border-radius: 3px;
   margin-bottom: 8px;
@@ -460,8 +458,8 @@
   width: 24px;
   height: 24px;
   vertical-align: text-bottom;
-  filter: drop-shadow(rgba(41, 42, 43, 0.1) 0px 1px 3px)
-    drop-shadow(rgba(0, 0, 0, 0.1) 0px 0px 0.5px);
+  filter: drop-shadow(rgba(41, 42, 43, 0.2) 0px 1px 3px)
+    drop-shadow(rgba(0, 0, 0, 0.2) 0px 0px 0.5px);
 }
 
 .ListFlex .title {
@@ -546,6 +544,22 @@
   text-decoration: none;
   color: black;
 }
+.Like:hover,
+.Link:hover{
+  background-color: black;
+  color: white;
+}
+.thumbsUp{
+  background-image: url("../img/thumbsup.png");
+  /* background-repeat : no-repeat;  */
+  background-size : cover;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+.Option_Like:hover > .thumbsUp {
+   background-image: url("../img/thumbsup2.png");
+  }
 @media screen and (max-width: 1200px) {
   .topcontainer,
   .container,
@@ -576,12 +590,10 @@
   }
 }
 @media screen and (max-width: 767px) {
-  .popup-wrap {
-    width: 70%;
-    min-width: 340px;
-  }
+  .popup-wrap,
   .login-wrap {
-    width: 60%;
+    width: 80%;
+    min-width: auto;
   }
   .popup-content,
   .login-content,
@@ -614,23 +626,34 @@
     font-size: 10px;
   }
   .topLogo {
-    margin-right: 30px;
+    width: 100%;
+    margin-right: 15px;
   }
   .search_bar {
     width: 100%;
     padding-left: 10px;
   }
+  .search_btn {
+    width: auto;
+    height: auto;
+    top: 8px;
+    right: 6px;
+  }
+  .search_icon {
+    width: 17px;
+    height: 17px;
+    margin-left: 0;
+  }
+  .member_box li {
+    font-size: 0.6rem;
+  }
+  .member_box li:nth-child(even) {
+    margin-left: 8px;
+  }
   .popup-content,
   .login-content,
   .signup-content {
     padding: 20px;
-  }
-  .popup-content {
-    width: 100%;
-  }
-  .login-content,
-  .signup-content {
-    width: 250px;
   }
   .cardRow,
   .cardRow2 {
@@ -640,18 +663,8 @@
   .ListBg {
     min-width: 100%;
   }
-  .popup-wrap,
-  .login-wrap {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-height: 100vh;
-    z-index: 10;
-    min-width: 40%;
-  }
   .popup-scroll-wrap {
-    max-height: 550px;
+    max-height: auto;
   }
   .member_box,
   .create-btn-fail {
@@ -687,14 +700,14 @@
   .search_result,
   .icon-dropdown-wrap2,
   .create-btn {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .detail-content-wrap h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   .detail-content-wrap p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .create-form input,
   .login-form input,
@@ -718,9 +731,17 @@
   .popup-box-wrap {
     margin-bottom: 15px;
   }
+  .detail-delete-btn {
+    margin-left: 8px;
+  }
 }
 @media screen and (max-width: 420px) {
   .topLogo {
-    margin-right: 20px;
+    width: auto;
+    margin: 0 10px 0 0;
+  }
+  .topLogo img {
+    width: 100%;
+    height: 100%;
   }
 }

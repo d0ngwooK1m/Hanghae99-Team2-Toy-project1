@@ -30,7 +30,7 @@ function myPageList() {
                  
                                 <div class="click-wrap" onclick="showDetail(event,'${id}')">
                                     <div class="imgHidden-box">
-                                        <img src="${imgsrc}" class="classImg">
+                                        <img src="${imgsrc}" class="classImg" onerror="this.src='../static/img/linkgather.png';">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
                                             <img src="${Jjim}" class="heart">
                                         </button>
@@ -46,8 +46,8 @@ function myPageList() {
                                 </div>
                                 <div class="Option">
                                     <div class="Like Option_Like" onclick="updateLike('${id}')">
-                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
-                                        <span class="likes-btn">추천하기</span>
+                                      <span class="thumbsUp"></span>
+                                      <span class="likes-btn">추천하기</span>
                                     </div>
                                     <a class="Link" href="${url}" target= '_blank'>
                                         <span>바로가기</span>
@@ -63,9 +63,9 @@ function myPageList() {
 }
 
 // 최상단으로
-toparrow = document.querySelector(".arrow")
-toparrow.addEventListener('click', scrolltop)
+toparrow = document.querySelector(".arrow");
+toparrow.addEventListener("click", scrolltop);
 
 function scrolltop() {
-  window.scrollTo(0,0)
- }
+  window.scrollTo(0, 0);
+}
