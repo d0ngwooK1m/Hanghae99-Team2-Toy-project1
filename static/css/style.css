@@ -721,7 +721,7 @@
 }
 @media screen and (max-width: 420px) {
   .topLogo {
-    width: auto;
+    width: 80px;
     margin: 0 10px 0 0;
   }
   .topLogo img {
