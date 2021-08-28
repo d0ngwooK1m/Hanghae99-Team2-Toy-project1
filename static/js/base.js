@@ -1,7 +1,8 @@
 const locationHref = window.location.href;
 const findPage = locationHref.split("/").reverse()[0];
 const findQueryPage = findPage.split("?")[0];
-
+console.log('%c                ', 'font-size:100px; background:url(http://linkgather.shop/static/img/logo.png) no-repeat center;');
+console.log('%c  Link Gather  ', 'font-size: 100px; font-weight:bolder; background-color:black; color:rgb(255,255,255,1);');
 //회원가입 API 통신
 const signupform = document.querySelector(".signup-form"); 
 signupform.addEventListener("submit", (e) => {

@@ -63,14 +63,12 @@ def editAuthCheck(type):
         check = db.posting.find_one({"email": detail[0]["email"]})
     else:
         check = ""
-    # print(detail)
     try:
         if not token_receive:
             return jsonify({"response": "권한 없음"}), 400
 
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"email": payload["email"]})
-        # print(user_info['email'], check['email'])
 
         if user_info['email'] == check['email'] and type == "GET":
             return jsonify({"response": detail}), 200
@@ -87,7 +85,6 @@ def editAuthCheck(type):
 
 @app.route('/user/signup', methods=["POST"])
 def signup():
-    print(request.form)
 
     # Create the user object
     user = {
@@ -96,7 +93,6 @@ def signup():
         "email": request.form['email'],
         "password": request.form['password']
     }
-    print(user)
 
     # Check the password
     if user["password"] != request.form['C_password']:
@@ -133,9 +129,6 @@ def login():
             }
 
             token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
-            # print(token)
-            # print(type(token))
-            # token = str(jwt.encode(payload, SECRET_KEY, algorithm='HS256'))
 
             return ujson.dumps({ "success": "True", "message": "로그인 성공!", "login_token":token}), 200
 
@@ -163,7 +156,6 @@ def mypage_list():
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     token_email = payload['email']
     lists = list(db.posting.find({'email': token_email}, {'_id': False}).sort('uploadtime', -1))
-    # print("mypage lists = ", lists)
     return jsonify({'my_list': lists})
 
 
@@ -190,7 +182,8 @@ def posting():
     now = datetime.datetime.now()
     now_date_time = now.strftime("%Y%m%d%H%M%S")
     # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
-    if image.split("/")[1] == "static" or image == "":
+    # if image.split("/")[1] == "static" or image == "":
+    if image == "":
         image = "../static/img/linkgather.png"
     doc = {
         "id": uuid.uuid4().hex,
@@ -212,7 +205,6 @@ def posting():
 def detail():
     id_receive = request.args.get('id_give')
     detail = list(db.posting.find({"id": id_receive}, {"_id": False}))
-    # print(id_receive, detail)
     return jsonify({"response": detail})
 
 
@@ -240,10 +232,10 @@ def submitEdit():
     title_receive = request.form['title_give']
     desc_receive = request.form['desc_give']
     # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
-    if img_receive.split("/")[1] == "static":
+    # if img_receive.split("/")[1] == "static":
+    if img_receive == "":
         img_receive = "../static/img/linkgather.png"
         
-    # print(id_receive, url_receive, title_receive, desc_receive)
     db.posting.update_one({'id': id_receive}, {'$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive, 'imgsrc': img_receive}})
     return jsonify({ "response": "수정 완료!"})
 
@@ -261,15 +253,12 @@ def view_Search():
     text = request.args.get('text')
     #text는 form으로 데이터를 받음
     splitted_keywords = text.split(' ')
-    #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 딕셔너리로 만들어짐
-    # print(splitted_keywords)
+    #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 리스트로 만들어짐
     pipelines = list()
     pipelines.append({
         '$sample':{'size':1}
     })
-    # print(pipelines)
     search_R = list(db.posting.aggregate(pipelines))
-    # print(search_R)
 
     sep_keywords = []
     for string in splitted_keywords:
@@ -277,10 +266,8 @@ def view_Search():
             {'title':{'$regex':string}},
             {'desc':{'$regex':string}}
         ]})
-    # print(sep_keywords)
 
     search = list(db.posting.find({"$or":sep_keywords},{'_id':False}).sort('uploadtime',-1))
-    # print(search)
     if text == "":
         return render_template('search.html', keywords=splitted_keywords, search=search_R, token=tokenExist)
     else :
@@ -327,7 +314,6 @@ def updatejjim():
     else:
         Heart = '../static/img/rheart.svg'
         msg = '찜하기 완료!'
-    # print(Heart)
     db.posting.update_one({'id':id_receive}, {'$set': {'heart':Heart, 'Jjim':target_Heart}})
     
     return jsonify({'msg':msg })    
