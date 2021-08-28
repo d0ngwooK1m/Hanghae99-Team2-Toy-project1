@@ -39,8 +39,9 @@ function viewing() {
                                 </div>
                                 <div class="Option">
                                     <div class="Like Option_Like" onclick="updateLike('${id}')">
-                                        <img src="../static/img/thumbsup.svg" class="thumbsUp">
-                                        <span class="likes-btn">추천하기</span>
+                                    <span class="thumbsUp"></span>
+                                    <span class="likes-btn">추천하기</span>
+                                </div>
                                     </div>
                                     <a class="Link" href="${url}" target= '_blank'>
                                         <span>바로가기</span>
