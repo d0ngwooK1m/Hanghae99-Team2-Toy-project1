@@ -17,11 +17,12 @@ app.secret_key = b'\x8e\xbf(\x11\xfb\x80\xa4<\xd9\xc9\x95\x10\xcf\x85Q\xd1'
 SECRET_KEY = 'LinkGather'
 
 # Database
-# client = pymongo.MongoClient('localhost', 27017)
-client = pymongo.MongoClient('mongodb://test:test@localhost', 27017)
+client = pymongo.MongoClient('localhost', 27017)
+# client = pymongo.MongoClient('mongodb://test:test@localhost', 27017)
 db = client.linkgather
 
 # Authentication
+
 
 def checkExpired():
     if request.cookies.get('login_token') is not None:
@@ -83,6 +84,7 @@ def editAuthCheck(type):
     except jwt.exceptions.DecodeError:
         return jsonify({"response": "로그인 정보 없음"}), 400
 
+
 @app.route('/user/signup', methods=["POST"])
 def signup():
 
@@ -96,43 +98,44 @@ def signup():
 
     # Check the password
     if user["password"] != request.form['C_password']:
-        return jsonify({ "error": "비밀번호가 다릅니다." }), 400
+        return jsonify({"error": "비밀번호가 다릅니다."}), 400
 
     # Encrypt the password
     user["password"] = pbkdf2_sha256.encrypt(user["password"])
 
     # Check for existing email address
-    if db.users.find_one({ "email": user["email"] }):
-        return jsonify({ "error": "이미 사용되고 있는 이메일 입니다." }), 400
+    if db.users.find_one({"email": user["email"]}):
+        return jsonify({"error": "이미 사용되고 있는 이메일 입니다."}), 400
 
     if db.users.insert_one(user):
-        return jsonify({'result':'회원가입 성공!'}),200
+        return jsonify({'result': '회원가입 성공!'}), 200
 
-    return jsonify({ "error": "회원가입 실패" }), 400
+    return jsonify({"error": "회원가입 실패"}), 400
 
 
 @app.route('/user/logout')
 def logout():
-    return jsonify({ "result": "success" }), 200
+    return jsonify({"result": "success"}), 200
+
 
 @app.route('/user/login', methods=["POST"])
 def login():
-        user = db.users.find_one({
-            "email": request.form["email"]
-        })
+    user = db.users.find_one({
+        "email": request.form["email"]
+    })
 
-        if user is not None and pbkdf2_sha256.verify(request.form["password"], user["password"]):
-            payload = {
-                'email': user['email'],
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=100)
+    if user is not None and pbkdf2_sha256.verify(request.form["password"], user["password"]):
+        payload = {
+            'email': user['email'],
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=100)
 
-            }
+        }
 
-            token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY,
+                           algorithm='HS256').decode('utf-8')
+        return ujson.dumps({"success": "True", "message": "로그인 성공!", "login_token": token}), 200
 
-            return ujson.dumps({ "success": "True", "message": "로그인 성공!", "login_token":token}), 200
-
-        return jsonify({ "error": "로그인 실패" }), 400
+    return jsonify({"error": "로그인 실패"}), 400
 
 
 @app.route('/')
@@ -150,18 +153,20 @@ def fail():
 def mypage():
     return userAuthCheck("myPage.html")
 
+
 @app.route('/myPage/list', methods=['GET'])
 def mypage_list():
     token_receive = request.cookies.get('login_token')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     token_email = payload['email']
-    lists = list(db.posting.find({'email': token_email}, {'_id': False}).sort('uploadtime', -1))
+    lists = list(db.posting.find({'email': token_email}, {
+                 '_id': False}).sort('uploadtime', -1))
     return jsonify({'my_list': lists})
 
 
 @app.route('/view', methods=['GET'])
 def show_view():
-    lists = list(db.posting.find({}, {'_id': False}).sort('uploadtime',-1))
+    lists = list(db.posting.find({}, {'_id': False}).sort('uploadtime', -1))
     return jsonify({'all_post': lists})
 
 
@@ -192,7 +197,7 @@ def posting():
         'desc': desc_receive,
         'likes': 0,
         'heart': './static/img/heart.svg',
-        'Jjim':True,
+        'Jjim': True,
         'uploadtime': now_date_time,
         'email': token_email,
         'imgsrc': image
@@ -235,9 +240,10 @@ def submitEdit():
     # if img_receive.split("/")[1] == "static":
     if img_receive == "":
         img_receive = "../static/img/linkgather.png"
-        
-    db.posting.update_one({'id': id_receive}, {'$set': {'url': url_receive, 'title': title_receive, 'desc': desc_receive, 'imgsrc': img_receive}})
-    return jsonify({ "response": "수정 완료!"})
+
+    db.posting.update_one({'id': id_receive}, {'$set': {
+                          'url': url_receive, 'title': title_receive, 'desc': desc_receive, 'imgsrc': img_receive}})
+    return jsonify({"response": "수정 완료!"})
 
 
 @app.route('/search', methods=['GET'])
@@ -246,31 +252,32 @@ def view_Search():
         tokenExist = checkExpired()
 
     except jwt.ExpiredSignatureError:
-        tokenExist=True
+        tokenExist = True
     except jwt.exceptions.DecodeError:
-        tokenExist=True
+        tokenExist = True
 
     text = request.args.get('text')
-    #text는 form으로 데이터를 받음
+    # text는 form으로 데이터를 받음
     splitted_keywords = text.split(' ')
-    #text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 리스트로 만들어짐
+    # text를 공백으로 나눠서 여러가지가 검색될수 있도록함 이때 split된 데이터는 리스트로 만들어짐
     pipelines = list()
     pipelines.append({
-        '$sample':{'size':1}
+        '$sample': {'size': 1}
     })
     search_R = list(db.posting.aggregate(pipelines))
 
     sep_keywords = []
     for string in splitted_keywords:
-        sep_keywords.append({'$or':[
-            {'title':{'$regex':string}},
-            {'desc':{'$regex':string}}
+        sep_keywords.append({'$or': [
+            {'title': {'$regex': string}},
+            {'desc': {'$regex': string}}
         ]})
 
-    search = list(db.posting.find({"$or":sep_keywords},{'_id':False}).sort('uploadtime',-1))
+    search = list(db.posting.find({"$or": sep_keywords}, {
+                  '_id': False}).sort('uploadtime', -1))
     if text == "":
         return render_template('search.html', keywords=splitted_keywords, search=search_R, token=tokenExist)
-    else :
+    else:
         return render_template('search.html', keywords=splitted_keywords, search=search, token=tokenExist)
 
 
@@ -297,13 +304,14 @@ def updateLikes():
     db.posting.update_one({'id': find_id}, {'$set': {'likes': new_like}})
     return jsonify({'msg': "추천되었습니다."})
 
+
 @app.route('/update/jjim', methods=['POST'])
 def updatejjim():
     # base jjim에서 id_give로 id값(52dfb19125fb4d1f8021d7281b56ca04)을 받아와 변수로 지정
     id_receive = request.form['id_give']
-    # db에서 해당 id값이 있는 자료를 찾아줌 
-    target = db.posting.find_one({'id':id_receive})
-    # id값이 속해있는 자료의 jjim 값을 변수로 지정 >> 처음 글 등록시 true 값을 가짐 
+    # db에서 해당 id값이 있는 자료를 찾아줌
+    target = db.posting.find_one({'id': id_receive})
+    # id값이 속해있는 자료의 jjim 값을 변수로 지정 >> 처음 글 등록시 true 값을 가짐
     target_Heart = target['Jjim']
     # True가 false로 바뀜
     target_Heart = not(target_Heart)
@@ -314,9 +322,10 @@ def updatejjim():
     else:
         Heart = '../static/img/rheart.svg'
         msg = '찜하기 완료!'
-    db.posting.update_one({'id':id_receive}, {'$set': {'heart':Heart, 'Jjim':target_Heart}})
-    
-    return jsonify({'msg':msg })    
+    db.posting.update_one({'id': id_receive}, {
+                          '$set': {'heart': Heart, 'Jjim': target_Heart}})
+
+    return jsonify({'msg': msg})
 # 켜기 터미널
 # set FLASK_APP=app.py
 # set FLASK_ENV=development

@@ -23,7 +23,7 @@ function viewing() {
                             <div class="ListFlex">
                                 <div class="click-wrap" onclick="showDetail(event,'${id}')">
                                     <div class="imgHidden-box">
-                                        <img src="${imgsrc}" class="classImg">
+                                        <img src="${imgsrc}" class="classImg" onerror="this.src='../static/img/linkgather.png';">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
                                             <img src="${jjim}" id="heartImg">
                                         </button>
@@ -53,7 +53,6 @@ function viewing() {
     },
   });
 }
-
 
 // 최신순 정렬
 const newCardBtn = document.querySelector(".new-card-btn");
@@ -86,7 +85,7 @@ newCardBtn.addEventListener("click", () => {
                             <div class="ListFlex">
                                 <div class="click-wrap" onclick="showDetail(event,'${id}')">
                                     <div class="imgHidden-box">
-                                        <img src="${imgsrc}" class="classImg">
+                                        <img src="${imgsrc}" class="classImg" onerror="this.src='../static/img/linkgather.png';">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
                                             <img src="${jjim}" class="heart">
                                         </button>
@@ -146,7 +145,7 @@ likeBtn.addEventListener("click", () => {
                             <div class="ListFlex">
                                 <div class="click-wrap" onclick="showDetail(event,'${id}')">
                                     <div class="imgHidden-box">
-                                        <img src="${imgsrc}" class="classImg">
+                                        <img src="${imgsrc}" class="classImg" onerror="this.src='../static/img/linkgather.png';">
                                         <button class="Option_Jjim" onclick="jjim('${id}')">
                                             <img src="${jjim}" class="heart">
                                         </button>
@@ -177,9 +176,9 @@ likeBtn.addEventListener("click", () => {
 });
 
 // 최상단으로
-toparrow = document.querySelector(".arrow")
-toparrow.addEventListener('click', scrolltop)
+toparrow = document.querySelector(".arrow");
+toparrow.addEventListener("click", scrolltop);
 
 function scrolltop() {
-  window.scrollTo(0,0)
- }
+  window.scrollTo(0, 0);
+}

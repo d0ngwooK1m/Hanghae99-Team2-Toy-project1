@@ -32,7 +32,7 @@
                     <div class="ListFlex">
                         <div class="click-wrap" onclick="showDetail(event,'{{text['id']}}')">
                             <div class="imgHidden-box">
-                                <img src="{{text['imgsrc']}}" class="classImg">
+                                <img src="{{text['imgsrc']}}" class="classImg" onerror="this.src='../static/img/linkgather.png';">
                                 <button class="Option_Jjim" onclick="jjim('{{text['id']}}')">
                                     <img src="{{text['heart']}}" class="heart">
                                 </button>

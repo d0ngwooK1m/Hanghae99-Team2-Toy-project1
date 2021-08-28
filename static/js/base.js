@@ -4,23 +4,23 @@ const findQueryPage = findPage.split("?")[0];
 console.log('%c                ', 'font-size:100px; background:url(http://linkgather.shop/static/img/logo.png) no-repeat center;');
 console.log('%c  Link Gather  ', 'font-size: 100px; font-weight:bolder; background-color:black; color:rgb(255,255,255,1);');
 //회원가입 API 통신
-const signupform = document.querySelector(".signup-form"); 
+const signupform = document.querySelector(".signup-form");
 signupform.addEventListener("submit", (e) => {
   const form_give = $(this);
   const error_give = form_give.find(".error");
   const name = $("input[name=s_name]").val();
-  const email = $('input[name=s_email]').val();
-  const password = $('input[name=s_password]').val();
-  const C_password = $('input[name=s_check_password]').val();
+  const email = $("input[name=s_email]").val();
+  const password = $("input[name=s_password]").val();
+  const C_password = $("input[name=s_check_password]").val();
 
   $.ajax({
     url: "/user/signup",
     type: "POST",
     data: {
-      'name':name,
-      'email':email,
-      'password':password,
-      'C_password':C_password
+      name: name,
+      email: email,
+      password: password,
+      C_password: C_password,
     },
     dataType: "json",
     success: function (response) {
@@ -35,20 +35,19 @@ signupform.addEventListener("submit", (e) => {
 });
 
 //로그인 API 통신
-const loginsubmit = document.querySelector(".login-submit")
-loginsubmit.addEventListener('submit', (e)=>{
+const loginsubmit = document.querySelector(".login-submit");
+loginsubmit.addEventListener("submit", (e) => {
   const form_give = $(this);
   const error_give = form_give.find(".error");
-  const email = $('input[name=l_email]').val();
-  const password = $('input[name=l_password]').val();
-
+  const email = $("input[name=l_email]").val();
+  const password = $("input[name=l_password]").val();
 
   $.ajax({
     url: "/user/login",
     type: "POST",
     data: {
-      'email':email,
-      'password':password
+      email: email,
+      password: password,
     },
     dataType: "json",
     success: function (response) {
@@ -56,12 +55,12 @@ loginsubmit.addEventListener('submit', (e)=>{
       return (window.location.href = "/");
     },
     error: function (response) {
-      error_give.text(response.responseJSON.error).removeClass("error--hidden");
+      // error_give.text(response.responseJSON.error).removeClass("error--hidden");
     },
   });
 
   e.preventDefault();
-})
+});
 
 //로그아웃 API 통신
 $(".logout-btn").click(function (e) {
@@ -152,16 +151,16 @@ const inputCheck = () => {
 
 //찜기능
 function jjim(id) {
-  event.stopPropagation()
+  event.stopPropagation();
   $.ajax({
-    type: 'POST',
-    url: '/update/jjim',
-    data: { id_give : id},
+    type: "POST",
+    url: "/update/jjim",
+    data: { id_give: id },
     success: function (response) {
-      alert(response['msg']);
-      window.location.reload()
-    }
-  })
+      alert(response["msg"]);
+      window.location.reload();
+    },
+  });
 }
 // 카드 상세화면 팝업
 function showDetail(event, id) {
@@ -197,7 +196,7 @@ function showDetail(event, id) {
                                             <div class="popup-form detail-form-wrap">
                                                 <div class="detail-form">
                                                     <div class="preview-image-wrap">
-                                                        <img class="detail-image-wrap" src="${imgsrc}" target="_blank"/>
+                                                        <img class="detail-image-wrap" src="${imgsrc}" onerror="this.src='../static/img/linkgather.png';" target="_blank"/>
                                                     </div>
                                                     <div class="detail-content-wrap">
                                                         <h3>${title}</h3>
@@ -298,7 +297,7 @@ function editPopup(id) {
       modifyForm.innerHTML = `
   
                                         <div class="modify-image-wrap">
-                                          <img class="detail-image-wrap" id="imgSource" src="${imgsrc}"  alt="image"/>
+                                          <img class="detail-image-wrap" id="imgSource" src="${imgsrc}" onerror="this.src='../static/img/linkgather.png';" alt="image"/>
                                         </div>
                                         <div class="popup-box-wrap">
                                             <label for="url">웹 사이트 URL</label>
@@ -384,6 +383,7 @@ const previewImage = (tag) => {
   let modifyWrap = ``;
   const urlValue = url.value; // 등록 값 등록 input / 수정 input
   let check = true;
+  console.log("click");
   // 상세보기 팝업을 클릭했을때 동적으로 html이 생성되어
   // 수정 버튼의 미리보기 버튼은 등록 팝업에서는 생성되지 않은 상태이기 때문에
   // undefined 조건값을 추가함
@@ -405,6 +405,7 @@ const previewImage = (tag) => {
       url_give: value,
     },
     success: function (response) {
+      console.log("success === ", response);
       // 서버랑 크롤링 img
       let CheckImage = response;
       // og:image가 없거나, 잘못내려올 경우 예외처리
@@ -416,12 +417,13 @@ const previewImage = (tag) => {
       imgsrc = CheckImage;
       // og:image가 있을 경우
       if (value === urlValue) {
-        previewBox.innerHTML = `<img src="${CheckImage}" alt="썸네일"/>`;
+        previewBox.innerHTML = `<img src="${CheckImage}" alt="썸네일" onerror="this.src='../static/img/linkgather.png';"/>`;
       } else {
-        modifyWrap.innerHTML = `<img class="detail-image-wrap" src="${CheckImage}" alt="썸네일"/>`;
+        modifyWrap.innerHTML = `<img class="detail-image-wrap" src="${CheckImage}" onerror="this.src='../static/img/linkgather.png';" alt="썸네일"/>`;
       }
     },
     error: function (e) {
+      console.log("error === ", e);
       if (e.status === 500) {
         alert("url 주소를 다시 확인해주세요");
       }
@@ -429,22 +431,22 @@ const previewImage = (tag) => {
   });
 };
 // "\"문자 입력 방지 함수
-const searchInput = document.querySelector('.search_bar');
+const searchInput = document.querySelector(".search_bar");
 
-function keyPrevent(event){
+function keyPrevent(event) {
   let keyvalue = event.keyCode;
   // console.log(event)
-  if(keyvalue == 220 ){
+  if (keyvalue == 220) {
     alert(`'\\'(은)는 사용하실 수 없습니다.`);
     event.returnValue = false;
-  }else{
+  } else {
     return false;
   }
 }
 
-searchInput.addEventListener('keydown', (event)=>{
-  keyPrevent(event)
-})
+searchInput.addEventListener("keydown", (event) => {
+  keyPrevent(event);
+});
 
 // 추천하기
 function updateLike(id) {
@@ -467,4 +469,3 @@ function updateLike(id) {
       }
     });
 }
-
