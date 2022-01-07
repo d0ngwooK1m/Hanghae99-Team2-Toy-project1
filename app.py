@@ -131,9 +131,9 @@ def login():
 
         }
 
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')        # token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
         return ujson.dumps({"success": "True", "message": "로그인 성공!", "login_token": token}), 200
-
+        # return jsonify({"success":"True", "message":"로그인 성공!", "login_token":token}), 200
     return jsonify({"error": "로그인 실패"}), 400
 
 
@@ -181,28 +181,48 @@ def posting():
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
     soup = BeautifulSoup(data.text, 'html.parser')
-    image = soup.select_one('meta[property="og:image"]')['content']
-    token_email = payload['email']
-    now = datetime.datetime.now()
-    now_date_time = now.strftime("%Y%m%d%H%M%S")
-    # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
-    # if image.split("/")[1] == "static" or image == "":
-    if image == "":
+    try:
+        image = soup.select_one('meta[property="og:image"]')['content']
+        token_email = payload['email']
+        now = datetime.datetime.now()
+        now_date_time = now.strftime("%Y%m%d%H%M%S")
+        # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
+        # if image.split("/")[1] == "static" or image == "":
+        doc = {
+            "id": uuid.uuid4().hex,
+            'url': url_receive,
+            'title': title_receive,
+            'desc': desc_receive,
+            'likes': 0,
+            'heart': './static/img/heart.svg',
+            'Jjim': True,
+            'uploadtime': now_date_time,
+            'email': token_email,
+            'imgsrc': image
+        }
+        db.posting.insert_one(doc)
+        return jsonify({'msg': '등록 완료!'})
+    except TypeError :
         image = "../static/img/linkgather.png"
-    doc = {
-        "id": uuid.uuid4().hex,
-        'url': url_receive,
-        'title': title_receive,
-        'desc': desc_receive,
-        'likes': 0,
-        'heart': './static/img/heart.svg',
-        'Jjim': True,
-        'uploadtime': now_date_time,
-        'email': token_email,
-        'imgsrc': image
-    }
-    db.posting.insert_one(doc)
-    return jsonify({'msg': '등록 완료!'})
+        token_email = payload['email']
+        now = datetime.datetime.now()
+        now_date_time = now.strftime("%Y%m%d%H%M%S")
+        # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
+        # if image.split("/")[1] == "static" or image == "":
+        doc = {
+            "id": uuid.uuid4().hex,
+            'url': url_receive,
+            'title': title_receive,
+            'desc': desc_receive,
+            'likes': 0,
+            'heart': './static/img/heart.svg',
+            'Jjim': True,
+            'uploadtime': now_date_time,
+            'email': token_email,
+            'imgsrc': image
+        }
+        db.posting.insert_one(doc)
+        return jsonify({'msg': '등록 완료!'})
 
 
 @app.route('/post/detail', methods=['GET'])
@@ -232,17 +252,25 @@ def submitEdit():
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
     soup = BeautifulSoup(data.text, 'html.parser')
-    img_receive = soup.select_one('meta[property="og:image"]')['content']
-    title_receive = request.form['title_give']
-    desc_receive = request.form['desc_give']
-    # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
-    # if img_receive.split("/")[1] == "static":
-    if img_receive == "":
+    try:
+        img_receive = soup.select_one('meta[property="og:image"]')['content']
+        title_receive = request.form['title_give']
+        desc_receive = request.form['desc_give']
+        # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
+        # if img_receive.split("/")[1] == "static":
+        db.posting.update_one({'id': id_receive}, {'$set': {
+                              'url': url_receive, 'title': title_receive, 'desc': desc_receive, 'imgsrc': img_receive}})
+        return jsonify({"response": "수정 완료!"})
+    except TypeError:
         img_receive = "../static/img/linkgather.png"
+        title_receive = request.form['title_give']
+        desc_receive = request.form['desc_give']
+        # og:image가 없어서 제대로 크롤링 못할 경우, 기본 이미지로 예외처리
+        # if img_receive.split("/")[1] == "static":
 
-    db.posting.update_one({'id': id_receive}, {'$set': {
-                          'url': url_receive, 'title': title_receive, 'desc': desc_receive, 'imgsrc': img_receive}})
-    return jsonify({"response": "수정 완료!"})
+        db.posting.update_one({'id': id_receive}, {'$set': {
+            'url': url_receive, 'title': title_receive, 'desc': desc_receive, 'imgsrc': img_receive}})
+        return jsonify({"response": "수정 완료!"})
 
 
 @app.route('/search', methods=['GET'])
@@ -251,9 +279,9 @@ def view_Search():
         tokenExist = checkExpired()
 
     except jwt.ExpiredSignatureError:
-        tokenExist = True
+        tokenExist = False
     except jwt.exceptions.DecodeError:
-        tokenExist = True
+        tokenExist = False
 
     text = request.args.get('text')
     # text는 form으로 데이터를 받음
@@ -287,8 +315,12 @@ def previewImage():
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
     soup = BeautifulSoup(data.text, 'html.parser')
-    image = soup.select_one('meta[property="og:image"]')['content']
-    return jsonify(image)
+    try:
+        image = soup.select_one('meta[property="og:image"]')['content']
+        return jsonify(image)
+    except TypeErrot:
+        image = "../static/img/linkgather.png"
+        return jsonify(image)
 
 # 추천하기 기능구현
 
